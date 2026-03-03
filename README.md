@@ -16,11 +16,11 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.35 | 1.35.0.2 |
-| 1.32 | release-1.35 | 1.35.0.2 |
-| 1.33 | release-1.35 | 1.35.0.2 |
-| 1.34 | release-1.35 | 1.35.0.2 |
-| 1.35 | release-1.35 | 1.35.0.2 |
+| 1.31 | release-1.35 | 1.35.0.3 |
+| 1.32 | release-1.35 | 1.35.0.3 |
+| 1.33 | release-1.35 | 1.35.0.3 |
+| 1.34 | release-1.35 | 1.35.0.3 |
+| 1.35 | release-1.35 | 1.35.0.3 |
 
 ## Requirements
 

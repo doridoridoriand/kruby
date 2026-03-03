@@ -6,7 +6,7 @@
 
 ### 現在のステータス
 
-- **バージョン**: 1.35.0.2
+- **バージョン**: 1.35.0.3
 - **対応Kubernetes API**: release-1.35
 - **メンテナンス状況**: アクティブ（コミュニティメンテナンス）
 - **最終更新日**: 2026年1月18日
@@ -43,7 +43,7 @@
 ### Kubernetes APIバージョン
 
 - **対応バージョン**: Kubernetes 1.31-1.35（OpenAPI: release-1.35）
-- **クライアントバージョン**: 1.35.0.2
+- **クライアントバージョン**: 1.35.0.3
 - **最終更新日**: 2026年1月18日
 
 このクライアントは、Kubernetes 1.31-1.35のAPIリソースとエンドポイントに対応しています。
@@ -52,11 +52,11 @@
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.35 | 1.35.0.2 |
-| 1.32 | release-1.35 | 1.35.0.2 |
-| 1.33 | release-1.35 | 1.35.0.2 |
-| 1.34 | release-1.35 | 1.35.0.2 |
-| 1.35 | release-1.35 | 1.35.0.2 |
+| 1.31 | release-1.35 | 1.35.0.3 |
+| 1.32 | release-1.35 | 1.35.0.3 |
+| 1.33 | release-1.35 | 1.35.0.3 |
+| 1.34 | release-1.35 | 1.35.0.3 |
+| 1.35 | release-1.35 | 1.35.0.3 |
 
 ### OpenAPI Generatorバージョン
 
@@ -119,14 +119,14 @@ cd kubernetes
 gem build kubernetes.gemspec
 ```
 
-これにより、`kruby-1.35.0.2.gem`ファイルが生成されます。
+これにより、`kruby-1.35.0.3.gem`ファイルが生成されます。
 
 ### ローカルインストール
 
 ビルドしたgemをローカル環境にインストールします：
 
 ```bash
-gem install ./kruby-1.35.0.2.gem
+gem install ./kruby-1.35.0.3.gem
 ```
 
 ### 開発用インストール
@@ -154,7 +154,7 @@ bundle install
 ruby -e "require 'kruby'; puts Kubernetes::VERSION"
 ```
 
-正常にインストールされていれば、バージョン番号（例: `1.35.0.2`）が表示されます。
+正常にインストールされていれば、バージョン番号（例: `1.35.0.3`）が表示されます。
 
 ## 使用方法
 
@@ -352,7 +352,7 @@ bundle install
 
 ```bash
 gem build kubernetes.gemspec
-gem install ./kruby-1.35.0.2.gem
+gem install ./kruby-1.35.0.3.gem
 ```
 
 ### テストの実行
