@@ -1,5 +1,5 @@
 
-require 'kubernetes'
+require 'kruby'
 require 'pp'
 
 config = Kubernetes::Configuration.default_config
