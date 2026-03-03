@@ -7,7 +7,7 @@
 | **args** | **Array&lt;String&gt;** | Arguments to the entrypoint. The image&#39;s CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] |
 | **command** | **Array&lt;String&gt;** | Entrypoint array. Not executed within a shell. The image&#39;s ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. \&quot;$$(VAR_NAME)\&quot; will produce the string literal \&quot;$(VAR_NAME)\&quot;. Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell | [optional] |
 | **env** | [**Array&lt;V1EnvVar&gt;**](V1EnvVar.md) | List of environment variables to set in the container. Cannot be updated. | [optional] |
-| **env_from** | [**Array&lt;V1EnvFromSource&gt;**](V1EnvFromSource.md) | List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. | [optional] |
+| **env_from** | [**Array&lt;V1EnvFromSource&gt;**](V1EnvFromSource.md) | List of sources to populate environment variables in the container. The keys defined within a source may consist of any printable ASCII characters except &#39;&#x3D;&#39;. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. | [optional] |
 | **image** | **String** | Container image name. More info: https://kubernetes.io/docs/concepts/containers/images | [optional] |
 | **image_pull_policy** | **String** | Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images | [optional] |
 | **lifecycle** | [**V1Lifecycle**](V1Lifecycle.md) |  | [optional] |
@@ -17,7 +17,8 @@
 | **readiness_probe** | [**V1Probe**](V1Probe.md) |  | [optional] |
 | **resize_policy** | [**Array&lt;V1ContainerResizePolicy&gt;**](V1ContainerResizePolicy.md) | Resources resize policy for the container. | [optional] |
 | **resources** | [**V1ResourceRequirements**](V1ResourceRequirements.md) |  | [optional] |
-| **restart_policy** | **String** | Restart policy for the container to manage the restart behavior of each container within a pod. This may only be set for init containers. You cannot set this field on ephemeral containers. | [optional] |
+| **restart_policy** | **String** | Restart policy for the container to manage the restart behavior of each container within a pod. You cannot set this field on ephemeral containers. | [optional] |
+| **restart_policy_rules** | [**Array&lt;V1ContainerRestartRule&gt;**](V1ContainerRestartRule.md) | Represents a list of rules to be checked to determine if the container should be restarted on exit. You cannot set this field on ephemeral containers. | [optional] |
 | **security_context** | [**V1SecurityContext**](V1SecurityContext.md) |  | [optional] |
 | **startup_probe** | [**V1Probe**](V1Probe.md) |  | [optional] |
 | **stdin** | **Boolean** | Whether this container should allocate a buffer for stdin in the container runtime. If this is not set, reads from stdin in the container will always result in EOF. Default is false. | [optional] |
@@ -50,6 +51,7 @@ instance = Kubernetes::V1EphemeralContainer.new(
   resize_policy: null,
   resources: null,
   restart_policy: null,
+  restart_policy_rules: null,
   security_context: null,
   startup_probe: null,
   stdin: null,

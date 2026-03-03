@@ -6,7 +6,7 @@ All URIs are relative to *http://localhost*
 | ------ | ------------ | ----------- |
 | [**create_self_subject_review**](AuthenticationV1Api.md#create_self_subject_review) | **POST** /apis/authentication.k8s.io/v1/selfsubjectreviews |  |
 | [**create_token_review**](AuthenticationV1Api.md#create_token_review) | **POST** /apis/authentication.k8s.io/v1/tokenreviews |  |
-| [**get_api_resources**](AuthenticationV1Api.md#get_api_resources) | **GET** /apis/authentication.k8s.io/v1/ |  |
+| [**get_api_resources_authentication_v1**](AuthenticationV1Api.md#get_api_resources_authentication_v1) | **GET** /apis/authentication.k8s.io/v1/ |  |
 
 
 ## create_self_subject_review
@@ -87,7 +87,7 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
 ## create_token_review
@@ -168,12 +168,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources
+## get_api_resources_authentication_v1
 
-> <V1APIResourceList> get_api_resources
+> <V1APIResourceList> get_api_resources_authentication_v1
 
 
 
@@ -196,28 +196,28 @@ api_instance = Kubernetes::AuthenticationV1Api.new
 
 begin
   
-  result = api_instance.get_api_resources
+  result = api_instance.get_api_resources_authentication_v1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AuthenticationV1Api->get_api_resources: #{e}"
+  puts "Error when calling AuthenticationV1Api->get_api_resources_authentication_v1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_with_http_info variant
+#### Using the get_api_resources_authentication_v1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_authentication_v1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_authentication_v1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AuthenticationV1Api->get_api_resources_with_http_info: #{e}"
+  puts "Error when calling AuthenticationV1Api->get_api_resources_authentication_v1_with_http_info: #{e}"
 end
 ```
 
@@ -236,5 +236,5 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 

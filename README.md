@@ -1,4 +1,4 @@
-# Kubernetes Ruby Client
+# Kruby Client
 
 Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
@@ -6,19 +6,27 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.27 | release-1.31 | 1.31.0 |
-| 1.28 | release-1.31 | 1.31.0 |
-| 1.29 | release-1.31 | 1.31.0 |
-| 1.30 | release-1.31 | 1.31.0 |
-| 1.31 | release-1.31 | 1.31.0 |
+| 1.31 | release-1.35 | 1.35.0 |
+| 1.32 | release-1.35 | 1.35.0 |
+| 1.33 | release-1.35 | 1.35.0 |
+| 1.34 | release-1.35 | 1.35.0 |
+| 1.35 | release-1.35 | 1.35.0 |
 
 ## Requirements
 
 - Ruby 3.3.0+
 
+## Installation
+
+Add this gem to your Gemfile:
+
+```ruby
+gem "kruby", "~> 1.35"
+```
+
 ## Usage
 ```ruby
-require 'kubernetes'
+require 'kruby'
 require 'pp'
 
 kube_config = Kubernetes::KubeConfig.new("#{ENV['HOME']}/.kube/config")
@@ -30,6 +38,8 @@ client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 pp client.list_namespaced_pod('default')
 ```
+
+For backward compatibility, `require 'kubernetes'` is also supported.
 
 ## Contribute
 
@@ -48,6 +58,10 @@ to update the client clone the `gen` repo and run this command at the root of th
 ```bash
 ${GEN_REPO_BASE}/openapi/ruby.sh kubernetes settings
 ```
+
+For a full, repeatable upgrade workflow (including verification and troubleshooting), see:
+
+- [docs/kubernetes-version-upgrade.md](docs/kubernetes-version-upgrade.md)
 
 ## License
 

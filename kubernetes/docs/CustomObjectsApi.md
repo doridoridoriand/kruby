@@ -10,7 +10,7 @@ All URIs are relative to *http://localhost*
 | [**delete_collection_cluster_custom_object**](CustomObjectsApi.md#delete_collection_cluster_custom_object) | **DELETE** /apis/{group}/{version}/{plural} |  |
 | [**delete_collection_namespaced_custom_object**](CustomObjectsApi.md#delete_collection_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural} |  |
 | [**delete_namespaced_custom_object**](CustomObjectsApi.md#delete_namespaced_custom_object) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} |  |
-| [**get_api_resources**](CustomObjectsApi.md#get_api_resources) | **GET** /apis/{group}/{version} |  |
+| [**get_api_resourcesgroupversion**](CustomObjectsApi.md#get_api_resourcesgroupversion) | **GET** /apis/{group}/{version} |  |
 | [**get_cluster_custom_object**](CustomObjectsApi.md#get_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural}/{name} |  |
 | [**get_cluster_custom_object_scale**](CustomObjectsApi.md#get_cluster_custom_object_scale) | **GET** /apis/{group}/{version}/{plural}/{name}/scale |  |
 | [**get_cluster_custom_object_status**](CustomObjectsApi.md#get_cluster_custom_object_status) | **GET** /apis/{group}/{version}/{plural}/{name}/status |  |
@@ -18,7 +18,7 @@ All URIs are relative to *http://localhost*
 | [**get_namespaced_custom_object_scale**](CustomObjectsApi.md#get_namespaced_custom_object_scale) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/scale |  |
 | [**get_namespaced_custom_object_status**](CustomObjectsApi.md#get_namespaced_custom_object_status) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/status |  |
 | [**list_cluster_custom_object**](CustomObjectsApi.md#list_cluster_custom_object) | **GET** /apis/{group}/{version}/{plural} |  |
-| [**list_custom_object_for_all_namespaces**](CustomObjectsApi.md#list_custom_object_for_all_namespaces) | **GET** /apis/{group}/{version}/{plural}#‎ |  |
+| [**list_custom_object_for_all_namespaces**](CustomObjectsApi.md#list_custom_object_for_all_namespaces) | **GET** /apis/{group}/{version}/{resource_plural} |  |
 | [**list_namespaced_custom_object**](CustomObjectsApi.md#list_namespaced_custom_object) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural} |  |
 | [**patch_cluster_custom_object**](CustomObjectsApi.md#patch_cluster_custom_object) | **PATCH** /apis/{group}/{version}/{plural}/{name} |  |
 | [**patch_cluster_custom_object_scale**](CustomObjectsApi.md#patch_cluster_custom_object_scale) | **PATCH** /apis/{group}/{version}/{plural}/{name}/scale |  |
@@ -576,9 +576,9 @@ end
 - **Accept**: application/json
 
 
-## get_api_resources
+## get_api_resourcesgroupversion
 
-> <V1APIResourceList> get_api_resources(group, version)
+> <V1APIResourceList> get_api_resourcesgroupversion(group, version)
 
 
 
@@ -603,28 +603,28 @@ version = 'version_example' # String | The custom resource's version
 
 begin
   
-  result = api_instance.get_api_resources(group, version)
+  result = api_instance.get_api_resourcesgroupversion(group, version)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling CustomObjectsApi->get_api_resources: #{e}"
+  puts "Error when calling CustomObjectsApi->get_api_resourcesgroupversion: #{e}"
 end
 ```
 
-#### Using the get_api_resources_with_http_info variant
+#### Using the get_api_resourcesgroupversion_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_with_http_info(group, version)
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resourcesgroupversion_with_http_info(group, version)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_with_http_info(group, version)
+  data, status_code, headers = api_instance.get_api_resourcesgroupversion_with_http_info(group, version)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling CustomObjectsApi->get_api_resources_with_http_info: #{e}"
+  puts "Error when calling CustomObjectsApi->get_api_resourcesgroupversion_with_http_info: #{e}"
 end
 ```
 
@@ -1216,7 +1216,7 @@ end
 
 ## list_custom_object_for_all_namespaces
 
-> Object list_custom_object_for_all_namespaces(group, version, plural, opts)
+> Object list_custom_object_for_all_namespaces(group, version, resource_plural, opts)
 
 
 
@@ -1238,7 +1238,7 @@ end
 api_instance = Kubernetes::CustomObjectsApi.new
 group = 'group_example' # String | The custom resource's group name
 version = 'version_example' # String | The custom resource's version
-plural = 'plural_example' # String | The custom resource's plural name. For TPRs this would be lowercase plural kind.
+resource_plural = 'resource_plural_example' # String | The custom resource's plural name. For TPRs this would be lowercase plural kind.
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed.
   allow_watch_bookmarks: true, # Boolean | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
@@ -1254,7 +1254,7 @@ opts = {
 
 begin
   
-  result = api_instance.list_custom_object_for_all_namespaces(group, version, plural, opts)
+  result = api_instance.list_custom_object_for_all_namespaces(group, version, resource_plural, opts)
   p result
 rescue Kubernetes::ApiError => e
   puts "Error when calling CustomObjectsApi->list_custom_object_for_all_namespaces: #{e}"
@@ -1265,12 +1265,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(Object, Integer, Hash)> list_custom_object_for_all_namespaces_with_http_info(group, version, plural, opts)
+> <Array(Object, Integer, Hash)> list_custom_object_for_all_namespaces_with_http_info(group, version, resource_plural, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_custom_object_for_all_namespaces_with_http_info(group, version, plural, opts)
+  data, status_code, headers = api_instance.list_custom_object_for_all_namespaces_with_http_info(group, version, resource_plural, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Object
@@ -1285,7 +1285,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **group** | **String** | The custom resource&#39;s group name |  |
 | **version** | **String** | The custom resource&#39;s version |  |
-| **plural** | **String** | The custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. |  |
+| **resource_plural** | **String** | The custom resource&#39;s plural name. For TPRs this would be lowercase plural kind. |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. | [optional] |
 | **allow_watch_bookmarks** | **Boolean** | allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored. | [optional] |
 | **continue** | **String** | The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] |

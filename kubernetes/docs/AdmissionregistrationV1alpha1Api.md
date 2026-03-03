@@ -4,33 +4,30 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#create_validating_admission_policy) | **POST** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies |  |
-| [**create_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#create_validating_admission_policy_binding) | **POST** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings |  |
-| [**delete_collection_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#delete_collection_validating_admission_policy) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies |  |
-| [**delete_collection_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#delete_collection_validating_admission_policy_binding) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings |  |
-| [**delete_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#delete_validating_admission_policy) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name} |  |
-| [**delete_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#delete_validating_admission_policy_binding) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings/{name} |  |
-| [**get_api_resources**](AdmissionregistrationV1alpha1Api.md#get_api_resources) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/ |  |
-| [**list_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#list_validating_admission_policy) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies |  |
-| [**list_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#list_validating_admission_policy_binding) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings |  |
-| [**patch_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#patch_validating_admission_policy) | **PATCH** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name} |  |
-| [**patch_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#patch_validating_admission_policy_binding) | **PATCH** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings/{name} |  |
-| [**patch_validating_admission_policy_status**](AdmissionregistrationV1alpha1Api.md#patch_validating_admission_policy_status) | **PATCH** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status |  |
-| [**read_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#read_validating_admission_policy) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name} |  |
-| [**read_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#read_validating_admission_policy_binding) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings/{name} |  |
-| [**read_validating_admission_policy_status**](AdmissionregistrationV1alpha1Api.md#read_validating_admission_policy_status) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status |  |
-| [**replace_validating_admission_policy**](AdmissionregistrationV1alpha1Api.md#replace_validating_admission_policy) | **PUT** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name} |  |
-| [**replace_validating_admission_policy_binding**](AdmissionregistrationV1alpha1Api.md#replace_validating_admission_policy_binding) | **PUT** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicybindings/{name} |  |
-| [**replace_validating_admission_policy_status**](AdmissionregistrationV1alpha1Api.md#replace_validating_admission_policy_status) | **PUT** /apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status |  |
+| [**create_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#create_mutating_admission_policy_admissionregistration_v1alpha1) | **POST** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies |  |
+| [**create_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#create_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **POST** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings |  |
+| [**delete_collection_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#delete_collection_mutating_admission_policy_admissionregistration_v1alpha1) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies |  |
+| [**delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings |  |
+| [**delete_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#delete_mutating_admission_policy_admissionregistration_v1alpha1) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies/{name} |  |
+| [**delete_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#delete_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **DELETE** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings/{name} |  |
+| [**get_api_resources_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#get_api_resources_admissionregistration_v1alpha1) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/ |  |
+| [**list_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#list_mutating_admission_policy_admissionregistration_v1alpha1) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies |  |
+| [**list_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#list_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings |  |
+| [**patch_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#patch_mutating_admission_policy_admissionregistration_v1alpha1) | **PATCH** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies/{name} |  |
+| [**patch_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#patch_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **PATCH** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings/{name} |  |
+| [**read_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#read_mutating_admission_policy_admissionregistration_v1alpha1) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies/{name} |  |
+| [**read_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#read_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **GET** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings/{name} |  |
+| [**replace_mutating_admission_policy_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#replace_mutating_admission_policy_admissionregistration_v1alpha1) | **PUT** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicies/{name} |  |
+| [**replace_mutating_admission_policy_binding_admissionregistration_v1alpha1**](AdmissionregistrationV1alpha1Api.md#replace_mutating_admission_policy_binding_admissionregistration_v1alpha1) | **PUT** /apis/admissionregistration.k8s.io/v1alpha1/mutatingadmissionpolicybindings/{name} |  |
 
 
-## create_validating_admission_policy
+## create_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicy> create_validating_admission_policy(body, opts)
+> <V1alpha1MutatingAdmissionPolicy> create_mutating_admission_policy_admissionregistration_v1alpha1(body, opts)
 
 
 
-create a ValidatingAdmissionPolicy
+create a MutatingAdmissionPolicy
 
 ### Examples
 
@@ -46,7 +43,7 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-body = Kubernetes::V1alpha1ValidatingAdmissionPolicy.new # V1alpha1ValidatingAdmissionPolicy | 
+body = Kubernetes::V1alpha1MutatingAdmissionPolicy.new # V1alpha1MutatingAdmissionPolicy | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -56,28 +53,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_validating_admission_policy(body, opts)
+  result = api_instance.create_mutating_admission_policy_admissionregistration_v1alpha1(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->create_validating_admission_policy: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->create_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the create_validating_admission_policy_with_http_info variant
+#### Using the create_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> create_validating_admission_policy_with_http_info(body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicy>, Integer, Hash)> create_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_validating_admission_policy_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
+  p data # => <V1alpha1MutatingAdmissionPolicy>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->create_validating_admission_policy_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->create_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -85,7 +82,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | [**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md) |  |  |
+| **body** | [**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md) |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] |
@@ -93,7 +90,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
+[**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md)
 
 ### Authorization
 
@@ -102,16 +99,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_validating_admission_policy_binding
+## create_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicyBinding> create_validating_admission_policy_binding(body, opts)
+> <V1alpha1MutatingAdmissionPolicyBinding> create_mutating_admission_policy_binding_admissionregistration_v1alpha1(body, opts)
 
 
 
-create a ValidatingAdmissionPolicyBinding
+create a MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -127,7 +124,7 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-body = Kubernetes::V1alpha1ValidatingAdmissionPolicyBinding.new # V1alpha1ValidatingAdmissionPolicyBinding | 
+body = Kubernetes::V1alpha1MutatingAdmissionPolicyBinding.new # V1alpha1MutatingAdmissionPolicyBinding | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -137,28 +134,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_validating_admission_policy_binding(body, opts)
+  result = api_instance.create_mutating_admission_policy_binding_admissionregistration_v1alpha1(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->create_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->create_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the create_validating_admission_policy_binding_with_http_info variant
+#### Using the create_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicyBinding>, Integer, Hash)> create_validating_admission_policy_binding_with_http_info(body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicyBinding>, Integer, Hash)> create_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_validating_admission_policy_binding_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyBinding>
+  p data # => <V1alpha1MutatingAdmissionPolicyBinding>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->create_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->create_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -166,7 +163,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | [**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md) |  |  |
+| **body** | [**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md) |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] |
@@ -174,7 +171,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md)
+[**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md)
 
 ### Authorization
 
@@ -183,16 +180,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_validating_admission_policy
+## delete_collection_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1Status> delete_collection_validating_admission_policy(opts)
+> <V1Status> delete_collection_mutating_admission_policy_admissionregistration_v1alpha1(opts)
 
 
 
-delete collection of ValidatingAdmissionPolicy
+delete collection of MutatingAdmissionPolicy
 
 ### Examples
 
@@ -214,6 +211,7 @@ opts = {
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
   limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
@@ -227,28 +225,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_collection_validating_admission_policy(opts)
+  result = api_instance.delete_collection_mutating_admission_policy_admissionregistration_v1alpha1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_validating_admission_policy: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the delete_collection_validating_admission_policy_with_http_info variant
+#### Using the delete_collection_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_validating_admission_policy_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_validating_admission_policy_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_validating_admission_policy_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -261,6 +259,7 @@ end
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
 | **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
@@ -282,16 +281,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_validating_admission_policy_binding
+## delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1Status> delete_collection_validating_admission_policy_binding(opts)
+> <V1Status> delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1(opts)
 
 
 
-delete collection of ValidatingAdmissionPolicyBinding
+delete collection of MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -313,6 +312,7 @@ opts = {
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
   limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
@@ -326,28 +326,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_collection_validating_admission_policy_binding(opts)
+  result = api_instance.delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the delete_collection_validating_admission_policy_binding_with_http_info variant
+#### Using the delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_validating_admission_policy_binding_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_validating_admission_policy_binding_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_collection_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -360,6 +360,7 @@ end
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
 | **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
@@ -381,101 +382,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_validating_admission_policy
+## delete_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1Status> delete_validating_admission_policy(name, opts)
-
-
-
-delete a ValidatingAdmissionPolicy
-
-### Examples
-
-```ruby
-require 'time'
-require 'kubernetes'
-# setup authorization
-Kubernetes.configure do |config|
-  # Configure API key authorization: BearerToken
-  config.api_key['BearerToken'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['BearerToken'] = 'Bearer'
-end
-
-api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
-opts = {
-  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-  dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-  grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-  orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
-  propagation_policy: 'propagation_policy_example', # String | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
-  body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
-}
-
-begin
-  
-  result = api_instance.delete_validating_admission_policy(name, opts)
-  p result
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_validating_admission_policy: #{e}"
-end
-```
-
-#### Using the delete_validating_admission_policy_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<V1Status>, Integer, Hash)> delete_validating_admission_policy_with_http_info(name, opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.delete_validating_admission_policy_with_http_info(name, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <V1Status>
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_validating_admission_policy_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
-| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
-| **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
-| **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
-| **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
-| **propagation_policy** | **String** | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] |
-| **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
-
-### Return type
-
-[**V1Status**](V1Status.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-
-## delete_validating_admission_policy_binding
-
-> <V1Status> delete_validating_admission_policy_binding(name, opts)
+> <V1Status> delete_mutating_admission_policy_admissionregistration_v1alpha1(name, opts)
 
 
 
-delete a ValidatingAdmissionPolicyBinding
+delete a MutatingAdmissionPolicy
 
 ### Examples
 
@@ -491,11 +407,12 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicyBinding
+name = 'name_example' # String | name of the MutatingAdmissionPolicy
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
   propagation_policy: 'propagation_policy_example', # String | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
@@ -503,28 +420,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_validating_admission_policy_binding(name, opts)
+  result = api_instance.delete_mutating_admission_policy_admissionregistration_v1alpha1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the delete_validating_admission_policy_binding_with_http_info variant
+#### Using the delete_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_validating_admission_policy_binding_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_validating_admission_policy_binding_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -532,10 +449,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicyBinding |  |
+| **name** | **String** | name of the MutatingAdmissionPolicy |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
 | **propagation_policy** | **String** | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
@@ -551,12 +469,99 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources
+## delete_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1APIResourceList> get_api_resources
+> <V1Status> delete_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, opts)
+
+
+
+delete a MutatingAdmissionPolicyBinding
+
+### Examples
+
+```ruby
+require 'time'
+require 'kubernetes'
+# setup authorization
+Kubernetes.configure do |config|
+  # Configure API key authorization: BearerToken
+  config.api_key['BearerToken'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['BearerToken'] = 'Bearer'
+end
+
+api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
+name = 'name_example' # String | name of the MutatingAdmissionPolicyBinding
+opts = {
+  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+  dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+  grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
+  orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+  propagation_policy: 'propagation_policy_example', # String | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+  body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
+}
+
+begin
+  
+  result = api_instance.delete_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, opts)
+  p result
+rescue Kubernetes::ApiError => e
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
+end
+```
+
+#### Using the delete_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<V1Status>, Integer, Hash)> delete_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.delete_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <V1Status>
+rescue Kubernetes::ApiError => e
+  puts "Error when calling AdmissionregistrationV1alpha1Api->delete_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **name** | **String** | name of the MutatingAdmissionPolicyBinding |  |
+| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
+| **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
+| **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
+| **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
+| **propagation_policy** | **String** | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] |
+| **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
+
+### Return type
+
+[**V1Status**](V1Status.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
+
+
+## get_api_resources_admissionregistration_v1alpha1
+
+> <V1APIResourceList> get_api_resources_admissionregistration_v1alpha1
 
 
 
@@ -579,28 +584,28 @@ api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
 
 begin
   
-  result = api_instance.get_api_resources
+  result = api_instance.get_api_resources_admissionregistration_v1alpha1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->get_api_resources: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->get_api_resources_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_with_http_info variant
+#### Using the get_api_resources_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_admissionregistration_v1alpha1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_admissionregistration_v1alpha1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->get_api_resources_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->get_api_resources_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -619,109 +624,16 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## list_validating_admission_policy
+## list_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicyList> list_validating_admission_policy(opts)
-
-
-
-list or watch objects of kind ValidatingAdmissionPolicy
-
-### Examples
-
-```ruby
-require 'time'
-require 'kubernetes'
-# setup authorization
-Kubernetes.configure do |config|
-  # Configure API key authorization: BearerToken
-  config.api_key['BearerToken'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['BearerToken'] = 'Bearer'
-end
-
-api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-opts = {
-  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-  allow_watch_bookmarks: true, # Boolean | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
-  continue: 'continue_example', # String | The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-  field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
-  label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
-  limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-  resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-  resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
-  send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
-  timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-  watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-}
-
-begin
-  
-  result = api_instance.list_validating_admission_policy(opts)
-  p result
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->list_validating_admission_policy: #{e}"
-end
-```
-
-#### Using the list_validating_admission_policy_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<V1alpha1ValidatingAdmissionPolicyList>, Integer, Hash)> list_validating_admission_policy_with_http_info(opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.list_validating_admission_policy_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyList>
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->list_validating_admission_policy_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
-| **allow_watch_bookmarks** | **Boolean** | allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. | [optional] |
-| **continue** | **String** | The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] |
-| **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
-| **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
-| **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
-| **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
-| **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
-| **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
-| **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
-| **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
-
-### Return type
-
-[**V1alpha1ValidatingAdmissionPolicyList**](V1alpha1ValidatingAdmissionPolicyList.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
-
-
-## list_validating_admission_policy_binding
-
-> <V1alpha1ValidatingAdmissionPolicyBindingList> list_validating_admission_policy_binding(opts)
+> <V1alpha1MutatingAdmissionPolicyList> list_mutating_admission_policy_admissionregistration_v1alpha1(opts)
 
 
 
-list or watch objects of kind ValidatingAdmissionPolicyBinding
+list or watch objects of kind MutatingAdmissionPolicy
 
 ### Examples
 
@@ -753,28 +665,28 @@ opts = {
 
 begin
   
-  result = api_instance.list_validating_admission_policy_binding(opts)
+  result = api_instance.list_mutating_admission_policy_admissionregistration_v1alpha1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->list_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->list_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the list_validating_admission_policy_binding_with_http_info variant
+#### Using the list_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicyBindingList>, Integer, Hash)> list_validating_admission_policy_binding_with_http_info(opts)
+> <Array(<V1alpha1MutatingAdmissionPolicyList>, Integer, Hash)> list_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_validating_admission_policy_binding_with_http_info(opts)
+  data, status_code, headers = api_instance.list_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyBindingList>
+  p data # => <V1alpha1MutatingAdmissionPolicyList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->list_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->list_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -796,7 +708,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicyBindingList**](V1alpha1ValidatingAdmissionPolicyBindingList.md)
+[**V1alpha1MutatingAdmissionPolicyList**](V1alpha1MutatingAdmissionPolicyList.md)
 
 ### Authorization
 
@@ -805,16 +717,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## patch_validating_admission_policy
+## list_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicy> patch_validating_admission_policy(name, body, opts)
+> <V1alpha1MutatingAdmissionPolicyBindingList> list_mutating_admission_policy_binding_admissionregistration_v1alpha1(opts)
 
 
 
-partially update the specified ValidatingAdmissionPolicy
+list or watch objects of kind MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -830,7 +742,100 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
+opts = {
+  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+  allow_watch_bookmarks: true, # Boolean | allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+  continue: 'continue_example', # String | The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+  field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
+  label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
+  limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+  resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+  resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
+  send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+  watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+}
+
+begin
+  
+  result = api_instance.list_mutating_admission_policy_binding_admissionregistration_v1alpha1(opts)
+  p result
+rescue Kubernetes::ApiError => e
+  puts "Error when calling AdmissionregistrationV1alpha1Api->list_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
+end
+```
+
+#### Using the list_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<V1alpha1MutatingAdmissionPolicyBindingList>, Integer, Hash)> list_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.list_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <V1alpha1MutatingAdmissionPolicyBindingList>
+rescue Kubernetes::ApiError => e
+  puts "Error when calling AdmissionregistrationV1alpha1Api->list_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
+| **allow_watch_bookmarks** | **Boolean** | allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. | [optional] |
+| **continue** | **String** | The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications. | [optional] |
+| **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
+| **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
+| **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
+| **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
+| **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
+| **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
+| **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
+
+### Return type
+
+[**V1alpha1MutatingAdmissionPolicyBindingList**](V1alpha1MutatingAdmissionPolicyBindingList.md)
+
+### Authorization
+
+[BearerToken](../README.md#BearerToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
+
+
+## patch_mutating_admission_policy_admissionregistration_v1alpha1
+
+> <V1alpha1MutatingAdmissionPolicy> patch_mutating_admission_policy_admissionregistration_v1alpha1(name, body, opts)
+
+
+
+partially update the specified MutatingAdmissionPolicy
+
+### Examples
+
+```ruby
+require 'time'
+require 'kubernetes'
+# setup authorization
+Kubernetes.configure do |config|
+  # Configure API key authorization: BearerToken
+  config.api_key['BearerToken'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['BearerToken'] = 'Bearer'
+end
+
+api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
+name = 'name_example' # String | name of the MutatingAdmissionPolicy
 body = Object # Object | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
@@ -842,28 +847,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_validating_admission_policy(name, body, opts)
+  result = api_instance.patch_mutating_admission_policy_admissionregistration_v1alpha1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the patch_validating_admission_policy_with_http_info variant
+#### Using the patch_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> patch_validating_admission_policy_with_http_info(name, body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicy>, Integer, Hash)> patch_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_validating_admission_policy_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
+  p data # => <V1alpha1MutatingAdmissionPolicy>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -871,7 +876,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
+| **name** | **String** | name of the MutatingAdmissionPolicy |  |
 | **body** | **Object** |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
@@ -881,7 +886,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
+[**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md)
 
 ### Authorization
 
@@ -889,17 +894,17 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_validating_admission_policy_binding
+## patch_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicyBinding> patch_validating_admission_policy_binding(name, body, opts)
+> <V1alpha1MutatingAdmissionPolicyBinding> patch_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, body, opts)
 
 
 
-partially update the specified ValidatingAdmissionPolicyBinding
+partially update the specified MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -915,7 +920,7 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicyBinding
+name = 'name_example' # String | name of the MutatingAdmissionPolicyBinding
 body = Object # Object | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
@@ -927,28 +932,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_validating_admission_policy_binding(name, body, opts)
+  result = api_instance.patch_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the patch_validating_admission_policy_binding_with_http_info variant
+#### Using the patch_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicyBinding>, Integer, Hash)> patch_validating_admission_policy_binding_with_http_info(name, body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicyBinding>, Integer, Hash)> patch_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_validating_admission_policy_binding_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyBinding>
+  p data # => <V1alpha1MutatingAdmissionPolicyBinding>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -956,7 +961,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicyBinding |  |
+| **name** | **String** | name of the MutatingAdmissionPolicyBinding |  |
 | **body** | **Object** |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
@@ -966,7 +971,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md)
+[**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md)
 
 ### Authorization
 
@@ -974,17 +979,17 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_validating_admission_policy_status
+## read_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicy> patch_validating_admission_policy_status(name, body, opts)
+> <V1alpha1MutatingAdmissionPolicy> read_mutating_admission_policy_admissionregistration_v1alpha1(name, opts)
 
 
 
-partially update status of the specified ValidatingAdmissionPolicy
+read the specified MutatingAdmissionPolicy
 
 ### Examples
 
@@ -1000,120 +1005,35 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
-body = Object # Object | 
-opts = {
-  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-  dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-  field_manager: 'field_manager_example', # String | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
-  field_validation: 'field_validation_example', # String | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-  force: true # Boolean | Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
-}
-
-begin
-  
-  result = api_instance.patch_validating_admission_policy_status(name, body, opts)
-  p result
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy_status: #{e}"
-end
-```
-
-#### Using the patch_validating_admission_policy_status_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> patch_validating_admission_policy_status_with_http_info(name, body, opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.patch_validating_admission_policy_status_with_http_info(name, body, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->patch_validating_admission_policy_status_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
-| **body** | **Object** |  |  |
-| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
-| **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
-| **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch). | [optional] |
-| **field_validation** | **String** | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional] |
-| **force** | **Boolean** | Force is going to \&quot;force\&quot; Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests. | [optional] |
-
-### Return type
-
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-
-## read_validating_admission_policy
-
-> <V1alpha1ValidatingAdmissionPolicy> read_validating_admission_policy(name, opts)
-
-
-
-read the specified ValidatingAdmissionPolicy
-
-### Examples
-
-```ruby
-require 'time'
-require 'kubernetes'
-# setup authorization
-Kubernetes.configure do |config|
-  # Configure API key authorization: BearerToken
-  config.api_key['BearerToken'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['BearerToken'] = 'Bearer'
-end
-
-api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
+name = 'name_example' # String | name of the MutatingAdmissionPolicy
 opts = {
   pretty: 'pretty_example' # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
 }
 
 begin
   
-  result = api_instance.read_validating_admission_policy(name, opts)
+  result = api_instance.read_mutating_admission_policy_admissionregistration_v1alpha1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->read_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the read_validating_admission_policy_with_http_info variant
+#### Using the read_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> read_validating_admission_policy_with_http_info(name, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicy>, Integer, Hash)> read_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_validating_admission_policy_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
+  p data # => <V1alpha1MutatingAdmissionPolicy>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->read_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -1121,12 +1041,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
+| **name** | **String** | name of the MutatingAdmissionPolicy |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
+[**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md)
 
 ### Authorization
 
@@ -1135,16 +1055,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_validating_admission_policy_binding
+## read_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicyBinding> read_validating_admission_policy_binding(name, opts)
+> <V1alpha1MutatingAdmissionPolicyBinding> read_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, opts)
 
 
 
-read the specified ValidatingAdmissionPolicyBinding
+read the specified MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -1160,35 +1080,35 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicyBinding
+name = 'name_example' # String | name of the MutatingAdmissionPolicyBinding
 opts = {
   pretty: 'pretty_example' # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
 }
 
 begin
   
-  result = api_instance.read_validating_admission_policy_binding(name, opts)
+  result = api_instance.read_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->read_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the read_validating_admission_policy_binding_with_http_info variant
+#### Using the read_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicyBinding>, Integer, Hash)> read_validating_admission_policy_binding_with_http_info(name, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicyBinding>, Integer, Hash)> read_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_validating_admission_policy_binding_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyBinding>
+  p data # => <V1alpha1MutatingAdmissionPolicyBinding>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->read_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -1196,12 +1116,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicyBinding |  |
+| **name** | **String** | name of the MutatingAdmissionPolicyBinding |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md)
+[**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md)
 
 ### Authorization
 
@@ -1210,91 +1130,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_validating_admission_policy_status
+## replace_mutating_admission_policy_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicy> read_validating_admission_policy_status(name, opts)
-
-
-
-read status of the specified ValidatingAdmissionPolicy
-
-### Examples
-
-```ruby
-require 'time'
-require 'kubernetes'
-# setup authorization
-Kubernetes.configure do |config|
-  # Configure API key authorization: BearerToken
-  config.api_key['BearerToken'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['BearerToken'] = 'Bearer'
-end
-
-api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
-opts = {
-  pretty: 'pretty_example' # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-}
-
-begin
-  
-  result = api_instance.read_validating_admission_policy_status(name, opts)
-  p result
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy_status: #{e}"
-end
-```
-
-#### Using the read_validating_admission_policy_status_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> read_validating_admission_policy_status_with_http_info(name, opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.read_validating_admission_policy_status_with_http_info(name, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->read_validating_admission_policy_status_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
-| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
-
-### Return type
-
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-
-## replace_validating_admission_policy
-
-> <V1alpha1ValidatingAdmissionPolicy> replace_validating_admission_policy(name, body, opts)
+> <V1alpha1MutatingAdmissionPolicy> replace_mutating_admission_policy_admissionregistration_v1alpha1(name, body, opts)
 
 
 
-replace the specified ValidatingAdmissionPolicy
+replace the specified MutatingAdmissionPolicy
 
 ### Examples
 
@@ -1310,8 +1155,8 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
-body = Kubernetes::V1alpha1ValidatingAdmissionPolicy.new # V1alpha1ValidatingAdmissionPolicy | 
+name = 'name_example' # String | name of the MutatingAdmissionPolicy
+body = Kubernetes::V1alpha1MutatingAdmissionPolicy.new # V1alpha1MutatingAdmissionPolicy | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -1321,28 +1166,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_validating_admission_policy(name, body, opts)
+  result = api_instance.replace_mutating_admission_policy_admissionregistration_v1alpha1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_mutating_admission_policy_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the replace_validating_admission_policy_with_http_info variant
+#### Using the replace_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> replace_validating_admission_policy_with_http_info(name, body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicy>, Integer, Hash)> replace_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_validating_admission_policy_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
+  p data # => <V1alpha1MutatingAdmissionPolicy>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_mutating_admission_policy_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -1350,8 +1195,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
-| **body** | [**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md) |  |  |
+| **name** | **String** | name of the MutatingAdmissionPolicy |  |
+| **body** | [**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md) |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] |
@@ -1359,7 +1204,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
+[**V1alpha1MutatingAdmissionPolicy**](V1alpha1MutatingAdmissionPolicy.md)
 
 ### Authorization
 
@@ -1368,16 +1213,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_validating_admission_policy_binding
+## replace_mutating_admission_policy_binding_admissionregistration_v1alpha1
 
-> <V1alpha1ValidatingAdmissionPolicyBinding> replace_validating_admission_policy_binding(name, body, opts)
+> <V1alpha1MutatingAdmissionPolicyBinding> replace_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, body, opts)
 
 
 
-replace the specified ValidatingAdmissionPolicyBinding
+replace the specified MutatingAdmissionPolicyBinding
 
 ### Examples
 
@@ -1393,8 +1238,8 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicyBinding
-body = Kubernetes::V1alpha1ValidatingAdmissionPolicyBinding.new # V1alpha1ValidatingAdmissionPolicyBinding | 
+name = 'name_example' # String | name of the MutatingAdmissionPolicyBinding
+body = Kubernetes::V1alpha1MutatingAdmissionPolicyBinding.new # V1alpha1MutatingAdmissionPolicyBinding | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -1404,28 +1249,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_validating_admission_policy_binding(name, body, opts)
+  result = api_instance.replace_mutating_admission_policy_binding_admissionregistration_v1alpha1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy_binding: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_mutating_admission_policy_binding_admissionregistration_v1alpha1: #{e}"
 end
 ```
 
-#### Using the replace_validating_admission_policy_binding_with_http_info variant
+#### Using the replace_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1alpha1ValidatingAdmissionPolicyBinding>, Integer, Hash)> replace_validating_admission_policy_binding_with_http_info(name, body, opts)
+> <Array(<V1alpha1MutatingAdmissionPolicyBinding>, Integer, Hash)> replace_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_validating_admission_policy_binding_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicyBinding>
+  p data # => <V1alpha1MutatingAdmissionPolicyBinding>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy_binding_with_http_info: #{e}"
+  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_mutating_admission_policy_binding_admissionregistration_v1alpha1_with_http_info: #{e}"
 end
 ```
 
@@ -1433,8 +1278,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicyBinding |  |
-| **body** | [**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md) |  |  |
+| **name** | **String** | name of the MutatingAdmissionPolicyBinding |  |
+| **body** | [**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md) |  |  |
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] |
@@ -1442,7 +1287,7 @@ end
 
 ### Return type
 
-[**V1alpha1ValidatingAdmissionPolicyBinding**](V1alpha1ValidatingAdmissionPolicyBinding.md)
+[**V1alpha1MutatingAdmissionPolicyBinding**](V1alpha1MutatingAdmissionPolicyBinding.md)
 
 ### Authorization
 
@@ -1451,88 +1296,5 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
-
-
-## replace_validating_admission_policy_status
-
-> <V1alpha1ValidatingAdmissionPolicy> replace_validating_admission_policy_status(name, body, opts)
-
-
-
-replace status of the specified ValidatingAdmissionPolicy
-
-### Examples
-
-```ruby
-require 'time'
-require 'kubernetes'
-# setup authorization
-Kubernetes.configure do |config|
-  # Configure API key authorization: BearerToken
-  config.api_key['BearerToken'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['BearerToken'] = 'Bearer'
-end
-
-api_instance = Kubernetes::AdmissionregistrationV1alpha1Api.new
-name = 'name_example' # String | name of the ValidatingAdmissionPolicy
-body = Kubernetes::V1alpha1ValidatingAdmissionPolicy.new # V1alpha1ValidatingAdmissionPolicy | 
-opts = {
-  pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
-  dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-  field_manager: 'field_manager_example', # String | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
-  field_validation: 'field_validation_example' # String | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
-}
-
-begin
-  
-  result = api_instance.replace_validating_admission_policy_status(name, body, opts)
-  p result
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy_status: #{e}"
-end
-```
-
-#### Using the replace_validating_admission_policy_status_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<V1alpha1ValidatingAdmissionPolicy>, Integer, Hash)> replace_validating_admission_policy_status_with_http_info(name, body, opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.replace_validating_admission_policy_status_with_http_info(name, body, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <V1alpha1ValidatingAdmissionPolicy>
-rescue Kubernetes::ApiError => e
-  puts "Error when calling AdmissionregistrationV1alpha1Api->replace_validating_admission_policy_status_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **name** | **String** | name of the ValidatingAdmissionPolicy |  |
-| **body** | [**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md) |  |  |
-| **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
-| **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
-| **field_manager** | **String** | fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. | [optional] |
-| **field_validation** | **String** | fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered. | [optional] |
-
-### Return type
-
-[**V1alpha1ValidatingAdmissionPolicy**](V1alpha1ValidatingAdmissionPolicy.md)
-
-### Authorization
-
-[BearerToken](../README.md#BearerToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 

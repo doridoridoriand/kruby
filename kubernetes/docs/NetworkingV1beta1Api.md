@@ -4,29 +4,29 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_ip_address**](NetworkingV1beta1Api.md#create_ip_address) | **POST** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**create_service_cidr**](NetworkingV1beta1Api.md#create_service_cidr) | **POST** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**delete_collection_ip_address**](NetworkingV1beta1Api.md#delete_collection_ip_address) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**delete_collection_service_cidr**](NetworkingV1beta1Api.md#delete_collection_service_cidr) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**delete_ip_address**](NetworkingV1beta1Api.md#delete_ip_address) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**delete_service_cidr**](NetworkingV1beta1Api.md#delete_service_cidr) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**get_api_resources**](NetworkingV1beta1Api.md#get_api_resources) | **GET** /apis/networking.k8s.io/v1beta1/ |  |
-| [**list_ip_address**](NetworkingV1beta1Api.md#list_ip_address) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**list_service_cidr**](NetworkingV1beta1Api.md#list_service_cidr) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**patch_ip_address**](NetworkingV1beta1Api.md#patch_ip_address) | **PATCH** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**patch_service_cidr**](NetworkingV1beta1Api.md#patch_service_cidr) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**patch_service_cidr_status**](NetworkingV1beta1Api.md#patch_service_cidr_status) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
-| [**read_ip_address**](NetworkingV1beta1Api.md#read_ip_address) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**read_service_cidr**](NetworkingV1beta1Api.md#read_service_cidr) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**read_service_cidr_status**](NetworkingV1beta1Api.md#read_service_cidr_status) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
-| [**replace_ip_address**](NetworkingV1beta1Api.md#replace_ip_address) | **PUT** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**replace_service_cidr**](NetworkingV1beta1Api.md#replace_service_cidr) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**replace_service_cidr_status**](NetworkingV1beta1Api.md#replace_service_cidr_status) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**create_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#create_ip_address_networking_v1beta1) | **POST** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**create_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#create_service_cidr_networking_v1beta1) | **POST** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**delete_collection_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#delete_collection_ip_address_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**delete_collection_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#delete_collection_service_cidr_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**delete_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#delete_ip_address_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**delete_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#delete_service_cidr_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**get_api_resources_networking_v1beta1**](NetworkingV1beta1Api.md#get_api_resources_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ |  |
+| [**list_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#list_ip_address_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**list_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#list_service_cidr_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**patch_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#patch_ip_address_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**patch_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#patch_service_cidr_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**patch_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#patch_service_cidr_status_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**read_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#read_ip_address_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**read_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#read_service_cidr_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**read_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#read_service_cidr_status_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**replace_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#replace_ip_address_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**replace_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#replace_service_cidr_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**replace_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#replace_service_cidr_status_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
 
 
-## create_ip_address
+## create_ip_address_networking_v1beta1
 
-> <V1beta1IPAddress> create_ip_address(body, opts)
+> <V1beta1IPAddress> create_ip_address_networking_v1beta1(body, opts)
 
 
 
@@ -56,28 +56,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_ip_address(body, opts)
+  result = api_instance.create_ip_address_networking_v1beta1(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the create_ip_address_with_http_info variant
+#### Using the create_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> create_ip_address_with_http_info(body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> create_ip_address_networking_v1beta1_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_ip_address_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_ip_address_networking_v1beta1_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -102,12 +102,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_service_cidr
+## create_service_cidr_networking_v1beta1
 
-> <V1beta1ServiceCIDR> create_service_cidr(body, opts)
+> <V1beta1ServiceCIDR> create_service_cidr_networking_v1beta1(body, opts)
 
 
 
@@ -137,28 +137,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_service_cidr(body, opts)
+  result = api_instance.create_service_cidr_networking_v1beta1(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the create_service_cidr_with_http_info variant
+#### Using the create_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> create_service_cidr_with_http_info(body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> create_service_cidr_networking_v1beta1_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_service_cidr_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_service_cidr_networking_v1beta1_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -183,12 +183,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_ip_address
+## delete_collection_ip_address_networking_v1beta1
 
-> <V1Status> delete_collection_ip_address(opts)
+> <V1Status> delete_collection_ip_address_networking_v1beta1(opts)
 
 
 
@@ -214,6 +214,7 @@ opts = {
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
   limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
@@ -227,28 +228,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_collection_ip_address(opts)
+  result = api_instance.delete_collection_ip_address_networking_v1beta1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the delete_collection_ip_address_with_http_info variant
+#### Using the delete_collection_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_networking_v1beta1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_ip_address_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_ip_address_networking_v1beta1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -261,6 +262,7 @@ end
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
 | **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
@@ -282,12 +284,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_service_cidr
+## delete_collection_service_cidr_networking_v1beta1
 
-> <V1Status> delete_collection_service_cidr(opts)
+> <V1Status> delete_collection_service_cidr_networking_v1beta1(opts)
 
 
 
@@ -313,6 +315,7 @@ opts = {
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   field_selector: 'field_selector_example', # String | A selector to restrict the list of returned objects by their fields. Defaults to everything.
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   label_selector: 'label_selector_example', # String | A selector to restrict the list of returned objects by their labels. Defaults to everything.
   limit: 56, # Integer | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
@@ -326,28 +329,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_collection_service_cidr(opts)
+  result = api_instance.delete_collection_service_cidr_networking_v1beta1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the delete_collection_service_cidr_with_http_info variant
+#### Using the delete_collection_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_networking_v1beta1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_service_cidr_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_service_cidr_networking_v1beta1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -360,6 +363,7 @@ end
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **field_selector** | **String** | A selector to restrict the list of returned objects by their fields. Defaults to everything. | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **label_selector** | **String** | A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] |
 | **limit** | **Integer** | limit is a maximum number of responses to return for a list call. If more items exist, the server will set the &#x60;continue&#x60; field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned. | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
@@ -381,12 +385,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_ip_address
+## delete_ip_address_networking_v1beta1
 
-> <V1Status> delete_ip_address(name, opts)
+> <V1Status> delete_ip_address_networking_v1beta1(name, opts)
 
 
 
@@ -411,6 +415,7 @@ opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
   propagation_policy: 'propagation_policy_example', # String | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
@@ -418,28 +423,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_ip_address(name, opts)
+  result = api_instance.delete_ip_address_networking_v1beta1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the delete_ip_address_with_http_info variant
+#### Using the delete_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_ip_address_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_ip_address_networking_v1beta1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_ip_address_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_ip_address_networking_v1beta1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -451,6 +456,7 @@ end
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
 | **propagation_policy** | **String** | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
@@ -466,12 +472,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_service_cidr
+## delete_service_cidr_networking_v1beta1
 
-> <V1Status> delete_service_cidr(name, opts)
+> <V1Status> delete_service_cidr_networking_v1beta1(name, opts)
 
 
 
@@ -496,6 +502,7 @@ opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
   grace_period_seconds: 56, # Integer | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+  ignore_store_read_error_with_cluster_breaking_potential: true, # Boolean | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it
   orphan_dependents: true, # Boolean | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
   propagation_policy: 'propagation_policy_example', # String | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
@@ -503,28 +510,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_service_cidr(name, opts)
+  result = api_instance.delete_service_cidr_networking_v1beta1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the delete_service_cidr_with_http_info variant
+#### Using the delete_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_networking_v1beta1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_service_cidr_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_service_cidr_networking_v1beta1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -536,6 +543,7 @@ end
 | **pretty** | **String** | If &#39;true&#39;, then the output is pretty printed. Defaults to &#39;false&#39; unless the user-agent indicates a browser or command-line HTTP tool (curl and wget). | [optional] |
 | **dry_run** | **String** | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed | [optional] |
 | **grace_period_seconds** | **Integer** | The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately. | [optional] |
+| **ignore_store_read_error_with_cluster_breaking_potential** | **Boolean** | if set to true, it will trigger an unsafe deletion of the resource in case the normal deletion flow fails with a corrupt object error. A resource is considered corrupt if it can not be retrieved from the underlying storage successfully because of a) its data can not be transformed e.g. decryption failure, or b) it fails to decode into an object. NOTE: unsafe deletion ignores finalizer constraints, skips precondition checks, and removes the object from the storage. WARNING: This may potentially break the cluster if the workload associated with the resource being unsafe-deleted relies on normal deletion flow. Use only if you REALLY know what you are doing. The default value is false, and the user must opt in to enable it | [optional] |
 | **orphan_dependents** | **Boolean** | Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both. | [optional] |
 | **propagation_policy** | **String** | Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: &#39;Orphan&#39; - orphan the dependents; &#39;Background&#39; - allow the garbage collector to delete the dependents in the background; &#39;Foreground&#39; - a cascading policy that deletes all dependents in the foreground. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
@@ -551,12 +559,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources
+## get_api_resources_networking_v1beta1
 
-> <V1APIResourceList> get_api_resources
+> <V1APIResourceList> get_api_resources_networking_v1beta1
 
 
 
@@ -579,28 +587,28 @@ api_instance = Kubernetes::NetworkingV1beta1Api.new
 
 begin
   
-  result = api_instance.get_api_resources
+  result = api_instance.get_api_resources_networking_v1beta1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->get_api_resources: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->get_api_resources_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_with_http_info variant
+#### Using the get_api_resources_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_networking_v1beta1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_networking_v1beta1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->get_api_resources_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->get_api_resources_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -619,12 +627,12 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## list_ip_address
+## list_ip_address_networking_v1beta1
 
-> <V1beta1IPAddressList> list_ip_address(opts)
+> <V1beta1IPAddressList> list_ip_address_networking_v1beta1(opts)
 
 
 
@@ -660,28 +668,28 @@ opts = {
 
 begin
   
-  result = api_instance.list_ip_address(opts)
+  result = api_instance.list_ip_address_networking_v1beta1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the list_ip_address_with_http_info variant
+#### Using the list_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddressList>, Integer, Hash)> list_ip_address_with_http_info(opts)
+> <Array(<V1beta1IPAddressList>, Integer, Hash)> list_ip_address_networking_v1beta1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_ip_address_with_http_info(opts)
+  data, status_code, headers = api_instance.list_ip_address_networking_v1beta1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddressList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -712,12 +720,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_service_cidr
+## list_service_cidr_networking_v1beta1
 
-> <V1beta1ServiceCIDRList> list_service_cidr(opts)
+> <V1beta1ServiceCIDRList> list_service_cidr_networking_v1beta1(opts)
 
 
 
@@ -753,28 +761,28 @@ opts = {
 
 begin
   
-  result = api_instance.list_service_cidr(opts)
+  result = api_instance.list_service_cidr_networking_v1beta1(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the list_service_cidr_with_http_info variant
+#### Using the list_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDRList>, Integer, Hash)> list_service_cidr_with_http_info(opts)
+> <Array(<V1beta1ServiceCIDRList>, Integer, Hash)> list_service_cidr_networking_v1beta1_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_service_cidr_with_http_info(opts)
+  data, status_code, headers = api_instance.list_service_cidr_networking_v1beta1_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDRList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -805,12 +813,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## patch_ip_address
+## patch_ip_address_networking_v1beta1
 
-> <V1beta1IPAddress> patch_ip_address(name, body, opts)
+> <V1beta1IPAddress> patch_ip_address_networking_v1beta1(name, body, opts)
 
 
 
@@ -842,28 +850,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_ip_address(name, body, opts)
+  result = api_instance.patch_ip_address_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the patch_ip_address_with_http_info variant
+#### Using the patch_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> patch_ip_address_with_http_info(name, body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> patch_ip_address_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_ip_address_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_ip_address_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -889,13 +897,13 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr
+## patch_service_cidr_networking_v1beta1
 
-> <V1beta1ServiceCIDR> patch_service_cidr(name, body, opts)
+> <V1beta1ServiceCIDR> patch_service_cidr_networking_v1beta1(name, body, opts)
 
 
 
@@ -927,28 +935,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr(name, body, opts)
+  result = api_instance.patch_service_cidr_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_with_http_info variant
+#### Using the patch_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -974,13 +982,13 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr_status
+## patch_service_cidr_status_networking_v1beta1
 
-> <V1beta1ServiceCIDR> patch_service_cidr_status(name, body, opts)
+> <V1beta1ServiceCIDR> patch_service_cidr_status_networking_v1beta1(name, body, opts)
 
 
 
@@ -1012,28 +1020,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr_status(name, body, opts)
+  result = api_instance.patch_service_cidr_status_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_status_with_http_info variant
+#### Using the patch_service_cidr_status_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_status_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1059,13 +1067,13 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Content-Type**: application/json-patch+json, application/merge-patch+json, application/strategic-merge-patch+json, application/apply-patch+yaml, application/apply-patch+cbor
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_ip_address
+## read_ip_address_networking_v1beta1
 
-> <V1beta1IPAddress> read_ip_address(name, opts)
+> <V1beta1IPAddress> read_ip_address_networking_v1beta1(name, opts)
 
 
 
@@ -1092,28 +1100,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_ip_address(name, opts)
+  result = api_instance.read_ip_address_networking_v1beta1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the read_ip_address_with_http_info variant
+#### Using the read_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> read_ip_address_with_http_info(name, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> read_ip_address_networking_v1beta1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_ip_address_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_ip_address_networking_v1beta1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1135,12 +1143,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr
+## read_service_cidr_networking_v1beta1
 
-> <V1beta1ServiceCIDR> read_service_cidr(name, opts)
+> <V1beta1ServiceCIDR> read_service_cidr_networking_v1beta1(name, opts)
 
 
 
@@ -1167,28 +1175,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr(name, opts)
+  result = api_instance.read_service_cidr_networking_v1beta1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_with_http_info variant
+#### Using the read_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_with_http_info(name, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_networking_v1beta1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_networking_v1beta1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1210,12 +1218,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr_status
+## read_service_cidr_status_networking_v1beta1
 
-> <V1beta1ServiceCIDR> read_service_cidr_status(name, opts)
+> <V1beta1ServiceCIDR> read_service_cidr_status_networking_v1beta1(name, opts)
 
 
 
@@ -1242,28 +1250,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr_status(name, opts)
+  result = api_instance.read_service_cidr_status_networking_v1beta1(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_status_with_http_info variant
+#### Using the read_service_cidr_status_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_with_http_info(name, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_networking_v1beta1_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_status_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_status_networking_v1beta1_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1285,12 +1293,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_ip_address
+## replace_ip_address_networking_v1beta1
 
-> <V1beta1IPAddress> replace_ip_address(name, body, opts)
+> <V1beta1IPAddress> replace_ip_address_networking_v1beta1(name, body, opts)
 
 
 
@@ -1321,28 +1329,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_ip_address(name, body, opts)
+  result = api_instance.replace_ip_address_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_ip_address: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the replace_ip_address_with_http_info variant
+#### Using the replace_ip_address_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> replace_ip_address_with_http_info(name, body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> replace_ip_address_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_ip_address_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_ip_address_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1368,12 +1376,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr
+## replace_service_cidr_networking_v1beta1
 
-> <V1beta1ServiceCIDR> replace_service_cidr(name, body, opts)
+> <V1beta1ServiceCIDR> replace_service_cidr_networking_v1beta1(name, body, opts)
 
 
 
@@ -1404,28 +1412,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr(name, body, opts)
+  result = api_instance.replace_service_cidr_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_with_http_info variant
+#### Using the replace_service_cidr_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1451,12 +1459,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr_status
+## replace_service_cidr_status_networking_v1beta1
 
-> <V1beta1ServiceCIDR> replace_service_cidr_status(name, body, opts)
+> <V1beta1ServiceCIDR> replace_service_cidr_status_networking_v1beta1(name, body, opts)
 
 
 
@@ -1487,28 +1495,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr_status(name, body, opts)
+  result = api_instance.replace_service_cidr_status_networking_v1beta1(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_networking_v1beta1: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_status_with_http_info variant
+#### Using the replace_service_cidr_status_networking_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_status_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -1534,5 +1542,5 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 

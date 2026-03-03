@@ -1,0 +1,24 @@
+# Kubernetes::V1alpha3DeviceTaint
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **effect** | **String** | The effect of the taint on claims that do not tolerate the taint and through such claims on the pods using them.  Valid effects are None, NoSchedule and NoExecute. PreferNoSchedule as used for nodes is not valid here. More effects may get added in the future. Consumers must treat unknown effects like None. |  |
+| **key** | **String** | The taint key to be applied to a device. Must be a label name. |  |
+| **time_added** | **Time** | TimeAdded represents the time at which the taint was added. Added automatically during create or update if not set. | [optional] |
+| **value** | **String** | The taint value corresponding to the taint key. Must be a label value. | [optional] |
+
+## Example
+
+```ruby
+require 'kubernetes'
+
+instance = Kubernetes::V1alpha3DeviceTaint.new(
+  effect: null,
+  key: null,
+  time_added: null,
+  value: null
+)
+```
+

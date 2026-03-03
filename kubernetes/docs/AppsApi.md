@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_api_group**](AppsApi.md#get_api_group) | **GET** /apis/apps/ |  |
+| [**get_api_group_apps**](AppsApi.md#get_api_group_apps) | **GET** /apis/apps/ |  |
 
 
-## get_api_group
+## get_api_group_apps
 
-> <V1APIGroup> get_api_group
+> <V1APIGroup> get_api_group_apps
 
 
 
@@ -32,28 +32,28 @@ api_instance = Kubernetes::AppsApi.new
 
 begin
   
-  result = api_instance.get_api_group
+  result = api_instance.get_api_group_apps
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AppsApi->get_api_group: #{e}"
+  puts "Error when calling AppsApi->get_api_group_apps: #{e}"
 end
 ```
 
-#### Using the get_api_group_with_http_info variant
+#### Using the get_api_group_apps_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_with_http_info
+> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_apps_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_group_with_http_info
+  data, status_code, headers = api_instance.get_api_group_apps_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIGroup>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AppsApi->get_api_group_with_http_info: #{e}"
+  puts "Error when calling AppsApi->get_api_group_apps_with_http_info: #{e}"
 end
 ```
 

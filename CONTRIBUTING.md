@@ -7,3 +7,9 @@ The client is in early stages of development and needs more contributors. If you
 ## Community, Support, Discussion
 
 You can reach the maintainers of this project at [SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery). If you have any problem with the package or any suggestions, please file an [issue](https://github.com/kubernetes-client/ruby/issues).
+
+## Kubernetes Version Upgrades
+
+For the standard Kubernetes/OpenAPI upgrade process, use:
+
+- [docs/kubernetes-version-upgrade.md](docs/kubernetes-version-upgrade.md)

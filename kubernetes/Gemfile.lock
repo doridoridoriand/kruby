@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kubernetes (1.31.0)
+    kruby (1.35.0)
       base64 (~> 0.2)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -79,7 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  kubernetes!
+  kruby!
   pry-byebug
   rake (~> 13.0.1)
   rspec (~> 3.6, >= 3.6.0)

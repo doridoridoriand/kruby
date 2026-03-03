@@ -8,7 +8,7 @@ All URIs are relative to *http://localhost*
 | [**create_self_subject_access_review**](AuthorizationV1Api.md#create_self_subject_access_review) | **POST** /apis/authorization.k8s.io/v1/selfsubjectaccessreviews |  |
 | [**create_self_subject_rules_review**](AuthorizationV1Api.md#create_self_subject_rules_review) | **POST** /apis/authorization.k8s.io/v1/selfsubjectrulesreviews |  |
 | [**create_subject_access_review**](AuthorizationV1Api.md#create_subject_access_review) | **POST** /apis/authorization.k8s.io/v1/subjectaccessreviews |  |
-| [**get_api_resources**](AuthorizationV1Api.md#get_api_resources) | **GET** /apis/authorization.k8s.io/v1/ |  |
+| [**get_api_resources_authorization_v1**](AuthorizationV1Api.md#get_api_resources_authorization_v1) | **GET** /apis/authorization.k8s.io/v1/ |  |
 
 
 ## create_namespaced_local_subject_access_review
@@ -91,7 +91,7 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
 ## create_self_subject_access_review
@@ -172,7 +172,7 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
 ## create_self_subject_rules_review
@@ -253,7 +253,7 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
 ## create_subject_access_review
@@ -334,12 +334,12 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources
+## get_api_resources_authorization_v1
 
-> <V1APIResourceList> get_api_resources
+> <V1APIResourceList> get_api_resources_authorization_v1
 
 
 
@@ -362,28 +362,28 @@ api_instance = Kubernetes::AuthorizationV1Api.new
 
 begin
   
-  result = api_instance.get_api_resources
+  result = api_instance.get_api_resources_authorization_v1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AuthorizationV1Api->get_api_resources: #{e}"
+  puts "Error when calling AuthorizationV1Api->get_api_resources_authorization_v1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_with_http_info variant
+#### Using the get_api_resources_authorization_v1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_authorization_v1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_authorization_v1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling AuthorizationV1Api->get_api_resources_with_http_info: #{e}"
+  puts "Error when calling AuthorizationV1Api->get_api_resources_authorization_v1_with_http_info: #{e}"
 end
 ```
 
@@ -402,5 +402,5 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf
+- **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
