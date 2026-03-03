@@ -43,9 +43,9 @@ gem 'kruby', '~> 1.35.0.3'
 
 ### Install from Git
 
-If the Ruby gem is hosted at a git repository: https://github.com/doridoridoriand/k8sruby, then add the following in the Gemfile:
+If the Ruby gem is hosted at a git repository: https://github.com/doridoridoriand/kruby, then add the following in the Gemfile:
 
-    gem 'kruby', :git => 'https://github.com/doridoridoriand/k8sruby.git'
+    gem 'kruby', :git => 'https://github.com/doridoridoriand/kruby.git'
 
 ### Include the Ruby code directly
 

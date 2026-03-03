@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.version     = Kubernetes::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["doridoridoriand"]
-  s.homepage    = "https://github.com/doridoridoriand/k8sruby"
+  s.homepage    = "https://github.com/doridoridoriand/kruby"
   s.summary     = "Kruby community client for Kubernetes API."
   s.description = "Kruby is a community-maintained Ruby client generated from Kubernetes OpenAPI."
   s.license     = "Apache-2.0"
