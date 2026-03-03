@@ -4,8 +4,10 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 ## Project Background
 
+- Fork source: [kubernetes-client/ruby](https://github.com/kubernetes-client/ruby).
 - This project is forked from the original Kubernetes Ruby client codebase after official maintenance had effectively stalled.
 - It is now maintained as a community-driven fork to keep pace with current Kubernetes API versions.
+- This fork includes community-maintained modifications (packaging, compatibility fixes, CI/runtime requirements, and docs) in addition to OpenAPI-generated code.
 
 ## Generation Policy
 

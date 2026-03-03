@@ -19,6 +19,9 @@
 
 このリポジトリは、元々Kubernetes公式クライアントプロジェクト（kubernetes-client organization）の一部として2017年5月に開始されました。しかし、2021年3月を最後に約5年間更新が停止していました。
 
+- **fork元リポジトリ**: [kubernetes-client/ruby](https://github.com/kubernetes-client/ruby)
+- **このforkでの改変**: OpenAPI再生成に加え、パッケージング調整（`kruby`化）、互換性修正、CI/実行要件更新、ドキュメント整備を実施
+
 ### 更新停止期間（2021年3月 - 2026年1月）
 
 公式のKubernetes Ruby Clientは長期間メンテナンスされず、以下の問題がありました：
