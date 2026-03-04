@@ -19,6 +19,20 @@ Please use GitHub Issues for bug reports, feature requests, and questions:
 
 If your change updates generated Kubernetes client artifacts, include the target Kubernetes/OpenAPI version in the PR description.
 
+## Pre-commit Hooks
+
+This repository enforces repository-relative paths in committed text files.
+
+1. Install `pre-commit` (https://pre-commit.com/).
+2. Run:
+
+```bash
+pre-commit install
+```
+
+The hook blocks machine-specific absolute paths such as `/Users/...`, `/home/...`, `C:\...`, and `file:///...`.
+Use paths from project root instead (for example `specs/001-kind-e2e-tests/plan.md`).
+
 ## Kubernetes Version Upgrades
 
 For the standard Kubernetes/OpenAPI upgrade process, use:
