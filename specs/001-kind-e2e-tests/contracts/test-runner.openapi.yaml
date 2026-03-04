@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: kruby E2E Test Runner API
+  version: 0.1.0
+  description: >-
+    Contract for orchestrating kind-backed E2E runs with full/targeted/changed modes.
+servers:
+  - url: http://localhost:8081
+paths:
+  /test-runs:
+    post:
+      summary: Start a new E2E run
+      operationId: startTestRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartRunRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+  /test-runs/{runId}:
+    get:
+      summary: Get run status
+      operationId: getTestRun
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+        '404':
+          description: Not found
+  /test-runs/{runId}/results:
+    get:
+      summary: Get run results and failure artifacts
+      operationId: getTestRunResults
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  run:
+                    $ref: '#/components/schemas/TestRun'
+                  failures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FailureArtifact'
+  /catalog/targets:
+    get:
+      summary: List available test targets
+      operationId: listTestTargets
+      parameters:
+        - in: query
+          name: apiGroup
+          schema:
+            type: string
+        - in: query
+          name: version
+          schema:
+            type: string
+        - in: query
+          name: resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestTarget'
+  /changes/resolve:
+    post:
+      summary: Resolve changed files to test targets
+      operationId: resolveChanges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveChangesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveChangesResponse'
+components:
+  parameters:
+    RunId:
+      in: path
+      name: runId
+      required: true
+      schema:
+        type: string
+  schemas:
+    StartRunRequest:
+      type: object
+      required: [mode]
+      properties:
+        mode:
+          type: string
+          enum: [full, targeted, changed]
+        targets:
+          type: array
+          items:
+            type: string
+          description: required when mode=targeted
+        baseRef:
+          type: string
+          description: required when mode=changed
+        fallbackStrategy:
+          type: string
+          enum: [minimal-smoke, full]
+          default: minimal-smoke
+    TestRun:
+      type: object
+      required: [runId, mode, status, startedAt]
+      properties:
+        runId:
+          type: string
+        mode:
+          type: string
+          enum: [full, targeted, changed]
+        status:
+          type: string
+          enum: [queued, running, passed, failed, canceled]
+        requestedTargets:
+          type: array
+          items:
+            type: string
+        resolvedTargets:
+          type: array
+          items:
+            type: string
+        clusterName:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+    TestTarget:
+      type: object
+      required: [id, apiGroup, version, resource, operation]
+      properties:
+        id:
+          type: string
+          example: core/v1/pods:create
+        apiGroup:
+          type: string
+        version:
+          type: string
+        resource:
+          type: string
+        operation:
+          type: string
+          enum: [create, get, list, update, patch, delete, watch]
+    ResolveChangesRequest:
+      type: object
+      required: [baseRef, changedFiles]
+      properties:
+        baseRef:
+          type: string
+        changedFiles:
+          type: array
+          items:
+            type: string
+        fallbackStrategy:
+          type: string
+          enum: [minimal-smoke, full]
+          default: minimal-smoke
+    ResolveChangesResponse:
+      type: object
+      required: [mappedTargets, fallbackUsed]
+      properties:
+        mappedTargets:
+          type: array
+          items:
+            type: string
+        fallbackUsed:
+          type: boolean
+        reason:
+          type: string
+          nullable: true
+    FailureArtifact:
+      type: object
+      required: [runId, targetId, errorType, reproCommand]
+      properties:
+        runId:
+          type: string
+        targetId:
+          type: string
+        errorType:
+          type: string
+        httpStatus:
+          type: integer
+          nullable: true
+        responseExcerpt:
+          type: string
+        reproCommand:
+          type: string
+        logPath:
+          type: string
