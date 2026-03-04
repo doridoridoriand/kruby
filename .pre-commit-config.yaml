@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: no-absolute-machine-paths
+        name: Disallow machine-specific absolute paths
+        entry: scripts/hooks/check-no-absolute-paths.sh
+        language: system
+        pass_filenames: true
+        types: [text]

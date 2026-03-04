@@ -7,7 +7,7 @@ Please do not report security vulnerabilities in public issues.
 Use one of the following private channels:
 
 - GitHub Security Advisories (preferred): https://github.com/doridoridoriand/kruby/security/advisories/new
-- Maintainer contact: i.am.eager.for.peace@gmail.com
+- Maintainer contact: fetter.4irony@icloud.com
 
 When reporting, include:
 - affected version(s)
