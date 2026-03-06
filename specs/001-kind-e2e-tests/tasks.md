@@ -54,7 +54,7 @@
 
 ### Tests for User Story 1
 
-- [ ] T016 [P] [US1] Create targeted execution spec for core/v1 Pod create/delete in kubernetes/spec/e2e/core_v1_pods_targeted_spec.rb
+- [x] T016 [P] [US1] Create targeted execution spec for core/v1 Pod create/delete in kubernetes/spec/e2e/core_v1_pods_targeted_spec.rb
 - [ ] T017 [P] [US1] Create changed-mode selection spec for git diff mapping in kubernetes/spec/e2e/changed_mode_selection_spec.rb
 - [ ] T018 [US1] Add fallback behavior spec for unresolved changes (`minimal-smoke|full`) in kubernetes/spec/e2e/changed_mode_selection_spec.rb
 
