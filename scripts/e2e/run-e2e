@@ -16,6 +16,7 @@ Options:
   --targets <selector[,selector...]>
   --base-ref <git-ref>
   --fallback <minimal-smoke|full>
+  --real-api <0|1>
   -h, --help
 USAGE
 }
@@ -24,6 +25,7 @@ mode="${E2E_MODE:-full}"
 targets="${E2E_TARGETS:-}"
 base_ref="${BASE_REF:-origin/HEAD}"
 fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
+real_api="${E2E_REAL_API:-1}"
 rspec_args=()
 
 while [[ $# -gt 0 ]]; do
@@ -68,6 +70,15 @@ while [[ $# -gt 0 ]]; do
       fallback="${1#*=}"
       shift
       ;;
+    --real-api)
+      [[ $# -ge 2 ]] || { echo "ERROR: --real-api requires a value" >&2; exit 1; }
+      real_api="$2"
+      shift 2
+      ;;
+    --real-api=*)
+      real_api="${1#*=}"
+      shift
+      ;;
     --)
       shift
       rspec_args+=("$@")
@@ -96,6 +107,14 @@ case "${fallback}" in
     ;;
 esac
 
+case "${real_api}" in
+  0|1) ;;
+  *)
+    echo "ERROR: unsupported --real-api value '${real_api}' (expected 0|1)" >&2
+    exit 1
+    ;;
+esac
+
 if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
   echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
   exit 1
@@ -103,6 +122,7 @@ fi
 
 export E2E_MODE="${mode}"
 export E2E_FALLBACK_STRATEGY="${fallback}"
+export E2E_REAL_API="${real_api}"
 
 case "${mode}" in
   full)
@@ -119,7 +139,7 @@ case "${mode}" in
     ;;
 esac
 
-echo "[run-e2e] mode=${E2E_MODE} fallback=${E2E_FALLBACK_STRATEGY}" >&2
+echo "[run-e2e] mode=${E2E_MODE} fallback=${E2E_FALLBACK_STRATEGY} real_api=${E2E_REAL_API}" >&2
 
 build_repro_command() {
   ruby -I "${REPO_ROOT}/kubernetes/spec" -e '
@@ -174,9 +194,33 @@ emit_issue_summary() {
   ' "${report_file}" "${rspec_exit_code}" "${mode}" "${fallback}" "${targets}" "${base_ref}" "${repro_command}"
 }
 
+emit_coverage_summary() {
+  local coverage_file="$1"
+  local real_api_mode="$2"
+
+  if [[ ! -f "${coverage_file}" ]]; then
+    if [[ "${real_api_mode}" == "1" ]]; then
+      echo "[run-e2e] ERROR: coverage report missing while real API execution is enabled: ${coverage_file}" >&2
+      return 1
+    fi
+
+    echo "[run-e2e] coverage report not generated (real_api=${real_api_mode})"
+    return 0
+  fi
+
+  ruby -rjson -e '
+    path = ARGV.fetch(0)
+    data = JSON.parse(File.read(path))
+    summary = data.fetch("summary", {})
+    puts "[run-e2e] coverage resolved=#{summary["resolved"] || 0} recorded=#{summary["recorded"] || 0} covered=#{summary["covered"] || 0} unsupported=#{summary["unsupported"] || 0} failed=#{summary["failed"] || 0}"
+  ' "${coverage_file}"
+}
+
 REPORT_DIR="${REPO_ROOT}/kubernetes/tmp/e2e"
 mkdir -p "${REPORT_DIR}"
 REPORT_FILE="${REPORT_DIR}/run-e2e-rspec-${mode}-$$.json"
+COVERAGE_FILE="${REPORT_DIR}/run-e2e-coverage-${mode}-$$.json"
+export E2E_COVERAGE_REPORT="${COVERAGE_FILE}"
 
 cd "${REPO_ROOT}/kubernetes"
 if [[ -n "${BUNDLE_BIN_PATH:-}" ]]; then
@@ -197,4 +241,12 @@ set -e
 
 repro_command="$(build_repro_command)"
 emit_issue_summary "${rspec_exit_code}" "${REPORT_FILE}" "${repro_command}"
-exit "${rspec_exit_code}"
+coverage_exit_code=0
+emit_coverage_summary "${COVERAGE_FILE}" "${E2E_REAL_API}" || coverage_exit_code=$?
+
+final_exit_code="${rspec_exit_code}"
+if [[ "${final_exit_code}" -eq 0 && "${coverage_exit_code}" -ne 0 ]]; then
+  final_exit_code="${coverage_exit_code}"
+fi
+
+exit "${final_exit_code}"
