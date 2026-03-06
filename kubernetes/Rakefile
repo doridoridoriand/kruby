@@ -8,18 +8,23 @@ begin
 
   e2e_scripts_dir = File.expand_path('../scripts/e2e', __dir__)
 
-  run_script = lambda do |script_name, env = {}|
+  run_script = lambda do |script_name, env = {}, *args|
     script_path = File.join(e2e_scripts_dir, script_name)
     raise "missing script: #{script_path}" unless File.executable?(script_path)
 
-    success = system(env, script_path)
-    raise "command failed: #{script_path}" unless success
+    success = system(env, script_path, *args)
+    command_display = ([script_path] + args).join(' ')
+    raise "command failed: #{command_display}" unless success
   end
 
   namespace :e2e do
-    desc 'Run full kind-backed E2E suite'
-    task :full do
-      run_script.call('run-e2e', 'E2E_MODE' => 'full')
+    desc 'Run full kind-backed E2E suite: rake "e2e:full[minimal-smoke]"'
+    task :full, [:fallback] do |_task, args|
+      fallback = args[:fallback].to_s.strip
+      fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?
+      fallback = 'minimal-smoke' if fallback.empty?
+
+      run_script.call('run-e2e', {}, '--mode', 'full', '--fallback', fallback)
     end
 
     desc 'Run targeted E2E selectors: rake "e2e:targeted[core/v1/pods:create]"'
@@ -28,7 +33,7 @@ begin
       targets = ENV['E2E_TARGETS'].to_s.strip if targets.empty?
       abort('E2E target selectors are required via task arg or E2E_TARGETS env var') if targets.empty?
 
-      run_script.call('run-e2e', 'E2E_MODE' => 'targeted', 'E2E_TARGETS' => targets)
+      run_script.call('run-e2e', {}, '--mode', 'targeted', '--targets', targets)
     end
 
     desc 'Run changed-only E2E selectors: rake "e2e:changed[origin/HEAD]"'
@@ -37,7 +42,7 @@ begin
       base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
       base_ref = 'origin/HEAD' if base_ref.empty?
 
-      run_script.call('run-e2e', 'E2E_MODE' => 'changed', 'BASE_REF' => base_ref)
+      run_script.call('run-e2e', {}, '--mode', 'changed', '--base-ref', base_ref)
     end
 
     desc 'Map changed files to selectors: rake "e2e:map_changes[origin/HEAD]"'
@@ -46,7 +51,7 @@ begin
       base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
       base_ref = 'origin/HEAD' if base_ref.empty?
 
-      run_script.call('map-changes', 'BASE_REF' => base_ref)
+      run_script.call('map-changes', {}, '--base-ref', base_ref)
     end
 
     desc 'Print baseline minimal-smoke selectors'

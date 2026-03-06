@@ -123,7 +123,14 @@ echo "[run-e2e] mode=${E2E_MODE} fallback=${E2E_FALLBACK_STRATEGY}" >&2
 
 cd "${REPO_ROOT}/kubernetes"
 if [[ -n "${BUNDLE_BIN_PATH:-}" ]]; then
-  exec rspec spec/e2e "${rspec_args[@]}"
+  if [[ ${#rspec_args[@]} -gt 0 ]]; then
+    exec rspec spec/e2e "${rspec_args[@]}"
+  fi
+  exec rspec spec/e2e
 fi
 
-exec bundle exec rspec spec/e2e "${rspec_args[@]}"
+if [[ ${#rspec_args[@]} -gt 0 ]]; then
+  exec bundle exec rspec spec/e2e "${rspec_args[@]}"
+fi
+
+exec bundle exec rspec spec/e2e
