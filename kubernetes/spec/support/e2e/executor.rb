@@ -137,7 +137,8 @@ module SpecSupport
             target_id: target_id,
             error: e,
             repro_command: repro_command,
-            response_excerpt: e.message
+            response_excerpt: e.message,
+            api_method: api_method
           )
           coverage_reporter.record(
             target_id: target_id,

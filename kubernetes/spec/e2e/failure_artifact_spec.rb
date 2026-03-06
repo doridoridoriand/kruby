@@ -15,14 +15,16 @@ RSpec.describe "failure artifact emission" do
       artifact = reporter.record(
         target_id: "core/v1/pods:create",
         error: StandardError.new("intentional failure"),
-        repro_command: "scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create"
+        repro_command: "scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create",
+        api_method: "CoreV1Api#create_namespaced_pod"
       )
 
       expect(artifact).to include(
         "runId" => "run-20260306-000001",
         "targetId" => "core/v1/pods:create",
         "errorType" => "StandardError",
-        "reproCommand" => "scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create"
+        "reproCommand" => "scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create",
+        "apiMethod" => "CoreV1Api#create_namespaced_pod"
       )
       expect(artifact).to have_key("httpStatus")
       expect(artifact.fetch("httpStatus")).to be_nil

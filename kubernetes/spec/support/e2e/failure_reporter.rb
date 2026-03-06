@@ -19,14 +19,15 @@ module SpecSupport
         @artifacts = []
       end
 
-      def record(target_id:, error:, repro_command:, http_status: nil, response_excerpt: nil, log_path: nil)
+      def record(target_id:, error:, repro_command:, http_status: nil, response_excerpt: nil, log_path: nil, api_method: nil)
         artifact = build_artifact(
           target_id: target_id,
           error: error,
           repro_command: repro_command,
           http_status: http_status,
           response_excerpt: response_excerpt,
-          log_path: log_path
+          log_path: log_path,
+          api_method: api_method
         )
 
         path = write_single_artifact(artifact)
@@ -53,7 +54,7 @@ module SpecSupport
 
       private
 
-      def build_artifact(target_id:, error:, repro_command:, http_status:, response_excerpt:, log_path:)
+      def build_artifact(target_id:, error:, repro_command:, http_status:, response_excerpt:, log_path:, api_method:)
         artifact = {
           "runId" => run_id,
           "targetId" => require_present_string!(target_id, "target_id"),
@@ -61,9 +62,11 @@ module SpecSupport
           "httpStatus" => normalize_http_status(http_status, error),
           "responseExcerpt" => truncate_excerpt(response_excerpt || extract_error_excerpt(error)),
           "reproCommand" => require_present_string!(repro_command, "repro_command"),
-          "logPath" => log_path
+          "logPath" => log_path,
+          "apiMethod" => api_method
         }
         artifact.delete("logPath") if artifact["logPath"].nil?
+        artifact.delete("apiMethod") if artifact["apiMethod"].to_s.strip.empty?
         artifact
       end
 
