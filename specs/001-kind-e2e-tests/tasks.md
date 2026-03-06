@@ -79,7 +79,7 @@
 
 ### Tests for User Story 2
 
-- [ ] T025 [P] [US2] Create full-mode orchestration spec for catalog expansion in kubernetes/spec/e2e/full_mode_regression_spec.rb
+- [x] T025 [P] [US2] Create full-mode orchestration spec for catalog expansion in kubernetes/spec/e2e/full_mode_regression_spec.rb
 - [ ] T026 [P] [US2] Create apps/v1 Deployment full-mode CRUD E2E spec in kubernetes/spec/e2e/apps_v1_deployments_full_spec.rb
 - [ ] T027 [P] [US2] Create batch/v1 Job full-mode create/list/delete E2E spec in kubernetes/spec/e2e/batch_v1_jobs_full_spec.rb
 
