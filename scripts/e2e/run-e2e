@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+usage() {
+  cat <<'USAGE'
+Usage: scripts/e2e/run-e2e [--help]
+
+Kind-backed E2E test runner entrypoint (skeleton).
+
+Current behavior:
+  - Runs kubernetes/spec/e2e via RSpec with current environment variables.
+
+Planned options (implemented in later phase):
+  --mode <full|targeted|changed>
+  --targets <selector[,selector...]>
+  --base-ref <git-ref>
+USAGE
+}
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+cd "${REPO_ROOT}/kubernetes"
+if [[ -n "${BUNDLE_BIN_PATH:-}" ]]; then
+  exec rspec spec/e2e "$@"
+fi
+
+exec bundle exec rspec spec/e2e "$@"

@@ -9,6 +9,9 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/kubernetes/spec/reports/e2e/
+/kubernetes/tmp/e2e/
+/kubernetes/tmp/kind/
 
 # Used by dotenv library to load environment variables.
 # .env

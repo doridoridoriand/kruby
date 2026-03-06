@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+Usage: scripts/e2e/map-changes [--help]
+
+Resolve git changes to E2E target selectors (skeleton).
+
+Planned options (implemented in later phase):
+  --base-ref <git-ref>
+  --fallback <minimal-smoke|full>
+USAGE
+}
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+echo "map-changes is not implemented yet (Phase 1 skeleton)."
+exit 0

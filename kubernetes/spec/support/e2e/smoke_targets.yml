@@ -1,0 +1,3 @@
+minimal_smoke:
+  - core/v1/pods:create
+  - core/v1/pods:list

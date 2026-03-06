@@ -5,6 +5,60 @@ begin
 
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
+
+  e2e_scripts_dir = File.expand_path('../scripts/e2e', __dir__)
+
+  run_script = lambda do |script_name, env = {}|
+    script_path = File.join(e2e_scripts_dir, script_name)
+    raise "missing script: #{script_path}" unless File.executable?(script_path)
+
+    success = system(env, script_path)
+    raise "command failed: #{script_path}" unless success
+  end
+
+  namespace :e2e do
+    desc 'Run full kind-backed E2E suite'
+    task :full do
+      run_script.call('run-e2e', 'E2E_MODE' => 'full')
+    end
+
+    desc 'Run targeted E2E selectors: rake "e2e:targeted[core/v1/pods:create]"'
+    task :targeted, [:targets] do |_task, args|
+      targets = args[:targets].to_s.strip
+      targets = ENV['E2E_TARGETS'].to_s.strip if targets.empty?
+      abort('E2E target selectors are required via task arg or E2E_TARGETS env var') if targets.empty?
+
+      run_script.call('run-e2e', 'E2E_MODE' => 'targeted', 'E2E_TARGETS' => targets)
+    end
+
+    desc 'Run changed-only E2E selectors: rake "e2e:changed[origin/HEAD]"'
+    task :changed, [:base_ref] do |_task, args|
+      base_ref = args[:base_ref].to_s.strip
+      base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
+      base_ref = 'origin/HEAD' if base_ref.empty?
+
+      run_script.call('run-e2e', 'E2E_MODE' => 'changed', 'BASE_REF' => base_ref)
+    end
+
+    desc 'Map changed files to selectors: rake "e2e:map_changes[origin/HEAD]"'
+    task :map_changes, [:base_ref] do |_task, args|
+      base_ref = args[:base_ref].to_s.strip
+      base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
+      base_ref = 'origin/HEAD' if base_ref.empty?
+
+      run_script.call('map-changes', 'BASE_REF' => base_ref)
+    end
+
+    desc 'Print baseline minimal-smoke selectors'
+    task :list_targets do
+      smoke_file = File.expand_path('spec/support/e2e/smoke_targets.yml', __dir__)
+      unless File.exist?(smoke_file)
+        abort("missing smoke target file: #{smoke_file}")
+      end
+
+      puts File.read(smoke_file)
+    end
+  end
 rescue LoadError
   # no rspec available
 end
