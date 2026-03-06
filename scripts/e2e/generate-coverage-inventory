@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+Usage: scripts/e2e/generate-coverage-inventory [options]
+
+Generate an inventory JSON for real API-call E2E coverage planning.
+
+Options:
+  --output <path>   Output JSON path (default: specs/002-real-api-e2e-coverage/coverage_inventory.json)
+  --policy <path>   Coverage policy YAML path (default: kubernetes/spec/support/e2e/coverage_policy.yml)
+  --compact         Write compact JSON instead of pretty JSON
+  -h, --help
+USAGE
+}
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+output_path="${REPO_ROOT}/specs/002-real-api-e2e-coverage/coverage_inventory.json"
+policy_path="${REPO_ROOT}/kubernetes/spec/support/e2e/coverage_policy.yml"
+json_pretty="1"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --output)
+      [[ $# -ge 2 ]] || { echo "ERROR: --output requires a value" >&2; exit 1; }
+      output_path="$2"
+      shift 2
+      ;;
+    --output=*)
+      output_path="${1#*=}"
+      shift
+      ;;
+    --policy)
+      [[ $# -ge 2 ]] || { echo "ERROR: --policy requires a value" >&2; exit 1; }
+      policy_path="$2"
+      shift 2
+      ;;
+    --policy=*)
+      policy_path="${1#*=}"
+      shift
+      ;;
+    --compact)
+      json_pretty="0"
+      shift
+      ;;
+    *)
+      echo "ERROR: unknown option '$1'" >&2
+      exit 1
+      ;;
+  esac
+done
+
+export E2E_COVERAGE_OUTPUT_PATH="${output_path}"
+export E2E_COVERAGE_POLICY_PATH="${policy_path}"
+export E2E_COVERAGE_JSON_PRETTY="${json_pretty}"
+export E2E_COVERAGE_REPO_ROOT="${REPO_ROOT}"
+
+ruby -I "${REPO_ROOT}/kubernetes/spec" <<'RUBY'
+require "json"
+require "fileutils"
+require "support/e2e/coverage_inventory"
+
+output_path = File.expand_path(ENV.fetch("E2E_COVERAGE_OUTPUT_PATH"))
+policy_path = File.expand_path(ENV.fetch("E2E_COVERAGE_POLICY_PATH"))
+pretty = ENV.fetch("E2E_COVERAGE_JSON_PRETTY") == "1"
+repo_root = File.expand_path(ENV.fetch("E2E_COVERAGE_REPO_ROOT"))
+
+inventory = SpecSupport::E2E::CoverageInventory.new(policy_path: policy_path, repo_root: repo_root)
+inventory.write_json(output_path, pretty: pretty)
+
+payload = JSON.parse(File.read(output_path))
+totals = payload.fetch("totals")
+
+puts "Coverage inventory written: #{output_path}"
+puts "api_files=#{totals.fetch('apiFiles')} methods_total=#{totals.fetch('methodsTotal')} candidate_methods=#{totals.fetch('candidateMethods')} excluded_by_policy=#{totals.fetch('excludedByPolicy')}"
+RUBY
