@@ -1,0 +1,29 @@
+# Coverage policy for real API-call E2E expansion.
+# Phase 0 keeps exclusions intentionally conservative and reasoned.
+
+version: 1
+
+include_operation_prefixes:
+  - create
+  - read
+  - list
+  - replace
+  - patch
+  - delete
+  - watch
+
+exclude_method_patterns:
+  - pattern: '^delete_collection_'
+    reason: 'Bulk delete calls are highly destructive and deferred to later phases.'
+
+  - pattern: '^list_.*_for_all_namespaces$'
+    reason: 'All-namespaces list calls are noisy for shared clusters and deferred initially.'
+
+  - pattern: '^watch_.*_for_all_namespaces$'
+    reason: 'Cluster-wide watch calls are flaky in CI and postponed until watch hardening.'
+
+  - pattern: '_(status|scale)$'
+    reason: 'Status/scale subresources are planned for a dedicated later phase.'
+
+  - pattern: '^create_.*_approval$'
+    reason: 'Approval workflows require extra signing prerequisites and are deferred.'
