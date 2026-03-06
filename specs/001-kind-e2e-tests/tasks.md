@@ -122,7 +122,7 @@
 
 **Purpose**: 複数ストーリー横断の最終整備
 
-- [ ] T040 [P] Document E2E run modes and selectors in specs/001-kind-e2e-tests/quickstart.md
+- [x] T040 [P] Document E2E run modes and selectors in specs/001-kind-e2e-tests/quickstart.md
 - [ ] T041 [P] Add contributor-facing E2E usage guide in CONTRIBUTING.md
 - [ ] T042 Add troubleshooting runbook for flaky kind startup and cleanup in docs/e2e-kind-testing.md
 - [ ] T043 Validate quickstart commands and record reproducible examples in specs/001-kind-e2e-tests/implementation-notes.md

@@ -14,38 +14,58 @@ cd kubernetes
 bundle install
 ```
 
-## Run modes
+## Selector format
+- Single selector: `apiGroup/version/resource:operation`
+  - Example: `core/v1/pods:create`
+- Multiple selectors: comma-separated
+  - Example: `core/v1/pods:create,apps/v1/deployments:update`
+- Supported operations: `create|get|list|update|patch|delete|watch`
 
-### 1) Full E2E
+## Run modes (`scripts/e2e/run-e2e`)
+
+### 1) Full
 ```bash
-cd kubernetes
-E2E_MODE=full bundle exec rspec spec/e2e
+scripts/e2e/run-e2e --mode full
 ```
 
-### 2) Targeted E2E (API group/resource/operation)
+### 2) Targeted
 ```bash
-cd kubernetes
-E2E_MODE=targeted E2E_TARGETS='core/v1/pods:create,apps/v1/deployments:update' bundle exec rspec spec/e2e
+scripts/e2e/run-e2e \
+  --mode targeted \
+  --targets 'core/v1/pods:create,apps/v1/deployments:update'
 ```
 
-### 3) Changed-only E2E
+### 3) Changed-only
 ```bash
-cd kubernetes
-E2E_MODE=changed BASE_REF=origin/HEAD bundle exec rspec spec/e2e
+scripts/e2e/run-e2e --mode changed --base-ref origin/HEAD
 ```
 
-## Expected output
-- 各失敗ケースで `target selector`, `http status`, `response excerpt`, `repro command` を出力
-- 任意で JSON artifact を保存（Issue 化用）
+### Optional flags
+```bash
+scripts/e2e/run-e2e --mode full --fallback minimal-smoke -- --format documentation
+```
+- `--fallback <minimal-smoke|full>`
+- `--` 以降は RSpec オプションとして渡される
+
+## Changed-file mapping (`scripts/e2e/map-changes`)
+```bash
+scripts/e2e/map-changes --base-ref origin/HEAD --format text
+scripts/e2e/map-changes --base-ref origin/HEAD --format json
+scripts/e2e/map-changes --changed-file kubernetes/lib/kubernetes/api/core_v1_api.rb --format json
+```
+
+## Package safety guard
+```bash
+scripts/e2e/check-gem-package
+cd kubernetes
+bundle exec rake e2e:package_guard
+```
 
 ## Cleanup expectations
 - すべてのモードで終了時に namespace/cluster をクリーンアップ
-- 異常終了時も `ensure` で teardown 実行
+- `E2E_MODE=full` では cluster reuse を有効化可能（`E2E_REUSE_CLUSTER=1`）
 
-## Packaging safety check
-```bash
-cd kubernetes
-gem build kubernetes.gemspec
-GEM=$(ls -t kruby-*.gem | head -n1)
-tar -xOf "$GEM" data.tar.gz | tar -tz | rg '^(spec|test|features|docs)/' || true
-```
+## Expected output
+- `run-e2e` は実行サマリ（examples/failures/duration）を出力
+- 失敗時は issue template に貼り付け可能な summary を追加出力
+- `failure_reporter` は JSON artifact を書き出し、`runId/targetId/errorType/httpStatus/reproCommand` を含む
