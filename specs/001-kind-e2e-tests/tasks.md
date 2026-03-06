@@ -103,7 +103,7 @@
 
 ### Tests for User Story 3
 
-- [ ] T033 [P] [US3] Create failure artifact emission spec in kubernetes/spec/e2e/failure_artifact_spec.rb
+- [x] T033 [P] [US3] Create failure artifact emission spec in kubernetes/spec/e2e/failure_artifact_spec.rb
 - [ ] T034 [P] [US3] Create packaging safety guard spec in kubernetes/spec/e2e/packaging_safety_spec.rb
 
 ### Implementation for User Story 3
