@@ -64,7 +64,7 @@
 - [x] T020 [P] [US1] Implement apps/v1 Deployment target definitions for selective checks in kubernetes/spec/support/e2e/targets/apps_v1_deployments.rb
 - [x] T021 [US1] Implement targeted run context (`E2E_TARGETS`) resolution in kubernetes/spec/support/e2e/run_context.rb
 - [x] T022 [US1] Implement mode dispatcher logic for `targeted` and `changed` in kubernetes/spec/support/e2e/mode_dispatcher.rb
-- [ ] T023 [US1] Implement CLI option parsing for `--mode targeted|changed` in scripts/e2e/run-e2e
+- [x] T023 [US1] Implement CLI option parsing for `--mode targeted|changed` in scripts/e2e/run-e2e
 - [ ] T024 [US1] Implement changed-file mapping CLI output in scripts/e2e/map-changes
 
 **Checkpoint**: User Story 1 is independently runnable and provides fast, scope-limited E2E feedback

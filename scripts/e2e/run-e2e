@@ -7,28 +7,112 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/e2e/run-e2e [--help]
+Usage: scripts/e2e/run-e2e [options] [-- rspec-args...]
 
-Kind-backed E2E test runner entrypoint (skeleton).
+Kind-backed E2E test runner entrypoint.
 
-Current behavior:
-  - Runs kubernetes/spec/e2e via RSpec with current environment variables.
-
-Planned options (implemented in later phase):
+Options:
   --mode <full|targeted|changed>
   --targets <selector[,selector...]>
   --base-ref <git-ref>
+  --fallback <minimal-smoke|full>
+  -h, --help
 USAGE
 }
 
-if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
-  usage
-  exit 0
+mode="${E2E_MODE:-full}"
+targets="${E2E_TARGETS:-}"
+base_ref="${BASE_REF:-origin/HEAD}"
+fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
+rspec_args=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --mode)
+      [[ $# -ge 2 ]] || { echo "ERROR: --mode requires a value" >&2; exit 1; }
+      mode="$2"
+      shift 2
+      ;;
+    --mode=*)
+      mode="${1#*=}"
+      shift
+      ;;
+    --targets)
+      [[ $# -ge 2 ]] || { echo "ERROR: --targets requires a value" >&2; exit 1; }
+      targets="$2"
+      shift 2
+      ;;
+    --targets=*)
+      targets="${1#*=}"
+      shift
+      ;;
+    --base-ref)
+      [[ $# -ge 2 ]] || { echo "ERROR: --base-ref requires a value" >&2; exit 1; }
+      base_ref="$2"
+      shift 2
+      ;;
+    --base-ref=*)
+      base_ref="${1#*=}"
+      shift
+      ;;
+    --fallback)
+      [[ $# -ge 2 ]] || { echo "ERROR: --fallback requires a value" >&2; exit 1; }
+      fallback="$2"
+      shift 2
+      ;;
+    --fallback=*)
+      fallback="${1#*=}"
+      shift
+      ;;
+    --)
+      shift
+      rspec_args+=("$@")
+      break
+      ;;
+    *)
+      rspec_args+=("$1")
+      shift
+      ;;
+  esac
+done
+
+case "${mode}" in
+  full|targeted|changed) ;;
+  *)
+    echo "ERROR: unsupported mode '${mode}' (expected full|targeted|changed)" >&2
+    exit 1
+    ;;
+esac
+
+case "${fallback}" in
+  minimal-smoke|full) ;;
+  *)
+    echo "ERROR: unsupported fallback '${fallback}' (expected minimal-smoke|full)" >&2
+    exit 1
+    ;;
+esac
+
+if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
+  echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
+  exit 1
+fi
+
+export E2E_MODE="${mode}"
+export E2E_FALLBACK_STRATEGY="${fallback}"
+if [[ -n "${targets}" ]]; then
+  export E2E_TARGETS="${targets}"
+fi
+if [[ -n "${base_ref}" ]]; then
+  export BASE_REF="${base_ref}"
 fi
 
 cd "${REPO_ROOT}/kubernetes"
 if [[ -n "${BUNDLE_BIN_PATH:-}" ]]; then
-  exec rspec spec/e2e "$@"
+  exec rspec spec/e2e "${rspec_args[@]}"
 fi
 
-exec bundle exec rspec spec/e2e "$@"
+exec bundle exec rspec spec/e2e "${rspec_args[@]}"
