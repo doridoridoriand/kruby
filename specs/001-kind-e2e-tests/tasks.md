@@ -89,7 +89,7 @@
 - [x] T029 [US2] Implement full-mode target expansion and execution order in kubernetes/spec/support/e2e/mode_dispatcher.rb
 - [x] T030 [US2] Implement `--mode full` flow in scripts/e2e/run-e2e
 - [x] T031 [US2] Add `e2e:full` rake task in kubernetes/Rakefile
-- [ ] T032 [US2] Optimize cluster reuse policy for full run in kubernetes/spec/support/e2e/cluster_manager.rb
+- [x] T032 [US2] Optimize cluster reuse policy for full run in kubernetes/spec/support/e2e/cluster_manager.rb
 
 **Checkpoint**: User Story 2 is independently runnable as a pre-release regression gate
 
