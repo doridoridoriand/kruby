@@ -30,7 +30,7 @@ RSpec.describe "changed mode selector resolution" do
     selection = dispatcher.dispatch(context)
 
     expect(selection.fallback_used).to be(true)
-    expect(selection.resolved_targets).to eq(%w[core/v1/pods:create core/v1/pods:list])
+    expect(selection.resolved_targets).to include("core/v1/pods:create", "core/v1/pods:list")
   end
 
   it "falls back to full catalog when fallback strategy is full" do

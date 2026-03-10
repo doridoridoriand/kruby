@@ -5,84 +5,84 @@ begin
 
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
-
-  e2e_scripts_dir = File.expand_path('../scripts/e2e', __dir__)
-
-  run_script = lambda do |script_name, env = {}, *args|
-    script_path = File.join(e2e_scripts_dir, script_name)
-    raise "missing script: #{script_path}" unless File.executable?(script_path)
-
-    success = system(env, script_path, *args)
-    command_display = ([script_path] + args).join(' ')
-    raise "command failed: #{command_display}" unless success
-  end
-
-  namespace :e2e do
-    desc 'Run full kind-backed E2E suite: rake "e2e:full[minimal-smoke]"'
-    task :full, [:fallback] do |_task, args|
-      fallback = args[:fallback].to_s.strip
-      fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?
-      fallback = 'minimal-smoke' if fallback.empty?
-
-      run_script.call('run-e2e', {}, '--mode', 'full', '--fallback', fallback)
-    end
-
-    desc 'Run targeted E2E selectors: rake "e2e:targeted[core/v1/pods:create]"'
-    task :targeted, [:targets] do |_task, args|
-      targets = args[:targets].to_s.strip
-      targets = ENV['E2E_TARGETS'].to_s.strip if targets.empty?
-      abort('E2E target selectors are required via task arg or E2E_TARGETS env var') if targets.empty?
-
-      run_script.call('run-e2e', {}, '--mode', 'targeted', '--targets', targets)
-    end
-
-    desc 'Run changed-only E2E selectors: rake "e2e:changed[origin/HEAD]"'
-    task :changed, [:base_ref] do |_task, args|
-      base_ref = args[:base_ref].to_s.strip
-      base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
-      base_ref = 'origin/HEAD' if base_ref.empty?
-
-      run_script.call('run-e2e', {}, '--mode', 'changed', '--base-ref', base_ref)
-    end
-
-    desc 'Map changed files to selectors: rake "e2e:map_changes[origin/HEAD]"'
-    task :map_changes, [:base_ref] do |_task, args|
-      base_ref = args[:base_ref].to_s.strip
-      base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
-      base_ref = 'origin/HEAD' if base_ref.empty?
-
-      run_script.call('map-changes', {}, '--base-ref', base_ref)
-    end
-
-    desc 'Print baseline minimal-smoke selectors'
-    task :list_targets do
-      smoke_file = File.expand_path('spec/support/e2e/smoke_targets.yml', __dir__)
-      unless File.exist?(smoke_file)
-        abort("missing smoke target file: #{smoke_file}")
-      end
-
-      puts File.read(smoke_file)
-    end
-
-    desc 'Verify gem package excludes spec/test/features/docs'
-    task :package_guard do
-      run_script.call('check-gem-package')
-    end
-
-    desc 'Generate API coverage inventory: rake "e2e:coverage_inventory[specs/002-real-api-e2e-coverage/coverage_inventory.json]"'
-    task :coverage_inventory, [:output, :policy] do |_task, args|
-      output = args[:output].to_s.strip
-      output = ENV['E2E_COVERAGE_OUTPUT'].to_s.strip if output.empty?
-      output = 'specs/002-real-api-e2e-coverage/coverage_inventory.json' if output.empty?
-
-      policy = args[:policy].to_s.strip
-      policy = ENV['E2E_COVERAGE_POLICY'].to_s.strip if policy.empty?
-
-      command_args = ['--output', output]
-      command_args += ['--policy', policy] unless policy.empty?
-      run_script.call('generate-coverage-inventory', {}, *command_args)
-    end
-  end
 rescue LoadError
   # no rspec available
+end
+
+e2e_scripts_dir = File.expand_path('../scripts/e2e', __dir__)
+
+run_script = lambda do |script_name, env = {}, *args|
+  script_path = File.join(e2e_scripts_dir, script_name)
+  raise "missing script: #{script_path}" unless File.executable?(script_path)
+
+  success = system(env, script_path, *args)
+  command_display = ([script_path] + args).join(' ')
+  raise "command failed: #{command_display}" unless success
+end
+
+namespace :e2e do
+  desc 'Run full kind-backed E2E suite: rake "e2e:full[minimal-smoke]"'
+  task :full, [:fallback] do |_task, args|
+    fallback = args[:fallback].to_s.strip
+    fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?
+    fallback = 'minimal-smoke' if fallback.empty?
+
+    run_script.call('run-e2e', {}, '--mode', 'full', '--fallback', fallback)
+  end
+
+  desc 'Run targeted E2E selectors: rake "e2e:targeted[core/v1/pods:create]"'
+  task :targeted, [:targets] do |_task, args|
+    targets = args[:targets].to_s.strip
+    targets = ENV['E2E_TARGETS'].to_s.strip if targets.empty?
+    abort('E2E target selectors are required via task arg or E2E_TARGETS env var') if targets.empty?
+
+    run_script.call('run-e2e', {}, '--mode', 'targeted', '--targets', targets)
+  end
+
+  desc 'Run changed-only E2E selectors: rake "e2e:changed[origin/HEAD]"'
+  task :changed, [:base_ref] do |_task, args|
+    base_ref = args[:base_ref].to_s.strip
+    base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
+    base_ref = 'origin/HEAD' if base_ref.empty?
+
+    run_script.call('run-e2e', {}, '--mode', 'changed', '--base-ref', base_ref)
+  end
+
+  desc 'Map changed files to selectors: rake "e2e:map_changes[origin/HEAD]"'
+  task :map_changes, [:base_ref] do |_task, args|
+    base_ref = args[:base_ref].to_s.strip
+    base_ref = ENV['BASE_REF'].to_s.strip if base_ref.empty?
+    base_ref = 'origin/HEAD' if base_ref.empty?
+
+    run_script.call('map-changes', {}, '--base-ref', base_ref)
+  end
+
+  desc 'Print baseline minimal-smoke selectors'
+  task :list_targets do
+    smoke_file = File.expand_path('spec/support/e2e/smoke_targets.yml', __dir__)
+    unless File.exist?(smoke_file)
+      abort("missing smoke target file: #{smoke_file}")
+    end
+
+    puts File.read(smoke_file)
+  end
+
+  desc 'Verify gem package excludes spec/test/features/docs'
+  task :package_guard do
+    run_script.call('check-gem-package')
+  end
+
+  desc 'Generate API coverage inventory: rake "e2e:coverage_inventory[specs/002-real-api-e2e-coverage/coverage_inventory.json]"'
+  task :coverage_inventory, [:output, :policy] do |_task, args|
+    output = args[:output].to_s.strip
+    output = ENV['E2E_COVERAGE_OUTPUT'].to_s.strip if output.empty?
+    output = 'specs/002-real-api-e2e-coverage/coverage_inventory.json' if output.empty?
+
+    policy = args[:policy].to_s.strip
+    policy = ENV['E2E_COVERAGE_POLICY'].to_s.strip if policy.empty?
+
+    command_args = ['--output', output]
+    command_args += ['--policy', policy] unless policy.empty?
+    run_script.call('generate-coverage-inventory', {}, *command_args)
+  end
 end

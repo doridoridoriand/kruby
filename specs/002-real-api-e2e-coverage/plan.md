@@ -56,11 +56,11 @@
 - 手動登録は「除外理由」「前提条件」のみ持つ最小差分方式に変更。
 
 2. **Executor 層の導入**
-- `spec/support/e2e/executor.rb` を追加し、selector ごとの実行器を統一インターフェース化。
+- `kubernetes/spec/support/e2e/executor.rb` を追加し、selector ごとの実行器を統一インターフェース化。
 - 実行器は `setup -> api_call -> assert -> cleanup` の4段階。
 
 3. **Fixture/Factory 標準化**
-- リソースごとに body 生成を `spec/support/e2e/factories/*` に集約。
+- リソースごとに body 生成を `kubernetes/spec/support/e2e/factories/*` に集約。
 - ランダム名、namespace、ownerReferences の共通ユーティリティを導入。
 
 4. **Coverage Reporter**
@@ -71,7 +71,7 @@
 
 ### Phase 0: Inventory & Policy (1週間)
 - API メソッド棚卸しスクリプトを追加。
-- 対象/除外ポリシーを `spec/support/e2e/coverage_policy.yml` で明文化。
+- 対象/除外ポリシーを `kubernetes/spec/support/e2e/coverage_policy.yml` で明文化。
 - 成果物:
   - `coverage_inventory.json`
   - 除外カテゴリ一覧（理由付き）
@@ -150,7 +150,7 @@
 - `changed`/`targeted`/`full` のすべてで、対象 selector が実 API 呼び出しを行う。
 - coverage レポートに `covered / unsupported / excluded / failed` が出る。
 - CI に coverage gate が導入され、基準未達を検知できる。
-- `kubernetes.gemspec` の同梱ポリシーを維持（`spec/test/features/docs` 非同梱）。
+- `kubernetes/kubernetes.gemspec` の同梱ポリシーを維持（`spec/test/features/docs` 非同梱）。
 
 ## 11. First Implementation Slice (次に着手する最小単位)
 
@@ -158,4 +158,3 @@
 2. `executor` + `coverage_reporter` の最小実装
 3. `pods/deployments/jobs` の3系統を「実 API call 検証」に置換
 4. `run-e2e` に coverage summary 出力を追加
-

@@ -48,8 +48,9 @@ module SpecSupport
         validate_fallback_strategy!(@fallback_strategy)
       end
 
-      def resolve(base_ref: ENV.fetch("BASE_REF", DEFAULT_BASE_REF), head_ref: DEFAULT_HEAD_REF, changed_files: nil)
-        files = Array(changed_files || git_changed_files(base_ref: base_ref, head_ref: head_ref))
+      def resolve(base_ref: ENV["BASE_REF"], head_ref: DEFAULT_HEAD_REF, changed_files: nil)
+        resolved_base_ref = base_ref.to_s.strip.empty? ? DEFAULT_BASE_REF : base_ref
+        files = Array(changed_files || git_changed_files(base_ref: resolved_base_ref, head_ref: head_ref))
                 .map { |file| normalize_path(file) }
                 .reject(&:empty?)
                 .uniq
@@ -64,7 +65,7 @@ module SpecSupport
         end
 
         ChangeSet.new(
-          base_ref: base_ref,
+          base_ref: resolved_base_ref,
           head_ref: head_ref,
           changed_files: files,
           mapped_targets: mapped_targets,
@@ -153,7 +154,7 @@ module SpecSupport
         {
           api_group: normalize_group(parts[0...version_index].join("_")),
           version: parts[version_index],
-          resource: normalize_resource(parts[(version_index + 1)..].join("_"))
+          resource: normalize_resource(parts.drop(version_index + 1).join("_"))
         }
       end
 

@@ -37,8 +37,13 @@ docker system df
 - Remove stale clusters:
 
 ```bash
-kind get clusters | xargs -n1 kind delete cluster --name
+kind get clusters | while IFS= read -r cluster; do
+  [ -n "${cluster}" ] || continue
+  kind delete cluster --name "${cluster}"
+done
 ```
+
+`xargs -r` is GNU-specific and not available on macOS/BSD `xargs`, so this uses a portable while-loop that safely skips empty input.
 
 - Clean Docker resources when disk pressure is high:
 
@@ -67,8 +72,15 @@ kubectl get ns | rg kruby-e2e || true
 ### Mitigations
 
 ```bash
-kubectl get ns -o name | rg 'namespace/kruby-e2e' | sed 's#namespace/##' | xargs -n1 kubectl delete ns --wait=false
-kind get clusters | rg '^kruby-e2e' | xargs -n1 kind delete cluster --name
+kubectl get ns -o name | rg 'namespace/kruby-e2e' | sed 's#namespace/##' | while IFS= read -r ns; do
+  [ -n "${ns}" ] || continue
+  kubectl delete ns "${ns}" --wait=false
+done
+
+kind get clusters | rg '^kruby-e2e' | while IFS= read -r cluster; do
+  [ -n "${cluster}" ] || continue
+  kind delete cluster --name "${cluster}"
+done
 ```
 
 ## Changed-mode Mapping Mismatch

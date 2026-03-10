@@ -4,10 +4,10 @@ require "json"
 require "spec_helper"
 
 RSpec.describe "real API selector execution", :real_api do
-  REQUIRED_COMMANDS = %w[kind kubectl docker].freeze
+  let(:required_commands) { %w[kind kubectl docker] }
 
   before do
-    missing_command = REQUIRED_COMMANDS.find do |command|
+    missing_command = required_commands.find do |command|
       !system("command -v #{command} >/dev/null 2>&1")
     end
     skip("missing required command: #{missing_command}") if missing_command

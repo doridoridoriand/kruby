@@ -10,6 +10,7 @@ module SpecSupport
     class FailureReporter
       DEFAULT_OUTPUT_DIR = File.expand_path("../../reports/e2e", __dir__)
       MAX_RESPONSE_EXCERPT_BYTES = 8 * 1024
+      RUN_FAILURE_TARGET_ID = "__run__/bootstrap:execute"
 
       attr_reader :run_id, :output_dir
 
@@ -37,6 +38,16 @@ module SpecSupport
         $stderr.puts(JSON.generate(artifact))
 
         artifact
+      end
+
+      def record_run_failure(error:, repro_command:, response_excerpt: nil)
+        record(
+          target_id: RUN_FAILURE_TARGET_ID,
+          error: error,
+          repro_command: repro_command,
+          response_excerpt: response_excerpt || extract_error_excerpt(error),
+          api_method: "Executor#execute"
+        )
       end
 
       def artifacts
@@ -100,10 +111,12 @@ module SpecSupport
 
       def truncate_excerpt(text)
         safe_text = text.to_s.encode("UTF-8", invalid: :replace, undef: :replace, replace: "?")
-        bytes = safe_text.bytes
-        return safe_text if bytes.length <= MAX_RESPONSE_EXCERPT_BYTES
+        return safe_text if safe_text.bytesize <= MAX_RESPONSE_EXCERPT_BYTES
 
-        bytes[0, MAX_RESPONSE_EXCERPT_BYTES].pack("C*")
+        safe_text
+          .byteslice(0, MAX_RESPONSE_EXCERPT_BYTES)
+          .force_encoding("UTF-8")
+          .scrub("?")
       end
 
       def default_run_id

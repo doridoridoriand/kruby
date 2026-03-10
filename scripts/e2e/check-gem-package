@@ -10,6 +10,11 @@ OUTPUT_DIR="${KUBERNETES_DIR}/tmp/e2e/package-guard"
 mkdir -p "${OUTPUT_DIR}"
 GEM_PATH="${OUTPUT_DIR}/kruby-package-guard-$(date +%Y%m%d%H%M%S)-$$.gem"
 
+cleanup() {
+  rm -f "${GEM_PATH}"
+}
+trap cleanup EXIT
+
 (
   cd "${KUBERNETES_DIR}"
   gem build kubernetes.gemspec --output "${GEM_PATH}" >/dev/null
@@ -30,4 +35,4 @@ if [[ -n "${forbidden}" ]]; then
 fi
 
 echo "Package guard passed: no spec/test/features/docs entries in gem package"
-echo "Checked gem: ${GEM_PATH}"
+echo "Checked gem artifact (removed after validation): ${GEM_PATH}"

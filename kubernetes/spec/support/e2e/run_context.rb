@@ -57,30 +57,30 @@ module SpecSupport
 
       private
 
-      def validate!
-        validate_mode!
-        validate_fallback_strategy!
-        validate_targets!
-      end
+        def validate!
+          validate_mode!
+          validate_fallback_strategy!
+          validate_targets!
+        end
 
-      def validate_mode!
-        return if SUPPORTED_MODES.include?(mode)
+        def validate_mode!
+          return if SUPPORTED_MODES.include?(mode)
 
-        raise ArgumentError, "unsupported E2E mode: #{mode}"
-      end
+          raise ArgumentError, "unsupported E2E mode: #{mode}"
+        end
 
-      def validate_fallback_strategy!
-        return if SUPPORTED_FALLBACK_STRATEGIES.include?(fallback_strategy)
+        def validate_fallback_strategy!
+          return if SUPPORTED_FALLBACK_STRATEGIES.include?(fallback_strategy)
 
-        raise ArgumentError, "unsupported fallback strategy: #{fallback_strategy}"
-      end
+          raise ArgumentError, "unsupported fallback strategy: #{fallback_strategy}"
+        end
 
-      def validate_targets!
-        return unless mode == "targeted"
+        def validate_targets!
+          return unless mode == "targeted"
 
-        targets = TargetSelector.parse_csv(targets_raw)
-        raise ArgumentError, "E2E_TARGETS is required in targeted mode" if targets.empty?
-      end
+          targets = TargetSelector.parse_csv(targets_raw)
+          raise ArgumentError, "E2E_TARGETS is required in targeted mode" if targets.empty?
+        end
     end
   end
 end

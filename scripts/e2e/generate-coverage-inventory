@@ -68,10 +68,10 @@ require "json"
 require "fileutils"
 require "support/e2e/coverage_inventory"
 
-output_path = File.expand_path(ENV.fetch("E2E_COVERAGE_OUTPUT_PATH"))
-policy_path = File.expand_path(ENV.fetch("E2E_COVERAGE_POLICY_PATH"))
-pretty = ENV.fetch("E2E_COVERAGE_JSON_PRETTY") == "1"
 repo_root = File.expand_path(ENV.fetch("E2E_COVERAGE_REPO_ROOT"))
+output_path = File.expand_path(ENV.fetch("E2E_COVERAGE_OUTPUT_PATH"), repo_root)
+policy_path = File.expand_path(ENV.fetch("E2E_COVERAGE_POLICY_PATH"), repo_root)
+pretty = ENV.fetch("E2E_COVERAGE_JSON_PRETTY") == "1"
 
 inventory = SpecSupport::E2E::CoverageInventory.new(policy_path: policy_path, repo_root: repo_root)
 inventory.write_json(output_path, pretty: pretty)

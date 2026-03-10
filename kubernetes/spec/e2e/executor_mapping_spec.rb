@@ -14,6 +14,7 @@ RSpec.describe SpecSupport::E2E::Executor do
     watch_deployment = SpecSupport::E2E::TargetSelector.parse("apps/v1/deployments:watch")
     watch_job = SpecSupport::E2E::TargetSelector.parse("batch/v1/jobs:watch")
 
+    # api_method_name is a critical selector->API contract; we verify it directly via `executor.send`.
     expect(executor.send(:api_method_name, update_pod)).to eq("CoreV1Api#replace_namespaced_pod")
     expect(executor.send(:api_method_name, update_deployment)).to eq("AppsV1Api#replace_namespaced_deployment")
     expect(executor.send(:api_method_name, update_job)).to eq("BatchV1Api#replace_namespaced_job")

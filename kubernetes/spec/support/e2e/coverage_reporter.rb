@@ -54,7 +54,15 @@ module SpecSupport
       def write
         data = payload
         FileUtils.mkdir_p(File.dirname(output_path))
-        File.write(output_path, JSON.pretty_generate(data))
+        temp_path = "#{output_path}.tmp"
+
+        File.open(temp_path, "w") do |file|
+          file.write(JSON.pretty_generate(data))
+          file.flush
+          file.fsync
+        end
+
+        File.rename(temp_path, output_path)
         output_path
       end
 

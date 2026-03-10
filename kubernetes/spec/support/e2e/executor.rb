@@ -16,6 +16,9 @@ require_relative "target_selector"
 module SpecSupport
   module E2E
     class Executor
+      DELETE_WAIT_TIMEOUT_SECONDS = 20
+      DELETE_WAIT_INTERVAL_SECONDS = 0.2
+
       class UnsupportedTargetError < StandardError; end
 
       class ExecutionError < StandardError
@@ -54,26 +57,40 @@ module SpecSupport
         coverage_reporter.start!(resolved_targets: selection.resolved_targets)
 
         cluster_manager = @cluster_manager || ClusterManager.new(mode: context.mode)
+        run_error = nil
+        failure_summary_path = nil
+        coverage_path = nil
 
-        with_kubeconfig(cluster_manager) do
-          cluster_manager.with_cluster do
-            cleanup = ResourceCleanup.new(cluster_manager: cluster_manager)
-            cleanup.with_namespace do |namespace|
-              selection.resolved_targets.each do |target_id|
-                execute_target_with_reporting(
-                  target_id: target_id,
-                  namespace: namespace,
-                  cleanup: cleanup,
-                  context: context,
-                  coverage_reporter: coverage_reporter
-                )
+        begin
+          with_kubeconfig(cluster_manager) do
+            cluster_manager.with_cluster do
+              cleanup = ResourceCleanup.new(cluster_manager: cluster_manager)
+              cleanup.with_namespace do |namespace|
+                selection.resolved_targets.each do |target_id|
+                  execute_target_with_reporting(
+                    target_id: target_id,
+                    namespace: namespace,
+                    cleanup: cleanup,
+                    context: context,
+                    coverage_reporter: coverage_reporter
+                  )
+                end
               end
             end
           end
+        rescue StandardError => e
+          run_error = e
+          @failure_reporter.record_run_failure(
+            error: e,
+            repro_command: run_failure_repro_command(context: context, selection: selection)
+          )
+        ensure
+          failure_summary_path = @failure_reporter.write_summary
+          coverage_path = coverage_reporter.write
         end
 
-        failure_summary_path = @failure_reporter.write_summary
-        coverage_path = coverage_reporter.write
+        raise run_error if run_error
+
         result = {
           "runId" => run_id,
           "mode" => selection.mode,
@@ -213,6 +230,9 @@ module SpecSupport
         when "delete"
           name = seed_pod(api, namespace: namespace, cleanup: cleanup)
           api.delete_namespaced_pod(name, namespace, grace_period_seconds: 0)
+          wait_for_resource_absence!("pod #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_pod(name, namespace) }
+          end
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/pods"
         end
@@ -260,6 +280,9 @@ module SpecSupport
         when "delete"
           name = seed_deployment(api, namespace: namespace, cleanup: cleanup)
           api.delete_namespaced_deployment(name, namespace, grace_period_seconds: 0)
+          wait_for_resource_absence!("deployment #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_deployment(name, namespace) }
+          end
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for apps/v1/deployments"
         end
@@ -307,6 +330,9 @@ module SpecSupport
         when "delete"
           name = seed_job(api, namespace: namespace, cleanup: cleanup)
           api.delete_namespaced_job(name, namespace, grace_period_seconds: 0)
+          wait_for_resource_absence!("job #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_job(name, namespace) }
+          end
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for batch/v1/jobs"
         end
@@ -404,6 +430,41 @@ module SpecSupport
         end
 
         resource
+      end
+
+      def run_failure_repro_command(context:, selection:)
+        @repro_command_builder.build(
+          mode: context.mode,
+          targets: selection.mode == "targeted" ? selection.requested_targets : nil,
+          base_ref: selection.mode == "changed" ? context.base_ref : nil,
+          fallback_strategy: context.fallback_strategy
+        )
+      end
+
+      def wait_for_resource_absence!(resource_label, timeout_seconds: DELETE_WAIT_TIMEOUT_SECONDS)
+        deadline = monotonic_time + timeout_seconds
+        loop do
+          return unless yield
+
+          break if monotonic_time >= deadline
+
+          sleep DELETE_WAIT_INTERVAL_SECONDS
+        end
+
+        raise "timed out waiting for #{resource_label} deletion after #{timeout_seconds}s"
+      end
+
+      def resource_present?
+        yield
+        true
+      rescue StandardError => e
+        return false if not_found_error?(e)
+
+        raise
+      end
+
+      def not_found_error?(error)
+        error.respond_to?(:code) && error.code.to_i == 404
       end
 
       def api_method_name(parsed_target)

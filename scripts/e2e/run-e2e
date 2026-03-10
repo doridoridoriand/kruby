@@ -139,6 +139,9 @@ case "${mode}" in
     ;;
 esac
 
+effective_targets="${E2E_TARGETS:-}"
+effective_base_ref="${BASE_REF:-}"
+
 echo "[run-e2e] mode=${E2E_MODE} fallback=${E2E_FALLBACK_STRATEGY} real_api=${E2E_REAL_API}" >&2
 
 build_repro_command() {
@@ -150,7 +153,7 @@ build_repro_command() {
     params[:targets] = targets.split(",").reject(&:empty?) unless targets.empty?
     params[:base_ref] = base_ref unless base_ref.empty?
     puts builder.build(**params)
-  ' "${mode}" "${targets}" "${base_ref}" "${fallback}" "${rspec_args[@]}"
+  ' "${mode}" "${effective_targets}" "${effective_base_ref}" "${fallback}" "${rspec_args[@]}"
 }
 
 emit_issue_summary() {
@@ -191,7 +194,7 @@ emit_issue_summary() {
     end
 
     puts "[run-e2e] ----------------------"
-  ' "${report_file}" "${rspec_exit_code}" "${mode}" "${fallback}" "${targets}" "${base_ref}" "${repro_command}"
+  ' "${report_file}" "${rspec_exit_code}" "${mode}" "${fallback}" "${effective_targets}" "${effective_base_ref}" "${repro_command}"
 }
 
 emit_coverage_summary() {
