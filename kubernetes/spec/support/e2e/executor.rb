@@ -113,13 +113,19 @@ module SpecSupport
 
       def with_kubeconfig(cluster_manager)
         desired = cluster_manager.kubeconfig_path.to_s
-        return yield if desired.empty?
-
         original = ENV["KUBECONFIG"]
-        ENV["KUBECONFIG"] = desired
+        override_applied = false
+
+        unless desired.empty?
+          ENV["KUBECONFIG"] = desired
+          override_applied = true
+        end
+
         yield
       ensure
-        ENV["KUBECONFIG"] = original
+        if override_applied
+          original.nil? ? ENV.delete("KUBECONFIG") : ENV["KUBECONFIG"] = original
+        end
       end
 
       def execute_target_with_reporting(target_id:, namespace:, cleanup:, context:, coverage_reporter:)

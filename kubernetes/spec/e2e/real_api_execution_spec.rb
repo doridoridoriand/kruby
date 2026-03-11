@@ -17,7 +17,12 @@ RSpec.describe "real API selector execution", :real_api do
   end
 
   it "executes resolved selectors against a kind cluster and records coverage" do
-    context = SpecSupport::E2E::RunContext.from_env(ENV)
+    context = SpecSupport::E2E::RunContext.new(
+      mode: "full",
+      targets_raw: "",
+      base_ref: "origin/HEAD",
+      fallback_strategy: "minimal-smoke"
+    )
     executor = SpecSupport::E2E::Executor.new
     result = executor.execute(run_context: context)
 
