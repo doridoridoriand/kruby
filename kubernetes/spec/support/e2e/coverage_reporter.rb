@@ -68,23 +68,23 @@ module SpecSupport
 
       private
 
-      def default_output_path(output_dir)
-        File.join(output_dir, "run-#{run_id}-coverage.json")
-      end
+        def default_output_path(output_dir)
+          File.join(output_dir, "run-#{run_id}-coverage.json")
+        end
 
-      def build_summary
-        {
-          "resolved" => @resolved_targets.length,
-          "recorded" => @entries.length,
-          "covered" => count_status("covered"),
-          "unsupported" => count_status("unsupported"),
-          "failed" => count_status("failed")
-        }
-      end
+        def build_summary
+          {
+            "resolved" => @resolved_targets.length,
+            "recorded" => @entries.length,
+            "covered" => count_status("covered"),
+            "unsupported" => count_status("unsupported"),
+            "failed" => count_status("failed")
+          }
+        end
 
-      def count_status(status)
-        @entries.count { |entry| entry.fetch("status") == status }
-      end
+        def count_status(status)
+          @entries.count { |entry| entry.fetch("status") == status }
+        end
     end
   end
 end

@@ -13,8 +13,7 @@ This runbook covers common flaky cases for local/CI E2E runs.
 docker version
 kind version
 kubectl version --client
-cd kubernetes
-bundle exec rspec spec/e2e --format progress
+(cd kubernetes && bundle exec rspec spec/e2e --format progress)
 ```
 
 If any command above fails, fix it before debugging test logic.
