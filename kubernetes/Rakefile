@@ -21,7 +21,7 @@ run_script = lambda do |script_name, env = {}, *args|
 end
 
 namespace :e2e do
-  desc 'Run full kind-backed E2E suite: rake "e2e:full[minimal-smoke]"'
+  desc 'Run full kind-backed E2E suite (set E2E_KUBERNETES_VERSION=1.31..1.35 to choose the Kind version)'
   task :full, [:fallback] do |_task, args|
     fallback = args[:fallback].to_s.strip
     fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?
@@ -70,6 +70,16 @@ namespace :e2e do
   desc 'Verify gem package excludes spec/test/features/docs'
   task :package_guard do
     run_script.call('check-gem-package')
+  end
+
+  desc 'Run a multi-version Kind matrix in parallel (set E2E_KUBERNETES_VERSIONS=1.31,1.32,... to override)'
+  task :matrix, [:versions] do |_task, args|
+    versions = args[:versions].to_s.strip
+    versions = ENV['E2E_KUBERNETES_VERSIONS'].to_s.strip if versions.empty?
+
+    command_args = ['--mode', 'full']
+    command_args += ['--versions', versions] unless versions.empty?
+    run_script.call('run-e2e-matrix', {}, *command_args)
   end
 
   desc 'Generate API coverage inventory: rake "e2e:coverage_inventory[specs/002-real-api-e2e-coverage/coverage_inventory.json]"'

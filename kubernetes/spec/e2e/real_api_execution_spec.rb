@@ -17,15 +17,11 @@ RSpec.describe "real API selector execution", :real_api do
   end
 
   it "executes resolved selectors against a kind cluster and records coverage" do
-    context = SpecSupport::E2E::RunContext.new(
-      mode: "full",
-      targets_raw: "",
-      base_ref: "origin/HEAD",
-      fallback_strategy: "minimal-smoke"
-    )
+    context = SpecSupport::E2E::RunContext.from_env
     executor = SpecSupport::E2E::Executor.new
     result = executor.execute(run_context: context)
 
+    expect(result.fetch("kubernetesVersion")).to eq(context.kubernetes_version)
     summary = result.fetch("coverage").fetch("summary")
     expect(summary.fetch("resolved")).to be > 0
     expect(summary.fetch("recorded")).to eq(summary.fetch("resolved"))

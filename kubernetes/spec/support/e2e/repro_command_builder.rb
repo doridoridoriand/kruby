@@ -2,6 +2,8 @@
 
 require "shellwords"
 
+require_relative "kind_version_resolver"
+
 module SpecSupport
   module E2E
     class ReproCommandBuilder
@@ -13,13 +15,16 @@ module SpecSupport
         @script_path = script_path
       end
 
-      def build(mode:, targets: nil, base_ref: nil, fallback_strategy: nil, rspec_args: [])
+      def build(mode:, targets: nil, base_ref: nil, fallback_strategy: nil, rspec_args: [], kubernetes_version: nil)
         normalized_mode = mode.to_s
         validate_mode!(normalized_mode)
 
         command = [@script_path, "--mode", normalized_mode]
         command.concat(mode_specific_args(normalized_mode, targets: targets, base_ref: base_ref))
         command.concat(["--fallback", fallback_strategy.to_s]) unless fallback_strategy.to_s.empty?
+        unless kubernetes_version.to_s.empty?
+          command.concat(["--kubernetes-version", KindVersionResolver.resolve_kubernetes_version(kubernetes_version)])
+        end
 
         extra_args = Array(rspec_args).map(&:to_s).reject(&:empty?)
         unless extra_args.empty?

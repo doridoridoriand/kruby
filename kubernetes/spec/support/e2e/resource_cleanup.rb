@@ -5,6 +5,9 @@ require "securerandom"
 module SpecSupport
   module E2E
     class ResourceCleanup
+      DEFAULT_SERVICE_ACCOUNT_WAIT_TIMEOUT_SECONDS = 20
+      DEFAULT_SERVICE_ACCOUNT_WAIT_INTERVAL_SECONDS = 0.2
+
       class CleanupError < StandardError; end
 
       def initialize(cluster_manager:, namespace_prefix: "kruby-e2e", keep_namespaces: ENV["E2E_KEEP_NAMESPACES"] == "1")
@@ -23,6 +26,7 @@ module SpecSupport
 
       def create_namespace(namespace)
         @cluster_manager.kubectl("create", "namespace", namespace, allow_failure: true)
+        wait_for_default_service_account(namespace)
         register { delete_namespace(namespace) } unless @keep_namespaces
         namespace
       end
@@ -82,6 +86,32 @@ module SpecSupport
 
       def build_namespace
         "#{@namespace_prefix}-#{SecureRandom.hex(4)}"
+      end
+
+      def wait_for_default_service_account(namespace,
+                                           timeout_seconds: DEFAULT_SERVICE_ACCOUNT_WAIT_TIMEOUT_SECONDS,
+                                           interval_seconds: DEFAULT_SERVICE_ACCOUNT_WAIT_INTERVAL_SECONDS)
+        deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout_seconds
+
+        loop do
+          result = @cluster_manager.kubectl(
+            "-n",
+            namespace,
+            "get",
+            "serviceaccount",
+            "default",
+            "-o",
+            "name",
+            allow_failure: true
+          )
+          return if result.success?
+
+          break if Process.clock_gettime(Process::CLOCK_MONOTONIC) >= deadline
+
+          sleep interval_seconds
+        end
+
+        raise CleanupError, "timed out waiting for default service account in namespace #{namespace}"
       end
     end
   end

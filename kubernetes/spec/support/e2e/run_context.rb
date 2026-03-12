@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "kind_version_resolver"
 require_relative "target_selector"
 
 module SpecSupport
@@ -8,23 +9,26 @@ module SpecSupport
       SUPPORTED_MODES = %w[full targeted changed].freeze
       SUPPORTED_FALLBACK_STRATEGIES = %w[minimal-smoke full].freeze
 
-      attr_reader :mode, :targets_raw, :base_ref, :fallback_strategy, :changed_files
+      attr_reader :mode, :targets_raw, :base_ref, :fallback_strategy, :changed_files, :kubernetes_version
 
       def self.from_env(env = ENV)
         new(
           mode: env.fetch("E2E_MODE", "full"),
           targets_raw: env.fetch("E2E_TARGETS", ""),
           base_ref: env.fetch("BASE_REF", "origin/HEAD"),
-          fallback_strategy: env.fetch("E2E_FALLBACK_STRATEGY", "minimal-smoke")
+          fallback_strategy: env.fetch("E2E_FALLBACK_STRATEGY", "minimal-smoke"),
+          kubernetes_version: env.fetch("E2E_KUBERNETES_VERSION", KindVersionResolver.default_kubernetes_version)
         )
       end
 
-      def initialize(mode:, targets_raw: "", base_ref: "origin/HEAD", fallback_strategy: "minimal-smoke", changed_files: nil)
+      def initialize(mode:, targets_raw: "", base_ref: "origin/HEAD", fallback_strategy: "minimal-smoke",
+                     changed_files: nil, kubernetes_version: KindVersionResolver.default_kubernetes_version)
         @mode = mode.to_s
         @targets_raw = targets_raw.to_s
         @base_ref = base_ref.to_s
         @fallback_strategy = fallback_strategy.to_s
         @changed_files = changed_files.nil? ? nil : Array(changed_files)
+        @kubernetes_version = KindVersionResolver.resolve_kubernetes_version(kubernetes_version)
 
         validate!
       end
@@ -41,7 +45,8 @@ module SpecSupport
           targets_raw: targets_raw,
           base_ref: base_ref,
           fallback_strategy: fallback_strategy,
-          changed_files: Array(files)
+          changed_files: Array(files),
+          kubernetes_version: kubernetes_version
         )
       end
 
@@ -51,7 +56,8 @@ module SpecSupport
           requested_targets: requested_targets,
           base_ref: base_ref,
           fallback_strategy: fallback_strategy,
-          changed_files: changed_files
+          changed_files: changed_files,
+          kubernetes_version: kubernetes_version
         }
       end
 

@@ -4,8 +4,22 @@ This runbook covers common flaky cases for local/CI E2E runs.
 
 ## Scope
 - E2E runner: `scripts/e2e/run-e2e`
+- E2E matrix runner: `scripts/e2e/run-e2e-matrix`
 - Change mapping: `scripts/e2e/map-changes`
 - Package safety: `scripts/e2e/check-gem-package`
+
+## Supported Kubernetes Versions
+
+The Kind-backed E2E environment supports the Kubernetes versions declared in `README.md`:
+
+- `1.31`
+- `1.32`
+- `1.33`
+- `1.34`
+- `1.35`
+
+Use `--kubernetes-version` (or `E2E_KUBERNETES_VERSION`) to select one version explicitly.
+Use `scripts/e2e/run-e2e-matrix` to fan out across multiple versions in parallel.
 
 ## Quick Health Checks
 
@@ -13,7 +27,9 @@ This runbook covers common flaky cases for local/CI E2E runs.
 docker version
 kind version
 kubectl version --client
-(cd kubernetes && bundle exec rspec spec/e2e --format progress)
+(cd kubernetes && E2E_KUBERNETES_VERSION=1.35 bundle exec rspec spec/e2e --format progress)
+scripts/e2e/run-e2e --mode full --kubernetes-version 1.35 --real-api 0
+scripts/e2e/run-e2e-matrix --mode full --versions 1.31,1.35 --real-api 0
 ```
 
 If any command above fails, fix it before debugging test logic.
@@ -53,7 +69,7 @@ docker system prune -f
 - Retry with full mode reuse disabled for isolation:
 
 ```bash
-E2E_REUSE_CLUSTER=0 scripts/e2e/run-e2e --mode full
+E2E_REUSE_CLUSTER=0 scripts/e2e/run-e2e --mode full --kubernetes-version 1.35
 ```
 
 ## Cleanup/Leak Issues
@@ -99,7 +115,7 @@ scripts/e2e/map-changes --changed-file kubernetes/lib/kubernetes/api/core_v1_api
 - Use explicit targeted run for quick isolation:
 
 ```bash
-scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create
+scripts/e2e/run-e2e --mode targeted --kubernetes-version 1.35 --targets core/v1/pods:create
 ```
 
 ## Packaging Guard Failures
@@ -111,6 +127,16 @@ scripts/e2e/run-e2e --mode targeted --targets core/v1/pods:create
 
 ```bash
 scripts/e2e/check-gem-package
+```
+
+## Multi-version Matrix Runs
+
+By default, `run-e2e-matrix` starts one `run-e2e` process per requested Kubernetes version in parallel.
+When `E2E_REUSE_CLUSTER` is unset, the matrix runner forces `E2E_REUSE_CLUSTER=0` for each child to avoid leaving multiple full-mode clusters behind.
+
+```bash
+scripts/e2e/run-e2e-matrix --mode full
+scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.32,1.33,1.34,1.35 --targets core/v1/pods:create
 ```
 
 ### Mitigations

@@ -20,6 +20,7 @@ e2e_default_env = {
   'E2E_MODE' => 'full',
   'E2E_FALLBACK_STRATEGY' => 'minimal-smoke',
   'BASE_REF' => 'origin/HEAD',
+  'E2E_KUBERNETES_VERSION' => '1.35',
   'E2E_REAL_API' => '0'
 }.freeze
 e2e_env_missing = Object.new

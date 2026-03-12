@@ -7,6 +7,7 @@ require_relative "cluster_manager"
 require_relative "coverage_reporter"
 require_relative "failure_reporter"
 require_relative "factories"
+require_relative "kind_version_resolver"
 require_relative "mode_dispatcher"
 require_relative "repro_command_builder"
 require_relative "resource_cleanup"
@@ -40,7 +41,7 @@ module SpecSupport
                      failure_reporter: nil,
                      coverage_output_path: ENV["E2E_COVERAGE_REPORT"])
         @mode_dispatcher = mode_dispatcher
-        @run_id = run_id || Time.now.utc.strftime("run-%Y%m%d%H%M%S")
+        @run_id = run_id || default_run_id
         @cluster_manager = cluster_manager
         @failure_reporter = failure_reporter || FailureReporter.new(run_id: @run_id)
         @coverage_output_path = coverage_output_path.to_s.empty? ? nil : coverage_output_path
@@ -58,7 +59,10 @@ module SpecSupport
         )
         coverage_reporter.start!(resolved_targets: selection.resolved_targets)
 
-        cluster_manager = @cluster_manager || ClusterManager.new(mode: context.mode)
+        cluster_manager = @cluster_manager || ClusterManager.new(
+          mode: context.mode,
+          kubernetes_version: context.kubernetes_version
+        )
         run_error = nil
         failure_summary_path = nil
         coverage_path = nil
@@ -96,6 +100,7 @@ module SpecSupport
         result = {
           "runId" => run_id,
           "mode" => selection.mode,
+          "kubernetesVersion" => context.kubernetes_version,
           "requestedTargets" => selection.requested_targets,
           "resolvedTargets" => selection.resolved_targets,
           "fallbackUsed" => selection.fallback_used,
@@ -156,7 +161,8 @@ module SpecSupport
             mode: context.mode,
             targets: [target_id],
             base_ref: context.base_ref,
-            fallback_strategy: context.fallback_strategy
+            fallback_strategy: context.fallback_strategy,
+            kubernetes_version: context.kubernetes_version
           )
           @failure_reporter.record(
             target_id: target_id,
@@ -451,7 +457,8 @@ module SpecSupport
           mode: context.mode,
           targets: selection.mode == "targeted" ? selection.requested_targets : nil,
           base_ref: selection.mode == "changed" ? context.base_ref : nil,
-          fallback_strategy: context.fallback_strategy
+          fallback_strategy: context.fallback_strategy,
+          kubernetes_version: context.kubernetes_version
         )
       end
 
@@ -542,6 +549,11 @@ module SpecSupport
 
       def build_api_client
         Kubernetes.new_client_from_config
+      end
+
+      def default_run_id
+        version_slug = KindVersionResolver.version_slug(ENV.fetch("E2E_KUBERNETES_VERSION", KindVersionResolver.default_kubernetes_version))
+        "run-#{Time.now.utc.strftime('%Y%m%d%H%M%S')}-#{version_slug}-p#{Process.pid}"
       end
     end
   end

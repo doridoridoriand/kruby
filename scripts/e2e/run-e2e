@@ -16,6 +16,7 @@ Options:
   --targets <selector[,selector...]>
   --base-ref <git-ref>
   --fallback <minimal-smoke|full>
+  --kubernetes-version <1.31|1.32|1.33|1.34|1.35>
   --real-api <0|1>
   -h, --help
 USAGE
@@ -25,6 +26,7 @@ mode="${E2E_MODE:-full}"
 targets="${E2E_TARGETS:-}"
 base_ref="${BASE_REF:-origin/HEAD}"
 fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
+kubernetes_version="${E2E_KUBERNETES_VERSION:-1.35}"
 real_api="${E2E_REAL_API:-1}"
 rspec_args=()
 
@@ -68,6 +70,15 @@ while [[ $# -gt 0 ]]; do
       ;;
     --fallback=*)
       fallback="${1#*=}"
+      shift
+      ;;
+    --kubernetes-version)
+      [[ $# -ge 2 ]] || { echo "ERROR: --kubernetes-version requires a value" >&2; exit 1; }
+      kubernetes_version="$2"
+      shift 2
+      ;;
+    --kubernetes-version=*)
+      kubernetes_version="${1#*=}"
       shift
       ;;
     --real-api)
@@ -122,6 +133,7 @@ fi
 
 export E2E_MODE="${mode}"
 export E2E_FALLBACK_STRATEGY="${fallback}"
+export E2E_KUBERNETES_VERSION="${kubernetes_version}"
 export E2E_REAL_API="${real_api}"
 
 case "${mode}" in
@@ -141,20 +153,22 @@ esac
 
 effective_targets="${E2E_TARGETS:-}"
 effective_base_ref="${BASE_REF:-}"
+effective_kubernetes_version="${E2E_KUBERNETES_VERSION:-}"
+version_slug="$(printf '%s' "${effective_kubernetes_version}" | sed 's/^v//' | tr '.+' '--' | tr -cd '[:alnum:]-')"
 
-echo "[run-e2e] mode=${E2E_MODE} fallback=${E2E_FALLBACK_STRATEGY} real_api=${E2E_REAL_API}" >&2
+echo "[run-e2e] mode=${E2E_MODE} kubernetes_version=${E2E_KUBERNETES_VERSION} fallback=${E2E_FALLBACK_STRATEGY} real_api=${E2E_REAL_API}" >&2
 
 build_repro_command() {
-  local build_args=("${mode}" "${effective_targets}" "${effective_base_ref}" "${fallback}")
+  local build_args=("${mode}" "${effective_targets}" "${effective_base_ref}" "${fallback}" "${effective_kubernetes_version}")
   if [[ ${#rspec_args[@]} -gt 0 ]]; then
     build_args+=("${rspec_args[@]}")
   fi
 
   ruby -I "${REPO_ROOT}/kubernetes/spec" -e '
     require "support/e2e/repro_command_builder"
-    mode, targets, base_ref, fallback, *extra = ARGV
+    mode, targets, base_ref, fallback, kubernetes_version, *extra = ARGV
     builder = SpecSupport::E2E::ReproCommandBuilder.new
-    params = { mode: mode, fallback_strategy: fallback, rspec_args: extra }
+    params = { mode: mode, fallback_strategy: fallback, rspec_args: extra, kubernetes_version: kubernetes_version }
     params[:targets] = targets.split(",").reject(&:empty?) unless targets.empty?
     params[:base_ref] = base_ref unless base_ref.empty?
     puts builder.build(**params)
@@ -167,7 +181,7 @@ emit_issue_summary() {
   local repro_command="$3"
 
   ruby -rjson -e '
-    path, exit_code, mode, fallback, targets, base_ref, repro = ARGV
+    path, exit_code, mode, fallback, targets, base_ref, kubernetes_version, repro = ARGV
     data = File.exist?(path) ? JSON.parse(File.read(path)) : {}
     summary = data.fetch("summary", {})
     examples = data.fetch("examples", [])
@@ -185,6 +199,7 @@ emit_issue_summary() {
     puts "[run-e2e] --- issue-template ---"
     puts "### E2E Failure Summary"
     puts "- mode: #{mode}"
+    puts "- kubernetes_version: #{kubernetes_version}" unless kubernetes_version.empty?
     puts "- fallback: #{fallback}"
     puts "- targets: #{targets}" unless targets.empty?
     puts "- base_ref: #{base_ref}" if mode == "changed" && !base_ref.empty?
@@ -199,7 +214,7 @@ emit_issue_summary() {
     end
 
     puts "[run-e2e] ----------------------"
-  ' "${report_file}" "${rspec_exit_code}" "${mode}" "${fallback}" "${effective_targets}" "${effective_base_ref}" "${repro_command}"
+  ' "${report_file}" "${rspec_exit_code}" "${mode}" "${fallback}" "${effective_targets}" "${effective_base_ref}" "${effective_kubernetes_version}" "${repro_command}"
 }
 
 emit_coverage_summary() {
@@ -226,8 +241,9 @@ emit_coverage_summary() {
 
 REPORT_DIR="${REPO_ROOT}/kubernetes/tmp/e2e"
 mkdir -p "${REPORT_DIR}"
-REPORT_FILE="${REPORT_DIR}/run-e2e-rspec-${mode}-$$.json"
-COVERAGE_FILE="${REPORT_DIR}/run-e2e-coverage-${mode}-$$.json"
+report_suffix="${mode}-k8s-${version_slug:-unknown}-$$"
+REPORT_FILE="${REPORT_DIR}/run-e2e-rspec-${report_suffix}.json"
+COVERAGE_FILE="${REPORT_DIR}/run-e2e-coverage-${report_suffix}.json"
 export E2E_COVERAGE_REPORT="${COVERAGE_FILE}"
 
 cd "${REPO_ROOT}/kubernetes"

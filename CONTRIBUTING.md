@@ -44,10 +44,18 @@ For the standard Kubernetes/OpenAPI upgrade process, use:
 Use the repository-level scripts for all E2E runs:
 
 ```bash
-scripts/e2e/run-e2e --mode full
-scripts/e2e/run-e2e --mode targeted --targets 'core/v1/pods:create'
-scripts/e2e/run-e2e --mode changed --base-ref origin/HEAD
+scripts/e2e/run-e2e --mode full --kubernetes-version 1.35
+scripts/e2e/run-e2e --mode targeted --kubernetes-version 1.31 --targets 'core/v1/pods:create'
+scripts/e2e/run-e2e --mode changed --kubernetes-version 1.35 --base-ref origin/HEAD
+scripts/e2e/run-e2e-matrix --mode full
 ```
+
+Supported Kind Kubernetes versions:
+- `1.31`
+- `1.32`
+- `1.33`
+- `1.34`
+- `1.35`
 
 Selector format:
 - `apiGroup/version/resource:operation`
@@ -59,8 +67,10 @@ Useful helpers:
 scripts/e2e/map-changes --base-ref origin/HEAD --format text
 cd kubernetes
 bundle exec rake e2e:full
+E2E_KUBERNETES_VERSION=1.31 bundle exec rake e2e:full
 bundle exec rake e2e:targeted['core/v1/pods:create']
 bundle exec rake e2e:changed[origin/HEAD]
+bundle exec rake e2e:matrix
 bundle exec rake e2e:package_guard
 ```
 

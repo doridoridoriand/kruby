@@ -1,0 +1,192 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+usage() {
+  cat <<'USAGE'
+Usage: scripts/e2e/run-e2e-matrix [options] [-- rspec-args...]
+
+Run Kind-backed E2E suites for multiple Kubernetes versions in parallel.
+
+Options:
+  --mode <full|targeted|changed>
+  --targets <selector[,selector...]>
+  --base-ref <git-ref>
+  --fallback <minimal-smoke|full>
+  --real-api <0|1>
+  --versions <1.31,1.32,1.33,1.34,1.35>
+  -h, --help
+USAGE
+}
+
+mode="${E2E_MODE:-full}"
+targets="${E2E_TARGETS:-}"
+base_ref="${BASE_REF:-origin/HEAD}"
+fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
+real_api="${E2E_REAL_API:-1}"
+versions_csv="${E2E_KUBERNETES_VERSIONS:-1.31,1.32,1.33,1.34,1.35}"
+rspec_args=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --mode)
+      [[ $# -ge 2 ]] || { echo "ERROR: --mode requires a value" >&2; exit 1; }
+      mode="$2"
+      shift 2
+      ;;
+    --mode=*)
+      mode="${1#*=}"
+      shift
+      ;;
+    --targets)
+      [[ $# -ge 2 ]] || { echo "ERROR: --targets requires a value" >&2; exit 1; }
+      targets="$2"
+      shift 2
+      ;;
+    --targets=*)
+      targets="${1#*=}"
+      shift
+      ;;
+    --base-ref)
+      [[ $# -ge 2 ]] || { echo "ERROR: --base-ref requires a value" >&2; exit 1; }
+      base_ref="$2"
+      shift 2
+      ;;
+    --base-ref=*)
+      base_ref="${1#*=}"
+      shift
+      ;;
+    --fallback)
+      [[ $# -ge 2 ]] || { echo "ERROR: --fallback requires a value" >&2; exit 1; }
+      fallback="$2"
+      shift 2
+      ;;
+    --fallback=*)
+      fallback="${1#*=}"
+      shift
+      ;;
+    --real-api)
+      [[ $# -ge 2 ]] || { echo "ERROR: --real-api requires a value" >&2; exit 1; }
+      real_api="$2"
+      shift 2
+      ;;
+    --real-api=*)
+      real_api="${1#*=}"
+      shift
+      ;;
+    --versions)
+      [[ $# -ge 2 ]] || { echo "ERROR: --versions requires a value" >&2; exit 1; }
+      versions_csv="$2"
+      shift 2
+      ;;
+    --versions=*)
+      versions_csv="${1#*=}"
+      shift
+      ;;
+    --)
+      shift
+      rspec_args+=("$@")
+      break
+      ;;
+    *)
+      rspec_args+=("$1")
+      shift
+      ;;
+  esac
+done
+
+case "${mode}" in
+  full|targeted|changed) ;;
+  *)
+    echo "ERROR: unsupported mode '${mode}' (expected full|targeted|changed)" >&2
+    exit 1
+    ;;
+esac
+
+if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
+  echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
+  exit 1
+fi
+
+IFS=',' read -r -a raw_versions <<< "${versions_csv}"
+versions=()
+for version in "${raw_versions[@]}"; do
+  trimmed="$(printf '%s' "${version}" | tr -d '[:space:]')"
+  [[ -n "${trimmed}" ]] || continue
+  versions+=("${trimmed}")
+done
+
+if [[ ${#versions[@]} -eq 0 ]]; then
+  echo "ERROR: at least one Kubernetes version is required" >&2
+  exit 1
+fi
+
+LOG_DIR="${REPO_ROOT}/kubernetes/tmp/e2e/matrix"
+mkdir -p "${LOG_DIR}"
+
+pids=()
+pid_versions=()
+pid_logs=()
+
+for version in "${versions[@]}"; do
+  version_slug="$(printf '%s' "${version}" | sed 's/^v//' | tr '.+' '--' | tr -cd '[:alnum:]-')"
+  log_file="${LOG_DIR}/run-e2e-${mode}-k8s-${version_slug:-unknown}-$$.log"
+  child_command=("${REPO_ROOT}/scripts/e2e/run-e2e" "--mode" "${mode}" "--fallback" "${fallback}" "--kubernetes-version" "${version}" "--real-api" "${real_api}")
+
+  case "${mode}" in
+    targeted)
+      child_command+=("--targets" "${targets}")
+      ;;
+    changed)
+      child_command+=("--base-ref" "${base_ref}")
+      ;;
+  esac
+
+  if [[ ${#rspec_args[@]} -gt 0 ]]; then
+    child_command+=("--")
+    child_command+=("${rspec_args[@]}")
+  fi
+
+  (
+    if [[ -z "${E2E_REUSE_CLUSTER+x}" ]]; then
+      export E2E_REUSE_CLUSTER=0
+    fi
+
+    "${child_command[@]}"
+  ) >"${log_file}" 2>&1 &
+
+  pid=$!
+  pids+=("${pid}")
+  pid_versions+=("${version}")
+  pid_logs+=("${log_file}")
+  echo "[run-e2e-matrix] started kubernetes_version=${version} pid=${pid} log=${log_file}" >&2
+done
+
+final_exit_code=0
+
+for i in "${!pids[@]}"; do
+  pid="${pids[$i]}"
+  version="${pid_versions[$i]}"
+  log_file="${pid_logs[$i]}"
+
+  if wait "${pid}"; then
+    exit_code=0
+  else
+    exit_code=$?
+    if [[ "${final_exit_code}" -eq 0 ]]; then
+      final_exit_code="${exit_code}"
+    fi
+  fi
+
+  echo "[run-e2e-matrix] completed kubernetes_version=${version} exit=${exit_code} log=${log_file}" >&2
+  cat "${log_file}"
+done
+
+exit "${final_exit_code}"
