@@ -53,6 +53,50 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
 
       expect(manager.kubeconfig_path).to end_with("kubernetes/tmp/e2e/kubeconfig/kruby-e2e-full-v1-35.kubeconfig")
     end
+
+    it "rehydrates a missing managed kubeconfig when reusing an existing cluster" do
+      Dir.mktmpdir("kruby-e2e-kubeconfig") do |tmpdir|
+        allow(described_class).to receive(:default_kubeconfig_path).and_return(File.join(tmpdir, "managed.kubeconfig"))
+
+        manager = described_class.new(mode: "full", kubernetes_version: "1.35", reuse_cluster: true)
+        cluster_list_result = described_class::CommandResult.new(
+          command: "kind get clusters",
+          status: 0,
+          stdout: "#{manager.cluster_name}\n",
+          stderr: ""
+        )
+        kubeconfig_result = described_class::CommandResult.new(
+          command: "kind get kubeconfig",
+          status: 0,
+          stdout: "apiVersion: v1\n",
+          stderr: ""
+        )
+
+        allow(manager).to receive(:run_command).and_return(cluster_list_result, kubeconfig_result)
+
+        manager.create
+
+        expect(File.read(manager.kubeconfig_path)).to eq("apiVersion: v1\n")
+      end
+    end
+
+    it "expands explicit kubeconfig paths before using them" do
+      Dir.mktmpdir("kruby-e2e-home") do |home_dir|
+        original_home = ENV["HOME"]
+        ENV["HOME"] = home_dir
+
+        manager = described_class.new(
+          mode: "full",
+          kubernetes_version: "1.35",
+          kubeconfig_path: "~/shared.kubeconfig",
+          reuse_cluster: false
+        )
+
+        expect(manager.kubeconfig_path).to eq(File.join(home_dir, "shared.kubeconfig"))
+      ensure
+        ENV["HOME"] = original_home
+      end
+    end
   end
 
   describe "#delete" do

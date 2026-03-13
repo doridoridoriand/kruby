@@ -70,6 +70,7 @@ module SpecSupport
 
       def create
         if reuse_cluster && cluster_exists?
+          ensure_managed_kubeconfig!
           @created = true
           @reused_existing_cluster = true
           return self
@@ -137,9 +138,18 @@ module SpecSupport
 
       def resolve_kubeconfig_path(explicit_path)
         path = explicit_path.to_s.strip
-        return [path, false] unless path.empty?
+        return [File.expand_path(path), false] unless path.empty?
 
         [self.class.default_kubeconfig_path(cluster_name: cluster_name), true]
+      end
+
+      def ensure_managed_kubeconfig!
+        return unless @managed_kubeconfig_path && kubeconfig_path && !kubeconfig_path.empty?
+        return if File.file?(kubeconfig_path) && File.readable?(kubeconfig_path)
+
+        FileUtils.mkdir_p(File.dirname(kubeconfig_path))
+        result = kind("get", "kubeconfig", "--name", cluster_name)
+        File.write(kubeconfig_path, result.stdout)
       end
 
       def run_command(command, allow_failure: false, stdin_data: nil)
