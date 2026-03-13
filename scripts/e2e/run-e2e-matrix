@@ -110,6 +110,14 @@ case "${mode}" in
     ;;
 esac
 
+case "${fallback}" in
+  minimal-smoke|full) ;;
+  *)
+    echo "ERROR: unsupported fallback '${fallback}' (expected minimal-smoke|full)" >&2
+    exit 1
+    ;;
+esac
+
 if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
   echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
   exit 1
@@ -170,6 +178,7 @@ for version in "${versions[@]}"; do
 done
 
 final_exit_code=0
+failed_runs=()
 
 for i in "${!pids[@]}"; do
   pid="${pids[$i]}"
@@ -180,6 +189,7 @@ for i in "${!pids[@]}"; do
     exit_code=0
   else
     exit_code=$?
+    failed_runs+=("kubernetes_version=${version} exit=${exit_code} log=${log_file}")
     if [[ "${final_exit_code}" -eq 0 ]]; then
       final_exit_code="${exit_code}"
     fi
@@ -188,5 +198,12 @@ for i in "${!pids[@]}"; do
   echo "[run-e2e-matrix] completed kubernetes_version=${version} exit=${exit_code} log=${log_file}" >&2
   cat "${log_file}"
 done
+
+if [[ ${#failed_runs[@]} -gt 0 ]]; then
+  echo "[run-e2e-matrix] failed runs:" >&2
+  for failed_run in "${failed_runs[@]}"; do
+    echo "[run-e2e-matrix]   ${failed_run}" >&2
+  done
+fi
 
 exit "${final_exit_code}"

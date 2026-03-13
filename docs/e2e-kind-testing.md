@@ -129,6 +129,10 @@ scripts/e2e/run-e2e --mode targeted --kubernetes-version 1.35 --targets core/v1/
 scripts/e2e/check-gem-package
 ```
 
+### Mitigations
+- Ensure gemspec whitelist still only includes runtime files (`lib`, `README`, `LICENSE`).
+- Remove accidental additions under `spec/`, `test/`, `features/`, `docs/` from package inputs.
+
 ## Multi-version Matrix Runs
 
 By default, `run-e2e-matrix` starts one `run-e2e` process per requested Kubernetes version in parallel.
@@ -138,10 +142,6 @@ When `E2E_REUSE_CLUSTER` is unset, the matrix runner forces `E2E_REUSE_CLUSTER=0
 scripts/e2e/run-e2e-matrix --mode full
 scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.32,1.33,1.34,1.35 --targets core/v1/pods:create
 ```
-
-### Mitigations
-- Ensure gemspec whitelist still only includes runtime files (`lib`, `README`, `LICENSE`).
-- Remove accidental additions under `spec/`, `test/`, `features/`, `docs/` from package inputs.
 
 ## Failure Reporting Checklist
 - Include `run-e2e` summary block
