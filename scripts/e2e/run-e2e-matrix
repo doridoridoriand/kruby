@@ -118,6 +118,14 @@ case "${fallback}" in
     ;;
 esac
 
+case "${real_api}" in
+  0|1) ;;
+  *)
+    echo "ERROR: unsupported --real-api value '${real_api}' (expected 0|1)" >&2
+    exit 1
+    ;;
+esac
+
 if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
   echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
   exit 1
@@ -143,6 +151,42 @@ pids=()
 pid_versions=()
 pid_logs=()
 
+cleanup_children() {
+  local signal="$1"
+  local pid version log_file
+
+  trap - INT TERM
+
+  for i in "${!pids[@]}"; do
+    pid="${pids[$i]}"
+    version="${pid_versions[$i]:-unknown}"
+    log_file="${pid_logs[$i]:-}"
+
+    if kill -0 "${pid}" 2>/dev/null; then
+      echo "[run-e2e-matrix] received ${signal}; terminating kubernetes_version=${version} pid=${pid} log=${log_file}" >&2
+      kill "${pid}" 2>/dev/null || true
+    fi
+  done
+
+  sleep 0.2
+
+  for i in "${!pids[@]}"; do
+    pid="${pids[$i]}"
+    version="${pid_versions[$i]:-unknown}"
+    log_file="${pid_logs[$i]:-}"
+
+    if kill -0 "${pid}" 2>/dev/null; then
+      echo "[run-e2e-matrix] forcing kill kubernetes_version=${version} pid=${pid} log=${log_file}" >&2
+      kill -KILL "${pid}" 2>/dev/null || true
+    fi
+
+    wait "${pid}" 2>/dev/null || true
+  done
+}
+
+trap 'cleanup_children INT; exit 130' INT
+trap 'cleanup_children TERM; exit 143' TERM
+
 for version in "${versions[@]}"; do
   version_slug="$(printf '%s' "${version}" | sed 's/^v//' | tr '.+' '--' | tr -cd '[:alnum:]-')"
   log_file="${LOG_DIR}/run-e2e-${mode}-k8s-${version_slug:-unknown}-$$.log"
@@ -167,7 +211,7 @@ for version in "${versions[@]}"; do
       export E2E_REUSE_CLUSTER=0
     fi
 
-    "${child_command[@]}"
+    exec "${child_command[@]}"
   ) >"${log_file}" 2>&1 &
 
   pid=$!

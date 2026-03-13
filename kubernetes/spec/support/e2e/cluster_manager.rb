@@ -44,7 +44,7 @@ module SpecSupport
         @cluster_name = cluster_name || self.class.default_cluster_name(mode: @mode, kubernetes_version: @kubernetes_version)
         @kind_bin = kind_bin
         @kubectl_bin = kubectl_bin
-        @kubeconfig_path = resolve_kubeconfig_path(kubeconfig_path)
+        @kubeconfig_path, @managed_kubeconfig_path = resolve_kubeconfig_path(kubeconfig_path)
         @kind_node_image = KindVersionResolver.resolve_node_image(
           kubernetes_version: @kubernetes_version,
           explicit_image: kind_node_image
@@ -89,7 +89,7 @@ module SpecSupport
 
       def delete
         result = run_command([@kind_bin, "delete", "cluster", "--name", cluster_name], allow_failure: true)
-        if result.success? && kubeconfig_path && !kubeconfig_path.empty?
+        if result.success? && @managed_kubeconfig_path && kubeconfig_path && !kubeconfig_path.empty?
           FileUtils.rm_f(kubeconfig_path)
         end
         @created = false
@@ -137,9 +137,9 @@ module SpecSupport
 
       def resolve_kubeconfig_path(explicit_path)
         path = explicit_path.to_s.strip
-        return path unless path.empty?
+        return [path, false] unless path.empty?
 
-        self.class.default_kubeconfig_path(cluster_name: cluster_name)
+        [self.class.default_kubeconfig_path(cluster_name: cluster_name), true]
       end
 
       def run_command(command, allow_failure: false, stdin_data: nil)
