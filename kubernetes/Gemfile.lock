@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kruby (1.35.0.3)
+    kruby (1.35.0.4)
       base64 (~> 0.2)
       typhoeus (~> 1.0, >= 1.0.1)
 

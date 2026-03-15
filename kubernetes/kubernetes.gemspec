@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => s.homepage,
     "source_code_uri" => s.homepage,
     "documentation_uri" => "#{s.homepage}#readme",
-    "changelog_uri" => "#{s.homepage}/releases",
+    "changelog_uri" => "#{s.homepage}/blob/master/CHANGELOG.md",
     "bug_tracker_uri" => "#{s.homepage}/issues",
     "allowed_push_host" => "https://rubygems.org",
     "rubygems_mfa_required" => "true"

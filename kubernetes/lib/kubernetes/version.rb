@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.1.0
 =end
 
 module Kubernetes
-  VERSION = '1.35.0.3'
+  VERSION = '1.35.0.4'
 end

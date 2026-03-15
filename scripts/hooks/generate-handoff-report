@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+repo_root="$(cd "$repo_root" && pwd -P)"
+cd "$repo_root"
+
+requested_output_path="${1:-docs/handoff.md}"
+case "$requested_output_path" in
+  /*) output_abs="$requested_output_path" ;;
+  *) output_abs="$repo_root/$requested_output_path" ;;
+esac
+
+output_dir="$(dirname "$output_abs")"
+mkdir -p "$output_dir"
+output_abs="$(cd "$output_dir" && pwd -P)/$(basename "$output_abs")"
+
+case "$output_abs" in
+  "$repo_root"/*) ;;
+  *)
+    echo "Error: output_path must stay inside repository: $requested_output_path" >&2
+    exit 1
+    ;;
+esac
+
+output_path="${output_abs#$repo_root/}"
+
+template_url="https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md"
+hook_name=".githooks/pre-commit"
+generated_at="$(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+branch_name="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "HEAD")"
+report_pathspec=":(exclude)$output_path"
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  base_head="$(git rev-parse HEAD)"
+  base_subject="$(git log -1 --pretty=%s)"
+  recent_commits="$(git log --oneline -n 5)"
+else
+  base_head="(no commits yet)"
+  base_subject="(initial commit)"
+  recent_commits="(no commits yet)"
+fi
+
+staged_name_status="$(git diff --cached --name-status --no-renames -- . "$report_pathspec")"
+staged_stat="$(git diff --cached --stat --no-renames -- . "$report_pathspec")"
+
+status_label() {
+  case "$1" in
+    A) printf '%s' "staged addition" ;;
+    M) printf '%s' "staged modification" ;;
+    D) printf '%s' "staged deletion" ;;
+    T) printf '%s' "staged type change" ;;
+    U) printf '%s' "staged unmerged path" ;;
+    *) printf '%s' "staged update" ;;
+  esac
+}
+
+render_files_changed() {
+  if [[ -z "$staged_name_status" ]]; then
+    cat <<EOF
+- No staged changes other than \`$output_path\`.
+EOF
+    return
+  fi
+
+  while IFS=$'\t' read -r status file_path; do
+    [[ -n "$file_path" ]] || continue
+    printf -- '- `%s`: %s.\n' "$file_path" "$(status_label "$status")"
+  done <<<"$staged_name_status"
+}
+
+{
+  cat <<EOF
+# Handoff
+
+このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
+テンプレート元: $template_url
+生成時刻: $generated_at
+生成フック: \`$hook_name\`
+
+## 1. Goal
+
+- \`$branch_name\` 上の staged changes を引き継ぐための handoff スナップショットです。
+- issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
+
+## 2. Current Status
+
+- \`docs/handoff.md\` は commit 前に生成され、同じ commit に含める前提です。
+- 基点の \`HEAD\`: \`$base_head\` (\`$base_subject\`)
+- このスナップショットは \`$output_path\` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
+
+## 3. Files Changed
+
+EOF
+  render_files_changed
+  cat <<EOF
+
+## 4. Branch / Commit
+
+- Branch: \`$branch_name\`
+- Base HEAD: \`$base_head\`
+- Recent commits:
+
+\`\`\`text
+$recent_commits
+\`\`\`
+
+## 5. Commands Run
+
+- \`git diff --cached --name-status --no-renames -- . ':(exclude)$output_path'\`: staged file list used for the summary below.
+- \`git diff --cached --stat --no-renames -- . ':(exclude)$output_path'\`: staged diff size summary.
+
+\`\`\`text
+${staged_stat:-No staged diff summary available.}
+\`\`\`
+
+## 6. Verification
+
+- この hook は git metadata だけを使ってレポートを生成します。
+- テストや手動確認の実施状況は自動判定しないため、必要ならここに追記してください。
+- commit 完了後の SHA はこの時点では未確定です。
+
+## 7. Risks / Blockers
+
+- 設計判断、チケット文脈、レビュー論点などの非 git 情報は自動では埋まりません。
+- 実行コマンドや検証結果を詳細に残したい場合は、commit 前に手動追記が必要です。
+
+## 8. Next Step
+
+- このファイルを確認し、必要なら Goal / Verification / Notes を補足する。
+- staged changes を commit する。
+- 次セッションでは \`docs/handoff.md\` を起点に差分と直近 commit を確認する。
+
+## 9. Notes For The Next Session
+
+- このレポートは commit 後ではなく commit 前に生成することで、handoff ファイル自身が次の handoff を生み続けるループを防いでいます。
+- report path は既定で \`$output_path\` を使い、必要に応じて引数で変更できます。履歴は git の file history で追跡します。
+- commit 後に自動生成を一時停止したい場合は \`KRUBY_SKIP_HANDOFF_HOOK=1\` を使ってください。
+EOF
+} >"$output_abs"
+
+git add -- "$output_path"
