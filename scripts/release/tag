@@ -4,6 +4,7 @@
 $LOAD_PATH.unshift(File.expand_path("../../kubernetes/lib", __dir__))
 
 require "optparse"
+require "open3"
 require "shellwords"
 require "kubernetes/version"
 require "kubernetes/release/changelog"
@@ -12,6 +13,16 @@ def run_command(*command)
   return if system(*command)
 
   raise Kubernetes::Release::Changelog::Error, "command failed: #{Shellwords.join(command)}"
+end
+
+def capture_command(*command)
+  output, status = Open3.capture2e(*command)
+  return output if status.success?
+
+  message = "command failed: #{Shellwords.join(command)}"
+  details = output.strip
+  message = "#{message}\n#{details}" unless details.empty?
+  raise Kubernetes::Release::Changelog::Error, message
 end
 
 def tracked_changes_present?(repo_root)
@@ -59,6 +70,12 @@ begin
 
   existing_tag = `git -C #{Shellwords.escape(options[:repo_root])} tag --list #{Shellwords.escape(tag_name)}`.strip
   raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} already exists" unless existing_tag.empty?
+
+  remote_tag = capture_command(
+    "git", "-C", options[:repo_root], "ls-remote", "--tags", "--refs",
+    options[:remote], "refs/tags/#{tag_name}"
+  ).strip
+  raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} already exists on #{options[:remote]}" unless remote_tag.empty?
 
   message = ["kruby #{options[:version]}", changelog.release_notes(options[:version])].join("\n\n")
   run_command("git", "-C", options[:repo_root], "tag", "-a", tag_name, "-m", message)

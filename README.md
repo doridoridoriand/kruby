@@ -12,7 +12,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 ## Release Tracking
 
 - User-visible changes are tracked in [CHANGELOG.md](CHANGELOG.md).
-- Release tags use the format `vX.Y.Z`.
+- Release tags use the format `v<version>` (for example `v1.35.0.4`).
 - Pushed release tags automatically publish a GitHub Release using the matching changelog section.
 
 ## Generation Policy

@@ -31,8 +31,9 @@ module Kubernetes
 
       def validate_release!(version:, tag: nil, require_empty_unreleased: false)
         errors = []
+        has_unreleased = include?("Unreleased")
 
-        errors << "missing Unreleased section in #{path}" unless include?("Unreleased")
+        errors << "missing Unreleased section in #{path}" unless has_unreleased
         errors << "missing CHANGELOG entry for #{version} in #{path}" unless include?(version)
 
         expected_tag = "v#{version}"
@@ -40,7 +41,7 @@ module Kubernetes
           errors << "release tag #{tag} does not match version #{version} (expected #{expected_tag})"
         end
 
-        if require_empty_unreleased && !unreleased_empty?
+        if require_empty_unreleased && has_unreleased && !unreleased_empty?
           errors << "Unreleased section must be empty before cutting #{expected_tag}"
         end
 

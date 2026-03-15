@@ -3,7 +3,7 @@
 All notable changes to `kruby` are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Release tags use the format `vX.Y.Z`, and the matching version section in this file is published as the GitHub Release body.
+Release tags use the format `v<version>` (for example `v1.35.0.4`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
 Historical releases published before this file was introduced are summarized as a baseline entry instead of being reconstructed commit-by-commit.
 
 ## [Unreleased]

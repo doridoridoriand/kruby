@@ -51,7 +51,7 @@ For changelog-driven releases and release-tag handling, use:
 - [CHANGELOG.md](CHANGELOG.md)
 - [docs/release-process.md](docs/release-process.md)
 
-Release tags must use `vX.Y.Z`, and the tag must match `kubernetes/lib/kubernetes/version.rb`.
+Release tags must use `v<version>` (for example `v1.35.0.4`), and the tag must match the numeric version in `kubernetes/lib/kubernetes/version.rb`.
 
 ## E2E Test Usage
 

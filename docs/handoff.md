@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-03-15 03:14:35 UTC
+生成時刻: 2026-03-15 03:22:23 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,26 +13,33 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `ab05f683c3702ad75b56f452d4ffedd808bc3f2d` (`chore: add spec kit scaffolding`)
+- 基点の `HEAD`: `965d9e272af67961c90405e87c66041cf72ed4b1` (`docs: add generated agent context`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `.kiro/specs/001-kind-e2e-tests/plan.md`: staged addition.
-- `AGENTS.md`: staged addition.
+- `.github/workflows/release.yml`: staged modification.
+- `CHANGELOG.md`: staged modification.
+- `CONTRIBUTING.md`: staged modification.
+- `README.md`: staged modification.
+- `docs/release-process.md`: staged modification.
+- `kubernetes/README.md`: staged modification.
+- `kubernetes/lib/kubernetes/release/changelog.rb`: staged modification.
+- `kubernetes/spec/release/changelog_spec.rb`: staged modification.
+- `scripts/release/tag`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `update-k8s-latest`
-- Base HEAD: `ab05f683c3702ad75b56f452d4ffedd808bc3f2d`
+- Base HEAD: `965d9e272af67961c90405e87c66041cf72ed4b1`
 - Recent commits:
 
 ```text
+965d9e2 docs: add generated agent context
 ab05f68 chore: add spec kit scaffolding
 4809376 fix: allow generic tmp paths in hook
 f7a0329 chore: automate handoff report generation
 172def8 release: 1.35.0.4
-9bf5a1f Fix managed kubeconfig reuse behavior
 ```
 
 ## 5. Commands Run
@@ -41,9 +48,16 @@ f7a0329 chore: automate handoff report generation
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- .kiro/specs/001-kind-e2e-tests/plan.md | 104 +++++++++++++++++++++++++++++++++
- AGENTS.md                              |  29 +++++++++
- 2 files changed, 133 insertions(+)
+ .github/workflows/release.yml                  | 17 ++++++++++---
+ CHANGELOG.md                                   |  2 +-
+ CONTRIBUTING.md                                |  2 +-
+ README.md                                      |  2 +-
+ docs/release-process.md                        | 16 ++++++------
+ kubernetes/README.md                           |  2 +-
+ kubernetes/lib/kubernetes/release/changelog.rb |  5 ++--
+ kubernetes/spec/release/changelog_spec.rb      | 35 ++++++++++++++++++++++++++
+ scripts/release/tag                            | 17 +++++++++++++
+ 9 files changed, 80 insertions(+), 18 deletions(-)
 ```
 
 ## 6. Verification

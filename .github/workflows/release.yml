@@ -40,7 +40,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           version="${GITHUB_REF_NAME#v}"
-          gh release create "${GITHUB_REF_NAME}" "kubernetes/kruby-${version}.gem" \
-            --verify-tag \
-            --title "kruby ${version}" \
-            --notes-file release-notes.md
+          asset="kubernetes/kruby-${version}.gem"
+
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release edit "${GITHUB_REF_NAME}" \
+              --title "kruby ${version}" \
+              --notes-file release-notes.md
+            gh release upload "${GITHUB_REF_NAME}" "${asset}" --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" "${asset}" \
+              --verify-tag \
+              --title "kruby ${version}" \
+              --notes-file release-notes.md
+          fi

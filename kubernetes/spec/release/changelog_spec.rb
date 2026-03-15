@@ -24,12 +24,21 @@ RSpec.describe Kubernetes::Release::Changelog do
         ### Added
         - Pending change
 
+        ## [1.2.2]
+
+        ### Changed
+        - Historical baseline
+
         ## [1.2.3] - 2026-03-15
 
         ### Fixed
         - Important bug
       MARKDOWN
       file.flush
+    end
+
+    it "returns the body for a historical version without a date label" do
+      expect(changelog.release_notes("1.2.2")).to eq("### Changed\n- Historical baseline")
     end
 
     it "returns the body for a released version" do
@@ -123,6 +132,32 @@ RSpec.describe Kubernetes::Release::Changelog do
         end.to raise_error(
           described_class::Error,
           "release tag v1.2.4 does not match version 1.2.3 (expected v1.2.3)"
+        )
+      end
+    end
+
+    context "when the Unreleased section is missing" do
+      let(:changelog_body) do
+        <<~MARKDOWN
+          # Changelog
+
+          ## [1.2.3]
+
+          ### Added
+          - Historical release
+        MARKDOWN
+      end
+
+      it "only reports the missing section error" do
+        expect do
+          changelog.validate_release!(
+            version: "1.2.3",
+            tag: "v1.2.3",
+            require_empty_unreleased: true
+          )
+        end.to raise_error(
+          described_class::Error,
+          "missing Unreleased section in #{file.path}"
         )
       end
     end
