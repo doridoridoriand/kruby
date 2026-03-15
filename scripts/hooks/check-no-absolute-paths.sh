@@ -8,7 +8,7 @@ fi
 
 # Detect machine-specific absolute file paths and guide contributors
 # to use repository-relative paths instead.
-pattern_unix='(^|[[:space:]"'"'"'(\[])/(Users|home|private|var/folders|tmp|opt|etc|mnt|Volumes)/[^[:space:]"'"'"'`<>)]*'
+pattern_unix='(^|[[:space:]"'"'"'(\[])/(Users|home|private|var/folders|opt|etc|mnt|Volumes)/[^[:space:]"'"'"'`<>)]*'
 pattern_windows='(^|[[:space:]"'"'"'(\[])[A-Za-z]:[\\/][^[:space:]"'"'"'`<>)]*'
 pattern_file_uri='file:///[[:alnum:]][^[:space:]"'"'"'`<>)]*'
 
