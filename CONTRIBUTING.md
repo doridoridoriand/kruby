@@ -24,13 +24,18 @@ If your change updates generated Kubernetes client artifacts, include the target
 This repository enforces repository-relative paths in committed text files.
 
 1. Install `pre-commit` (https://pre-commit.com/).
-2. Run:
+2. Enable the versioned git hooks:
 
 ```bash
-pre-commit install
+scripts/hooks/install-git-hooks.sh
 ```
 
-The hook blocks machine-specific absolute paths such as `/Users/...`, `/home/...`, `C:\...`, and `file:///...`.
+3. Optionally verify the `pre-commit` CLI is available so the configured hooks in `.pre-commit-config.yaml` also run from `.githooks/pre-commit`.
+
+The versioned pre-commit hook also generates `docs/handoff.md` from the staged diff before each commit and stages it in the same commit.
+This is intentionally done before commit finalization so the handoff report does not create a post-commit update loop.
+
+The hook blocks machine-specific absolute paths and `file:///` URIs.
 Use paths from project root instead (for example `specs/001-kind-e2e-tests/plan.md`).
 
 ## Kubernetes Version Upgrades

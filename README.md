@@ -63,6 +63,14 @@ For backward compatibility, `require 'kubernetes'` is also supported.
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on how to contribute.
 
+Before committing, enable the versioned git hooks:
+
+```bash
+scripts/hooks/install-git-hooks.sh
+```
+
+The pre-commit hook generates `docs/handoff.md` from the staged diff and stages it in the same commit.
+
 ## Code of conduct
 
 Participation in this repository is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
