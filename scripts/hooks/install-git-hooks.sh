@@ -4,6 +4,11 @@ set -euo pipefail
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
+if [[ ! -d .githooks ]]; then
+  echo "Error: .githooks directory not found at repo root." >&2
+  exit 1
+fi
+
 git config core.hooksPath .githooks
 
 cat <<'EOF'
