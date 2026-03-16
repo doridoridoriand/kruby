@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-03-15 03:30:05 UTC
+生成時刻: 2026-03-16 01:03:21 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,27 +13,26 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `9521f651c9f328e095216e238ba31356499d8502` (`fix: address release review feedback`)
+- 基点の `HEAD`: `1f8b7ea39075b6dfc343943655136243055408de` (`fix: harden hook safety checks`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `scripts/hooks/check-no-absolute-paths.sh`: staged modification.
-- `scripts/hooks/generate-handoff-report`: staged modification.
-- `scripts/hooks/install-git-hooks.sh`: staged modification.
+- `kubernetes/lib/kubernetes/watch.rb`: staged modification.
+- `kubernetes/spec/watch_spec.rb`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `update-k8s-latest`
-- Base HEAD: `9521f651c9f328e095216e238ba31356499d8502`
+- Base HEAD: `1f8b7ea39075b6dfc343943655136243055408de`
 - Recent commits:
 
 ```text
+1f8b7ea fix: harden hook safety checks
 9521f65 fix: address release review feedback
 965d9e2 docs: add generated agent context
 ab05f68 chore: add spec kit scaffolding
 4809376 fix: allow generic tmp paths in hook
-f7a0329 chore: automate handoff report generation
 ```
 
 ## 5. Commands Run
@@ -42,10 +41,9 @@ f7a0329 chore: automate handoff report generation
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- scripts/hooks/check-no-absolute-paths.sh |  2 +-
- scripts/hooks/generate-handoff-report    | 27 ++++++++++++++++++++++-----
- scripts/hooks/install-git-hooks.sh       |  5 +++++
- 3 files changed, 28 insertions(+), 6 deletions(-)
+ kubernetes/lib/kubernetes/watch.rb |  6 +++++-
+ kubernetes/spec/watch_spec.rb      | 33 +++++++++++++++++++++++++++++++++
+ 2 files changed, 38 insertions(+), 1 deletion(-)
 ```
 
 ## 6. Verification
