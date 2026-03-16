@@ -10,6 +10,8 @@ module SpecSupport
   module E2E
     class ClusterManager
       DEFAULT_KUBECONFIG_DIR = File.expand_path("../../../tmp/e2e/kubeconfig", __dir__)
+      CREATE_RETRY_ATTEMPTS = 3
+      CREATE_RETRY_INTERVAL_SECONDS = 1
 
       class CommandError < StandardError
         attr_reader :result
@@ -82,7 +84,9 @@ module SpecSupport
         command += ["--config", @kind_config_path] if @kind_config_path && !@kind_config_path.empty?
 
         FileUtils.mkdir_p(File.dirname(kubeconfig_path)) if kubeconfig_path && !kubeconfig_path.empty?
-        run_command(command)
+        with_create_retry do
+          run_command(command)
+        end
         @created = true
         @reused_existing_cluster = false
         self
@@ -143,6 +147,22 @@ module SpecSupport
         [self.class.default_kubeconfig_path(cluster_name: cluster_name), true]
       end
 
+      def with_create_retry(attempts: CREATE_RETRY_ATTEMPTS)
+        current_attempt = 0
+
+        begin
+          current_attempt += 1
+          yield
+        rescue CommandError => e
+          raise unless retryable_create_error?(e)
+          raise if current_attempt >= attempts
+
+          delete
+          sleep CREATE_RETRY_INTERVAL_SECONDS
+          retry
+        end
+      end
+
       def ensure_managed_kubeconfig!
         return unless @managed_kubeconfig_path && kubeconfig_path && !kubeconfig_path.empty?
         return if File.file?(kubeconfig_path) && File.readable?(kubeconfig_path)
@@ -164,6 +184,11 @@ module SpecSupport
         return result if allow_failure || result.success?
 
         raise CommandError.new("command failed: #{result.command}\n#{stderr}", result)
+      end
+
+      def retryable_create_error?(error)
+        stderr = error.result&.stderr.to_s
+        stderr.include?("failed to bind host port") || stderr.include?("address already in use")
       end
     end
   end
