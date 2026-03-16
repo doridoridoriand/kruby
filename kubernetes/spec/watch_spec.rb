@@ -109,6 +109,38 @@ describe 'WatchClient' do
     expect(result[1]['baz']).to eq('blah')
   end
 
+  it 'should propagate JSON parser errors raised by the callback' do
+    config = Kubernetes::Configuration.new
+    config.scheme = 'http'
+    config.host = 'k8s.io:8080'
+    client = Kubernetes::ApiClient.new(config)
+    user_agent = client.default_headers['User-Agent']
+    body = "{ \"foo\": \"bar\" }\n{ \"payload\": \"not-json\" }\n"
+
+    WebMock.stub_request(:get, 'http://k8s.io:8080/some/path?watch=true')
+           .with(
+             headers: {
+               'Authorization' => '',
+               'Content-Type' => 'application/json',
+               'Expect' => '',
+               'User-Agent' => user_agent
+             }
+           )
+           .to_return(status: 200, body: body, headers: {})
+
+    watch = Kubernetes::Watch.new(client)
+    result = []
+
+    expect do
+      watch.connect('/some/path', nil) do |obj|
+        result << obj['foo'] if obj['foo']
+        JSON.parse(obj['payload']) if obj['payload']
+      end
+    end.to raise_error(JSON::ParserError)
+
+    expect(result).to eq(['bar'])
+  end
+
   it 'should parse chunks correctly' do
     client = Kubernetes::Watch.new(nil)
     last = ''

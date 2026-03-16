@@ -38,10 +38,13 @@ module Kubernetes
         last, pieces = split_lines(last, chunk)
         pieces.each do |part|
           begin
-            yield JSON.parse(part)
+            event = JSON.parse(part)
           rescue JSON::ParserError => e
             warn "Failed to parse watch event: #{e.message}. Raw event: #{part.inspect}"
+            next
           end
+
+          yield event
         end
       end
       request.run
