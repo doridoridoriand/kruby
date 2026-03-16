@@ -1,4 +1,5 @@
 require "bundler/gem_tasks"
+require "shellwords"
 
 begin
   require 'rspec/core/rake_task'
@@ -10,6 +11,7 @@ rescue LoadError
 end
 
 e2e_scripts_dir = File.expand_path('../scripts/e2e', __dir__)
+release_scripts_dir = File.expand_path('../scripts/release', __dir__)
 
 run_script = lambda do |script_name, env = {}, *args|
   script_path = File.join(e2e_scripts_dir, script_name)
@@ -17,6 +19,15 @@ run_script = lambda do |script_name, env = {}, *args|
 
   success = system(env, script_path, *args)
   command_display = ([script_path] + args).join(' ')
+  raise "command failed: #{command_display}" unless success
+end
+
+run_release_script = lambda do |script_name, *args|
+  script_path = File.join(release_scripts_dir, script_name)
+  raise "missing script: #{script_path}" unless File.executable?(script_path)
+
+  success = system(script_path, *args)
+  command_display = Shellwords.join([script_path] + args)
   raise "command failed: #{command_display}" unless success
 end
 
@@ -96,3 +107,31 @@ namespace :e2e do
     run_script.call('generate-coverage-inventory', {}, *command_args)
   end
 end
+
+namespace :release do
+  desc 'Validate CHANGELOG.md and version metadata for a release'
+  task :check, [:version] do |_task, args|
+    version = args[:version].to_s.strip
+    command_args = ['--require-empty-unreleased']
+    command_args += ['--version', version] unless version.empty?
+    run_release_script.call('check', *command_args)
+  end
+
+  desc 'Print release notes for the given version or current gem version'
+  task :notes, [:version] do |_task, args|
+    version = args[:version].to_s.strip
+    command_args = []
+    command_args += ['--version', version] unless version.empty?
+    run_release_script.call('notes', *command_args)
+  end
+
+  desc 'Create an annotated git tag for the current gem version'
+  task :tag do
+    run_release_script.call('tag')
+  end
+end
+
+Rake::Task['release'].clear if Rake::Task.task_defined?('release')
+
+desc 'Validate release metadata and create an annotated git tag'
+task release: 'release:tag'

@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../../kubernetes/lib", __dir__))
+
+require "optparse"
+require "open3"
+require "shellwords"
+require "kubernetes/version"
+require "kubernetes/release/changelog"
+
+def run_command(*command)
+  return if system(*command)
+
+  raise Kubernetes::Release::Changelog::Error, "command failed: #{Shellwords.join(command)}"
+end
+
+def capture_command(*command)
+  output, status = Open3.capture2e(*command)
+  return output if status.success?
+
+  message = "command failed: #{Shellwords.join(command)}"
+  details = output.strip
+  message = "#{message}\n#{details}" unless details.empty?
+  raise Kubernetes::Release::Changelog::Error, message
+end
+
+def tracked_changes_present?(repo_root)
+  !system("git", "-C", repo_root, "diff", "--quiet") ||
+    !system("git", "-C", repo_root, "diff", "--cached", "--quiet")
+end
+
+options = {
+  changelog: File.expand_path("../../CHANGELOG.md", __dir__),
+  remote: "origin",
+  repo_root: File.expand_path("../..", __dir__),
+  version: Kubernetes::VERSION
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: scripts/release/tag [options]"
+
+  opts.on("--version VERSION", "Version to tag (default: current gem version)") do |value|
+    options[:version] = value
+  end
+
+  opts.on("--changelog PATH", "Path to CHANGELOG.md") do |value|
+    options[:changelog] = value
+  end
+
+  opts.on("--remote REMOTE", "Remote name shown in push instructions (default: origin)") do |value|
+    options[:remote] = value
+  end
+end
+
+begin
+  parser.parse!
+
+  tag_name = "v#{options[:version]}"
+  changelog = Kubernetes::Release::Changelog.new(options[:changelog])
+  changelog.validate_release!(
+    version: options[:version],
+    tag: tag_name,
+    require_empty_unreleased: true
+  )
+
+  if tracked_changes_present?(options[:repo_root])
+    raise Kubernetes::Release::Changelog::Error, "tracked changes must be committed before tagging #{tag_name}"
+  end
+
+  existing_tag = `git -C #{Shellwords.escape(options[:repo_root])} tag --list #{Shellwords.escape(tag_name)}`.strip
+  raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} already exists" unless existing_tag.empty?
+
+  remote_tag = capture_command(
+    "git", "-C", options[:repo_root], "ls-remote", "--tags", "--refs",
+    options[:remote], "refs/tags/#{tag_name}"
+  ).strip
+  raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} already exists on #{options[:remote]}" unless remote_tag.empty?
+
+  message = ["kruby #{options[:version]}", changelog.release_notes(options[:version])].join("\n\n")
+  run_command("git", "-C", options[:repo_root], "tag", "-a", tag_name, "-m", message)
+
+  puts "Created #{tag_name}"
+  puts "Push the release commit, then publish the tag:"
+  puts "  git push #{options[:remote]} HEAD"
+  puts "  git push #{options[:remote]} #{tag_name}"
+rescue OptionParser::ParseError, Kubernetes::Release::Changelog::Error => e
+  warn e.message
+  exit 1
+end

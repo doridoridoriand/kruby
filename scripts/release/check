@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../../kubernetes/lib", __dir__))
+
+require "optparse"
+require "kubernetes/version"
+require "kubernetes/release/changelog"
+
+options = {
+  changelog: File.expand_path("../../CHANGELOG.md", __dir__),
+  require_empty_unreleased: false,
+  tag: nil,
+  version: Kubernetes::VERSION
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: scripts/release/check [options]"
+
+  opts.on("--version VERSION", "Version to validate (default: current gem version)") do |value|
+    options[:version] = value
+  end
+
+  opts.on("--tag TAG", "Expected git tag (for example: v1.35.0.4)") do |value|
+    options[:tag] = value
+  end
+
+  opts.on("--changelog PATH", "Path to CHANGELOG.md") do |value|
+    options[:changelog] = value
+  end
+
+  opts.on("--require-empty-unreleased", "Require Unreleased to be empty before release") do
+    options[:require_empty_unreleased] = true
+  end
+end
+
+begin
+  parser.parse!
+
+  changelog = Kubernetes::Release::Changelog.new(options[:changelog])
+  changelog.validate_release!(
+    version: options[:version],
+    tag: options[:tag],
+    require_empty_unreleased: options[:require_empty_unreleased]
+  )
+
+  status = "Release metadata OK for #{options[:version]}"
+  status += " (#{options[:tag]})" if options[:tag]
+  puts status
+rescue OptionParser::ParseError, Kubernetes::Release::Changelog::Error => e
+  warn e.message
+  exit 1
+end

@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../../kubernetes/lib", __dir__))
+
+require "optparse"
+require "kubernetes/version"
+require "kubernetes/release/changelog"
+
+options = {
+  changelog: File.expand_path("../../CHANGELOG.md", __dir__),
+  version: Kubernetes::VERSION
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: scripts/release/notes [options]"
+
+  opts.on("--version VERSION", "Version to render (default: current gem version)") do |value|
+    options[:version] = value
+  end
+
+  opts.on("--tag TAG", "Release tag to render (for example: v1.35.0.4)") do |value|
+    options[:version] = value.sub(/\Av/, "")
+  end
+
+  opts.on("--changelog PATH", "Path to CHANGELOG.md") do |value|
+    options[:changelog] = value
+  end
+end
+
+begin
+  parser.parse!
+
+  changelog = Kubernetes::Release::Changelog.new(options[:changelog])
+  puts changelog.release_notes(options[:version])
+rescue OptionParser::ParseError, Kubernetes::Release::Changelog::Error => e
+  warn e.message
+  exit 1
+end

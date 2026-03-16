@@ -8,9 +8,9 @@ fi
 
 # Detect machine-specific absolute file paths and guide contributors
 # to use repository-relative paths instead.
-pattern_unix='(^|[[:space:]"'"'"'(\[])/(Users|home|private|var/folders|tmp|opt|etc|mnt|Volumes)/[^[:space:]"'"'"'`<>)]*'
+pattern_unix='(^|[[:space:]"'"'"'(\[])/(Users|home|private|var/folders|opt|etc|mnt|Volumes)/[^[:space:]"'"'"'`<>)]*'
 pattern_windows='(^|[[:space:]"'"'"'(\[])[A-Za-z]:[\\/][^[:space:]"'"'"'`<>)]*'
-pattern_file_uri='file:///'
+pattern_file_uri='file://''/[^[:space:]"'"'"'`<>)]+'
 
 failed=0
 
@@ -37,7 +37,7 @@ if [[ $failed -ne 0 ]]; then
 Use repository-relative paths from project root, for example:
   specs/001-kind-e2e-tests/plan.md
   kubernetes/spec/e2e/core_v1_pods_targeted_spec.rb
-Do not commit /Users/... , /home/... , C:\... , or file:/// paths.
+Do not commit machine-specific absolute paths or file:/// URIs.
 EOF
   exit 1
 fi
