@@ -19,7 +19,7 @@ parser = OptionParser.new do |opts|
     options[:version] = value
   end
 
-  opts.on("--tag TAG", "Release tag to render (for example: v1.35.0.4)") do |value|
+  opts.on("--tag TAG", "Release tag to render (for example: v1.35.0.5)") do |value|
     options[:version] = value.sub(/\Av/, "")
   end
 

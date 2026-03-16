@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-03-16 01:28:17 UTC
+生成時刻: 2026-03-16 01:33:29 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,26 +13,33 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `9a3e7b367ce711e9eea6dfd3f2fa638366bb4eea` (`fix: preserve callback parser errors in watch`)
+- 基点の `HEAD`: `d5dcfdb87da0d3875097afc6dd0d5d0172f33ee2` (`fix: retry kind bootstrap on port conflicts`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/e2e/cluster_manager_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/cluster_manager.rb`: staged modification.
+- `CHANGELOG.md`: staged modification.
+- `CONTRIBUTING.md`: staged modification.
+- `README.md`: staged modification.
+- `docs/release-process.md`: staged modification.
+- `kubernetes/Gemfile.lock`: staged modification.
+- `kubernetes/README.md`: staged modification.
+- `kubernetes/lib/kubernetes/version.rb`: staged modification.
+- `scripts/release/check`: staged modification.
+- `scripts/release/notes`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `update-k8s-latest`
-- Base HEAD: `9a3e7b367ce711e9eea6dfd3f2fa638366bb4eea`
+- Base HEAD: `d5dcfdb87da0d3875097afc6dd0d5d0172f33ee2`
 - Recent commits:
 
 ```text
+d5dcfdb fix: retry kind bootstrap on port conflicts
 9a3e7b3 fix: preserve callback parser errors in watch
 b8c51e0 fix: tolerate malformed watch events
 1f8b7ea fix: harden hook safety checks
 9521f65 fix: address release review feedback
-965d9e2 docs: add generated agent context
 ```
 
 ## 5. Commands Run
@@ -41,9 +48,16 @@ b8c51e0 fix: tolerate malformed watch events
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/e2e/cluster_manager_spec.rb    | 25 ++++++++++++++++++++++++
- kubernetes/spec/support/e2e/cluster_manager.rb | 27 +++++++++++++++++++++++++-
- 2 files changed, 51 insertions(+), 1 deletion(-)
+ CHANGELOG.md                         | 13 ++++++++++++-
+ CONTRIBUTING.md                      |  2 +-
+ README.md                            | 12 ++++++------
+ docs/release-process.md              | 10 +++++-----
+ kubernetes/Gemfile.lock              |  2 +-
+ kubernetes/README.md                 | 10 +++++-----
+ kubernetes/lib/kubernetes/version.rb |  2 +-
+ scripts/release/check                |  2 +-
+ scripts/release/notes                |  2 +-
+ 9 files changed, 33 insertions(+), 22 deletions(-)
 ```
 
 ## 6. Verification

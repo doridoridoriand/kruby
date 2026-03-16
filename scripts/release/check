@@ -21,7 +21,7 @@ parser = OptionParser.new do |opts|
     options[:version] = value
   end
 
-  opts.on("--tag TAG", "Expected git tag (for example: v1.35.0.4)") do |value|
+  opts.on("--tag TAG", "Expected git tag (for example: v1.35.0.5)") do |value|
     options[:tag] = value
   end
 
