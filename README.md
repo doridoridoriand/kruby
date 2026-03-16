@@ -12,7 +12,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 ## Release Tracking
 
 - User-visible changes are tracked in [CHANGELOG.md](CHANGELOG.md).
-- Release tags use the format `v<version>` (for example `v1.35.0.4`).
+- Release tags use the format `v<version>` (for example `v1.35.0.5`).
 - Pushed release tags automatically publish a GitHub Release using the matching changelog section.
 
 ## Generation Policy
@@ -24,11 +24,11 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.35 | 1.35.0.4 |
-| 1.32 | release-1.35 | 1.35.0.4 |
-| 1.33 | release-1.35 | 1.35.0.4 |
-| 1.34 | release-1.35 | 1.35.0.4 |
-| 1.35 | release-1.35 | 1.35.0.4 |
+| 1.31 | release-1.35 | 1.35.0.5 |
+| 1.32 | release-1.35 | 1.35.0.5 |
+| 1.33 | release-1.35 | 1.35.0.5 |
+| 1.34 | release-1.35 | 1.35.0.5 |
+| 1.35 | release-1.35 | 1.35.0.5 |
 
 ## Requirements
 

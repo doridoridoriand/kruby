@@ -3,12 +3,23 @@
 All notable changes to `kruby` are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Release tags use the format `v<version>` (for example `v1.35.0.4`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
+Release tags use the format `v<version>` (for example `v1.35.0.5`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
 Historical releases published before this file was introduced are summarized as a baseline entry instead of being reconstructed commit-by-commit.
 
 ## [Unreleased]
 
 - Nothing yet.
+
+## [1.35.0.5] - 2026-03-16
+
+### Fixed
+
+- Hardened `Kubernetes::Watch` so malformed watch events are skipped with a warning instead of aborting the stream.
+- Preserved caller-visible `JSON::ParserError` exceptions from watch callbacks instead of swallowing them as malformed watch events.
+
+### Changed
+
+- Retried Kind cluster bootstrap when Docker host port allocation collides during multi-version E2E runs.
 
 ## [1.35.0.4] - 2026-03-15
 

@@ -97,6 +97,31 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
         ENV["HOME"] = original_home
       end
     end
+
+    it "retries kind cluster creation when docker host port binding collides" do
+      manager = described_class.new(mode: "full", kubernetes_version: "1.33", reuse_cluster: false)
+      port_conflict_result = described_class::CommandResult.new(
+        command: "kind create cluster",
+        status: 125,
+        stdout: "",
+        stderr: "docker: Error response from daemon: failed to bind host port 127.0.0.1:61424/tcp: address already in use.\n"
+      )
+      port_conflict_error = described_class::CommandError.new("command failed", port_conflict_result)
+      call_count = 0
+
+      allow(manager).to receive(:run_command) do
+        call_count += 1
+        raise port_conflict_error if call_count == 1
+
+        success_result
+      end
+      allow(manager).to receive(:sleep)
+
+      manager.create
+
+      expect(manager).to have_received(:run_command).exactly(3).times
+      expect(manager).to have_received(:sleep).with(described_class::CREATE_RETRY_INTERVAL_SECONDS).once
+    end
   end
 
   describe "#delete" do
