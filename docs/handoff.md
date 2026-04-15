@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-04-15 23:15:41 UTC
+生成時刻: 2026-04-15 23:29:54 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,26 +13,25 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `a3ede201ee24adfd077dab9a6ae256e3f28bb722` (`Merge pull request #22 from doridoridoriand/dependabot/bundler/kubernetes/addressable-2.9.0`)
+- 基点の `HEAD`: `253b9b5419a738f8c2aeae707c3e3b43ff07b3c5` (`release: 1.35.0.6`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `CHANGELOG.md`: staged modification.
-- `kubernetes/lib/kubernetes/version.rb`: staged modification.
+- `kubernetes/Gemfile.lock`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `master`
-- Base HEAD: `a3ede201ee24adfd077dab9a6ae256e3f28bb722`
+- Base HEAD: `253b9b5419a738f8c2aeae707c3e3b43ff07b3c5`
 - Recent commits:
 
 ```text
+253b9b5 release: 1.35.0.6
 a3ede20 Merge pull request #22 from doridoridoriand/dependabot/bundler/kubernetes/addressable-2.9.0
 ae794fd chore(deps-dev): bump addressable from 2.8.8 to 2.9.0 in /kubernetes
 9179af0 Merge pull request #21 from doridoridoriand/update-k8s-latest
 3a6ebc3 release: 1.35.0.5
-d5dcfdb fix: retry kind bootstrap on port conflicts
 ```
 
 ## 5. Commands Run
@@ -41,9 +40,8 @@ d5dcfdb fix: retry kind bootstrap on port conflicts
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- CHANGELOG.md                         | 6 ++++++
- kubernetes/lib/kubernetes/version.rb | 2 +-
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ kubernetes/Gemfile.lock | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
 ## 6. Verification
