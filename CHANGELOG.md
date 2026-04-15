@@ -10,6 +10,12 @@ Historical releases published before this file was introduced are summarized as 
 
 - Nothing yet.
 
+## [1.35.0.6] - 2026-04-16
+
+### Changed
+
+- Updated dependency lockfiles in `kubernetes/` to include `addressable` 2.9.0 (and `public_suffix` 7.0.5), pulling in upstream ReDoS remediation.
+
 ## [1.35.0.5] - 2026-03-16
 
 ### Fixed
