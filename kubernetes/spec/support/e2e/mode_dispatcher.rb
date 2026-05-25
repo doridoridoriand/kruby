@@ -3,6 +3,9 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/networking_v1_ingress"
+require_relative "targets/networking_v1_network_policy"
+require_relative "targets/networking_v1_ingress_class"
 require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
 require_relative "targets/batch_v1_jobs"
@@ -37,7 +40,8 @@ module SpecSupport
       API_GROUP_ORDER = {
         "core" => 10,
         "apps" => 20,
-        "batch" => 30
+        "batch" => 30,
+        "networking.k8s.io" => 40
       }.freeze
 
       attr_reader :target_catalog
@@ -57,6 +61,9 @@ module SpecSupport
         Targets::CoreV1Services.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
+        Targets::NetworkingV1Ingress.register!(catalog)
+        Targets::NetworkingV1NetworkPolicy.register!(catalog)
+        Targets::NetworkingV1IngressClass.register!(catalog)
         catalog
       end
 

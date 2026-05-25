@@ -199,6 +199,12 @@ module SpecSupport
           execute_deployment_operation(operation, namespace: namespace, cleanup: cleanup)
         when %w[batch v1 jobs]
           execute_job_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["networking.k8s.io", "v1", "ingresses"]
+          execute_ingress_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["networking.k8s.io", "v1", "network_policies"]
+          execute_network_policy_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["networking.k8s.io", "v1", "ingressclasses"]
+          execute_ingress_class_operation(operation, namespace: namespace, cleanup: cleanup)
         else
           raise UnsupportedTargetError, "no executor registered for #{parsed_target.fetch(:id)}"
         end
@@ -440,6 +446,182 @@ module SpecSupport
         name
       end
 
+      def execute_ingress_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::NetworkingV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          ingress = api.read_namespaced_ingress(name, namespace)
+          assert_resource_name!(ingress, name)
+        when "get"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          ingress = api.read_namespaced_ingress(name, namespace)
+          assert_resource_name!(ingress, name)
+        when "list"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_ingress(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_ingress(name, namespace, [
+                                          {
+                                            op: "add",
+                                            path: "/metadata/labels/e2e-patched",
+                                            value: "true"
+                                          }
+                                        ])
+          ingress = api.read_namespaced_ingress(name, namespace)
+          labels = resource_labels(ingress)
+          raise "patch verification failed for ingress #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            ingress = api.read_namespaced_ingress(name, namespace)
+            api.replace_namespaced_ingress(
+              name,
+              namespace,
+              with_updated_label(ingress, key: "e2e-updated", value: "true")
+            )
+          end
+          ingress = api.read_namespaced_ingress(name, namespace)
+          labels = resource_labels(ingress)
+          raise "update verification failed for ingress #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_ingress(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_ingress(name, namespace)
+          wait_for_resource_absence!("ingress #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_ingress(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for networking.k8s.io/v1/ingresses"
+        end
+      end
+
+      def execute_network_policy_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::NetworkingV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          policy = api.read_namespaced_network_policy(name, namespace)
+          assert_resource_name!(policy, name)
+        when "get"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          policy = api.read_namespaced_network_policy(name, namespace)
+          assert_resource_name!(policy, name)
+        when "list"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_network_policy(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_network_policy(name, namespace, [
+                                                  {
+                                                    op: "add",
+                                                    path: "/metadata/labels/e2e-patched",
+                                                    value: "true"
+                                                  }
+                                                ])
+          policy = api.read_namespaced_network_policy(name, namespace)
+          labels = resource_labels(policy)
+          raise "patch verification failed for networkpolicy #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            policy = api.read_namespaced_network_policy(name, namespace)
+            api.replace_namespaced_network_policy(
+              name,
+              namespace,
+              with_updated_label(policy, key: "e2e-updated", value: "true")
+            )
+          end
+          policy = api.read_namespaced_network_policy(name, namespace)
+          labels = resource_labels(policy)
+          raise "update verification failed for networkpolicy #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_network_policy(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_network_policy(name, namespace)
+          wait_for_resource_absence!("networkpolicy #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_network_policy(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for networking.k8s.io/v1/network_policies"
+        end
+      end
+
+      def execute_ingress_class_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::NetworkingV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          ingress_class = api.read_ingress_class(name)
+          assert_resource_name!(ingress_class, name)
+        when "get"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          ingress_class = api.read_ingress_class(name)
+          assert_resource_name!(ingress_class, name)
+        when "list"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_ingress_class
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          api.patch_ingress_class(name, [
+                                      {
+                                        op: "add",
+                                        path: "/metadata/labels/e2e-patched",
+                                        value: "true"
+                                      }
+                                    ])
+          ingress_class = api.read_ingress_class(name)
+          labels = resource_labels(ingress_class)
+          raise "patch verification failed for ingressclass #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            ingress_class = api.read_ingress_class(name)
+            api.replace_ingress_class(
+              name,
+              with_updated_label(ingress_class, key: "e2e-updated", value: "true")
+            )
+          end
+          ingress_class = api.read_ingress_class(name)
+          labels = resource_labels(ingress_class)
+          raise "update verification failed for ingressclass #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_ingress_class(api, namespace: namespace, cleanup: cleanup)
+          api.delete_ingress_class(name)
+          wait_for_resource_absence!("ingressclass #{name}") do
+            resource_present? { api.read_ingress_class(name) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for networking.k8s.io/v1/ingressclasses"
+        end
+      end
+
+      def seed_ingress(api, namespace:, cleanup:)
+        name = resource_name("ingress")
+        api.create_namespaced_ingress(namespace, Factories.ingress(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "ingress", name: name)
+        name
+      end
+
+      def seed_network_policy(api, namespace:, cleanup:)
+        name = resource_name("netpol")
+        api.create_namespaced_network_policy(namespace, Factories.network_policy(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "networkpolicy", name: name)
+        name
+      end
+
+      def seed_ingress_class(api, namespace:, cleanup:)
+        name = resource_name("ingressclass")
+        api.create_ingress_class(Factories.ingress_class(name: name, labels: base_labels(name)))
+        cleanup.register { api.delete_ingress_class(name) rescue nil }
+        name
+      end
+
       def base_labels(name)
         {
           "app.kubernetes.io/name" => "kruby-e2e",
@@ -602,6 +784,24 @@ module SpecSupport
         when ["batch", "jobs", "patch"] then "BatchV1Api#patch_namespaced_job"
         when ["batch", "jobs", "delete"] then "BatchV1Api#delete_namespaced_job"
         when ["batch", "jobs", "watch"] then "BatchV1Api#watch_namespaced_job"
+        when ["networking.k8s.io", "ingresses", "create"] then "NetworkingV1Api#create_namespaced_ingress"
+        when ["networking.k8s.io", "ingresses", "get"] then "NetworkingV1Api#read_namespaced_ingress"
+        when ["networking.k8s.io", "ingresses", "list"] then "NetworkingV1Api#list_namespaced_ingress"
+        when ["networking.k8s.io", "ingresses", "update"] then "NetworkingV1Api#replace_namespaced_ingress"
+        when ["networking.k8s.io", "ingresses", "patch"] then "NetworkingV1Api#patch_namespaced_ingress"
+        when ["networking.k8s.io", "ingresses", "delete"] then "NetworkingV1Api#delete_namespaced_ingress"
+        when ["networking.k8s.io", "network_policies", "create"] then "NetworkingV1Api#create_namespaced_network_policy"
+        when ["networking.k8s.io", "network_policies", "get"] then "NetworkingV1Api#read_namespaced_network_policy"
+        when ["networking.k8s.io", "network_policies", "list"] then "NetworkingV1Api#list_namespaced_network_policy"
+        when ["networking.k8s.io", "network_policies", "update"] then "NetworkingV1Api#replace_namespaced_network_policy"
+        when ["networking.k8s.io", "network_policies", "patch"] then "NetworkingV1Api#patch_namespaced_network_policy"
+        when ["networking.k8s.io", "network_policies", "delete"] then "NetworkingV1Api#delete_namespaced_network_policy"
+        when ["networking.k8s.io", "ingressclasses", "create"] then "NetworkingV1Api#create_ingress_class"
+        when ["networking.k8s.io", "ingressclasses", "get"] then "NetworkingV1Api#read_ingress_class"
+        when ["networking.k8s.io", "ingressclasses", "list"] then "NetworkingV1Api#list_ingress_class"
+        when ["networking.k8s.io", "ingressclasses", "update"] then "NetworkingV1Api#replace_ingress_class"
+        when ["networking.k8s.io", "ingressclasses", "patch"] then "NetworkingV1Api#patch_ingress_class"
+        when ["networking.k8s.io", "ingressclasses", "delete"] then "NetworkingV1Api#delete_ingress_class"
         else
           nil
         end
