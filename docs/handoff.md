@@ -2,36 +2,36 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-04-15 23:29:54 UTC
+生成時刻: 2026-05-25 04:27:33 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `master` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `HEAD` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `253b9b5419a738f8c2aeae707c3e3b43ff07b3c5` (`release: 1.35.0.6`)
+- 基点の `HEAD`: `65b86713b09d881c32d54a61c232cb3bc4c41636` (`test: add unit tests for ConfigError (#28)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/Gemfile.lock`: staged modification.
+- No staged changes other than `docs/handoff.md`.
 
 ## 4. Branch / Commit
 
-- Branch: `master`
-- Base HEAD: `253b9b5419a738f8c2aeae707c3e3b43ff07b3c5`
+- Branch: `HEAD`
+- Base HEAD: `65b86713b09d881c32d54a61c232cb3bc4c41636`
 - Recent commits:
 
 ```text
+65b8671 test: add unit tests for ConfigError (#28)
+f6bca81 Merge pull request #23 from doridoridoriand/release/1.36.0.1
+3f73ecf release: 1.36.0.1
+4afe686 chore: sync lockfile with kruby 1.35.0.6
 253b9b5 release: 1.35.0.6
-a3ede20 Merge pull request #22 from doridoridoriand/dependabot/bundler/kubernetes/addressable-2.9.0
-ae794fd chore(deps-dev): bump addressable from 2.8.8 to 2.9.0 in /kubernetes
-9179af0 Merge pull request #21 from doridoridoriand/update-k8s-latest
-3a6ebc3 release: 1.35.0.5
 ```
 
 ## 5. Commands Run
@@ -40,8 +40,7 @@ ae794fd chore(deps-dev): bump addressable from 2.8.8 to 2.9.0 in /kubernetes
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/Gemfile.lock | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+No staged diff summary available.
 ```
 
 ## 6. Verification
