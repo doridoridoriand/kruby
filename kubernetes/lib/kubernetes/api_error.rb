@@ -31,6 +31,7 @@ module Kubernetes
           instance_variable_set "@#{k}", v
         end
       else
+        @message = arg
         super arg
       end
     end
@@ -42,8 +43,7 @@ module Kubernetes
 
     def message
       if @message.nil?
-        msg = super() || ""
-        msg = "Error message: the server returns an error" if msg.empty?
+        msg = "Error message: the server returns an error"
       else
         msg = @message
       end
