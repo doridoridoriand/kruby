@@ -11,7 +11,7 @@ module SpecSupport
             catalog.register(
               api_group: "core",
               version: "v1",
-              resource: "configmap",
+              resource: "config-maps",
               operation: operation,
               namespace_scoped: true
             )

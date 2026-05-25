@@ -10,12 +10,12 @@ RSpec.describe "full mode core/v1 config maps coverage" do
     selection = dispatcher.dispatch(context)
 
     expected_crud = %w[create get list update patch delete].map do |op|
-      "core/v1/configmap:#{op}"
+      "core/v1/config-maps:#{op}"
     end
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected_crud)
-    expect(selection.resolved_targets.index("core/v1/configmap:create"))
-      .to be < selection.resolved_targets.index("core/v1/configmap:delete")
+    expect(selection.resolved_targets.index("core/v1/config-maps:create"))
+      .to be < selection.resolved_targets.index("core/v1/config-maps:delete")
   end
 end
