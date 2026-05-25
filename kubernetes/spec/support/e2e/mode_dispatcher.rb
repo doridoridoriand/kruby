@@ -7,6 +7,7 @@ require_relative "targets/apps_v1_deployments"
 require_relative "targets/batch_v1_jobs"
 require_relative "targets/core_v1_config_maps"
 require_relative "targets/core_v1_pods"
+require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_services"
 
 module SpecSupport
@@ -48,6 +49,7 @@ module SpecSupport
         catalog = TargetCatalog.new
         Targets::CoreV1ConfigMaps.register!(catalog)
         Targets::CoreV1Pods.register!(catalog)
+        Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
