@@ -201,7 +201,7 @@ module SpecSupport
           execute_job_operation(operation, namespace: namespace, cleanup: cleanup)
         when ["networking.k8s.io", "v1", "ingresses"]
           execute_ingress_operation(operation, namespace: namespace, cleanup: cleanup)
-        when ["networking.k8s.io", "v1", "network_policies"]
+        when ["networking.k8s.io", "v1", "networkpolicies"]
           execute_network_policy_operation(operation, namespace: namespace, cleanup: cleanup)
         when ["networking.k8s.io", "v1", "ingressclasses"]
           execute_ingress_class_operation(operation, namespace: namespace, cleanup: cleanup)
@@ -546,7 +546,7 @@ module SpecSupport
             resource_present? { api.read_namespaced_network_policy(name, namespace) }
           end
         else
-          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for networking.k8s.io/v1/network_policies"
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for networking.k8s.io/v1/networkpolicies"
         end
       end
 
@@ -790,12 +790,12 @@ module SpecSupport
         when ["networking.k8s.io", "ingresses", "update"] then "NetworkingV1Api#replace_namespaced_ingress"
         when ["networking.k8s.io", "ingresses", "patch"] then "NetworkingV1Api#patch_namespaced_ingress"
         when ["networking.k8s.io", "ingresses", "delete"] then "NetworkingV1Api#delete_namespaced_ingress"
-        when ["networking.k8s.io", "network_policies", "create"] then "NetworkingV1Api#create_namespaced_network_policy"
-        when ["networking.k8s.io", "network_policies", "get"] then "NetworkingV1Api#read_namespaced_network_policy"
-        when ["networking.k8s.io", "network_policies", "list"] then "NetworkingV1Api#list_namespaced_network_policy"
-        when ["networking.k8s.io", "network_policies", "update"] then "NetworkingV1Api#replace_namespaced_network_policy"
-        when ["networking.k8s.io", "network_policies", "patch"] then "NetworkingV1Api#patch_namespaced_network_policy"
-        when ["networking.k8s.io", "network_policies", "delete"] then "NetworkingV1Api#delete_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "create"] then "NetworkingV1Api#create_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "get"] then "NetworkingV1Api#read_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "list"] then "NetworkingV1Api#list_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "update"] then "NetworkingV1Api#replace_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "patch"] then "NetworkingV1Api#patch_namespaced_network_policy"
+        when ["networking.k8s.io", "networkpolicies", "delete"] then "NetworkingV1Api#delete_namespaced_network_policy"
         when ["networking.k8s.io", "ingressclasses", "create"] then "NetworkingV1Api#create_ingress_class"
         when ["networking.k8s.io", "ingressclasses", "get"] then "NetworkingV1Api#read_ingress_class"
         when ["networking.k8s.io", "ingressclasses", "list"] then "NetworkingV1Api#list_ingress_class"

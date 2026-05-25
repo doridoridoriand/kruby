@@ -11,7 +11,7 @@ module SpecSupport
             catalog.register(
               api_group: "networking.k8s.io",
               version: "v1",
-              resource: "network_policies",
+              resource: "networkpolicies",
               operation: operation,
               namespace_scoped: true
             )
