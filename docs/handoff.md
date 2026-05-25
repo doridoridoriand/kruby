@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-05-25 04:27:41 UTC
+生成時刻: 2026-05-25 04:27:48 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,7 +13,7 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `5f5718a220c21fb5d25be2fb3914ecdd10ae7b71` (`test: add unit tests for VERSION (#27)`)
+- 基点の `HEAD`: `4386f3b316266d9547216849e993deb294357dbb` (`test: add unit tests for ApiError (#25)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
@@ -23,11 +23,11 @@
 ## 4. Branch / Commit
 
 - Branch: `HEAD`
-- Base HEAD: `5f5718a220c21fb5d25be2fb3914ecdd10ae7b71`
+- Base HEAD: `4386f3b316266d9547216849e993deb294357dbb`
 - Recent commits:
 
 ```text
-5f5718a test: add unit tests for VERSION (#27)
+4386f3b test: add unit tests for ApiError (#25)
 f6bca81 Merge pull request #23 from doridoridoriand/release/1.36.0.1
 3f73ecf release: 1.36.0.1
 4afe686 chore: sync lockfile with kruby 1.35.0.6
