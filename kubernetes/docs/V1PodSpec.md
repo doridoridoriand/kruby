@@ -16,7 +16,7 @@
 | **host_ipc** | **Boolean** | Use the host&#39;s ipc namespace. Optional: Default to false. | [optional] |
 | **host_network** | **Boolean** | Host networking requested for this pod. Use the host&#39;s network namespace. When using HostNetwork you should specify ports so the scheduler is aware. When &#x60;hostNetwork&#x60; is true, specified &#x60;hostPort&#x60; fields in port definitions must match &#x60;containerPort&#x60;, and unspecified &#x60;hostPort&#x60; fields in port definitions are defaulted to match &#x60;containerPort&#x60;. Default to false. | [optional] |
 | **host_pid** | **Boolean** | Use the host&#39;s pid namespace. Optional: Default to false. | [optional] |
-| **host_users** | **Boolean** | Use the host&#39;s user namespace. Optional: Default to true. If set to true or not present, the pod will be run in the host user namespace, useful for when the pod needs a feature only available to the host user namespace, such as loading a kernel module with CAP_SYS_MODULE. When set to false, a new userns is created for the pod. Setting false is useful for mitigating container breakout vulnerabilities even allowing users to run their containers as root without actually having root privileges on the host. This field is alpha-level and is only honored by servers that enable the UserNamespacesSupport feature. | [optional] |
+| **host_users** | **Boolean** | Use the host&#39;s user namespace. Optional: Default to true. If set to true or not present, the pod will be run in the host user namespace, useful for when the pod needs a feature only available to the host user namespace, such as loading a kernel module with CAP_SYS_MODULE. When set to false, a new userns is created for the pod. Setting false is useful for mitigating container breakout vulnerabilities even allowing users to run their containers as root without actually having root privileges on the host. | [optional] |
 | **hostname** | **String** | Specifies the hostname of the Pod If not specified, the pod&#39;s hostname will be set to a system-defined value. | [optional] |
 | **hostname_override** | **String** | HostnameOverride specifies an explicit override for the pod&#39;s hostname as perceived by the pod. This field only specifies the pod&#39;s hostname and does not affect its DNS records. When this field is set to a non-empty string: - It takes precedence over the values set in &#x60;hostname&#x60; and &#x60;subdomain&#x60;. - The Pod&#39;s hostname will be set to this value. - &#x60;setHostnameAsFQDN&#x60; must be nil or set to false. - &#x60;hostNetwork&#x60; must be set to false.  This field must be a valid DNS subdomain as defined in RFC 1123 and contain at most 64 characters. Requires the HostnameOverride feature gate to be enabled. | [optional] |
 | **image_pull_secrets** | [**Array&lt;V1LocalObjectReference&gt;**](V1LocalObjectReference.md) | ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod | [optional] |
@@ -35,6 +35,7 @@
 | **runtime_class_name** | **String** | RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which should be used to run this pod.  If no RuntimeClass resource matches the named class, the pod will not be run. If unset or empty, the \&quot;legacy\&quot; RuntimeClass will be used, which is an implicit class with an empty definition that uses the default runtime handler. More info: https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class | [optional] |
 | **scheduler_name** | **String** | If specified, the pod will be dispatched by specified scheduler. If not specified, the pod will be dispatched by default scheduler. | [optional] |
 | **scheduling_gates** | [**Array&lt;V1PodSchedulingGate&gt;**](V1PodSchedulingGate.md) | SchedulingGates is an opaque list of values that if specified will block scheduling the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the scheduler will not attempt to schedule the pod.  SchedulingGates can only be set at pod creation time, and be removed only afterwards. | [optional] |
+| **scheduling_group** | [**V1PodSchedulingGroup**](V1PodSchedulingGroup.md) |  | [optional] |
 | **security_context** | [**V1PodSecurityContext**](V1PodSecurityContext.md) |  | [optional] |
 | **service_account** | **String** | DeprecatedServiceAccount is a deprecated alias for ServiceAccountName. Deprecated: Use serviceAccountName instead. | [optional] |
 | **service_account_name** | **String** | ServiceAccountName is the name of the ServiceAccount to use to run this pod. More info: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/ | [optional] |
@@ -45,7 +46,6 @@
 | **tolerations** | [**Array&lt;V1Toleration&gt;**](V1Toleration.md) | If specified, the pod&#39;s tolerations. | [optional] |
 | **topology_spread_constraints** | [**Array&lt;V1TopologySpreadConstraint&gt;**](V1TopologySpreadConstraint.md) | TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. All topologySpreadConstraints are ANDed. | [optional] |
 | **volumes** | [**Array&lt;V1Volume&gt;**](V1Volume.md) | List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes | [optional] |
-| **workload_ref** | [**V1WorkloadReference**](V1WorkloadReference.md) |  | [optional] |
 
 ## Example
 
@@ -84,6 +84,7 @@ instance = Kubernetes::V1PodSpec.new(
   runtime_class_name: null,
   scheduler_name: null,
   scheduling_gates: null,
+  scheduling_group: null,
   security_context: null,
   service_account: null,
   service_account_name: null,
@@ -93,8 +94,7 @@ instance = Kubernetes::V1PodSpec.new(
   termination_grace_period_seconds: null,
   tolerations: null,
   topology_spread_constraints: null,
-  volumes: null,
-  workload_ref: null
+  volumes: null
 )
 ```
 

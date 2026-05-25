@@ -3,12 +3,23 @@
 All notable changes to `kruby` are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Release tags use the format `v<version>` (for example `v1.35.0.5`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
+Release tags use the format `v<version>` (for example `v1.36.0.1`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
 Historical releases published before this file was introduced are summarized as a baseline entry instead of being reconstructed commit-by-commit.
 
 ## [Unreleased]
 
 - Nothing yet.
+
+## [1.36.0.1] - 2026-05-25
+
+### Added
+
+- Added support for Kubernetes 1.36 by regenerating the client from Kubernetes OpenAPI `release-1.36`.
+
+### Changed
+
+- Updated kruby package metadata and compatibility checks for release `1.36.0.1`.
+- Deduplicated processed OpenAPI operation IDs during generation for Kubernetes 1.36.
 
 ## [1.35.0.6] - 2026-04-16
 

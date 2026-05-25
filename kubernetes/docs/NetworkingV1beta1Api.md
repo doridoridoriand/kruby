@@ -4,29 +4,29 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#create_ip_address_networking_v1beta1) | **POST** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**create_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#create_service_cidr_networking_v1beta1) | **POST** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**delete_collection_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#delete_collection_ip_address_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**delete_collection_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#delete_collection_service_cidr_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**delete_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#delete_ip_address_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**delete_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#delete_service_cidr_networking_v1beta1) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**get_api_resources_networking_v1beta1**](NetworkingV1beta1Api.md#get_api_resources_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ |  |
-| [**list_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#list_ip_address_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
-| [**list_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#list_service_cidr_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
-| [**patch_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#patch_ip_address_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**patch_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#patch_service_cidr_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**patch_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#patch_service_cidr_status_networking_v1beta1) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
-| [**read_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#read_ip_address_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**read_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#read_service_cidr_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**read_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#read_service_cidr_status_networking_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
-| [**replace_ip_address_networking_v1beta1**](NetworkingV1beta1Api.md#replace_ip_address_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
-| [**replace_service_cidr_networking_v1beta1**](NetworkingV1beta1Api.md#replace_service_cidr_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
-| [**replace_service_cidr_status_networking_v1beta1**](NetworkingV1beta1Api.md#replace_service_cidr_status_networking_v1beta1) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses**](NetworkingV1beta1Api.md#create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses) | **POST** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs**](NetworkingV1beta1Api.md#create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs) | **POST** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses**](NetworkingV1beta1Api.md#delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs**](NetworkingV1beta1Api.md#delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name**](NetworkingV1beta1Api.md#delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name) | **DELETE** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name**](NetworkingV1beta1Api.md#delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name) | **DELETE** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**get_api_resources_get_apis_networking_k8s_io_v1beta1**](NetworkingV1beta1Api.md#get_api_resources_get_apis_networking_k8s_io_v1beta1) | **GET** /apis/networking.k8s.io/v1beta1/ |  |
+| [**list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses**](NetworkingV1beta1Api.md#list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses |  |
+| [**list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs**](NetworkingV1beta1Api.md#list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs |  |
+| [**patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name**](NetworkingV1beta1Api.md#patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name) | **PATCH** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name**](NetworkingV1beta1Api.md#patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status**](NetworkingV1beta1Api.md#patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status) | **PATCH** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name**](NetworkingV1beta1Api.md#read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name) | **GET** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name**](NetworkingV1beta1Api.md#read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status**](NetworkingV1beta1Api.md#read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status) | **GET** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
+| [**replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name**](NetworkingV1beta1Api.md#replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name) | **PUT** /apis/networking.k8s.io/v1beta1/ipaddresses/{name} |  |
+| [**replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name**](NetworkingV1beta1Api.md#replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name} |  |
+| [**replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status**](NetworkingV1beta1Api.md#replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status) | **PUT** /apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status |  |
 
 
-## create_ip_address_networking_v1beta1
+## create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses
 
-> <V1beta1IPAddress> create_ip_address_networking_v1beta1(body, opts)
+> <V1beta1IPAddress> create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses(body, opts)
 
 
 
@@ -46,7 +46,7 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::NetworkingV1beta1Api.new
-body = Kubernetes::V1beta1IPAddress.new # V1beta1IPAddress | 
+body = Kubernetes::V1beta1IPAddress.new({spec: Kubernetes::V1beta1IPAddressSpec.new({parent_ref: Kubernetes::V1beta1ParentReference.new({name: 'name_example', resource: 'resource_example'})})}) # V1beta1IPAddress | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -56,28 +56,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_ip_address_networking_v1beta1(body, opts)
+  result = api_instance.create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses: #{e}"
 end
 ```
 
-#### Using the create_ip_address_networking_v1beta1_with_http_info variant
+#### Using the create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> create_ip_address_networking_v1beta1_with_http_info(body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_ip_address_networking_v1beta1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_ip_address_post_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info: #{e}"
 end
 ```
 
@@ -105,9 +105,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_service_cidr_networking_v1beta1
+## create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs
 
-> <V1beta1ServiceCIDR> create_service_cidr_networking_v1beta1(body, opts)
+> <V1beta1ServiceCIDR> create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs(body, opts)
 
 
 
@@ -137,28 +137,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_service_cidr_networking_v1beta1(body, opts)
+  result = api_instance.create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs: #{e}"
 end
 ```
 
-#### Using the create_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> create_service_cidr_networking_v1beta1_with_http_info(body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_service_cidr_networking_v1beta1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->create_service_cidr_post_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info: #{e}"
 end
 ```
 
@@ -186,9 +186,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_ip_address_networking_v1beta1
+## delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses
 
-> <V1Status> delete_collection_ip_address_networking_v1beta1(opts)
+> <V1Status> delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses(opts)
 
 
 
@@ -222,34 +222,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_ip_address_networking_v1beta1(opts)
+  result = api_instance.delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses: #{e}"
 end
 ```
 
-#### Using the delete_collection_ip_address_networking_v1beta1_with_http_info variant
+#### Using the delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_networking_v1beta1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_ip_address_networking_v1beta1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info: #{e}"
 end
 ```
 
@@ -270,6 +271,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -287,9 +289,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_service_cidr_networking_v1beta1
+## delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs
 
-> <V1Status> delete_collection_service_cidr_networking_v1beta1(opts)
+> <V1Status> delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs(opts)
 
 
 
@@ -323,34 +325,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_service_cidr_networking_v1beta1(opts)
+  result = api_instance.delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs: #{e}"
 end
 ```
 
-#### Using the delete_collection_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_networking_v1beta1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_service_cidr_networking_v1beta1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_collection_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info: #{e}"
 end
 ```
 
@@ -371,6 +374,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -388,9 +392,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_ip_address_networking_v1beta1
+## delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name
 
-> <V1Status> delete_ip_address_networking_v1beta1(name, opts)
+> <V1Status> delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, opts)
 
 
 
@@ -423,28 +427,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_ip_address_networking_v1beta1(name, opts)
+  result = api_instance.delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name: #{e}"
 end
 ```
 
-#### Using the delete_ip_address_networking_v1beta1_with_http_info variant
+#### Using the delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_ip_address_networking_v1beta1_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_ip_address_networking_v1beta1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_ip_address_delete_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -475,9 +479,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_service_cidr_networking_v1beta1
+## delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name
 
-> <V1Status> delete_service_cidr_networking_v1beta1(name, opts)
+> <V1Status> delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, opts)
 
 
 
@@ -510,28 +514,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_service_cidr_networking_v1beta1(name, opts)
+  result = api_instance.delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name: #{e}"
 end
 ```
 
-#### Using the delete_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_networking_v1beta1_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_service_cidr_networking_v1beta1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->delete_service_cidr_delete_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -562,9 +566,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources_networking_v1beta1
+## get_api_resources_get_apis_networking_k8s_io_v1beta1
 
-> <V1APIResourceList> get_api_resources_networking_v1beta1
+> <V1APIResourceList> get_api_resources_get_apis_networking_k8s_io_v1beta1
 
 
 
@@ -587,28 +591,28 @@ api_instance = Kubernetes::NetworkingV1beta1Api.new
 
 begin
   
-  result = api_instance.get_api_resources_networking_v1beta1
+  result = api_instance.get_api_resources_get_apis_networking_k8s_io_v1beta1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->get_api_resources_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->get_api_resources_get_apis_networking_k8s_io_v1beta1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_networking_v1beta1_with_http_info variant
+#### Using the get_api_resources_get_apis_networking_k8s_io_v1beta1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_networking_v1beta1_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_get_apis_networking_k8s_io_v1beta1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_networking_v1beta1_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_get_apis_networking_k8s_io_v1beta1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->get_api_resources_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->get_api_resources_get_apis_networking_k8s_io_v1beta1_with_http_info: #{e}"
 end
 ```
 
@@ -630,9 +634,9 @@ This endpoint does not need any parameter.
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## list_ip_address_networking_v1beta1
+## list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses
 
-> <V1beta1IPAddressList> list_ip_address_networking_v1beta1(opts)
+> <V1beta1IPAddressList> list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses(opts)
 
 
 
@@ -662,34 +666,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_ip_address_networking_v1beta1(opts)
+  result = api_instance.list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses: #{e}"
 end
 ```
 
-#### Using the list_ip_address_networking_v1beta1_with_http_info variant
+#### Using the list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddressList>, Integer, Hash)> list_ip_address_networking_v1beta1_with_http_info(opts)
+> <Array(<V1beta1IPAddressList>, Integer, Hash)> list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_ip_address_networking_v1beta1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddressList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_with_http_info: #{e}"
 end
 ```
 
@@ -706,6 +711,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -723,9 +729,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_service_cidr_networking_v1beta1
+## list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs
 
-> <V1beta1ServiceCIDRList> list_service_cidr_networking_v1beta1(opts)
+> <V1beta1ServiceCIDRList> list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs(opts)
 
 
 
@@ -755,34 +761,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_service_cidr_networking_v1beta1(opts)
+  result = api_instance.list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs: #{e}"
 end
 ```
 
-#### Using the list_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDRList>, Integer, Hash)> list_service_cidr_networking_v1beta1_with_http_info(opts)
+> <Array(<V1beta1ServiceCIDRList>, Integer, Hash)> list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_service_cidr_networking_v1beta1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDRList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->list_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_with_http_info: #{e}"
 end
 ```
 
@@ -799,6 +806,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -816,9 +824,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## patch_ip_address_networking_v1beta1
+## patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name
 
-> <V1beta1IPAddress> patch_ip_address_networking_v1beta1(name, body, opts)
+> <V1beta1IPAddress> patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, body, opts)
 
 
 
@@ -850,28 +858,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_ip_address_networking_v1beta1(name, body, opts)
+  result = api_instance.patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name: #{e}"
 end
 ```
 
-#### Using the patch_ip_address_networking_v1beta1_with_http_info variant
+#### Using the patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> patch_ip_address_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_ip_address_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_ip_address_patch_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -901,9 +909,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr_networking_v1beta1
+## patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name
 
-> <V1beta1ServiceCIDR> patch_service_cidr_networking_v1beta1(name, body, opts)
+> <V1beta1ServiceCIDR> patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, body, opts)
 
 
 
@@ -935,28 +943,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr_networking_v1beta1(name, body, opts)
+  result = api_instance.patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -986,9 +994,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr_status_networking_v1beta1
+## patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status
 
-> <V1beta1ServiceCIDR> patch_service_cidr_status_networking_v1beta1(name, body, opts)
+> <V1beta1ServiceCIDR> patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, body, opts)
 
 
 
@@ -1020,28 +1028,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr_status_networking_v1beta1(name, body, opts)
+  result = api_instance.patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_status_networking_v1beta1_with_http_info variant
+#### Using the patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->patch_service_cidr_status_patch_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info: #{e}"
 end
 ```
 
@@ -1071,9 +1079,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_ip_address_networking_v1beta1
+## read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name
 
-> <V1beta1IPAddress> read_ip_address_networking_v1beta1(name, opts)
+> <V1beta1IPAddress> read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, opts)
 
 
 
@@ -1100,28 +1108,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_ip_address_networking_v1beta1(name, opts)
+  result = api_instance.read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name: #{e}"
 end
 ```
 
-#### Using the read_ip_address_networking_v1beta1_with_http_info variant
+#### Using the read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> read_ip_address_networking_v1beta1_with_http_info(name, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_ip_address_networking_v1beta1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_ip_address_get_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -1146,9 +1154,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr_networking_v1beta1
+## read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name
 
-> <V1beta1ServiceCIDR> read_service_cidr_networking_v1beta1(name, opts)
+> <V1beta1ServiceCIDR> read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, opts)
 
 
 
@@ -1175,28 +1183,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr_networking_v1beta1(name, opts)
+  result = api_instance.read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_networking_v1beta1_with_http_info(name, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_networking_v1beta1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -1221,9 +1229,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr_status_networking_v1beta1
+## read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status
 
-> <V1beta1ServiceCIDR> read_service_cidr_status_networking_v1beta1(name, opts)
+> <V1beta1ServiceCIDR> read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, opts)
 
 
 
@@ -1250,28 +1258,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr_status_networking_v1beta1(name, opts)
+  result = api_instance.read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_status_networking_v1beta1_with_http_info variant
+#### Using the read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_networking_v1beta1_with_http_info(name, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_status_networking_v1beta1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->read_service_cidr_status_get_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info: #{e}"
 end
 ```
 
@@ -1296,9 +1304,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_ip_address_networking_v1beta1
+## replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name
 
-> <V1beta1IPAddress> replace_ip_address_networking_v1beta1(name, body, opts)
+> <V1beta1IPAddress> replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, body, opts)
 
 
 
@@ -1319,7 +1327,7 @@ end
 
 api_instance = Kubernetes::NetworkingV1beta1Api.new
 name = 'name_example' # String | name of the IPAddress
-body = Kubernetes::V1beta1IPAddress.new # V1beta1IPAddress | 
+body = Kubernetes::V1beta1IPAddress.new({spec: Kubernetes::V1beta1IPAddressSpec.new({parent_ref: Kubernetes::V1beta1ParentReference.new({name: 'name_example', resource: 'resource_example'})})}) # V1beta1IPAddress | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -1329,28 +1337,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_ip_address_networking_v1beta1(name, body, opts)
+  result = api_instance.replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name: #{e}"
 end
 ```
 
-#### Using the replace_ip_address_networking_v1beta1_with_http_info variant
+#### Using the replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1IPAddress>, Integer, Hash)> replace_ip_address_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1IPAddress>, Integer, Hash)> replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_ip_address_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_ip_address_put_apis_networking_k8s_io_v1beta1_ipaddresses_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -1379,9 +1387,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr_networking_v1beta1
+## replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name
 
-> <V1beta1ServiceCIDR> replace_service_cidr_networking_v1beta1(name, body, opts)
+> <V1beta1ServiceCIDR> replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, body, opts)
 
 
 
@@ -1412,28 +1420,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr_networking_v1beta1(name, body, opts)
+  result = api_instance.replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_networking_v1beta1_with_http_info variant
+#### Using the replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_with_http_info: #{e}"
 end
 ```
 
@@ -1462,9 +1470,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr_status_networking_v1beta1
+## replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status
 
-> <V1beta1ServiceCIDR> replace_service_cidr_status_networking_v1beta1(name, body, opts)
+> <V1beta1ServiceCIDR> replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, body, opts)
 
 
 
@@ -1495,28 +1503,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr_status_networking_v1beta1(name, body, opts)
+  result = api_instance.replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_networking_v1beta1: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_status_networking_v1beta1_with_http_info variant
+#### Using the replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
+> <Array(<V1beta1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_status_networking_v1beta1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1beta1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_networking_v1beta1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1beta1Api->replace_service_cidr_status_put_apis_networking_k8s_io_v1beta1_servicecidrs_by_name_status_with_http_info: #{e}"
 end
 ```
 

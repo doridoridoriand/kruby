@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **path** | **String** | Path is the URL path of the request | [optional] |
-| **verb** | **String** | Verb is the standard HTTP verb | [optional] |
+| **path** | **String** | path is the URL path of the request | [optional] |
+| **verb** | **String** | verb is the standard HTTP verb | [optional] |
 
 ## Example
 

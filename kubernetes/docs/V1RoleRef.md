@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **api_group** | **String** | APIGroup is the group for the resource being referenced |  |
+| **api_group** | **String** | APIGroup is the group for the resource being referenced | [optional] |
 | **kind** | **String** | Kind is the type of resource being referenced |  |
 | **name** | **String** | Name is the name of resource being referenced |  |
 

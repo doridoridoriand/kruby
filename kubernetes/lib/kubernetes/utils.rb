@@ -88,11 +88,11 @@ module Kubernetes
   end
 
   SUPPORTED_KUBERNETES_VERSION_RANGE = (
-    Gem::Version.new('1.31.0')..Gem::Version.new('1.35.999')
+    Gem::Version.new('1.31.0')..Gem::Version.new('1.36.999')
   )
 
   def supported_kubernetes_versions
-    %w[1.31 1.32 1.33 1.34 1.35].freeze
+    %w[1.31 1.32 1.33 1.34 1.35 1.36].freeze
   end
 
   def normalize_kubernetes_version(version)

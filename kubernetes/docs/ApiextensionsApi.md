@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_api_group_apiextensions**](ApiextensionsApi.md#get_api_group_apiextensions) | **GET** /apis/apiextensions.k8s.io/ |  |
+| [**get_api_group_get_apis_apiextensions_k8s_io**](ApiextensionsApi.md#get_api_group_get_apis_apiextensions_k8s_io) | **GET** /apis/apiextensions.k8s.io/ |  |
 
 
-## get_api_group_apiextensions
+## get_api_group_get_apis_apiextensions_k8s_io
 
-> <V1APIGroup> get_api_group_apiextensions
+> <V1APIGroup> get_api_group_get_apis_apiextensions_k8s_io
 
 
 
@@ -32,28 +32,28 @@ api_instance = Kubernetes::ApiextensionsApi.new
 
 begin
   
-  result = api_instance.get_api_group_apiextensions
+  result = api_instance.get_api_group_get_apis_apiextensions_k8s_io
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ApiextensionsApi->get_api_group_apiextensions: #{e}"
+  puts "Error when calling ApiextensionsApi->get_api_group_get_apis_apiextensions_k8s_io: #{e}"
 end
 ```
 
-#### Using the get_api_group_apiextensions_with_http_info variant
+#### Using the get_api_group_get_apis_apiextensions_k8s_io_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_apiextensions_with_http_info
+> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_get_apis_apiextensions_k8s_io_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_group_apiextensions_with_http_info
+  data, status_code, headers = api_instance.get_api_group_get_apis_apiextensions_k8s_io_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIGroup>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ApiextensionsApi->get_api_group_apiextensions_with_http_info: #{e}"
+  puts "Error when calling ApiextensionsApi->get_api_group_get_apis_apiextensions_k8s_io_with_http_info: #{e}"
 end
 ```
 

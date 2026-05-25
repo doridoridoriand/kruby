@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **api_version** | **String** | API version of the referent. | [optional] |
-| **kind** | **String** | Kind of the referent. Valid kinds are &#39;Pod&#39; and &#39;Secret&#39;. | [optional] |
-| **name** | **String** | Name of the referent. | [optional] |
-| **uid** | **String** | UID of the referent. | [optional] |
+| **api_version** | **String** | apiVersion is API version of the referent. | [optional] |
+| **kind** | **String** | kind of the referent. Valid kinds are &#39;Pod&#39; and &#39;Secret&#39;. | [optional] |
+| **name** | **String** | name of the referent. | [optional] |
+| **uid** | **String** | uid of the referent. | [optional] |
 
 ## Example
 

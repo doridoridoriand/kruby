@@ -4,45 +4,45 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_device_class_resource_v1**](ResourceV1Api.md#create_device_class_resource_v1) | **POST** /apis/resource.k8s.io/v1/deviceclasses |  |
-| [**create_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#create_namespaced_resource_claim_resource_v1) | **POST** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
-| [**create_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#create_namespaced_resource_claim_template_resource_v1) | **POST** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
-| [**create_resource_slice_resource_v1**](ResourceV1Api.md#create_resource_slice_resource_v1) | **POST** /apis/resource.k8s.io/v1/resourceslices |  |
-| [**delete_collection_device_class_resource_v1**](ResourceV1Api.md#delete_collection_device_class_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/deviceclasses |  |
-| [**delete_collection_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#delete_collection_namespaced_resource_claim_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
-| [**delete_collection_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#delete_collection_namespaced_resource_claim_template_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
-| [**delete_collection_resource_slice_resource_v1**](ResourceV1Api.md#delete_collection_resource_slice_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/resourceslices |  |
-| [**delete_device_class_resource_v1**](ResourceV1Api.md#delete_device_class_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
-| [**delete_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#delete_namespaced_resource_claim_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
-| [**delete_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#delete_namespaced_resource_claim_template_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
-| [**delete_resource_slice_resource_v1**](ResourceV1Api.md#delete_resource_slice_resource_v1) | **DELETE** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
-| [**get_api_resources_resource_v1**](ResourceV1Api.md#get_api_resources_resource_v1) | **GET** /apis/resource.k8s.io/v1/ |  |
-| [**list_device_class_resource_v1**](ResourceV1Api.md#list_device_class_resource_v1) | **GET** /apis/resource.k8s.io/v1/deviceclasses |  |
-| [**list_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#list_namespaced_resource_claim_resource_v1) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
-| [**list_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#list_namespaced_resource_claim_template_resource_v1) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
-| [**list_resource_claim_for_all_namespaces_resource_v1**](ResourceV1Api.md#list_resource_claim_for_all_namespaces_resource_v1) | **GET** /apis/resource.k8s.io/v1/resourceclaims |  |
-| [**list_resource_claim_template_for_all_namespaces_resource_v1**](ResourceV1Api.md#list_resource_claim_template_for_all_namespaces_resource_v1) | **GET** /apis/resource.k8s.io/v1/resourceclaimtemplates |  |
-| [**list_resource_slice_resource_v1**](ResourceV1Api.md#list_resource_slice_resource_v1) | **GET** /apis/resource.k8s.io/v1/resourceslices |  |
-| [**patch_device_class_resource_v1**](ResourceV1Api.md#patch_device_class_resource_v1) | **PATCH** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
-| [**patch_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#patch_namespaced_resource_claim_resource_v1) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
-| [**patch_namespaced_resource_claim_status_resource_v1**](ResourceV1Api.md#patch_namespaced_resource_claim_status_resource_v1) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
-| [**patch_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#patch_namespaced_resource_claim_template_resource_v1) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
-| [**patch_resource_slice_resource_v1**](ResourceV1Api.md#patch_resource_slice_resource_v1) | **PATCH** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
-| [**read_device_class_resource_v1**](ResourceV1Api.md#read_device_class_resource_v1) | **GET** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
-| [**read_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#read_namespaced_resource_claim_resource_v1) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
-| [**read_namespaced_resource_claim_status_resource_v1**](ResourceV1Api.md#read_namespaced_resource_claim_status_resource_v1) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
-| [**read_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#read_namespaced_resource_claim_template_resource_v1) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
-| [**read_resource_slice_resource_v1**](ResourceV1Api.md#read_resource_slice_resource_v1) | **GET** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
-| [**replace_device_class_resource_v1**](ResourceV1Api.md#replace_device_class_resource_v1) | **PUT** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
-| [**replace_namespaced_resource_claim_resource_v1**](ResourceV1Api.md#replace_namespaced_resource_claim_resource_v1) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
-| [**replace_namespaced_resource_claim_status_resource_v1**](ResourceV1Api.md#replace_namespaced_resource_claim_status_resource_v1) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
-| [**replace_namespaced_resource_claim_template_resource_v1**](ResourceV1Api.md#replace_namespaced_resource_claim_template_resource_v1) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
-| [**replace_resource_slice_resource_v1**](ResourceV1Api.md#replace_resource_slice_resource_v1) | **PUT** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
+| [**create_device_class**](ResourceV1Api.md#create_device_class) | **POST** /apis/resource.k8s.io/v1/deviceclasses |  |
+| [**create_namespaced_resource_claim**](ResourceV1Api.md#create_namespaced_resource_claim) | **POST** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
+| [**create_namespaced_resource_claim_template**](ResourceV1Api.md#create_namespaced_resource_claim_template) | **POST** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
+| [**create_resource_slice**](ResourceV1Api.md#create_resource_slice) | **POST** /apis/resource.k8s.io/v1/resourceslices |  |
+| [**delete_collection_device_class**](ResourceV1Api.md#delete_collection_device_class) | **DELETE** /apis/resource.k8s.io/v1/deviceclasses |  |
+| [**delete_collection_namespaced_resource_claim**](ResourceV1Api.md#delete_collection_namespaced_resource_claim) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
+| [**delete_collection_namespaced_resource_claim_template**](ResourceV1Api.md#delete_collection_namespaced_resource_claim_template) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
+| [**delete_collection_resource_slice**](ResourceV1Api.md#delete_collection_resource_slice) | **DELETE** /apis/resource.k8s.io/v1/resourceslices |  |
+| [**delete_device_class**](ResourceV1Api.md#delete_device_class) | **DELETE** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
+| [**delete_namespaced_resource_claim**](ResourceV1Api.md#delete_namespaced_resource_claim) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
+| [**delete_namespaced_resource_claim_template**](ResourceV1Api.md#delete_namespaced_resource_claim_template) | **DELETE** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
+| [**delete_resource_slice**](ResourceV1Api.md#delete_resource_slice) | **DELETE** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
+| [**get_api_resources_get_apis_resource_k8s_io_v1**](ResourceV1Api.md#get_api_resources_get_apis_resource_k8s_io_v1) | **GET** /apis/resource.k8s.io/v1/ |  |
+| [**list_device_class**](ResourceV1Api.md#list_device_class) | **GET** /apis/resource.k8s.io/v1/deviceclasses |  |
+| [**list_namespaced_resource_claim**](ResourceV1Api.md#list_namespaced_resource_claim) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims |  |
+| [**list_namespaced_resource_claim_template**](ResourceV1Api.md#list_namespaced_resource_claim_template) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates |  |
+| [**list_resource_claim_for_all_namespaces**](ResourceV1Api.md#list_resource_claim_for_all_namespaces) | **GET** /apis/resource.k8s.io/v1/resourceclaims |  |
+| [**list_resource_claim_template_for_all_namespaces**](ResourceV1Api.md#list_resource_claim_template_for_all_namespaces) | **GET** /apis/resource.k8s.io/v1/resourceclaimtemplates |  |
+| [**list_resource_slice**](ResourceV1Api.md#list_resource_slice) | **GET** /apis/resource.k8s.io/v1/resourceslices |  |
+| [**patch_device_class**](ResourceV1Api.md#patch_device_class) | **PATCH** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
+| [**patch_namespaced_resource_claim**](ResourceV1Api.md#patch_namespaced_resource_claim) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
+| [**patch_namespaced_resource_claim_status**](ResourceV1Api.md#patch_namespaced_resource_claim_status) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
+| [**patch_namespaced_resource_claim_template**](ResourceV1Api.md#patch_namespaced_resource_claim_template) | **PATCH** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
+| [**patch_resource_slice**](ResourceV1Api.md#patch_resource_slice) | **PATCH** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
+| [**read_device_class**](ResourceV1Api.md#read_device_class) | **GET** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
+| [**read_namespaced_resource_claim**](ResourceV1Api.md#read_namespaced_resource_claim) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
+| [**read_namespaced_resource_claim_status**](ResourceV1Api.md#read_namespaced_resource_claim_status) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
+| [**read_namespaced_resource_claim_template**](ResourceV1Api.md#read_namespaced_resource_claim_template) | **GET** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
+| [**read_resource_slice**](ResourceV1Api.md#read_resource_slice) | **GET** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
+| [**replace_device_class**](ResourceV1Api.md#replace_device_class) | **PUT** /apis/resource.k8s.io/v1/deviceclasses/{name} |  |
+| [**replace_namespaced_resource_claim**](ResourceV1Api.md#replace_namespaced_resource_claim) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name} |  |
+| [**replace_namespaced_resource_claim_status**](ResourceV1Api.md#replace_namespaced_resource_claim_status) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaims/{name}/status |  |
+| [**replace_namespaced_resource_claim_template**](ResourceV1Api.md#replace_namespaced_resource_claim_template) | **PUT** /apis/resource.k8s.io/v1/namespaces/{namespace}/resourceclaimtemplates/{name} |  |
+| [**replace_resource_slice**](ResourceV1Api.md#replace_resource_slice) | **PUT** /apis/resource.k8s.io/v1/resourceslices/{name} |  |
 
 
-## create_device_class_resource_v1
+## create_device_class
 
-> <V1DeviceClass> create_device_class_resource_v1(body, opts)
+> <V1DeviceClass> create_device_class(body, opts)
 
 
 
@@ -72,28 +72,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_device_class_resource_v1(body, opts)
+  result = api_instance.create_device_class(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->create_device_class: #{e}"
 end
 ```
 
-#### Using the create_device_class_resource_v1_with_http_info variant
+#### Using the create_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClass>, Integer, Hash)> create_device_class_resource_v1_with_http_info(body, opts)
+> <Array(<V1DeviceClass>, Integer, Hash)> create_device_class_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_device_class_resource_v1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_device_class_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClass>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->create_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -121,9 +121,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_namespaced_resource_claim_resource_v1
+## create_namespaced_resource_claim
 
-> <ResourceV1ResourceClaim> create_namespaced_resource_claim_resource_v1(namespace, body, opts)
+> <ResourceV1ResourceClaim> create_namespaced_resource_claim(namespace, body, opts)
 
 
 
@@ -154,28 +154,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_namespaced_resource_claim_resource_v1(namespace, body, opts)
+  result = api_instance.create_namespaced_resource_claim(namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the create_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the create_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> create_namespaced_resource_claim_resource_v1_with_http_info(namespace, body, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> create_namespaced_resource_claim_with_http_info(namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_namespaced_resource_claim_resource_v1_with_http_info(namespace, body, opts)
+  data, status_code, headers = api_instance.create_namespaced_resource_claim_with_http_info(namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -204,9 +204,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_namespaced_resource_claim_template_resource_v1
+## create_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplate> create_namespaced_resource_claim_template_resource_v1(namespace, body, opts)
+> <V1ResourceClaimTemplate> create_namespaced_resource_claim_template(namespace, body, opts)
 
 
 
@@ -237,28 +237,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_namespaced_resource_claim_template_resource_v1(namespace, body, opts)
+  result = api_instance.create_namespaced_resource_claim_template(namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the create_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the create_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> create_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, body, opts)
+> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> create_namespaced_resource_claim_template_with_http_info(namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, body, opts)
+  data, status_code, headers = api_instance.create_namespaced_resource_claim_template_with_http_info(namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplate>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->create_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -287,9 +287,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_resource_slice_resource_v1
+## create_resource_slice
 
-> <V1ResourceSlice> create_resource_slice_resource_v1(body, opts)
+> <V1ResourceSlice> create_resource_slice(body, opts)
 
 
 
@@ -319,28 +319,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_resource_slice_resource_v1(body, opts)
+  result = api_instance.create_resource_slice(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->create_resource_slice: #{e}"
 end
 ```
 
-#### Using the create_resource_slice_resource_v1_with_http_info variant
+#### Using the create_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSlice>, Integer, Hash)> create_resource_slice_resource_v1_with_http_info(body, opts)
+> <Array(<V1ResourceSlice>, Integer, Hash)> create_resource_slice_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_resource_slice_resource_v1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_resource_slice_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSlice>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->create_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->create_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -368,9 +368,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_device_class_resource_v1
+## delete_collection_device_class
 
-> <V1Status> delete_collection_device_class_resource_v1(opts)
+> <V1Status> delete_collection_device_class(opts)
 
 
 
@@ -404,34 +404,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_device_class_resource_v1(opts)
+  result = api_instance.delete_collection_device_class(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_device_class: #{e}"
 end
 ```
 
-#### Using the delete_collection_device_class_resource_v1_with_http_info variant
+#### Using the delete_collection_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_device_class_resource_v1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_device_class_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_device_class_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_device_class_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -452,6 +453,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -469,9 +471,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_namespaced_resource_claim_resource_v1
+## delete_collection_namespaced_resource_claim
 
-> <V1Status> delete_collection_namespaced_resource_claim_resource_v1(namespace, opts)
+> <V1Status> delete_collection_namespaced_resource_claim(namespace, opts)
 
 
 
@@ -506,34 +508,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_namespaced_resource_claim_resource_v1(namespace, opts)
+  result = api_instance.delete_collection_namespaced_resource_claim(namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the delete_collection_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the delete_collection_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_namespaced_resource_claim_resource_v1_with_http_info(namespace, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_namespaced_resource_claim_with_http_info(namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_namespaced_resource_claim_resource_v1_with_http_info(namespace, opts)
+  data, status_code, headers = api_instance.delete_collection_namespaced_resource_claim_with_http_info(namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -555,6 +558,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -572,9 +576,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_namespaced_resource_claim_template_resource_v1
+## delete_collection_namespaced_resource_claim_template
 
-> <V1Status> delete_collection_namespaced_resource_claim_template_resource_v1(namespace, opts)
+> <V1Status> delete_collection_namespaced_resource_claim_template(namespace, opts)
 
 
 
@@ -609,34 +613,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_namespaced_resource_claim_template_resource_v1(namespace, opts)
+  result = api_instance.delete_collection_namespaced_resource_claim_template(namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the delete_collection_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the delete_collection_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_namespaced_resource_claim_template_with_http_info(namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, opts)
+  data, status_code, headers = api_instance.delete_collection_namespaced_resource_claim_template_with_http_info(namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -658,6 +663,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -675,9 +681,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_resource_slice_resource_v1
+## delete_collection_resource_slice
 
-> <V1Status> delete_collection_resource_slice_resource_v1(opts)
+> <V1Status> delete_collection_resource_slice(opts)
 
 
 
@@ -711,34 +717,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_resource_slice_resource_v1(opts)
+  result = api_instance.delete_collection_resource_slice(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_resource_slice: #{e}"
 end
 ```
 
-#### Using the delete_collection_resource_slice_resource_v1_with_http_info variant
+#### Using the delete_collection_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_resource_slice_resource_v1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_resource_slice_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_resource_slice_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_resource_slice_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_collection_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_collection_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -759,6 +766,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -776,9 +784,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_device_class_resource_v1
+## delete_device_class
 
-> <V1DeviceClass> delete_device_class_resource_v1(name, opts)
+> <V1DeviceClass> delete_device_class(name, opts)
 
 
 
@@ -811,28 +819,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_device_class_resource_v1(name, opts)
+  result = api_instance.delete_device_class(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_device_class: #{e}"
 end
 ```
 
-#### Using the delete_device_class_resource_v1_with_http_info variant
+#### Using the delete_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClass>, Integer, Hash)> delete_device_class_resource_v1_with_http_info(name, opts)
+> <Array(<V1DeviceClass>, Integer, Hash)> delete_device_class_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_device_class_resource_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_device_class_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClass>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -863,9 +871,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_namespaced_resource_claim_resource_v1
+## delete_namespaced_resource_claim
 
-> <ResourceV1ResourceClaim> delete_namespaced_resource_claim_resource_v1(name, namespace, opts)
+> <ResourceV1ResourceClaim> delete_namespaced_resource_claim(name, namespace, opts)
 
 
 
@@ -899,28 +907,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_namespaced_resource_claim_resource_v1(name, namespace, opts)
+  result = api_instance.delete_namespaced_resource_claim(name, namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the delete_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the delete_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> delete_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> delete_namespaced_resource_claim_with_http_info(name, namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, opts)
+  data, status_code, headers = api_instance.delete_namespaced_resource_claim_with_http_info(name, namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -952,9 +960,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_namespaced_resource_claim_template_resource_v1
+## delete_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplate> delete_namespaced_resource_claim_template_resource_v1(name, namespace, opts)
+> <V1ResourceClaimTemplate> delete_namespaced_resource_claim_template(name, namespace, opts)
 
 
 
@@ -988,28 +996,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_namespaced_resource_claim_template_resource_v1(name, namespace, opts)
+  result = api_instance.delete_namespaced_resource_claim_template(name, namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the delete_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the delete_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> delete_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, opts)
+> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> delete_namespaced_resource_claim_template_with_http_info(name, namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, opts)
+  data, status_code, headers = api_instance.delete_namespaced_resource_claim_template_with_http_info(name, namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplate>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -1041,9 +1049,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_resource_slice_resource_v1
+## delete_resource_slice
 
-> <V1ResourceSlice> delete_resource_slice_resource_v1(name, opts)
+> <V1ResourceSlice> delete_resource_slice(name, opts)
 
 
 
@@ -1076,28 +1084,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_resource_slice_resource_v1(name, opts)
+  result = api_instance.delete_resource_slice(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->delete_resource_slice: #{e}"
 end
 ```
 
-#### Using the delete_resource_slice_resource_v1_with_http_info variant
+#### Using the delete_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSlice>, Integer, Hash)> delete_resource_slice_resource_v1_with_http_info(name, opts)
+> <Array(<V1ResourceSlice>, Integer, Hash)> delete_resource_slice_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_resource_slice_resource_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_resource_slice_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSlice>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->delete_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->delete_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -1128,9 +1136,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources_resource_v1
+## get_api_resources_get_apis_resource_k8s_io_v1
 
-> <V1APIResourceList> get_api_resources_resource_v1
+> <V1APIResourceList> get_api_resources_get_apis_resource_k8s_io_v1
 
 
 
@@ -1153,28 +1161,28 @@ api_instance = Kubernetes::ResourceV1Api.new
 
 begin
   
-  result = api_instance.get_api_resources_resource_v1
+  result = api_instance.get_api_resources_get_apis_resource_k8s_io_v1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->get_api_resources_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->get_api_resources_get_apis_resource_k8s_io_v1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_resource_v1_with_http_info variant
+#### Using the get_api_resources_get_apis_resource_k8s_io_v1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_resource_v1_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_get_apis_resource_k8s_io_v1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_resource_v1_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_get_apis_resource_k8s_io_v1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->get_api_resources_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->get_api_resources_get_apis_resource_k8s_io_v1_with_http_info: #{e}"
 end
 ```
 
@@ -1196,9 +1204,9 @@ This endpoint does not need any parameter.
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## list_device_class_resource_v1
+## list_device_class
 
-> <V1DeviceClassList> list_device_class_resource_v1(opts)
+> <V1DeviceClassList> list_device_class(opts)
 
 
 
@@ -1228,34 +1236,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_device_class_resource_v1(opts)
+  result = api_instance.list_device_class(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_device_class: #{e}"
 end
 ```
 
-#### Using the list_device_class_resource_v1_with_http_info variant
+#### Using the list_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClassList>, Integer, Hash)> list_device_class_resource_v1_with_http_info(opts)
+> <Array(<V1DeviceClassList>, Integer, Hash)> list_device_class_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_device_class_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_device_class_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClassList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -1272,6 +1281,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1289,9 +1299,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_namespaced_resource_claim_resource_v1
+## list_namespaced_resource_claim
 
-> <V1ResourceClaimList> list_namespaced_resource_claim_resource_v1(namespace, opts)
+> <V1ResourceClaimList> list_namespaced_resource_claim(namespace, opts)
 
 
 
@@ -1322,34 +1332,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_namespaced_resource_claim_resource_v1(namespace, opts)
+  result = api_instance.list_namespaced_resource_claim(namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the list_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the list_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimList>, Integer, Hash)> list_namespaced_resource_claim_resource_v1_with_http_info(namespace, opts)
+> <Array(<V1ResourceClaimList>, Integer, Hash)> list_namespaced_resource_claim_with_http_info(namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_namespaced_resource_claim_resource_v1_with_http_info(namespace, opts)
+  data, status_code, headers = api_instance.list_namespaced_resource_claim_with_http_info(namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -1367,6 +1378,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1384,9 +1396,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_namespaced_resource_claim_template_resource_v1
+## list_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplateList> list_namespaced_resource_claim_template_resource_v1(namespace, opts)
+> <V1ResourceClaimTemplateList> list_namespaced_resource_claim_template(namespace, opts)
 
 
 
@@ -1417,34 +1429,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_namespaced_resource_claim_template_resource_v1(namespace, opts)
+  result = api_instance.list_namespaced_resource_claim_template(namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the list_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the list_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplateList>, Integer, Hash)> list_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, opts)
+> <Array(<V1ResourceClaimTemplateList>, Integer, Hash)> list_namespaced_resource_claim_template_with_http_info(namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_namespaced_resource_claim_template_resource_v1_with_http_info(namespace, opts)
+  data, status_code, headers = api_instance.list_namespaced_resource_claim_template_with_http_info(namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplateList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -1462,6 +1475,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1479,9 +1493,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_resource_claim_for_all_namespaces_resource_v1
+## list_resource_claim_for_all_namespaces
 
-> <V1ResourceClaimList> list_resource_claim_for_all_namespaces_resource_v1(opts)
+> <V1ResourceClaimList> list_resource_claim_for_all_namespaces(opts)
 
 
 
@@ -1511,34 +1525,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_resource_claim_for_all_namespaces_resource_v1(opts)
+  result = api_instance.list_resource_claim_for_all_namespaces(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_claim_for_all_namespaces_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_claim_for_all_namespaces: #{e}"
 end
 ```
 
-#### Using the list_resource_claim_for_all_namespaces_resource_v1_with_http_info variant
+#### Using the list_resource_claim_for_all_namespaces_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimList>, Integer, Hash)> list_resource_claim_for_all_namespaces_resource_v1_with_http_info(opts)
+> <Array(<V1ResourceClaimList>, Integer, Hash)> list_resource_claim_for_all_namespaces_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_resource_claim_for_all_namespaces_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_resource_claim_for_all_namespaces_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_claim_for_all_namespaces_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_claim_for_all_namespaces_with_http_info: #{e}"
 end
 ```
 
@@ -1555,6 +1570,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1572,9 +1588,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_resource_claim_template_for_all_namespaces_resource_v1
+## list_resource_claim_template_for_all_namespaces
 
-> <V1ResourceClaimTemplateList> list_resource_claim_template_for_all_namespaces_resource_v1(opts)
+> <V1ResourceClaimTemplateList> list_resource_claim_template_for_all_namespaces(opts)
 
 
 
@@ -1604,34 +1620,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_resource_claim_template_for_all_namespaces_resource_v1(opts)
+  result = api_instance.list_resource_claim_template_for_all_namespaces(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_claim_template_for_all_namespaces_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_claim_template_for_all_namespaces: #{e}"
 end
 ```
 
-#### Using the list_resource_claim_template_for_all_namespaces_resource_v1_with_http_info variant
+#### Using the list_resource_claim_template_for_all_namespaces_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplateList>, Integer, Hash)> list_resource_claim_template_for_all_namespaces_resource_v1_with_http_info(opts)
+> <Array(<V1ResourceClaimTemplateList>, Integer, Hash)> list_resource_claim_template_for_all_namespaces_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_resource_claim_template_for_all_namespaces_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_resource_claim_template_for_all_namespaces_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplateList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_claim_template_for_all_namespaces_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_claim_template_for_all_namespaces_with_http_info: #{e}"
 end
 ```
 
@@ -1648,6 +1665,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1665,9 +1683,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_resource_slice_resource_v1
+## list_resource_slice
 
-> <V1ResourceSliceList> list_resource_slice_resource_v1(opts)
+> <V1ResourceSliceList> list_resource_slice(opts)
 
 
 
@@ -1697,34 +1715,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_resource_slice_resource_v1(opts)
+  result = api_instance.list_resource_slice(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_slice: #{e}"
 end
 ```
 
-#### Using the list_resource_slice_resource_v1_with_http_info variant
+#### Using the list_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSliceList>, Integer, Hash)> list_resource_slice_resource_v1_with_http_info(opts)
+> <Array(<V1ResourceSliceList>, Integer, Hash)> list_resource_slice_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_resource_slice_resource_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_resource_slice_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSliceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->list_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->list_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -1741,6 +1760,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1758,9 +1778,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## patch_device_class_resource_v1
+## patch_device_class
 
-> <V1DeviceClass> patch_device_class_resource_v1(name, body, opts)
+> <V1DeviceClass> patch_device_class(name, body, opts)
 
 
 
@@ -1792,28 +1812,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_device_class_resource_v1(name, body, opts)
+  result = api_instance.patch_device_class(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->patch_device_class: #{e}"
 end
 ```
 
-#### Using the patch_device_class_resource_v1_with_http_info variant
+#### Using the patch_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClass>, Integer, Hash)> patch_device_class_resource_v1_with_http_info(name, body, opts)
+> <Array(<V1DeviceClass>, Integer, Hash)> patch_device_class_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_device_class_resource_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_device_class_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClass>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->patch_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -1843,9 +1863,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_namespaced_resource_claim_resource_v1
+## patch_namespaced_resource_claim
 
-> <ResourceV1ResourceClaim> patch_namespaced_resource_claim_resource_v1(name, namespace, body, opts)
+> <ResourceV1ResourceClaim> patch_namespaced_resource_claim(name, namespace, body, opts)
 
 
 
@@ -1878,28 +1898,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_namespaced_resource_claim_resource_v1(name, namespace, body, opts)
+  result = api_instance.patch_namespaced_resource_claim(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the patch_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the patch_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> patch_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> patch_namespaced_resource_claim_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.patch_namespaced_resource_claim_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -1930,9 +1950,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_namespaced_resource_claim_status_resource_v1
+## patch_namespaced_resource_claim_status
 
-> <ResourceV1ResourceClaim> patch_namespaced_resource_claim_status_resource_v1(name, namespace, body, opts)
+> <ResourceV1ResourceClaim> patch_namespaced_resource_claim_status(name, namespace, body, opts)
 
 
 
@@ -1965,28 +1985,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_namespaced_resource_claim_status_resource_v1(name, namespace, body, opts)
+  result = api_instance.patch_namespaced_resource_claim_status(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_status_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_status: #{e}"
 end
 ```
 
-#### Using the patch_namespaced_resource_claim_status_resource_v1_with_http_info variant
+#### Using the patch_namespaced_resource_claim_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> patch_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> patch_namespaced_resource_claim_status_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.patch_namespaced_resource_claim_status_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_status_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_status_with_http_info: #{e}"
 end
 ```
 
@@ -2017,9 +2037,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_namespaced_resource_claim_template_resource_v1
+## patch_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplate> patch_namespaced_resource_claim_template_resource_v1(name, namespace, body, opts)
+> <V1ResourceClaimTemplate> patch_namespaced_resource_claim_template(name, namespace, body, opts)
 
 
 
@@ -2052,28 +2072,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_namespaced_resource_claim_template_resource_v1(name, namespace, body, opts)
+  result = api_instance.patch_namespaced_resource_claim_template(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the patch_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the patch_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> patch_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> patch_namespaced_resource_claim_template_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.patch_namespaced_resource_claim_template_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplate>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->patch_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -2104,9 +2124,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_resource_slice_resource_v1
+## patch_resource_slice
 
-> <V1ResourceSlice> patch_resource_slice_resource_v1(name, body, opts)
+> <V1ResourceSlice> patch_resource_slice(name, body, opts)
 
 
 
@@ -2138,28 +2158,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_resource_slice_resource_v1(name, body, opts)
+  result = api_instance.patch_resource_slice(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->patch_resource_slice: #{e}"
 end
 ```
 
-#### Using the patch_resource_slice_resource_v1_with_http_info variant
+#### Using the patch_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSlice>, Integer, Hash)> patch_resource_slice_resource_v1_with_http_info(name, body, opts)
+> <Array(<V1ResourceSlice>, Integer, Hash)> patch_resource_slice_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_resource_slice_resource_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_resource_slice_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSlice>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->patch_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->patch_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -2189,9 +2209,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_device_class_resource_v1
+## read_device_class
 
-> <V1DeviceClass> read_device_class_resource_v1(name, opts)
+> <V1DeviceClass> read_device_class(name, opts)
 
 
 
@@ -2218,28 +2238,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_device_class_resource_v1(name, opts)
+  result = api_instance.read_device_class(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->read_device_class: #{e}"
 end
 ```
 
-#### Using the read_device_class_resource_v1_with_http_info variant
+#### Using the read_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClass>, Integer, Hash)> read_device_class_resource_v1_with_http_info(name, opts)
+> <Array(<V1DeviceClass>, Integer, Hash)> read_device_class_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_device_class_resource_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_device_class_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClass>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->read_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -2264,9 +2284,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_namespaced_resource_claim_resource_v1
+## read_namespaced_resource_claim
 
-> <ResourceV1ResourceClaim> read_namespaced_resource_claim_resource_v1(name, namespace, opts)
+> <ResourceV1ResourceClaim> read_namespaced_resource_claim(name, namespace, opts)
 
 
 
@@ -2294,28 +2314,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_namespaced_resource_claim_resource_v1(name, namespace, opts)
+  result = api_instance.read_namespaced_resource_claim(name, namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the read_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the read_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> read_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> read_namespaced_resource_claim_with_http_info(name, namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, opts)
+  data, status_code, headers = api_instance.read_namespaced_resource_claim_with_http_info(name, namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -2341,9 +2361,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_namespaced_resource_claim_status_resource_v1
+## read_namespaced_resource_claim_status
 
-> <ResourceV1ResourceClaim> read_namespaced_resource_claim_status_resource_v1(name, namespace, opts)
+> <ResourceV1ResourceClaim> read_namespaced_resource_claim_status(name, namespace, opts)
 
 
 
@@ -2371,28 +2391,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_namespaced_resource_claim_status_resource_v1(name, namespace, opts)
+  result = api_instance.read_namespaced_resource_claim_status(name, namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_status_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_status: #{e}"
 end
 ```
 
-#### Using the read_namespaced_resource_claim_status_resource_v1_with_http_info variant
+#### Using the read_namespaced_resource_claim_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> read_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> read_namespaced_resource_claim_status_with_http_info(name, namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, opts)
+  data, status_code, headers = api_instance.read_namespaced_resource_claim_status_with_http_info(name, namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_status_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_status_with_http_info: #{e}"
 end
 ```
 
@@ -2418,9 +2438,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_namespaced_resource_claim_template_resource_v1
+## read_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplate> read_namespaced_resource_claim_template_resource_v1(name, namespace, opts)
+> <V1ResourceClaimTemplate> read_namespaced_resource_claim_template(name, namespace, opts)
 
 
 
@@ -2448,28 +2468,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_namespaced_resource_claim_template_resource_v1(name, namespace, opts)
+  result = api_instance.read_namespaced_resource_claim_template(name, namespace, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the read_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the read_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> read_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, opts)
+> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> read_namespaced_resource_claim_template_with_http_info(name, namespace, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, opts)
+  data, status_code, headers = api_instance.read_namespaced_resource_claim_template_with_http_info(name, namespace, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplate>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->read_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -2495,9 +2515,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_resource_slice_resource_v1
+## read_resource_slice
 
-> <V1ResourceSlice> read_resource_slice_resource_v1(name, opts)
+> <V1ResourceSlice> read_resource_slice(name, opts)
 
 
 
@@ -2524,28 +2544,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_resource_slice_resource_v1(name, opts)
+  result = api_instance.read_resource_slice(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->read_resource_slice: #{e}"
 end
 ```
 
-#### Using the read_resource_slice_resource_v1_with_http_info variant
+#### Using the read_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSlice>, Integer, Hash)> read_resource_slice_resource_v1_with_http_info(name, opts)
+> <Array(<V1ResourceSlice>, Integer, Hash)> read_resource_slice_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_resource_slice_resource_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_resource_slice_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSlice>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->read_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->read_resource_slice_with_http_info: #{e}"
 end
 ```
 
@@ -2570,9 +2590,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_device_class_resource_v1
+## replace_device_class
 
-> <V1DeviceClass> replace_device_class_resource_v1(name, body, opts)
+> <V1DeviceClass> replace_device_class(name, body, opts)
 
 
 
@@ -2603,28 +2623,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_device_class_resource_v1(name, body, opts)
+  result = api_instance.replace_device_class(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_device_class_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->replace_device_class: #{e}"
 end
 ```
 
-#### Using the replace_device_class_resource_v1_with_http_info variant
+#### Using the replace_device_class_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1DeviceClass>, Integer, Hash)> replace_device_class_resource_v1_with_http_info(name, body, opts)
+> <Array(<V1DeviceClass>, Integer, Hash)> replace_device_class_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_device_class_resource_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_device_class_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1DeviceClass>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_device_class_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->replace_device_class_with_http_info: #{e}"
 end
 ```
 
@@ -2653,9 +2673,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_namespaced_resource_claim_resource_v1
+## replace_namespaced_resource_claim
 
-> <ResourceV1ResourceClaim> replace_namespaced_resource_claim_resource_v1(name, namespace, body, opts)
+> <ResourceV1ResourceClaim> replace_namespaced_resource_claim(name, namespace, body, opts)
 
 
 
@@ -2687,28 +2707,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_namespaced_resource_claim_resource_v1(name, namespace, body, opts)
+  result = api_instance.replace_namespaced_resource_claim(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim: #{e}"
 end
 ```
 
-#### Using the replace_namespaced_resource_claim_resource_v1_with_http_info variant
+#### Using the replace_namespaced_resource_claim_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> replace_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> replace_namespaced_resource_claim_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_namespaced_resource_claim_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.replace_namespaced_resource_claim_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_with_http_info: #{e}"
 end
 ```
 
@@ -2738,9 +2758,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_namespaced_resource_claim_status_resource_v1
+## replace_namespaced_resource_claim_status
 
-> <ResourceV1ResourceClaim> replace_namespaced_resource_claim_status_resource_v1(name, namespace, body, opts)
+> <ResourceV1ResourceClaim> replace_namespaced_resource_claim_status(name, namespace, body, opts)
 
 
 
@@ -2772,28 +2792,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_namespaced_resource_claim_status_resource_v1(name, namespace, body, opts)
+  result = api_instance.replace_namespaced_resource_claim_status(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_status_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_status: #{e}"
 end
 ```
 
-#### Using the replace_namespaced_resource_claim_status_resource_v1_with_http_info variant
+#### Using the replace_namespaced_resource_claim_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> replace_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<ResourceV1ResourceClaim>, Integer, Hash)> replace_namespaced_resource_claim_status_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_namespaced_resource_claim_status_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.replace_namespaced_resource_claim_status_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ResourceV1ResourceClaim>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_status_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_status_with_http_info: #{e}"
 end
 ```
 
@@ -2823,9 +2843,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_namespaced_resource_claim_template_resource_v1
+## replace_namespaced_resource_claim_template
 
-> <V1ResourceClaimTemplate> replace_namespaced_resource_claim_template_resource_v1(name, namespace, body, opts)
+> <V1ResourceClaimTemplate> replace_namespaced_resource_claim_template(name, namespace, body, opts)
 
 
 
@@ -2857,28 +2877,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_namespaced_resource_claim_template_resource_v1(name, namespace, body, opts)
+  result = api_instance.replace_namespaced_resource_claim_template(name, namespace, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_template_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_template: #{e}"
 end
 ```
 
-#### Using the replace_namespaced_resource_claim_template_resource_v1_with_http_info variant
+#### Using the replace_namespaced_resource_claim_template_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> replace_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, body, opts)
+> <Array(<V1ResourceClaimTemplate>, Integer, Hash)> replace_namespaced_resource_claim_template_with_http_info(name, namespace, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_namespaced_resource_claim_template_resource_v1_with_http_info(name, namespace, body, opts)
+  data, status_code, headers = api_instance.replace_namespaced_resource_claim_template_with_http_info(name, namespace, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceClaimTemplate>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_template_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->replace_namespaced_resource_claim_template_with_http_info: #{e}"
 end
 ```
 
@@ -2908,9 +2928,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_resource_slice_resource_v1
+## replace_resource_slice
 
-> <V1ResourceSlice> replace_resource_slice_resource_v1(name, body, opts)
+> <V1ResourceSlice> replace_resource_slice(name, body, opts)
 
 
 
@@ -2941,28 +2961,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_resource_slice_resource_v1(name, body, opts)
+  result = api_instance.replace_resource_slice(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_resource_slice_resource_v1: #{e}"
+  puts "Error when calling ResourceV1Api->replace_resource_slice: #{e}"
 end
 ```
 
-#### Using the replace_resource_slice_resource_v1_with_http_info variant
+#### Using the replace_resource_slice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ResourceSlice>, Integer, Hash)> replace_resource_slice_resource_v1_with_http_info(name, body, opts)
+> <Array(<V1ResourceSlice>, Integer, Hash)> replace_resource_slice_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_resource_slice_resource_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_resource_slice_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ResourceSlice>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ResourceV1Api->replace_resource_slice_resource_v1_with_http_info: #{e}"
+  puts "Error when calling ResourceV1Api->replace_resource_slice_with_http_info: #{e}"
 end
 ```
 
