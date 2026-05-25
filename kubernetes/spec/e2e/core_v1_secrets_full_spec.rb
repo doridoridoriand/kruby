@@ -3,18 +3,18 @@
 require "spec_helper"
 
 RSpec.describe "full mode core/v1 secrets coverage" do
-  it "contains CRUD selectors for core/v1 secrets" do
+  it "contains CRUD+watch selectors for core/v1 secrets" do
     context = SpecSupport::E2E::RunContext.from_env("E2E_MODE" => "full")
     dispatcher = SpecSupport::E2E::ModeDispatcher.new
 
     selection = dispatcher.dispatch(context)
 
-    expected_crud = %w[create get list update patch delete].map do |op|
+    expected_ops = %w[create get list update patch delete watch].map do |op|
       "core/v1/secrets:#{op}"
     end
 
     expect(selection.mode).to eq("full")
-    expect(selection.resolved_targets).to include(*expected_crud)
+    expect(selection.resolved_targets).to include(*expected_ops)
     expect(selection.resolved_targets.index("core/v1/secrets:create"))
       .to be < selection.resolved_targets.index("core/v1/secrets:delete")
   end
