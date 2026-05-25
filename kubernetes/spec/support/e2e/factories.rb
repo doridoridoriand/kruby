@@ -86,6 +86,28 @@ module SpecSupport
           }
         }
       end
+
+      def service(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "Service",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            selector: labels,
+            ports: [
+              {
+                name: "http",
+                port: 80,
+                protocol: "TCP",
+                targetPort: 80
+              }
+            ]
+          }
+        }
+      end
     end
   end
 end
