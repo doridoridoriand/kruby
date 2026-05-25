@@ -1,32 +1,21 @@
 # frozen_string_literal: true
 
-require_relative "../support/e2e/spec_runner"
-require_relative "../support/e2e/targets/networking_v1_ingress_class"
+require "spec_helper"
 
-RSpec.describe "E2E - networking.k8s.io/v1/ingressclasses" do
-  include SpecSupport::E2E::SpecRunner
+RSpec.describe "full mode networking.k8s.io/v1 ingress classes coverage" do
+  it "contains CRUD selectors for networking.k8s.io/v1 ingress classes" do
+    context = SpecSupport::E2E::RunContext.from_env("E2E_MODE" => "full")
+    dispatcher = SpecSupport::E2E::ModeDispatcher.new
 
-  E2E_TARGET_GROUP_ID = "networking_v1_ingress_class"
+    selection = dispatcher.dispatch(context)
 
-  describe "ingress_class" do
-    let(:api_group) { "networking.k8s.io" }
-    let(:version) { "v1" }
-    let(:resource) { "ingressclasses" }
-
-    E2E_OPERATION_ORDER.each do |operation|
-      it "should successfully execute #{operation}" do
-        result = run_target!(
-          api_group: api_group,
-          version: version,
-          resource: resource,
-          operation: operation,
-          target_group: E2E_TARGET_GROUP_ID
-        )
-
-        expect(result[:status]).to eq("passed")
-        expect(result[:duration_ms]).to be_a_kind_of(Numeric)
-        expect(result[:duration_ms]).to be >= 0
-      end
+    expected_crud = %w[create get list update patch delete].map do |op|
+      "networking.k8s.io/v1/ingressclasses:#{op}"
     end
+
+    expect(selection.mode).to eq("full")
+    expect(selection.resolved_targets).to include(*expected_crud)
+    expect(selection.resolved_targets.index("networking.k8s.io/v1/ingressclasses:create"))
+      .to be < selection.resolved_targets.index("networking.k8s.io/v1/ingressclasses:delete")
   end
 end
