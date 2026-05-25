@@ -43,7 +43,7 @@ describe Kubernetes::Configuration do
 
       it 'loads the file specified by KUBECONFIG' do
         ENV['KUBECONFIG'] = kubeconfig_path
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with(kubeconfig_path).and_return(true)
         kube_config = instance_double(Kubernetes::KubeConfig)
         allow(Kubernetes::KubeConfig).to receive(:new).with(kubeconfig_path).and_return(kube_config)
@@ -58,7 +58,7 @@ describe Kubernetes::Configuration do
     context 'when KUBECONFIG is set but file does not exist' do
       it 'falls through to default home location or fallback' do
         ENV['KUBECONFIG'] = '/nonexistent/kubeconfig'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/nonexistent/kubeconfig').and_return(false)
         ENV['HOME'] = '/tmp/test-home'
         default_path = '/tmp/test-home/.kube/config'
@@ -77,7 +77,7 @@ describe Kubernetes::Configuration do
 
       it 'loads the default kubeconfig file' do
         ENV['HOME'] = '/home/user'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with(default_kubeconfig).and_return(true)
         kube_config = instance_double(Kubernetes::KubeConfig)
         allow(Kubernetes::KubeConfig).to receive(:new).with(default_kubeconfig).and_return(kube_config)
@@ -92,7 +92,7 @@ describe Kubernetes::Configuration do
     context 'when no local config and running in cluster' do
       it 'uses InClusterConfig' do
         ENV['HOME'] = '/tmp/test-home'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/tmp/test-home/.kube/config').and_return(false)
         allow(Kubernetes::InClusterConfig).to receive(:in_cluster?).and_return(true)
         in_cluster_config = instance_double(Kubernetes::InClusterConfig)
@@ -108,7 +108,7 @@ describe Kubernetes::Configuration do
     context 'when no local config and not in cluster' do
       it 'falls back to localhost:8080' do
         ENV['HOME'] = '/tmp/test-home'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/tmp/test-home/.kube/config').and_return(false)
         allow(Kubernetes::InClusterConfig).to receive(:in_cluster?).and_return(false)
 
@@ -145,7 +145,7 @@ describe Kubernetes::Configuration do
     context 'when KUBECONFIG points to an existing file' do
       it 'loads the KUBECONFIG file' do
         ENV['KUBECONFIG'] = '/custom/kubeconfig'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/custom/kubeconfig').and_return(true)
         kube_config = instance_double(Kubernetes::KubeConfig)
         allow(Kubernetes::KubeConfig).to receive(:new).with('/custom/kubeconfig').and_return(kube_config)
@@ -161,7 +161,7 @@ describe Kubernetes::Configuration do
       it 'returns nil' do
         ENV['KUBECONFIG'] = '/nonexistent'
         ENV['HOME'] = '/tmp/test-home'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/nonexistent').and_return(false)
         allow(File).to receive(:exist?).with('/tmp/test-home/.kube/config').and_return(false)
 
@@ -173,7 +173,7 @@ describe Kubernetes::Configuration do
     context 'when KUBECONFIG is not set and ~/.kube/config does not exist' do
       it 'returns nil' do
         ENV['HOME'] = '/tmp/test-home'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/tmp/test-home/.kube/config').and_return(false)
 
         output = described_class.load_local_config(result)
@@ -185,7 +185,7 @@ describe Kubernetes::Configuration do
       it 'loads the default kubeconfig' do
         ENV['KUBECONFIG'] = '/nonexistent'
         ENV['HOME'] = '/home/user'
-        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?).with('/nonexistent').and_return(false)
         allow(File).to receive(:exist?).with('/home/user/.kube/config').and_return(true)
         kube_config = instance_double(Kubernetes::KubeConfig)
