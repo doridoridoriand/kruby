@@ -193,6 +193,8 @@ module SpecSupport
         case key
         when %w[core v1 pods]
           execute_pod_operation(operation, namespace: namespace, cleanup: cleanup)
+        when %w[core v1 services]
+          execute_service_operation(operation, namespace: namespace, cleanup: cleanup)
         when %w[apps v1 deployments]
           execute_deployment_operation(operation, namespace: namespace, cleanup: cleanup)
         when %w[batch v1 jobs]
@@ -251,6 +253,58 @@ module SpecSupport
           end
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/pods"
+        end
+      end
+
+      def execute_service_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::CoreV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          service = api.read_namespaced_service(name, namespace)
+          assert_resource_name!(service, name)
+        when "get"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          service = api.read_namespaced_service(name, namespace)
+          assert_resource_name!(service, name)
+        when "list"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_service(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_service(name, namespace, [
+                                         {
+                                           op: "add",
+                                           path: "/metadata/labels/e2e-patched",
+                                           value: "true"
+                                         }
+                                       ])
+          service = api.read_namespaced_service(name, namespace)
+          labels = resource_labels(service)
+          raise "patch verification failed for service #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            service = api.read_namespaced_service(name, namespace)
+            api.replace_namespaced_service(
+              name,
+              namespace,
+              with_updated_label(service, key: "e2e-updated", value: "true")
+            )
+          end
+          service = api.read_namespaced_service(name, namespace)
+          labels = resource_labels(service)
+          raise "update verification failed for service #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_service(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_service(name, namespace)
+          wait_for_resource_absence!("service #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_service(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/services"
         end
       end
 
@@ -362,6 +416,13 @@ module SpecSupport
         name = resource_name("pod")
         api.create_namespaced_pod(namespace, Factories.pod(name: name, labels: base_labels(name)))
         cleanup.track_resource(namespace: namespace, resource_type: "pod", name: name)
+        name
+      end
+
+      def seed_service(api, namespace:, cleanup:)
+        name = resource_name("service")
+        api.create_namespaced_service(namespace, Factories.service(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "service", name: name)
         name
       end
 
@@ -520,6 +581,13 @@ module SpecSupport
         when ["core", "pods", "patch"] then "CoreV1Api#patch_namespaced_pod"
         when ["core", "pods", "delete"] then "CoreV1Api#delete_namespaced_pod"
         when ["core", "pods", "watch"] then "CoreV1Api#watch_namespaced_pod"
+        when ["core", "services", "create"] then "CoreV1Api#create_namespaced_service"
+        when ["core", "services", "get"] then "CoreV1Api#read_namespaced_service"
+        when ["core", "services", "list"] then "CoreV1Api#list_namespaced_service"
+        when ["core", "services", "update"] then "CoreV1Api#replace_namespaced_service"
+        when ["core", "services", "patch"] then "CoreV1Api#patch_namespaced_service"
+        when ["core", "services", "delete"] then "CoreV1Api#delete_namespaced_service"
+        when ["core", "services", "watch"] then "CoreV1Api#watch_namespaced_service"
         when ["apps", "deployments", "create"] then "AppsV1Api#create_namespaced_deployment"
         when ["apps", "deployments", "get"] then "AppsV1Api#read_namespaced_deployment"
         when ["apps", "deployments", "list"] then "AppsV1Api#list_namespaced_deployment"
