@@ -24,7 +24,7 @@ describe Kubernetes::VERSION do
   end
 
   it 'matches the version declared in kubernetes.gemspec' do
-    gemspec = Gem::Specification.load(File.expand_path('kubernetes.gemspec', __dir__))
+    gemspec = Gem::Specification.load(File.expand_path('../kubernetes.gemspec', __dir__))
     expect(Kubernetes::VERSION).to eq(gemspec.version.to_s)
   end
 end
