@@ -42,7 +42,8 @@ module Kubernetes
 
     def message
       if @message.nil?
-        msg = "Error message: the server returns an error"
+        msg = super()
+        msg = "Error message: the server returns an error" if msg.empty?
       else
         msg = @message
       end
