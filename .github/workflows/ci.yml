@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  ruby:
+    name: Ruby ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: kubernetes
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - "3.3"
+          - "3.4"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          working-directory: kubernetes
+
+      - name: Run RSpec
+        run: bundle exec rspec
+
+      - name: Build gem
+        run: |
+          rm -f kruby-*.gem
+          gem build kubernetes.gemspec
+          ruby -e 'abort("gem was not built") if Dir["kruby-*.gem"].empty?'
