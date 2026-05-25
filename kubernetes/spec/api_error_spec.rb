@@ -87,7 +87,7 @@ describe Kubernetes::ApiError do
     context 'with a non-string, non-hash argument' do
       it 'handles numeric arguments' do
         error = described_class.new(42)
-        expect(error.message).to include('42')
+        expect(error.message).to eq(42)
       end
     end
   end
