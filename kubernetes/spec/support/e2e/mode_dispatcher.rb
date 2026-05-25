@@ -3,6 +3,7 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
 require_relative "targets/batch_v1_jobs"
 require_relative "targets/core_v1_config_maps"
@@ -48,6 +49,7 @@ module SpecSupport
       def self.build_default_catalog
         catalog = TargetCatalog.new
         Targets::CoreV1ConfigMaps.register!(catalog)
+        Targets::CoreV1Namespaces.register!(catalog)
         Targets::CoreV1Pods.register!(catalog)
         Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
