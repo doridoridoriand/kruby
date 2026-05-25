@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **expiration_timestamp** | **Time** | ExpirationTimestamp is the time of expiration of the returned token. |  |
-| **token** | **String** | Token is the opaque bearer token. |  |
+| **expiration_timestamp** | **Time** | expirationTimestamp is the time of expiration of the returned token. | [optional] |
+| **token** | **String** | token is the opaque bearer token. | [optional] |
 
 ## Example
 

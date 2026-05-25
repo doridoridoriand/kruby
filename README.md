@@ -12,7 +12,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 ## Release Tracking
 
 - User-visible changes are tracked in [CHANGELOG.md](CHANGELOG.md).
-- Release tags use the format `v<version>` (for example `v1.35.0.5`).
+- Release tags use the format `v<version>` (for example `v1.36.0.1`).
 - Pushed release tags automatically publish a GitHub Release using the matching changelog section.
 
 ## Generation Policy
@@ -24,11 +24,12 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.35 | 1.35.0.5 |
-| 1.32 | release-1.35 | 1.35.0.5 |
-| 1.33 | release-1.35 | 1.35.0.5 |
-| 1.34 | release-1.35 | 1.35.0.5 |
-| 1.35 | release-1.35 | 1.35.0.5 |
+| 1.31 | release-1.36 | 1.36.0.1 |
+| 1.32 | release-1.36 | 1.36.0.1 |
+| 1.33 | release-1.36 | 1.36.0.1 |
+| 1.34 | release-1.36 | 1.36.0.1 |
+| 1.35 | release-1.36 | 1.36.0.1 |
+| 1.36 | release-1.36 | 1.36.0.1 |
 
 ## Requirements
 
@@ -39,7 +40,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 Add this gem to your Gemfile:
 
 ```ruby
-gem "kruby", "~> 1.35"
+gem "kruby", "~> 1.36"
 ```
 
 ## Usage
@@ -91,8 +92,9 @@ For a full, repeatable upgrade workflow (including verification and troubleshoot
 
 ## E2E testing
 
-Kind-backed E2E runs support the Kubernetes versions listed in the compatibility matrix: `1.31`, `1.32`, `1.33`, `1.34`, and `1.35`.
+Kind-backed E2E runs currently support Kubernetes `1.31`, `1.32`, `1.33`, `1.34`, and `1.35`.
 The default E2E Kind environment is `1.35`, and the repository pins official `kindest/node` images for deterministic coverage.
+Kubernetes `1.36` client generation is covered by OpenAPI/gem checks; Kind-backed 1.36 E2E can be added once an official `kindest/node` 1.36 image is available.
 
 Run a single Kubernetes version:
 

@@ -5,49 +5,49 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_ingress_class**](NetworkingV1Api.md#create_ingress_class) | **POST** /apis/networking.k8s.io/v1/ingressclasses |  |
-| [**create_ip_address_networking_v1**](NetworkingV1Api.md#create_ip_address_networking_v1) | **POST** /apis/networking.k8s.io/v1/ipaddresses |  |
+| [**create_ip_address**](NetworkingV1Api.md#create_ip_address) | **POST** /apis/networking.k8s.io/v1/ipaddresses |  |
 | [**create_namespaced_ingress**](NetworkingV1Api.md#create_namespaced_ingress) | **POST** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses |  |
 | [**create_namespaced_network_policy**](NetworkingV1Api.md#create_namespaced_network_policy) | **POST** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies |  |
-| [**create_service_cidr_networking_v1**](NetworkingV1Api.md#create_service_cidr_networking_v1) | **POST** /apis/networking.k8s.io/v1/servicecidrs |  |
+| [**create_service_cidr**](NetworkingV1Api.md#create_service_cidr) | **POST** /apis/networking.k8s.io/v1/servicecidrs |  |
 | [**delete_collection_ingress_class**](NetworkingV1Api.md#delete_collection_ingress_class) | **DELETE** /apis/networking.k8s.io/v1/ingressclasses |  |
-| [**delete_collection_ip_address_networking_v1**](NetworkingV1Api.md#delete_collection_ip_address_networking_v1) | **DELETE** /apis/networking.k8s.io/v1/ipaddresses |  |
+| [**delete_collection_ip_address**](NetworkingV1Api.md#delete_collection_ip_address) | **DELETE** /apis/networking.k8s.io/v1/ipaddresses |  |
 | [**delete_collection_namespaced_ingress**](NetworkingV1Api.md#delete_collection_namespaced_ingress) | **DELETE** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses |  |
 | [**delete_collection_namespaced_network_policy**](NetworkingV1Api.md#delete_collection_namespaced_network_policy) | **DELETE** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies |  |
-| [**delete_collection_service_cidr_networking_v1**](NetworkingV1Api.md#delete_collection_service_cidr_networking_v1) | **DELETE** /apis/networking.k8s.io/v1/servicecidrs |  |
+| [**delete_collection_service_cidr**](NetworkingV1Api.md#delete_collection_service_cidr) | **DELETE** /apis/networking.k8s.io/v1/servicecidrs |  |
 | [**delete_ingress_class**](NetworkingV1Api.md#delete_ingress_class) | **DELETE** /apis/networking.k8s.io/v1/ingressclasses/{name} |  |
-| [**delete_ip_address_networking_v1**](NetworkingV1Api.md#delete_ip_address_networking_v1) | **DELETE** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
+| [**delete_ip_address**](NetworkingV1Api.md#delete_ip_address) | **DELETE** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
 | [**delete_namespaced_ingress**](NetworkingV1Api.md#delete_namespaced_ingress) | **DELETE** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name} |  |
 | [**delete_namespaced_network_policy**](NetworkingV1Api.md#delete_namespaced_network_policy) | **DELETE** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name} |  |
-| [**delete_service_cidr_networking_v1**](NetworkingV1Api.md#delete_service_cidr_networking_v1) | **DELETE** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
-| [**get_api_resources_networking_v1**](NetworkingV1Api.md#get_api_resources_networking_v1) | **GET** /apis/networking.k8s.io/v1/ |  |
+| [**delete_service_cidr**](NetworkingV1Api.md#delete_service_cidr) | **DELETE** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
+| [**get_api_resources_get_apis_networking_k8s_io_v1**](NetworkingV1Api.md#get_api_resources_get_apis_networking_k8s_io_v1) | **GET** /apis/networking.k8s.io/v1/ |  |
 | [**list_ingress_class**](NetworkingV1Api.md#list_ingress_class) | **GET** /apis/networking.k8s.io/v1/ingressclasses |  |
 | [**list_ingress_for_all_namespaces**](NetworkingV1Api.md#list_ingress_for_all_namespaces) | **GET** /apis/networking.k8s.io/v1/ingresses |  |
-| [**list_ip_address_networking_v1**](NetworkingV1Api.md#list_ip_address_networking_v1) | **GET** /apis/networking.k8s.io/v1/ipaddresses |  |
+| [**list_ip_address**](NetworkingV1Api.md#list_ip_address) | **GET** /apis/networking.k8s.io/v1/ipaddresses |  |
 | [**list_namespaced_ingress**](NetworkingV1Api.md#list_namespaced_ingress) | **GET** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses |  |
 | [**list_namespaced_network_policy**](NetworkingV1Api.md#list_namespaced_network_policy) | **GET** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies |  |
 | [**list_network_policy_for_all_namespaces**](NetworkingV1Api.md#list_network_policy_for_all_namespaces) | **GET** /apis/networking.k8s.io/v1/networkpolicies |  |
-| [**list_service_cidr_networking_v1**](NetworkingV1Api.md#list_service_cidr_networking_v1) | **GET** /apis/networking.k8s.io/v1/servicecidrs |  |
+| [**list_service_cidr**](NetworkingV1Api.md#list_service_cidr) | **GET** /apis/networking.k8s.io/v1/servicecidrs |  |
 | [**patch_ingress_class**](NetworkingV1Api.md#patch_ingress_class) | **PATCH** /apis/networking.k8s.io/v1/ingressclasses/{name} |  |
-| [**patch_ip_address_networking_v1**](NetworkingV1Api.md#patch_ip_address_networking_v1) | **PATCH** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
+| [**patch_ip_address**](NetworkingV1Api.md#patch_ip_address) | **PATCH** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
 | [**patch_namespaced_ingress**](NetworkingV1Api.md#patch_namespaced_ingress) | **PATCH** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name} |  |
 | [**patch_namespaced_ingress_status**](NetworkingV1Api.md#patch_namespaced_ingress_status) | **PATCH** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status |  |
 | [**patch_namespaced_network_policy**](NetworkingV1Api.md#patch_namespaced_network_policy) | **PATCH** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name} |  |
-| [**patch_service_cidr_networking_v1**](NetworkingV1Api.md#patch_service_cidr_networking_v1) | **PATCH** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
-| [**patch_service_cidr_status_networking_v1**](NetworkingV1Api.md#patch_service_cidr_status_networking_v1) | **PATCH** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
+| [**patch_service_cidr**](NetworkingV1Api.md#patch_service_cidr) | **PATCH** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
+| [**patch_service_cidr_status**](NetworkingV1Api.md#patch_service_cidr_status) | **PATCH** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
 | [**read_ingress_class**](NetworkingV1Api.md#read_ingress_class) | **GET** /apis/networking.k8s.io/v1/ingressclasses/{name} |  |
-| [**read_ip_address_networking_v1**](NetworkingV1Api.md#read_ip_address_networking_v1) | **GET** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
+| [**read_ip_address**](NetworkingV1Api.md#read_ip_address) | **GET** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
 | [**read_namespaced_ingress**](NetworkingV1Api.md#read_namespaced_ingress) | **GET** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name} |  |
 | [**read_namespaced_ingress_status**](NetworkingV1Api.md#read_namespaced_ingress_status) | **GET** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status |  |
 | [**read_namespaced_network_policy**](NetworkingV1Api.md#read_namespaced_network_policy) | **GET** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name} |  |
-| [**read_service_cidr_networking_v1**](NetworkingV1Api.md#read_service_cidr_networking_v1) | **GET** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
-| [**read_service_cidr_status_networking_v1**](NetworkingV1Api.md#read_service_cidr_status_networking_v1) | **GET** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
+| [**read_service_cidr**](NetworkingV1Api.md#read_service_cidr) | **GET** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
+| [**read_service_cidr_status**](NetworkingV1Api.md#read_service_cidr_status) | **GET** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
 | [**replace_ingress_class**](NetworkingV1Api.md#replace_ingress_class) | **PUT** /apis/networking.k8s.io/v1/ingressclasses/{name} |  |
-| [**replace_ip_address_networking_v1**](NetworkingV1Api.md#replace_ip_address_networking_v1) | **PUT** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
+| [**replace_ip_address**](NetworkingV1Api.md#replace_ip_address) | **PUT** /apis/networking.k8s.io/v1/ipaddresses/{name} |  |
 | [**replace_namespaced_ingress**](NetworkingV1Api.md#replace_namespaced_ingress) | **PUT** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name} |  |
 | [**replace_namespaced_ingress_status**](NetworkingV1Api.md#replace_namespaced_ingress_status) | **PUT** /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status |  |
 | [**replace_namespaced_network_policy**](NetworkingV1Api.md#replace_namespaced_network_policy) | **PUT** /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name} |  |
-| [**replace_service_cidr_networking_v1**](NetworkingV1Api.md#replace_service_cidr_networking_v1) | **PUT** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
-| [**replace_service_cidr_status_networking_v1**](NetworkingV1Api.md#replace_service_cidr_status_networking_v1) | **PUT** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
+| [**replace_service_cidr**](NetworkingV1Api.md#replace_service_cidr) | **PUT** /apis/networking.k8s.io/v1/servicecidrs/{name} |  |
+| [**replace_service_cidr_status**](NetworkingV1Api.md#replace_service_cidr_status) | **PUT** /apis/networking.k8s.io/v1/servicecidrs/{name}/status |  |
 
 
 ## create_ingress_class
@@ -131,9 +131,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_ip_address_networking_v1
+## create_ip_address
 
-> <V1IPAddress> create_ip_address_networking_v1(body, opts)
+> <V1IPAddress> create_ip_address(body, opts)
 
 
 
@@ -153,7 +153,7 @@ Kubernetes.configure do |config|
 end
 
 api_instance = Kubernetes::NetworkingV1Api.new
-body = Kubernetes::V1IPAddress.new # V1IPAddress | 
+body = Kubernetes::V1IPAddress.new({spec: Kubernetes::V1IPAddressSpec.new({parent_ref: Kubernetes::V1ParentReference.new({name: 'name_example', resource: 'resource_example'})})}) # V1IPAddress | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -163,28 +163,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_ip_address_networking_v1(body, opts)
+  result = api_instance.create_ip_address(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->create_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->create_ip_address: #{e}"
 end
 ```
 
-#### Using the create_ip_address_networking_v1_with_http_info variant
+#### Using the create_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1IPAddress>, Integer, Hash)> create_ip_address_networking_v1_with_http_info(body, opts)
+> <Array(<V1IPAddress>, Integer, Hash)> create_ip_address_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_ip_address_networking_v1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_ip_address_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->create_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->create_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -378,9 +378,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## create_service_cidr_networking_v1
+## create_service_cidr
 
-> <V1ServiceCIDR> create_service_cidr_networking_v1(body, opts)
+> <V1ServiceCIDR> create_service_cidr(body, opts)
 
 
 
@@ -410,28 +410,28 @@ opts = {
 
 begin
   
-  result = api_instance.create_service_cidr_networking_v1(body, opts)
+  result = api_instance.create_service_cidr(body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->create_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->create_service_cidr: #{e}"
 end
 ```
 
-#### Using the create_service_cidr_networking_v1_with_http_info variant
+#### Using the create_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> create_service_cidr_networking_v1_with_http_info(body, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> create_service_cidr_with_http_info(body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.create_service_cidr_networking_v1_with_http_info(body, opts)
+  data, status_code, headers = api_instance.create_service_cidr_with_http_info(body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->create_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->create_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -495,6 +495,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
@@ -543,6 +544,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -560,9 +562,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_ip_address_networking_v1
+## delete_collection_ip_address
 
-> <V1Status> delete_collection_ip_address_networking_v1(opts)
+> <V1Status> delete_collection_ip_address(opts)
 
 
 
@@ -596,34 +598,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_ip_address_networking_v1(opts)
+  result = api_instance.delete_collection_ip_address(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_collection_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_collection_ip_address: #{e}"
 end
 ```
 
-#### Using the delete_collection_ip_address_networking_v1_with_http_info variant
+#### Using the delete_collection_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_networking_v1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_ip_address_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_ip_address_networking_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_ip_address_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_collection_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_collection_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -644,6 +647,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -698,6 +702,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
@@ -747,6 +752,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -801,6 +807,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
@@ -850,6 +857,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -867,9 +875,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_collection_service_cidr_networking_v1
+## delete_collection_service_cidr
 
-> <V1Status> delete_collection_service_cidr_networking_v1(opts)
+> <V1Status> delete_collection_service_cidr(opts)
 
 
 
@@ -903,34 +911,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   body: Kubernetes::V1DeleteOptions.new # V1DeleteOptions | 
 }
 
 begin
   
-  result = api_instance.delete_collection_service_cidr_networking_v1(opts)
+  result = api_instance.delete_collection_service_cidr(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_collection_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_collection_service_cidr: #{e}"
 end
 ```
 
-#### Using the delete_collection_service_cidr_networking_v1_with_http_info variant
+#### Using the delete_collection_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_networking_v1_with_http_info(opts)
+> <Array(<V1Status>, Integer, Hash)> delete_collection_service_cidr_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_collection_service_cidr_networking_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.delete_collection_service_cidr_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_collection_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_collection_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -951,6 +960,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **body** | [**V1DeleteOptions**](V1DeleteOptions.md) |  | [optional] |
 
@@ -1055,9 +1065,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_ip_address_networking_v1
+## delete_ip_address
 
-> <V1Status> delete_ip_address_networking_v1(name, opts)
+> <V1Status> delete_ip_address(name, opts)
 
 
 
@@ -1090,28 +1100,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_ip_address_networking_v1(name, opts)
+  result = api_instance.delete_ip_address(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_ip_address: #{e}"
 end
 ```
 
-#### Using the delete_ip_address_networking_v1_with_http_info variant
+#### Using the delete_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_ip_address_networking_v1_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_ip_address_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_ip_address_networking_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_ip_address_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -1320,9 +1330,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## delete_service_cidr_networking_v1
+## delete_service_cidr
 
-> <V1Status> delete_service_cidr_networking_v1(name, opts)
+> <V1Status> delete_service_cidr(name, opts)
 
 
 
@@ -1355,28 +1365,28 @@ opts = {
 
 begin
   
-  result = api_instance.delete_service_cidr_networking_v1(name, opts)
+  result = api_instance.delete_service_cidr(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_service_cidr: #{e}"
 end
 ```
 
-#### Using the delete_service_cidr_networking_v1_with_http_info variant
+#### Using the delete_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_networking_v1_with_http_info(name, opts)
+> <Array(<V1Status>, Integer, Hash)> delete_service_cidr_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.delete_service_cidr_networking_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.delete_service_cidr_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1Status>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->delete_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->delete_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -1407,9 +1417,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## get_api_resources_networking_v1
+## get_api_resources_get_apis_networking_k8s_io_v1
 
-> <V1APIResourceList> get_api_resources_networking_v1
+> <V1APIResourceList> get_api_resources_get_apis_networking_k8s_io_v1
 
 
 
@@ -1432,28 +1442,28 @@ api_instance = Kubernetes::NetworkingV1Api.new
 
 begin
   
-  result = api_instance.get_api_resources_networking_v1
+  result = api_instance.get_api_resources_get_apis_networking_k8s_io_v1
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->get_api_resources_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->get_api_resources_get_apis_networking_k8s_io_v1: #{e}"
 end
 ```
 
-#### Using the get_api_resources_networking_v1_with_http_info variant
+#### Using the get_api_resources_get_apis_networking_k8s_io_v1_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_networking_v1_with_http_info
+> <Array(<V1APIResourceList>, Integer, Hash)> get_api_resources_get_apis_networking_k8s_io_v1_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_resources_networking_v1_with_http_info
+  data, status_code, headers = api_instance.get_api_resources_get_apis_networking_k8s_io_v1_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIResourceList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->get_api_resources_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->get_api_resources_get_apis_networking_k8s_io_v1_with_http_info: #{e}"
 end
 ```
 
@@ -1507,6 +1517,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
@@ -1551,6 +1562,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1600,6 +1612,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
@@ -1644,6 +1657,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1661,9 +1675,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_ip_address_networking_v1
+## list_ip_address
 
-> <V1IPAddressList> list_ip_address_networking_v1(opts)
+> <V1IPAddressList> list_ip_address(opts)
 
 
 
@@ -1693,34 +1707,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_ip_address_networking_v1(opts)
+  result = api_instance.list_ip_address(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->list_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->list_ip_address: #{e}"
 end
 ```
 
-#### Using the list_ip_address_networking_v1_with_http_info variant
+#### Using the list_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1IPAddressList>, Integer, Hash)> list_ip_address_networking_v1_with_http_info(opts)
+> <Array(<V1IPAddressList>, Integer, Hash)> list_ip_address_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_ip_address_networking_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_ip_address_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1IPAddressList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->list_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->list_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -1737,6 +1752,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1787,6 +1803,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
@@ -1832,6 +1849,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1882,6 +1900,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
@@ -1927,6 +1946,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -1976,6 +1996,7 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
@@ -2020,6 +2041,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -2037,9 +2059,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor, application/json;stream=watch, application/vnd.kubernetes.protobuf;stream=watch, application/cbor-seq
 
 
-## list_service_cidr_networking_v1
+## list_service_cidr
 
-> <V1ServiceCIDRList> list_service_cidr_networking_v1(opts)
+> <V1ServiceCIDRList> list_service_cidr(opts)
 
 
 
@@ -2069,34 +2091,35 @@ opts = {
   resource_version: 'resource_version_example', # String | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   resource_version_match: 'resource_version_match_example', # String | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset
   send_initial_events: true, # Boolean | `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \"Bookmark\" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `\"k8s.io/initial-events-end\": \"true\"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan   is interpreted as \"data at least as new as the provided `resourceVersion`\"   and the bookmark event is send when the state is synced   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.   If `resourceVersion` is unset, this is interpreted as \"consistent read\" and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - `resourceVersionMatch` set to any other value or unset   Invalid error is returned.  Defaults to true if `resourceVersion=\"\"` or `resourceVersion=\"0\"` (for backward compatibility reasons) and to false otherwise.
+  shard_selector: 'shard_selector_example', # String | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')   shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')  Field paths use CEL-style object-rooted syntax (e.g. \"object.metadata.uid\"), NOT the fieldSelector format (\"metadata.uid\"). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')     shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')   4-shard split:     shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')     shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')     shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')     shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')  This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
   timeout_seconds: 56, # Integer | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
   watch: true # Boolean | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 }
 
 begin
   
-  result = api_instance.list_service_cidr_networking_v1(opts)
+  result = api_instance.list_service_cidr(opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->list_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->list_service_cidr: #{e}"
 end
 ```
 
-#### Using the list_service_cidr_networking_v1_with_http_info variant
+#### Using the list_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDRList>, Integer, Hash)> list_service_cidr_networking_v1_with_http_info(opts)
+> <Array(<V1ServiceCIDRList>, Integer, Hash)> list_service_cidr_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.list_service_cidr_networking_v1_with_http_info(opts)
+  data, status_code, headers = api_instance.list_service_cidr_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDRList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->list_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->list_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -2113,6 +2136,7 @@ end
 | **resource_version** | **String** | resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **resource_version_match** | **String** | resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.  Defaults to unset | [optional] |
 | **send_initial_events** | **Boolean** | &#x60;sendInitialEvents&#x3D;true&#x60; may be set together with &#x60;watch&#x3D;true&#x60;. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic \&quot;Bookmark\&quot; event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with &#x60;\&quot;k8s.io/initial-events-end\&quot;: \&quot;true\&quot;&#x60; annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.  When &#x60;sendInitialEvents&#x60; option is set, we require &#x60;resourceVersionMatch&#x60; option to also be set. The semantic of the watch request is as following: - &#x60;resourceVersionMatch&#x60; &#x3D; NotOlderThan   is interpreted as \&quot;data at least as new as the provided &#x60;resourceVersion&#x60;\&quot;   and the bookmark event is send when the state is synced   to a &#x60;resourceVersion&#x60; at least as fresh as the one provided by the ListOptions.   If &#x60;resourceVersion&#x60; is unset, this is interpreted as \&quot;consistent read\&quot; and the   bookmark event is send when the state is synced at least to the moment   when request started being processed. - &#x60;resourceVersionMatch&#x60; set to any other value or unset   Invalid error is returned.  Defaults to true if &#x60;resourceVersion&#x3D;\&quot;\&quot;&#x60; or &#x60;resourceVersion&#x3D;\&quot;0\&quot;&#x60; (for backward compatibility reasons) and to false otherwise. | [optional] |
+| **shard_selector** | **String** | shardSelector restricts the list of returned objects using a CEL-based shard selector expression. The format uses the shardRange() function combined with || (logical OR) to specify one or more hash ranges:    shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;)   shardRange(object.metadata.uid, &#39;0x0&#39;, &#39;0x8000000000000000&#39;) || shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)  Field paths use CEL-style object-rooted syntax (e.g. \&quot;object.metadata.uid\&quot;), NOT the fieldSelector format (\&quot;metadata.uid\&quot;). Currently supported paths:   - object.metadata.uid   - object.metadata.namespace  hexStart and hexEnd are single-quoted CEL string literals with a &#39;0x&#39; prefix, defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a hash space. The full range is [0x0, 0x10000000000000000), where the exclusive upper bound equals 2^64.  Examples:   2-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0x10000000000000000&#39;)   4-shard split:     shard 0: shardRange(object.metadata.uid, &#39;0x0000000000000000&#39;, &#39;0x4000000000000000&#39;)     shard 1: shardRange(object.metadata.uid, &#39;0x4000000000000000&#39;, &#39;0x8000000000000000&#39;)     shard 2: shardRange(object.metadata.uid, &#39;0x8000000000000000&#39;, &#39;0xc000000000000000&#39;)     shard 3: shardRange(object.metadata.uid, &#39;0xc000000000000000&#39;, &#39;0x10000000000000000&#39;)  This is an alpha field and requires enabling the ShardedListAndWatch feature gate. | [optional] |
 | **timeout_seconds** | **Integer** | Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity. | [optional] |
 | **watch** | **Boolean** | Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion. | [optional] |
 
@@ -2215,9 +2239,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_ip_address_networking_v1
+## patch_ip_address
 
-> <V1IPAddress> patch_ip_address_networking_v1(name, body, opts)
+> <V1IPAddress> patch_ip_address(name, body, opts)
 
 
 
@@ -2249,28 +2273,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_ip_address_networking_v1(name, body, opts)
+  result = api_instance.patch_ip_address(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_ip_address: #{e}"
 end
 ```
 
-#### Using the patch_ip_address_networking_v1_with_http_info variant
+#### Using the patch_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1IPAddress>, Integer, Hash)> patch_ip_address_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1IPAddress>, Integer, Hash)> patch_ip_address_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_ip_address_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_ip_address_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -2561,9 +2585,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr_networking_v1
+## patch_service_cidr
 
-> <V1ServiceCIDR> patch_service_cidr_networking_v1(name, body, opts)
+> <V1ServiceCIDR> patch_service_cidr(name, body, opts)
 
 
 
@@ -2595,28 +2619,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr_networking_v1(name, body, opts)
+  result = api_instance.patch_service_cidr(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_service_cidr: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_networking_v1_with_http_info variant
+#### Using the patch_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> patch_service_cidr_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> patch_service_cidr_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -2646,9 +2670,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## patch_service_cidr_status_networking_v1
+## patch_service_cidr_status
 
-> <V1ServiceCIDR> patch_service_cidr_status_networking_v1(name, body, opts)
+> <V1ServiceCIDR> patch_service_cidr_status(name, body, opts)
 
 
 
@@ -2680,28 +2704,28 @@ opts = {
 
 begin
   
-  result = api_instance.patch_service_cidr_status_networking_v1(name, body, opts)
+  result = api_instance.patch_service_cidr_status(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_service_cidr_status_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_service_cidr_status: #{e}"
 end
 ```
 
-#### Using the patch_service_cidr_status_networking_v1_with_http_info variant
+#### Using the patch_service_cidr_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> patch_service_cidr_status_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.patch_service_cidr_status_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.patch_service_cidr_status_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->patch_service_cidr_status_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->patch_service_cidr_status_with_http_info: #{e}"
 end
 ```
 
@@ -2806,9 +2830,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_ip_address_networking_v1
+## read_ip_address
 
-> <V1IPAddress> read_ip_address_networking_v1(name, opts)
+> <V1IPAddress> read_ip_address(name, opts)
 
 
 
@@ -2835,28 +2859,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_ip_address_networking_v1(name, opts)
+  result = api_instance.read_ip_address(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->read_ip_address: #{e}"
 end
 ```
 
-#### Using the read_ip_address_networking_v1_with_http_info variant
+#### Using the read_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1IPAddress>, Integer, Hash)> read_ip_address_networking_v1_with_http_info(name, opts)
+> <Array(<V1IPAddress>, Integer, Hash)> read_ip_address_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_ip_address_networking_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_ip_address_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->read_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -3112,9 +3136,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr_networking_v1
+## read_service_cidr
 
-> <V1ServiceCIDR> read_service_cidr_networking_v1(name, opts)
+> <V1ServiceCIDR> read_service_cidr(name, opts)
 
 
 
@@ -3141,28 +3165,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr_networking_v1(name, opts)
+  result = api_instance.read_service_cidr(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->read_service_cidr: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_networking_v1_with_http_info variant
+#### Using the read_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> read_service_cidr_networking_v1_with_http_info(name, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> read_service_cidr_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_networking_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->read_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -3187,9 +3211,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## read_service_cidr_status_networking_v1
+## read_service_cidr_status
 
-> <V1ServiceCIDR> read_service_cidr_status_networking_v1(name, opts)
+> <V1ServiceCIDR> read_service_cidr_status(name, opts)
 
 
 
@@ -3216,28 +3240,28 @@ opts = {
 
 begin
   
-  result = api_instance.read_service_cidr_status_networking_v1(name, opts)
+  result = api_instance.read_service_cidr_status(name, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_service_cidr_status_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->read_service_cidr_status: #{e}"
 end
 ```
 
-#### Using the read_service_cidr_status_networking_v1_with_http_info variant
+#### Using the read_service_cidr_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_networking_v1_with_http_info(name, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> read_service_cidr_status_with_http_info(name, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.read_service_cidr_status_networking_v1_with_http_info(name, opts)
+  data, status_code, headers = api_instance.read_service_cidr_status_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->read_service_cidr_status_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->read_service_cidr_status_with_http_info: #{e}"
 end
 ```
 
@@ -3345,9 +3369,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_ip_address_networking_v1
+## replace_ip_address
 
-> <V1IPAddress> replace_ip_address_networking_v1(name, body, opts)
+> <V1IPAddress> replace_ip_address(name, body, opts)
 
 
 
@@ -3368,7 +3392,7 @@ end
 
 api_instance = Kubernetes::NetworkingV1Api.new
 name = 'name_example' # String | name of the IPAddress
-body = Kubernetes::V1IPAddress.new # V1IPAddress | 
+body = Kubernetes::V1IPAddress.new({spec: Kubernetes::V1IPAddressSpec.new({parent_ref: Kubernetes::V1ParentReference.new({name: 'name_example', resource: 'resource_example'})})}) # V1IPAddress | 
 opts = {
   pretty: 'pretty_example', # String | If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
   dry_run: 'dry_run_example', # String | When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
@@ -3378,28 +3402,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_ip_address_networking_v1(name, body, opts)
+  result = api_instance.replace_ip_address(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_ip_address_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_ip_address: #{e}"
 end
 ```
 
-#### Using the replace_ip_address_networking_v1_with_http_info variant
+#### Using the replace_ip_address_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1IPAddress>, Integer, Hash)> replace_ip_address_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1IPAddress>, Integer, Hash)> replace_ip_address_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_ip_address_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_ip_address_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1IPAddress>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_ip_address_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_ip_address_with_http_info: #{e}"
 end
 ```
 
@@ -3683,9 +3707,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr_networking_v1
+## replace_service_cidr
 
-> <V1ServiceCIDR> replace_service_cidr_networking_v1(name, body, opts)
+> <V1ServiceCIDR> replace_service_cidr(name, body, opts)
 
 
 
@@ -3716,28 +3740,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr_networking_v1(name, body, opts)
+  result = api_instance.replace_service_cidr(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_service_cidr_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_service_cidr: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_networking_v1_with_http_info variant
+#### Using the replace_service_cidr_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> replace_service_cidr_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> replace_service_cidr_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_service_cidr_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_service_cidr_with_http_info: #{e}"
 end
 ```
 
@@ -3766,9 +3790,9 @@ end
 - **Accept**: application/json, application/yaml, application/vnd.kubernetes.protobuf, application/cbor
 
 
-## replace_service_cidr_status_networking_v1
+## replace_service_cidr_status
 
-> <V1ServiceCIDR> replace_service_cidr_status_networking_v1(name, body, opts)
+> <V1ServiceCIDR> replace_service_cidr_status(name, body, opts)
 
 
 
@@ -3799,28 +3823,28 @@ opts = {
 
 begin
   
-  result = api_instance.replace_service_cidr_status_networking_v1(name, body, opts)
+  result = api_instance.replace_service_cidr_status(name, body, opts)
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_service_cidr_status_networking_v1: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_service_cidr_status: #{e}"
 end
 ```
 
-#### Using the replace_service_cidr_status_networking_v1_with_http_info variant
+#### Using the replace_service_cidr_status_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_networking_v1_with_http_info(name, body, opts)
+> <Array(<V1ServiceCIDR>, Integer, Hash)> replace_service_cidr_status_with_http_info(name, body, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.replace_service_cidr_status_networking_v1_with_http_info(name, body, opts)
+  data, status_code, headers = api_instance.replace_service_cidr_status_with_http_info(name, body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1ServiceCIDR>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling NetworkingV1Api->replace_service_cidr_status_networking_v1_with_http_info: #{e}"
+  puts "Error when calling NetworkingV1Api->replace_service_cidr_status_with_http_info: #{e}"
 end
 ```
 

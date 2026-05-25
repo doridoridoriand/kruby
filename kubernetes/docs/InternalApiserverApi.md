@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_api_group_internal**](InternalApiserverApi.md#get_api_group_internal) | **GET** /apis/internal.apiserver.k8s.io/ |  |
+| [**get_api_group_get_apis_internal_apiserver_k8s_io**](InternalApiserverApi.md#get_api_group_get_apis_internal_apiserver_k8s_io) | **GET** /apis/internal.apiserver.k8s.io/ |  |
 
 
-## get_api_group_internal
+## get_api_group_get_apis_internal_apiserver_k8s_io
 
-> <V1APIGroup> get_api_group_internal
+> <V1APIGroup> get_api_group_get_apis_internal_apiserver_k8s_io
 
 
 
@@ -32,28 +32,28 @@ api_instance = Kubernetes::InternalApiserverApi.new
 
 begin
   
-  result = api_instance.get_api_group_internal
+  result = api_instance.get_api_group_get_apis_internal_apiserver_k8s_io
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling InternalApiserverApi->get_api_group_internal: #{e}"
+  puts "Error when calling InternalApiserverApi->get_api_group_get_apis_internal_apiserver_k8s_io: #{e}"
 end
 ```
 
-#### Using the get_api_group_internal_with_http_info variant
+#### Using the get_api_group_get_apis_internal_apiserver_k8s_io_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_internal_with_http_info
+> <Array(<V1APIGroup>, Integer, Hash)> get_api_group_get_apis_internal_apiserver_k8s_io_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_group_internal_with_http_info
+  data, status_code, headers = api_instance.get_api_group_get_apis_internal_apiserver_k8s_io_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIGroup>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling InternalApiserverApi->get_api_group_internal_with_http_info: #{e}"
+  puts "Error when calling InternalApiserverApi->get_api_group_get_apis_internal_apiserver_k8s_io_with_http_info: #{e}"
 end
 ```
 

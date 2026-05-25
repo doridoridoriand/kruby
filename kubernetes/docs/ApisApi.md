@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_api_versions**](ApisApi.md#get_api_versions) | **GET** /apis/ |  |
+| [**get_api_versions_get_apis**](ApisApi.md#get_api_versions_get_apis) | **GET** /apis/ |  |
 
 
-## get_api_versions
+## get_api_versions_get_apis
 
-> <V1APIGroupList> get_api_versions
+> <V1APIGroupList> get_api_versions_get_apis
 
 
 
@@ -32,28 +32,28 @@ api_instance = Kubernetes::ApisApi.new
 
 begin
   
-  result = api_instance.get_api_versions
+  result = api_instance.get_api_versions_get_apis
   p result
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ApisApi->get_api_versions: #{e}"
+  puts "Error when calling ApisApi->get_api_versions_get_apis: #{e}"
 end
 ```
 
-#### Using the get_api_versions_with_http_info variant
+#### Using the get_api_versions_get_apis_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<V1APIGroupList>, Integer, Hash)> get_api_versions_with_http_info
+> <Array(<V1APIGroupList>, Integer, Hash)> get_api_versions_get_apis_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.get_api_versions_with_http_info
+  data, status_code, headers = api_instance.get_api_versions_get_apis_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <V1APIGroupList>
 rescue Kubernetes::ApiError => e
-  puts "Error when calling ApisApi->get_api_versions_with_http_info: #{e}"
+  puts "Error when calling ApisApi->get_api_versions_get_apis_with_http_info: #{e}"
 end
 ```
 
