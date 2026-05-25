@@ -199,6 +199,14 @@ module SpecSupport
           execute_deployment_operation(operation, namespace: namespace, cleanup: cleanup)
         when %w[batch v1 jobs]
           execute_job_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["rbac.authorization.k8s.io", "v1", "roles"]
+          execute_role_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["rbac.authorization.k8s.io", "v1", "clusterroles"]
+          execute_cluster_role_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["rbac.authorization.k8s.io", "v1", "rolebindings"]
+          execute_role_binding_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["rbac.authorization.k8s.io", "v1", "clusterrolebindings"]
+          execute_cluster_role_binding_operation(operation, namespace: namespace, cleanup: cleanup)
         else
           raise UnsupportedTargetError, "no executor registered for #{parsed_target.fetch(:id)}"
         end
@@ -412,6 +420,212 @@ module SpecSupport
         end
       end
 
+      def execute_role_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::RbacAuthorizationV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          role = api.read_namespaced_role(name, namespace)
+          assert_resource_name!(role, name)
+        when "get"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          role = api.read_namespaced_role(name, namespace)
+          assert_resource_name!(role, name)
+        when "list"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_role(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_role(name, namespace, [
+                                        {
+                                          op: "add",
+                                          path: "/metadata/labels/e2e-patched",
+                                          value: "true"
+                                        }
+                                      ])
+          role = api.read_namespaced_role(name, namespace)
+          labels = resource_labels(role)
+          raise "patch verification failed for role #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            role = api.read_namespaced_role(name, namespace)
+            api.replace_namespaced_role(
+              name,
+              namespace,
+              with_updated_label(role, key: "e2e-updated", value: "true")
+            )
+          end
+          role = api.read_namespaced_role(name, namespace)
+          labels = resource_labels(role)
+          raise "update verification failed for role #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_role(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_role(name, namespace)
+          wait_for_resource_absence!("role #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_role(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for rbac.authorization.k8s.io/v1/roles"
+        end
+      end
+
+      def execute_cluster_role_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::RbacAuthorizationV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          cluster_role = api.read_cluster_role(name)
+          assert_resource_name!(cluster_role, name)
+        when "get"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          cluster_role = api.read_cluster_role(name)
+          assert_resource_name!(cluster_role, name)
+        when "list"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_cluster_role
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          api.patch_cluster_role(name, [
+                                     {
+                                       op: "add",
+                                       path: "/metadata/labels/e2e-patched",
+                                       value: "true"
+                                     }
+                                   ])
+          cluster_role = api.read_cluster_role(name)
+          labels = resource_labels(cluster_role)
+          raise "patch verification failed for clusterrole #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            cluster_role = api.read_cluster_role(name)
+            api.replace_cluster_role(
+              name,
+              with_updated_label(cluster_role, key: "e2e-updated", value: "true")
+            )
+          end
+          cluster_role = api.read_cluster_role(name)
+          labels = resource_labels(cluster_role)
+          raise "update verification failed for clusterrole #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+          api.delete_cluster_role(name)
+          wait_for_resource_absence!("clusterrole #{name}") do
+            resource_present? { api.read_cluster_role(name) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for rbac.authorization.k8s.io/v1/clusterroles"
+        end
+      end
+
+      def execute_role_binding_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::RbacAuthorizationV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          binding = api.read_namespaced_role_binding(name, namespace)
+          assert_resource_name!(binding, name)
+        when "get"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          binding = api.read_namespaced_role_binding(name, namespace)
+          assert_resource_name!(binding, name)
+        when "list"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_role_binding(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_role_binding(name, namespace, [
+                                                {
+                                                  op: "add",
+                                                  path: "/metadata/labels/e2e-patched",
+                                                  value: "true"
+                                                }
+                                              ])
+          binding = api.read_namespaced_role_binding(name, namespace)
+          labels = resource_labels(binding)
+          raise "patch verification failed for rolebinding #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            binding = api.read_namespaced_role_binding(name, namespace)
+            api.replace_namespaced_role_binding(
+              name,
+              namespace,
+              with_updated_label(binding, key: "e2e-updated", value: "true")
+            )
+          end
+          binding = api.read_namespaced_role_binding(name, namespace)
+          labels = resource_labels(binding)
+          raise "update verification failed for rolebinding #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_role_binding(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_role_binding(name, namespace)
+          wait_for_resource_absence!("rolebinding #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_role_binding(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for rbac.authorization.k8s.io/v1/rolebindings"
+        end
+      end
+
+      def execute_cluster_role_binding_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::RbacAuthorizationV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          binding = api.read_cluster_role_binding(name)
+          assert_resource_name!(binding, name)
+        when "get"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          binding = api.read_cluster_role_binding(name)
+          assert_resource_name!(binding, name)
+        when "list"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_cluster_role_binding
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          api.patch_cluster_role_binding(name, [
+                                             {
+                                               op: "add",
+                                               path: "/metadata/labels/e2e-patched",
+                                               value: "true"
+                                             }
+                                           ])
+          binding = api.read_cluster_role_binding(name)
+          labels = resource_labels(binding)
+          raise "patch verification failed for clusterrolebinding #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            binding = api.read_cluster_role_binding(name)
+            api.replace_cluster_role_binding(
+              name,
+              with_updated_label(binding, key: "e2e-updated", value: "true")
+            )
+          end
+          binding = api.read_cluster_role_binding(name)
+          labels = resource_labels(binding)
+          raise "update verification failed for clusterrolebinding #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_cluster_role_binding(api, namespace: namespace, cleanup: cleanup)
+          api.delete_cluster_role_binding(name)
+          wait_for_resource_absence!("clusterrolebinding #{name}") do
+            resource_present? { api.read_cluster_role_binding(name) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for rbac.authorization.k8s.io/v1/clusterrolebindings"
+        end
+      end
+
       def seed_pod(api, namespace:, cleanup:)
         name = resource_name("pod")
         api.create_namespaced_pod(namespace, Factories.pod(name: name, labels: base_labels(name)))
@@ -437,6 +651,41 @@ module SpecSupport
         name = resource_name("job")
         api.create_namespaced_job(namespace, Factories.job(name: name, labels: base_labels(name)))
         cleanup.track_resource(namespace: namespace, resource_type: "job", name: name)
+        name
+      end
+
+      def seed_role(api, namespace:, cleanup:)
+        name = resource_name("role")
+        api.create_namespaced_role(namespace, Factories.role(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "role", name: name)
+        name
+      end
+
+      def seed_cluster_role(api, namespace:, cleanup:)
+        name = resource_name("clusterrole")
+        api.create_cluster_role(Factories.cluster_role(name: name, labels: base_labels(name)))
+        cleanup.register { api.delete_cluster_role(name) rescue nil }
+        name
+      end
+
+      def seed_role_binding(api, namespace:, cleanup:)
+        role_name = seed_role(api, namespace: namespace, cleanup: cleanup)
+        name = resource_name("rolebinding")
+        api.create_namespaced_role_binding(
+          namespace,
+          Factories.role_binding(name: name, role_name: role_name, namespace: namespace, labels: base_labels(name))
+        )
+        cleanup.track_resource(namespace: namespace, resource_type: "rolebinding", name: name)
+        name
+      end
+
+      def seed_cluster_role_binding(api, namespace:, cleanup:)
+        cluster_role_name = seed_cluster_role(api, namespace: namespace, cleanup: cleanup)
+        name = resource_name("clusterrolebinding")
+        api.create_cluster_role_binding(
+          Factories.cluster_role_binding(name: name, cluster_role_name: cluster_role_name, labels: base_labels(name))
+        )
+        cleanup.register { api.delete_cluster_role_binding(name) rescue nil }
         name
       end
 
@@ -602,6 +851,30 @@ module SpecSupport
         when ["batch", "jobs", "patch"] then "BatchV1Api#patch_namespaced_job"
         when ["batch", "jobs", "delete"] then "BatchV1Api#delete_namespaced_job"
         when ["batch", "jobs", "watch"] then "BatchV1Api#watch_namespaced_job"
+        when ["rbac.authorization.k8s.io", "roles", "create"] then "RbacAuthorizationV1Api#create_namespaced_role"
+        when ["rbac.authorization.k8s.io", "roles", "get"] then "RbacAuthorizationV1Api#read_namespaced_role"
+        when ["rbac.authorization.k8s.io", "roles", "list"] then "RbacAuthorizationV1Api#list_namespaced_role"
+        when ["rbac.authorization.k8s.io", "roles", "update"] then "RbacAuthorizationV1Api#replace_namespaced_role"
+        when ["rbac.authorization.k8s.io", "roles", "patch"] then "RbacAuthorizationV1Api#patch_namespaced_role"
+        when ["rbac.authorization.k8s.io", "roles", "delete"] then "RbacAuthorizationV1Api#delete_namespaced_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "create"] then "RbacAuthorizationV1Api#create_cluster_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "get"] then "RbacAuthorizationV1Api#read_cluster_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "list"] then "RbacAuthorizationV1Api#list_cluster_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "update"] then "RbacAuthorizationV1Api#replace_cluster_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "patch"] then "RbacAuthorizationV1Api#patch_cluster_role"
+        when ["rbac.authorization.k8s.io", "clusterroles", "delete"] then "RbacAuthorizationV1Api#delete_cluster_role"
+        when ["rbac.authorization.k8s.io", "rolebindings", "create"] then "RbacAuthorizationV1Api#create_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "rolebindings", "get"] then "RbacAuthorizationV1Api#read_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "rolebindings", "list"] then "RbacAuthorizationV1Api#list_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "rolebindings", "update"] then "RbacAuthorizationV1Api#replace_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "rolebindings", "patch"] then "RbacAuthorizationV1Api#patch_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "rolebindings", "delete"] then "RbacAuthorizationV1Api#delete_namespaced_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "create"] then "RbacAuthorizationV1Api#create_cluster_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "get"] then "RbacAuthorizationV1Api#read_cluster_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "list"] then "RbacAuthorizationV1Api#list_cluster_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "update"] then "RbacAuthorizationV1Api#replace_cluster_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "patch"] then "RbacAuthorizationV1Api#patch_cluster_role_binding"
+        when ["rbac.authorization.k8s.io", "clusterrolebindings", "delete"] then "RbacAuthorizationV1Api#delete_cluster_role_binding"
         else
           nil
         end
