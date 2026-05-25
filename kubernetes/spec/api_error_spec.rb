@@ -62,6 +62,13 @@ describe Kubernetes::ApiError do
       end
     end
 
+    context 'with an empty hash' do
+      it 'defaults to the fallback message' do
+        error = described_class.new({})
+        expect(error.message).to eq('Error message: the server returns an error')
+      end
+    end
+
     context 'with a hash argument without :message' do
       it 'sets instance variables from the hash' do
         error = described_class.new(:code => 403, :response_body => 'Forbidden')
@@ -75,6 +82,22 @@ describe Kubernetes::ApiError do
         error = described_class.new(nil)
         expect(error.message).to eq('Error message: the server returns an error')
       end
+    end
+
+    context 'with a non-string, non-hash argument' do
+      it 'handles numeric arguments' do
+        error = described_class.new(42)
+        expect(error.message).to include('42')
+      end
+    end
+  end
+
+  describe 'unset attributes' do
+    it 'returns nil for code, response_headers, and response_body when not set' do
+      error = described_class.new('Some error')
+      expect(error.code).to be_nil
+      expect(error.response_headers).to be_nil
+      expect(error.response_body).to be_nil
     end
   end
 
