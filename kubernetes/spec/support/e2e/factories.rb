@@ -161,9 +161,10 @@ module SpecSupport
           },
           subjects: [
             {
-              kind: "User",
-              name: "system:anonymous",
-              apiGroup: "rbac.authorization.k8s.io"
+              kind: "ServiceAccount",
+              name: "default",
+              namespace: "default",
+              apiGroup: ""
             }
           ]
         }
@@ -184,9 +185,10 @@ module SpecSupport
           },
           subjects: [
             {
-              kind: "User",
-              name: "system:anonymous",
-              apiGroup: "rbac.authorization.k8s.io"
+              kind: "ServiceAccount",
+              name: "default",
+              namespace: "default",
+              apiGroup: ""
             }
           ]
         }

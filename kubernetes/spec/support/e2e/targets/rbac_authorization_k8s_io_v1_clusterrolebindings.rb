@@ -3,7 +3,7 @@
 module SpecSupport
   module E2E
     module Targets
-      module RbacAuthorizationV1Roles
+      module RbacAuthorizationV1Clusterrolebindings
         module_function
 
         def register!(catalog)
@@ -11,9 +11,9 @@ module SpecSupport
             catalog.register(
               api_group: "rbac.authorization.k8s.io",
               version: "v1",
-              resource: "roles",
+              resource: "clusterrolebindings",
               operation: operation,
-              namespace_scoped: true
+              namespace_scoped: false
             )
           end
 

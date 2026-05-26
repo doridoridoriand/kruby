@@ -12,7 +12,9 @@ require_relative "targets/core_v1_endpoints"
 require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_services"
 require_relative "targets/rbac_authorization_k8s_io_v1_roles"
-require_relative "targets/rbac_authorization_k8s_io_v1_bindings"
+require_relative "targets/rbac_authorization_k8s_io_v1_clusterroles"
+require_relative "targets/rbac_authorization_k8s_io_v1_rolebindings"
+require_relative "targets/rbac_authorization_k8s_io_v1_clusterrolebindings"
 
 module SpecSupport
   module E2E
@@ -61,7 +63,9 @@ module SpecSupport
         Targets::AppsV1Deployments.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
         Targets::RbacAuthorizationV1Roles.register!(catalog)
-        Targets::RbacAuthorizationV1Bindings.register!(catalog)
+        Targets::RbacAuthorizationV1Clusterroles.register!(catalog)
+        Targets::RbacAuthorizationV1Rolebindings.register!(catalog)
+        Targets::RbacAuthorizationV1Clusterrolebindings.register!(catalog)
         catalog
       end
 
