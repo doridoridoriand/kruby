@@ -26,4 +26,5 @@ Ruby 3.3+（CI は 3.3/3.4）: Follow standard conventions
 - 001-kind-e2e-tests: Added Ruby 3.3+（CI は 3.3/3.4） + RSpec, kruby client (`Kubernetes::*Api`), kind, kubectl, Docker, bash
 
 <!-- MANUAL ADDITIONS START -->
+- Do not work directly on `master`. Always create and switch to a dedicated branch before making changes, commits, tags, or release work.
 <!-- MANUAL ADDITIONS END -->

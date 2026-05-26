@@ -53,7 +53,23 @@ For changelog-driven releases and release-tag handling, use:
 
 Release tags must use `v<version>` (for example `v1.35.0.5`), and the tag must match the numeric version in `kubernetes/lib/kubernetes/version.rb`.
 
+## Local Validation
+
+Run the standard local validation before opening a pull request:
+
+```bash
+cd kubernetes
+bundle exec rspec
+rm -f kruby-*.gem
+gem build kubernetes.gemspec
+bundle exec rake e2e:package_guard
+```
+
+This covers the unit/spec suite, gem build, and package contents guard. The Kind-backed E2E runner is listed separately below because it requires Docker, Kind, and kubectl.
+
 ## E2E Test Usage
+
+The commands in this section run Kind-backed E2E tests and require Docker, Kind, and kubectl.
 
 Use the repository-level scripts for all E2E runs:
 
