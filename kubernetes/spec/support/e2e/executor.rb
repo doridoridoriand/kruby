@@ -602,9 +602,9 @@ module SpecSupport
       end
 
       def seed_ingress(api, namespace:, cleanup:)
-        name = resource_name("ingress")
+        name = resource_name("ingresses")
         api.create_namespaced_ingress(namespace, Factories.ingress(name: name, labels: base_labels(name)))
-        cleanup.track_resource(namespace: namespace, resource_type: "ingress", name: name)
+        cleanup.track_resource(namespace: namespace, resource_type: "ingresses", name: name)
         name
       end
 

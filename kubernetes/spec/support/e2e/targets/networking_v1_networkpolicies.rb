@@ -3,7 +3,7 @@
 module SpecSupport
   module E2E
     module Targets
-      module NetworkingV1IngressClass
+      module NetworkingV1Networkpolicies
         module_function
 
         def register!(catalog)
@@ -11,9 +11,9 @@ module SpecSupport
             catalog.register(
               api_group: "networking.k8s.io",
               version: "v1",
-              resource: "ingressclasses",
+              resource: "networkpolicies",
               operation: operation,
-              namespace_scoped: false
+              namespace_scoped: true
             )
           end
 

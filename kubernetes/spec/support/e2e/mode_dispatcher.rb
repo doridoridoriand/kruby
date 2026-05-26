@@ -3,9 +3,9 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
-require_relative "targets/networking_v1_ingress"
-require_relative "targets/networking_v1_network_policy"
-require_relative "targets/networking_v1_ingress_class"
+require_relative "targets/networking_v1_ingresses"
+require_relative "targets/networking_v1_networkpolicies"
+require_relative "targets/networking_v1_ingressclasses"
 require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
 require_relative "targets/batch_v1_jobs"
@@ -61,9 +61,9 @@ module SpecSupport
         Targets::CoreV1Services.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
-        Targets::NetworkingV1Ingress.register!(catalog)
-        Targets::NetworkingV1NetworkPolicy.register!(catalog)
-        Targets::NetworkingV1IngressClass.register!(catalog)
+        Targets::NetworkingV1Ingresses.register!(catalog)
+        Targets::NetworkingV1Networkpolicies.register!(catalog)
+        Targets::NetworkingV1Ingressclasses.register!(catalog)
         catalog
       end
 
