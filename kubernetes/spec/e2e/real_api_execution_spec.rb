@@ -27,6 +27,7 @@ RSpec.describe "real API selector execution", :real_api do
     expect(summary.fetch("recorded")).to eq(summary.fetch("resolved"))
     expect(summary.fetch("covered")).to be > 0
     expect(summary.fetch("failed")).to eq(0), JSON.pretty_generate(result)
+    expect(summary.fetch("unsupported")).to eq(0), "Expected zero unsupported targets, got #{summary.fetch('unsupported')}: #{JSON.pretty_generate(result)}"
 
     coverage_path = result.fetch("coveragePath")
     expect(File.exist?(coverage_path)).to be(true), "coverage file missing: #{coverage_path}"

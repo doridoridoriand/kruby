@@ -7,7 +7,7 @@ module SpecSupport
         module_function
 
         def register!(catalog)
-          %w[create get list update patch delete watch].each do |operation|
+          %w[create get list update patch delete].each do |operation|
             catalog.register(
               api_group: "core",
               version: "v1",

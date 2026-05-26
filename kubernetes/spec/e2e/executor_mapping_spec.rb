@@ -27,4 +27,33 @@ RSpec.describe SpecSupport::E2E::Executor do
     expect(executor.send(:api_method_name, watch_deployment)).to eq("AppsV1Api#watch_namespaced_deployment")
     expect(executor.send(:api_method_name, watch_job)).to eq("BatchV1Api#watch_namespaced_job")
   end
+
+  it "maps config-maps, secrets, and namespaces to CoreV1Api methods" do
+    executor = described_class.new
+
+    %w[create get list update patch delete].each do |op|
+      cm = SpecSupport::E2E::TargetSelector.parse("core/v1/config-maps:#{op}")
+      secret = SpecSupport::E2E::TargetSelector.parse("core/v1/secrets:#{op}")
+      ns = SpecSupport::E2E::TargetSelector.parse("core/v1/namespaces:#{op}")
+
+      api_action = case op
+      when "create"
+        ["create_namespaced_config_map", "create_namespaced_secret", "create_namespace"]
+      when "get"
+        ["read_namespaced_config_map", "read_namespaced_secret", "read_namespace"]
+      when "list"
+        ["list_namespaced_config_map", "list_namespaced_secret", "list_namespace"]
+      when "update"
+        ["replace_namespaced_config_map", "replace_namespaced_secret", "replace_namespace"]
+      when "patch"
+        ["patch_namespaced_config_map", "patch_namespaced_secret", "patch_namespace"]
+      when "delete"
+        ["delete_namespaced_config_map", "delete_namespaced_secret", "delete_namespace"]
+      end
+
+      expect(executor.send(:api_method_name, cm)).to eq("CoreV1Api##{api_action[0]}")
+      expect(executor.send(:api_method_name, secret)).to eq("CoreV1Api##{api_action[1]}")
+      expect(executor.send(:api_method_name, ns)).to eq("CoreV1Api##{api_action[2]}")
+    end
+  end
 end

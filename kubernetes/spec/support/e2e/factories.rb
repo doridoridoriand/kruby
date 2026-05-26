@@ -109,6 +109,46 @@ module SpecSupport
         }
       end
 
+      def config_map(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "ConfigMap",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          data: {
+            "app" => name
+          }
+        }
+      end
+
+      def secret(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "Secret",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          type: "Opaque",
+          stringData: {
+            "key" => "e2e-test-value"
+          }
+        }
+      end
+
+      def namespace(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "Namespace",
+          metadata: {
+            name: name,
+            labels: labels
+          }
+        }
+      end
+
       def role(name:, labels: {})
         {
           apiVersion: "rbac.authorization.k8s.io/v1",
