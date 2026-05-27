@@ -16,6 +16,7 @@ require_relative "targets/core_v1_config_maps"
 require_relative "targets/core_v1_pods"
 require_relative "targets/core_v1_endpoints"
 require_relative "targets/core_v1_nodes"
+require_relative "targets/core_v1_persistentvolumes"
 require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_persistentvolumeclaims"
 require_relative "targets/core_v1_services"
@@ -23,6 +24,9 @@ require_relative "targets/rbac_authorization_k8s_io_v1_roles"
 require_relative "targets/rbac_authorization_k8s_io_v1_clusterroles"
 require_relative "targets/rbac_authorization_k8s_io_v1_rolebindings"
 require_relative "targets/rbac_authorization_k8s_io_v1_clusterrolebindings"
+require_relative "targets/storage_k8s_io_v1_csidrivers"
+require_relative "targets/storage_k8s_io_v1_csistoragecapacities"
+require_relative "targets/storage_k8s_io_v1_storageclasses"
 
 module SpecSupport
   module E2E
@@ -51,7 +55,8 @@ module SpecSupport
         "apps" => 20,
         "batch" => 30,
         "rbac.authorization.k8s.io" => 40,
-        "networking.k8s.io" => 50
+        "networking.k8s.io" => 50,
+        "storage.k8s.io" => 60
       }.freeze
 
       attr_reader :target_catalog
@@ -68,6 +73,7 @@ module SpecSupport
         Targets::CoreV1Pods.register!(catalog)
         Targets::CoreV1Endpoints.register!(catalog)
         Targets::CoreV1Nodes.register!(catalog)
+        Targets::CoreV1PersistentVolumes.register!(catalog)
         Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1PersistentVolumeClaims.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
@@ -83,6 +89,9 @@ module SpecSupport
         Targets::NetworkingV1Ingresses.register!(catalog)
         Targets::NetworkingV1Networkpolicies.register!(catalog)
         Targets::NetworkingV1Ingressclasses.register!(catalog)
+        Targets::StorageK8sIoV1CsiDrivers.register!(catalog)
+        Targets::StorageK8sIoV1CsiStorageCapacities.register!(catalog)
+        Targets::StorageK8sIoV1StorageClasses.register!(catalog)
         catalog
       end
 

@@ -70,6 +70,18 @@ module SpecSupport
           patch_method: :patch_namespaced_persistent_volume_claim,
           delete_method: :delete_namespaced_persistent_volume_claim
         },
+        ["core", "v1", "persistentvolumes"] => {
+          api_class: "CoreV1Api",
+          factory: :persistent_volume,
+          name_prefix: "pv",
+          namespace_scoped: false,
+          create_method: :create_persistent_volume,
+          read_method: :read_persistent_volume,
+          list_method: :list_persistent_volume,
+          replace_method: :replace_persistent_volume,
+          patch_method: :patch_persistent_volume,
+          delete_method: :delete_persistent_volume
+        },
         ["core", "v1", "nodes"] => {
           api_class: "CoreV1Api",
           namespace_scoped: false,
@@ -115,6 +127,43 @@ module SpecSupport
           replace_method: :replace_namespaced_stateful_set,
           patch_method: :patch_namespaced_stateful_set,
           delete_method: :delete_namespaced_stateful_set
+        },
+        ["storage.k8s.io", "v1", "csidrivers"] => {
+          api_class: "StorageV1Api",
+          factory: :csi_driver,
+          name_prefix: "csidriver",
+          namespace_scoped: false,
+          create_method: :create_csi_driver,
+          read_method: :read_csi_driver,
+          list_method: :list_csi_driver,
+          replace_method: :replace_csi_driver,
+          patch_method: :patch_csi_driver,
+          delete_method: :delete_csi_driver
+        },
+        ["storage.k8s.io", "v1", "csistoragecapacities"] => {
+          api_class: "StorageV1Api",
+          factory: :csi_storage_capacity,
+          name_prefix: "csistoragecapacity",
+          namespace_scoped: true,
+          kubectl_resource: "csistoragecapacities.storage.k8s.io",
+          create_method: :create_namespaced_csi_storage_capacity,
+          read_method: :read_namespaced_csi_storage_capacity,
+          list_method: :list_namespaced_csi_storage_capacity,
+          replace_method: :replace_namespaced_csi_storage_capacity,
+          patch_method: :patch_namespaced_csi_storage_capacity,
+          delete_method: :delete_namespaced_csi_storage_capacity
+        },
+        ["storage.k8s.io", "v1", "storageclasses"] => {
+          api_class: "StorageV1Api",
+          factory: :storage_class,
+          name_prefix: "storageclass",
+          namespace_scoped: false,
+          create_method: :create_storage_class,
+          read_method: :read_storage_class,
+          list_method: :list_storage_class,
+          replace_method: :replace_storage_class,
+          patch_method: :patch_storage_class,
+          delete_method: :delete_storage_class
         }
       }.freeze
 
