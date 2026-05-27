@@ -33,6 +33,36 @@ RSpec.describe "changed mode selector resolution" do
     expect(selection.resolved_targets).to include("core/v1/pods:create", "core/v1/pods:list")
   end
 
+  it "maps persistentvolumeclaims target definition changes to PVC selectors" do
+    context = SpecSupport::E2E::RunContext.from_env(
+      "E2E_MODE" => "changed",
+      "BASE_REF" => "origin/HEAD",
+      "E2E_FALLBACK_STRATEGY" => "minimal-smoke"
+    ).with_changed_files(["kubernetes/spec/support/e2e/targets/core_v1_persistentvolumeclaims.rb"])
+
+    dispatcher = SpecSupport::E2E::ModeDispatcher.new
+    selection = dispatcher.dispatch(context)
+
+    expect(selection.fallback_used).to be(false)
+    expect(selection.resolved_targets).to include("core/v1/persistentvolumeclaims:create")
+    expect(selection.resolved_targets).to include("core/v1/persistentvolumeclaims:watch")
+  end
+
+  it "maps persistentvolumeclaims full spec changes to PVC selectors" do
+    context = SpecSupport::E2E::RunContext.from_env(
+      "E2E_MODE" => "changed",
+      "BASE_REF" => "origin/HEAD",
+      "E2E_FALLBACK_STRATEGY" => "minimal-smoke"
+    ).with_changed_files(["kubernetes/spec/e2e/core_v1_persistentvolumeclaims_full_spec.rb"])
+
+    dispatcher = SpecSupport::E2E::ModeDispatcher.new
+    selection = dispatcher.dispatch(context)
+
+    expect(selection.fallback_used).to be(false)
+    expect(selection.resolved_targets).to include("core/v1/persistentvolumeclaims:create")
+    expect(selection.resolved_targets).to include("core/v1/persistentvolumeclaims:watch")
+  end
+
   it "falls back to full catalog when fallback strategy is full" do
     context = SpecSupport::E2E::RunContext.from_env(
       "E2E_MODE" => "changed",
