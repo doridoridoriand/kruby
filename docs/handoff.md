@@ -2,36 +2,37 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-05-25 04:27:55 UTC
+生成時刻: 2026-05-26 00:58:50 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `HEAD` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `codex/e2e-validation-20260526` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `755a4d81f7d1fe9e75ac4dd3b37ee499084884cb` (`test: add unit tests for Configuration (loader.rb) (#26)`)
+- 基点の `HEAD`: `62be7cf1219e9fe39128adfaeffbd2b0112e7825` (`test: add E2E tests for core/v1 namespaces (#30) (#49)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- No staged changes other than `docs/handoff.md`.
+- `AGENTS.md`: staged modification.
+- `CONTRIBUTING.md`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `HEAD`
-- Base HEAD: `755a4d81f7d1fe9e75ac4dd3b37ee499084884cb`
+- Branch: `codex/e2e-validation-20260526`
+- Base HEAD: `62be7cf1219e9fe39128adfaeffbd2b0112e7825`
 - Recent commits:
 
 ```text
-755a4d8 test: add unit tests for Configuration (loader.rb) (#26)
-f6bca81 Merge pull request #23 from doridoridoriand/release/1.36.0.1
-3f73ecf release: 1.36.0.1
-4afe686 chore: sync lockfile with kruby 1.35.0.6
-253b9b5 release: 1.35.0.6
+62be7cf test: add E2E tests for core/v1 namespaces (#30) (#49)
+9ab3528 test: add E2E tests for core/v1 secrets (#32) (#48)
+cc93965 test: add E2E tests for core/v1 config maps (#31) (#46)
+d93b03d test: add E2E tests for core/v1 services (#29) (#41)
+acc19bd test: add unit tests for Configuration (loader.rb) (#26) (#39)
 ```
 
 ## 5. Commands Run
@@ -40,7 +41,9 @@ f6bca81 Merge pull request #23 from doridoridoriand/release/1.36.0.1
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
-No staged diff summary available.
+ AGENTS.md       |  1 +
+ CONTRIBUTING.md | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+)
 ```
 
 ## 6. Verification
