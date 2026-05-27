@@ -15,5 +15,7 @@ RSpec.describe "full mode scheduling.k8s.io/v1 priorityclasses coverage" do
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected)
+    expect(selection.resolved_targets.index("scheduling.k8s.io/v1/priorityclasses:create"))
+      .to be < selection.resolved_targets.index("scheduling.k8s.io/v1/priorityclasses:delete")
   end
 end

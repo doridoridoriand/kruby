@@ -15,5 +15,7 @@ RSpec.describe "full mode storage.k8s.io/v1 csidrivers coverage" do
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected)
+    expect(selection.resolved_targets.index("storage.k8s.io/v1/csidrivers:create"))
+      .to be < selection.resolved_targets.index("storage.k8s.io/v1/csidrivers:delete")
   end
 end

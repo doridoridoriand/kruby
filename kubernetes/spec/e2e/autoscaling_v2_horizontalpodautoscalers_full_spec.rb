@@ -15,5 +15,7 @@ RSpec.describe "full mode autoscaling/v2 horizontalpodautoscalers coverage" do
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected)
+    expect(selection.resolved_targets.index("autoscaling/v2/horizontalpodautoscalers:create"))
+      .to be < selection.resolved_targets.index("autoscaling/v2/horizontalpodautoscalers:delete")
   end
 end

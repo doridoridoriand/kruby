@@ -15,5 +15,7 @@ RSpec.describe "full mode policy/v1 poddisruptionbudgets coverage" do
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected)
+    expect(selection.resolved_targets.index("policy/v1/poddisruptionbudgets:create"))
+      .to be < selection.resolved_targets.index("policy/v1/poddisruptionbudgets:delete")
   end
 end

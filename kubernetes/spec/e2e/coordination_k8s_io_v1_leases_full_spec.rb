@@ -15,5 +15,7 @@ RSpec.describe "full mode coordination.k8s.io/v1 leases coverage" do
 
     expect(selection.mode).to eq("full")
     expect(selection.resolved_targets).to include(*expected)
+    expect(selection.resolved_targets.index("coordination.k8s.io/v1/leases:create"))
+      .to be < selection.resolved_targets.index("coordination.k8s.io/v1/leases:delete")
   end
 end
