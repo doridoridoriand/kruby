@@ -76,6 +76,45 @@ module SpecSupport
           read_method: :read_node,
           list_method: :list_node,
           patch_method: :patch_node
+        },
+        ["apps", "v1", "daemonsets"] => {
+          api_class: "AppsV1Api",
+          factory: :daemon_set,
+          name_prefix: "daemonset",
+          namespace_scoped: true,
+          kubectl_resource: "daemonset",
+          create_method: :create_namespaced_daemon_set,
+          read_method: :read_namespaced_daemon_set,
+          list_method: :list_namespaced_daemon_set,
+          replace_method: :replace_namespaced_daemon_set,
+          patch_method: :patch_namespaced_daemon_set,
+          delete_method: :delete_namespaced_daemon_set
+        },
+        ["apps", "v1", "replicasets"] => {
+          api_class: "AppsV1Api",
+          factory: :replica_set,
+          name_prefix: "replicaset",
+          namespace_scoped: true,
+          kubectl_resource: "replicaset",
+          create_method: :create_namespaced_replica_set,
+          read_method: :read_namespaced_replica_set,
+          list_method: :list_namespaced_replica_set,
+          replace_method: :replace_namespaced_replica_set,
+          patch_method: :patch_namespaced_replica_set,
+          delete_method: :delete_namespaced_replica_set
+        },
+        ["apps", "v1", "statefulsets"] => {
+          api_class: "AppsV1Api",
+          factory: :stateful_set,
+          name_prefix: "statefulset",
+          namespace_scoped: true,
+          kubectl_resource: "statefulset",
+          create_method: :create_namespaced_stateful_set,
+          read_method: :read_namespaced_stateful_set,
+          list_method: :list_namespaced_stateful_set,
+          replace_method: :replace_namespaced_stateful_set,
+          patch_method: :patch_namespaced_stateful_set,
+          delete_method: :delete_namespaced_stateful_set
         }
       }.freeze
 
