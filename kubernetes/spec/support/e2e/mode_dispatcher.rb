@@ -12,6 +12,10 @@ require_relative "targets/core_v1_endpoints"
 require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_persistentvolumeclaims"
 require_relative "targets/core_v1_services"
+require_relative "targets/rbac_authorization_k8s_io_v1_roles"
+require_relative "targets/rbac_authorization_k8s_io_v1_clusterroles"
+require_relative "targets/rbac_authorization_k8s_io_v1_rolebindings"
+require_relative "targets/rbac_authorization_k8s_io_v1_clusterrolebindings"
 
 module SpecSupport
   module E2E
@@ -38,7 +42,8 @@ module SpecSupport
       API_GROUP_ORDER = {
         "core" => 10,
         "apps" => 20,
-        "batch" => 30
+        "batch" => 30,
+        "rbac.authorization.k8s.io" => 40
       }.freeze
 
       attr_reader :target_catalog
@@ -59,6 +64,10 @@ module SpecSupport
         Targets::CoreV1Services.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
+        Targets::RbacAuthorizationV1Roles.register!(catalog)
+        Targets::RbacAuthorizationV1Clusterroles.register!(catalog)
+        Targets::RbacAuthorizationV1Rolebindings.register!(catalog)
+        Targets::RbacAuthorizationV1Clusterrolebindings.register!(catalog)
         catalog
       end
 
