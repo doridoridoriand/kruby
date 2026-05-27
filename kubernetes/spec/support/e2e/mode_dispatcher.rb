@@ -3,6 +3,9 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/networking_v1_ingresses"
+require_relative "targets/networking_v1_networkpolicies"
+require_relative "targets/networking_v1_ingressclasses"
 require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
 require_relative "targets/batch_v1_jobs"
@@ -43,7 +46,8 @@ module SpecSupport
         "core" => 10,
         "apps" => 20,
         "batch" => 30,
-        "rbac.authorization.k8s.io" => 40
+        "rbac.authorization.k8s.io" => 40,
+        "networking.k8s.io" => 50
       }.freeze
 
       attr_reader :target_catalog
@@ -68,6 +72,9 @@ module SpecSupport
         Targets::RbacAuthorizationV1Clusterroles.register!(catalog)
         Targets::RbacAuthorizationV1Rolebindings.register!(catalog)
         Targets::RbacAuthorizationV1Clusterrolebindings.register!(catalog)
+        Targets::NetworkingV1Ingresses.register!(catalog)
+        Targets::NetworkingV1Networkpolicies.register!(catalog)
+        Targets::NetworkingV1Ingressclasses.register!(catalog)
         catalog
       end
 
