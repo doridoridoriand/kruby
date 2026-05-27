@@ -213,6 +213,12 @@ module SpecSupport
           execute_network_policy_operation(operation, namespace: namespace, cleanup: cleanup)
         when ["networking.k8s.io", "v1", "ingressclasses"]
           execute_ingress_class_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["core", "v1", "config-maps"]
+          execute_config_map_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["core", "v1", "secrets"]
+          execute_secret_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["core", "v1", "namespaces"]
+          execute_namespace_operation(operation, namespace: namespace, cleanup: cleanup)
         else
           raise UnsupportedTargetError, "no executor registered for #{parsed_target.fetch(:id)}"
         end
@@ -850,6 +856,161 @@ module SpecSupport
         end
       end
 
+      def execute_config_map_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::CoreV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          config_map = api.read_namespaced_config_map(name, namespace)
+          assert_resource_name!(config_map, name)
+        when "get"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          config_map = api.read_namespaced_config_map(name, namespace)
+          assert_resource_name!(config_map, name)
+        when "list"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_config_map(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_config_map(name, namespace, [
+                                              {
+                                                op: "add",
+                                                path: "/metadata/labels/e2e-patched",
+                                                value: "true"
+                                              }
+                                            ])
+          config_map = api.read_namespaced_config_map(name, namespace)
+          labels = resource_labels(config_map)
+          raise "patch verification failed for configmap #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            config_map = api.read_namespaced_config_map(name, namespace)
+            api.replace_namespaced_config_map(
+              name,
+              namespace,
+              with_updated_label(config_map, key: "e2e-updated", value: "true")
+            )
+          end
+          config_map = api.read_namespaced_config_map(name, namespace)
+          labels = resource_labels(config_map)
+          raise "update verification failed for configmap #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_config_map(name, namespace)
+          wait_for_resource_absence!("configmap #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_config_map(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/config-maps"
+        end
+      end
+
+      def execute_secret_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::CoreV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          secret = api.read_namespaced_secret(name, namespace)
+          assert_resource_name!(secret, name)
+        when "get"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          secret = api.read_namespaced_secret(name, namespace)
+          assert_resource_name!(secret, name)
+        when "list"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          list = api.list_namespaced_secret(namespace)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          api.patch_namespaced_secret(name, namespace, [
+                                             {
+                                               op: "add",
+                                               path: "/metadata/labels/e2e-patched",
+                                               value: "true"
+                                             }
+                                           ])
+          secret = api.read_namespaced_secret(name, namespace)
+          labels = resource_labels(secret)
+          raise "patch verification failed for secret #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            secret = api.read_namespaced_secret(name, namespace)
+            api.replace_namespaced_secret(
+              name,
+              namespace,
+              with_updated_label(secret, key: "e2e-updated", value: "true")
+            )
+          end
+          secret = api.read_namespaced_secret(name, namespace)
+          labels = resource_labels(secret)
+          raise "update verification failed for secret #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_secret(api, namespace: namespace, cleanup: cleanup)
+          api.delete_namespaced_secret(name, namespace)
+          wait_for_resource_absence!("secret #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_secret(name, namespace) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/secrets"
+        end
+      end
+
+      def execute_namespace_operation(operation, namespace:, cleanup:)
+        api = Kubernetes::CoreV1Api.new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_namespace(api, cleanup: cleanup)
+          ns = api.read_namespace(name)
+          assert_resource_name!(ns, name)
+        when "get"
+          name = seed_namespace(api, cleanup: cleanup)
+          ns = api.read_namespace(name)
+          assert_resource_name!(ns, name)
+        when "list"
+          name = seed_namespace(api, cleanup: cleanup)
+          list = api.list_namespace
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_namespace(api, cleanup: cleanup)
+          api.patch_namespace(name, [
+                                   {
+                                     op: "add",
+                                     path: "/metadata/labels/e2e-patched",
+                                     value: "true"
+                                   }
+                                 ])
+          ns = api.read_namespace(name)
+          labels = resource_labels(ns)
+          raise "patch verification failed for namespace #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_namespace(api, cleanup: cleanup)
+          with_conflict_retry do
+            ns = api.read_namespace(name)
+            api.replace_namespace(
+              name,
+              with_updated_label(ns, key: "e2e-updated", value: "true")
+            )
+          end
+          ns = api.read_namespace(name)
+          labels = resource_labels(ns)
+          raise "update verification failed for namespace #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_namespace(api, cleanup: cleanup)
+          api.delete_namespace(name)
+          wait_for_resource_absence!("namespace #{name}") do
+            resource_present? { api.read_namespace(name) }
+          end
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/namespaces"
+        end
+      end
+
       def seed_ingress(api, namespace:, cleanup:)
         name = resource_name("ingresses")
         api.create_namespaced_ingress(namespace, Factories.ingress(name: name, labels: base_labels(name)))
@@ -868,6 +1029,27 @@ module SpecSupport
         name = resource_name("ingressclass")
         api.create_ingress_class(Factories.ingress_class(name: name, labels: base_labels(name)))
         cleanup.register { api.delete_ingress_class(name) rescue nil }
+        name
+      end
+
+      def seed_config_map(api, namespace:, cleanup:)
+        name = resource_name("cm")
+        api.create_namespaced_config_map(namespace, Factories.config_map(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "configmap", name: name)
+        name
+      end
+
+      def seed_secret(api, namespace:, cleanup:)
+        name = resource_name("secret")
+        api.create_namespaced_secret(namespace, Factories.secret(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: namespace, resource_type: "secret", name: name)
+        name
+      end
+
+      def seed_namespace(api, cleanup:)
+        name = resource_name("ns")
+        api.create_namespace(Factories.namespace(name: name, labels: base_labels(name)))
+        cleanup.track_resource(namespace: nil, resource_type: "namespace", name: name)
         name
       end
 
@@ -1075,6 +1257,24 @@ module SpecSupport
         when ["networking.k8s.io", "ingressclasses", "update"] then "NetworkingV1Api#replace_ingress_class"
         when ["networking.k8s.io", "ingressclasses", "patch"] then "NetworkingV1Api#patch_ingress_class"
         when ["networking.k8s.io", "ingressclasses", "delete"] then "NetworkingV1Api#delete_ingress_class"
+        when ["core", "config-maps", "create"] then "CoreV1Api#create_namespaced_config_map"
+        when ["core", "config-maps", "get"] then "CoreV1Api#read_namespaced_config_map"
+        when ["core", "config-maps", "list"] then "CoreV1Api#list_namespaced_config_map"
+        when ["core", "config-maps", "update"] then "CoreV1Api#replace_namespaced_config_map"
+        when ["core", "config-maps", "patch"] then "CoreV1Api#patch_namespaced_config_map"
+        when ["core", "config-maps", "delete"] then "CoreV1Api#delete_namespaced_config_map"
+        when ["core", "secrets", "create"] then "CoreV1Api#create_namespaced_secret"
+        when ["core", "secrets", "get"] then "CoreV1Api#read_namespaced_secret"
+        when ["core", "secrets", "list"] then "CoreV1Api#list_namespaced_secret"
+        when ["core", "secrets", "update"] then "CoreV1Api#replace_namespaced_secret"
+        when ["core", "secrets", "patch"] then "CoreV1Api#patch_namespaced_secret"
+        when ["core", "secrets", "delete"] then "CoreV1Api#delete_namespaced_secret"
+        when ["core", "namespaces", "create"] then "CoreV1Api#create_namespace"
+        when ["core", "namespaces", "get"] then "CoreV1Api#read_namespace"
+        when ["core", "namespaces", "list"] then "CoreV1Api#list_namespace"
+        when ["core", "namespaces", "update"] then "CoreV1Api#replace_namespace"
+        when ["core", "namespaces", "patch"] then "CoreV1Api#patch_namespace"
+        when ["core", "namespaces", "delete"] then "CoreV1Api#delete_namespace"
         else
           nil
         end
