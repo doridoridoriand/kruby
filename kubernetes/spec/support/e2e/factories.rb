@@ -151,7 +151,6 @@ module SpecSupport
           kind: "RoleBinding",
           metadata: {
             name: name,
-            namespace: namespace,
             labels: labels
           },
           roleRef: {
@@ -163,8 +162,7 @@ module SpecSupport
             {
               kind: "ServiceAccount",
               name: "default",
-              namespace: "default",
-              apiGroup: ""
+              namespace: namespace
             }
           ]
         }
@@ -191,6 +189,58 @@ module SpecSupport
               apiGroup: ""
             }
           ]
+        }
+      end
+
+      def ingress(name:, labels: {})
+        {
+          "apiVersion" => "networking.k8s.io/v1",
+          "kind" => "Ingress",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "rules" => [
+              {
+                "host" => "e2e-test.local",
+                "http" => {
+                  "paths" => [
+                    {
+                      "path" => "/",
+                      "pathType" => "Prefix",
+                      "backend" => {
+                        "service" => {
+                          "name" => "nonexistent",
+                          "port" => { "number" => 80 }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      end
+
+      def network_policy(name:, labels: {})
+        {
+          "apiVersion" => "networking.k8s.io/v1",
+          "kind" => "NetworkPolicy",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "podSelector" => { "matchLabels" => { "app" => "e2e-test" } },
+            "policyTypes" => ["Ingress"]
+          }
+        }
+      end
+
+      def ingress_class(name:, labels: {})
+        {
+          "apiVersion" => "networking.k8s.io/v1",
+          "kind" => "IngressClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "controller" => "e2e-test-controller.local"
+          }
         }
       end
     end
