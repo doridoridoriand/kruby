@@ -12,6 +12,7 @@ require_relative "targets/batch_v1_jobs"
 require_relative "targets/core_v1_config_maps"
 require_relative "targets/core_v1_pods"
 require_relative "targets/core_v1_endpoints"
+require_relative "targets/core_v1_nodes"
 require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_persistentvolumeclaims"
 require_relative "targets/core_v1_services"
@@ -63,6 +64,7 @@ module SpecSupport
         Targets::CoreV1Namespaces.register!(catalog)
         Targets::CoreV1Pods.register!(catalog)
         Targets::CoreV1Endpoints.register!(catalog)
+        Targets::CoreV1Nodes.register!(catalog)
         Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1PersistentVolumeClaims.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
