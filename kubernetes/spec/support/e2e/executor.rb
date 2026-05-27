@@ -164,6 +164,57 @@ module SpecSupport
           replace_method: :replace_storage_class,
           patch_method: :patch_storage_class,
           delete_method: :delete_storage_class
+        },
+        ["autoscaling", "v2", "horizontalpodautoscalers"] => {
+          api_class: "AutoscalingV2Api",
+          factory: :horizontal_pod_autoscaler,
+          name_prefix: "hpa",
+          namespace_scoped: true,
+          kubectl_resource: "horizontalpodautoscaler",
+          create_method: :create_namespaced_horizontal_pod_autoscaler_post_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers,
+          read_method: :read_namespaced_horizontal_pod_autoscaler_get_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name,
+          list_method: :list_namespaced_horizontal_pod_autoscaler_get_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers,
+          replace_method: :replace_namespaced_horizontal_pod_autoscaler_put_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name,
+          patch_method: :patch_namespaced_horizontal_pod_autoscaler_patch_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name,
+          delete_method: :delete_namespaced_horizontal_pod_autoscaler_delete_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name
+        },
+        ["policy", "v1", "poddisruptionbudgets"] => {
+          api_class: "PolicyV1Api",
+          factory: :pod_disruption_budget,
+          name_prefix: "pdb",
+          namespace_scoped: true,
+          kubectl_resource: "poddisruptionbudget",
+          create_method: :create_namespaced_pod_disruption_budget,
+          read_method: :read_namespaced_pod_disruption_budget,
+          list_method: :list_namespaced_pod_disruption_budget,
+          replace_method: :replace_namespaced_pod_disruption_budget,
+          patch_method: :patch_namespaced_pod_disruption_budget,
+          delete_method: :delete_namespaced_pod_disruption_budget
+        },
+        ["coordination.k8s.io", "v1", "leases"] => {
+          api_class: "CoordinationV1Api",
+          factory: :lease,
+          name_prefix: "lease",
+          namespace_scoped: true,
+          kubectl_resource: "lease",
+          create_method: :create_namespaced_lease,
+          read_method: :read_namespaced_lease,
+          list_method: :list_namespaced_lease,
+          replace_method: :replace_namespaced_lease,
+          patch_method: :patch_namespaced_lease,
+          delete_method: :delete_namespaced_lease
+        },
+        ["scheduling.k8s.io", "v1", "priorityclasses"] => {
+          api_class: "SchedulingV1Api",
+          factory: :priority_class,
+          name_prefix: "priorityclass",
+          namespace_scoped: false,
+          create_method: :create_priority_class,
+          read_method: :read_priority_class,
+          list_method: :list_priority_class,
+          replace_method: :replace_priority_class,
+          patch_method: :patch_priority_class,
+          delete_method: :delete_priority_class
         }
       }.freeze
 

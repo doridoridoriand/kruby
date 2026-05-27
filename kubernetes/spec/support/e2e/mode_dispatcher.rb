@@ -3,6 +3,8 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/autoscaling_v2_horizontalpodautoscalers"
+require_relative "targets/coordination_k8s_io_v1_leases"
 require_relative "targets/networking_v1_ingresses"
 require_relative "targets/networking_v1_networkpolicies"
 require_relative "targets/networking_v1_ingressclasses"
@@ -27,6 +29,8 @@ require_relative "targets/rbac_authorization_k8s_io_v1_clusterrolebindings"
 require_relative "targets/storage_k8s_io_v1_csidrivers"
 require_relative "targets/storage_k8s_io_v1_csistoragecapacities"
 require_relative "targets/storage_k8s_io_v1_storageclasses"
+require_relative "targets/policy_v1_poddisruptionbudgets"
+require_relative "targets/scheduling_k8s_io_v1_priorityclasses"
 
 module SpecSupport
   module E2E
@@ -56,7 +60,11 @@ module SpecSupport
         "batch" => 30,
         "rbac.authorization.k8s.io" => 40,
         "networking.k8s.io" => 50,
-        "storage.k8s.io" => 60
+        "storage.k8s.io" => 60,
+        "autoscaling" => 70,
+        "policy" => 80,
+        "coordination.k8s.io" => 90,
+        "scheduling.k8s.io" => 100
       }.freeze
 
       attr_reader :target_catalog
@@ -92,6 +100,10 @@ module SpecSupport
         Targets::StorageK8sIoV1CsiDrivers.register!(catalog)
         Targets::StorageK8sIoV1CsiStorageCapacities.register!(catalog)
         Targets::StorageK8sIoV1StorageClasses.register!(catalog)
+        Targets::AutoscalingV2HorizontalPodAutoscalers.register!(catalog)
+        Targets::PolicyV1PodDisruptionBudgets.register!(catalog)
+        Targets::CoordinationK8sIoV1Leases.register!(catalog)
+        Targets::SchedulingK8sIoV1PriorityClasses.register!(catalog)
         catalog
       end
 

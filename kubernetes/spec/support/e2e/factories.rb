@@ -491,6 +491,62 @@ module SpecSupport
           "capacity" => "1Mi"
         }
       end
+
+      def horizontal_pod_autoscaler(name:, labels: {})
+        {
+          "apiVersion" => "autoscaling/v2",
+          "kind" => "HorizontalPodAutoscaler",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "minReplicas" => 1,
+            "maxReplicas" => 3,
+            "scaleTargetRef" => {
+              "apiVersion" => "apps/v1",
+              "kind" => "Deployment",
+              "name" => "#{name}-target"
+            }
+          }
+        }
+      end
+
+      def pod_disruption_budget(name:, labels: {})
+        {
+          "apiVersion" => "policy/v1",
+          "kind" => "PodDisruptionBudget",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "maxUnavailable" => 1,
+            "selector" => {
+              "matchLabels" => {
+                "app.kubernetes.io/instance" => name
+              }
+            }
+          }
+        }
+      end
+
+      def lease(name:, labels: {})
+        {
+          "apiVersion" => "coordination.k8s.io/v1",
+          "kind" => "Lease",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "holderIdentity" => "kruby-e2e",
+            "leaseDurationSeconds" => 30
+          }
+        }
+      end
+
+      def priority_class(name:, labels: {})
+        {
+          "apiVersion" => "scheduling.k8s.io/v1",
+          "kind" => "PriorityClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "value" => 1000,
+          "globalDefault" => false,
+          "description" => "kruby E2E priority class"
+        }
+      end
     end
   end
 end
