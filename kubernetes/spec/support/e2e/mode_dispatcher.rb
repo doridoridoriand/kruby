@@ -3,15 +3,22 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/autoscaling_v2_horizontalpodautoscalers"
+require_relative "targets/coordination_k8s_io_v1_leases"
 require_relative "targets/networking_v1_ingresses"
 require_relative "targets/networking_v1_networkpolicies"
 require_relative "targets/networking_v1_ingressclasses"
 require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
+require_relative "targets/apps_v1_daemonsets"
+require_relative "targets/apps_v1_replicasets"
+require_relative "targets/apps_v1_statefulsets"
 require_relative "targets/batch_v1_jobs"
 require_relative "targets/core_v1_config_maps"
 require_relative "targets/core_v1_pods"
 require_relative "targets/core_v1_endpoints"
+require_relative "targets/core_v1_nodes"
+require_relative "targets/core_v1_persistentvolumes"
 require_relative "targets/core_v1_secrets"
 require_relative "targets/core_v1_persistentvolumeclaims"
 require_relative "targets/core_v1_services"
@@ -19,6 +26,11 @@ require_relative "targets/rbac_authorization_k8s_io_v1_roles"
 require_relative "targets/rbac_authorization_k8s_io_v1_clusterroles"
 require_relative "targets/rbac_authorization_k8s_io_v1_rolebindings"
 require_relative "targets/rbac_authorization_k8s_io_v1_clusterrolebindings"
+require_relative "targets/policy_v1_poddisruptionbudgets"
+require_relative "targets/scheduling_k8s_io_v1_priorityclasses"
+require_relative "targets/storage_k8s_io_v1_csidrivers"
+require_relative "targets/storage_k8s_io_v1_csistoragecapacities"
+require_relative "targets/storage_k8s_io_v1_storageclasses"
 
 module SpecSupport
   module E2E
@@ -47,7 +59,12 @@ module SpecSupport
         "apps" => 20,
         "batch" => 30,
         "rbac.authorization.k8s.io" => 40,
-        "networking.k8s.io" => 50
+        "networking.k8s.io" => 50,
+        "storage.k8s.io" => 60,
+        "autoscaling" => 70,
+        "policy" => 80,
+        "coordination.k8s.io" => 90,
+        "scheduling.k8s.io" => 100
       }.freeze
 
       attr_reader :target_catalog
@@ -63,10 +80,15 @@ module SpecSupport
         Targets::CoreV1Namespaces.register!(catalog)
         Targets::CoreV1Pods.register!(catalog)
         Targets::CoreV1Endpoints.register!(catalog)
+        Targets::CoreV1Nodes.register!(catalog)
+        Targets::CoreV1PersistentVolumes.register!(catalog)
         Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1PersistentVolumeClaims.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
+        Targets::AppsV1DaemonSets.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
+        Targets::AppsV1ReplicaSets.register!(catalog)
+        Targets::AppsV1StatefulSets.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
         Targets::RbacAuthorizationV1Roles.register!(catalog)
         Targets::RbacAuthorizationV1Clusterroles.register!(catalog)
@@ -75,6 +97,13 @@ module SpecSupport
         Targets::NetworkingV1Ingresses.register!(catalog)
         Targets::NetworkingV1Networkpolicies.register!(catalog)
         Targets::NetworkingV1Ingressclasses.register!(catalog)
+        Targets::StorageK8sIoV1CsiDrivers.register!(catalog)
+        Targets::StorageK8sIoV1CsiStorageCapacities.register!(catalog)
+        Targets::StorageK8sIoV1StorageClasses.register!(catalog)
+        Targets::AutoscalingV2HorizontalPodAutoscalers.register!(catalog)
+        Targets::PolicyV1PodDisruptionBudgets.register!(catalog)
+        Targets::CoordinationK8sIoV1Leases.register!(catalog)
+        Targets::SchedulingK8sIoV1PriorityClasses.register!(catalog)
         catalog
       end
 

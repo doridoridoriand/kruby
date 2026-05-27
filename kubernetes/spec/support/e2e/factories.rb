@@ -58,6 +58,111 @@ module SpecSupport
         }
       end
 
+      def daemon_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "DaemonSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                nodeSelector: {
+                  "kruby-e2e-node" => "never"
+                },
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
+      def replica_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "ReplicaSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            replicas: 0,
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
+      def stateful_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "StatefulSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            replicas: 0,
+            serviceName: "#{name}-headless",
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
       def job(name:, labels: {})
         pod_labels = labels.merge("job" => name)
 
@@ -145,6 +250,76 @@ module SpecSupport
           metadata: {
             name: name,
             labels: labels
+          }
+        }
+      end
+
+      def endpoints(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "Endpoints",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          subsets: [
+            {
+              addresses: [
+                {
+                  ip: "10.0.0.1"
+                }
+              ],
+              ports: [
+                {
+                  name: "http",
+                  port: 80,
+                  protocol: "TCP"
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      def persistent_volume_claim(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "PersistentVolumeClaim",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            storageClassName: "",
+            accessModes: ["ReadWriteOnce"],
+            resources: {
+              requests: {
+                storage: "1Mi"
+              }
+            }
+          }
+        }
+      end
+
+      def persistent_volume(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "PersistentVolume",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            capacity: {
+              storage: "1Mi"
+            },
+            accessModes: ["ReadWriteOnce"],
+            persistentVolumeReclaimPolicy: "Retain",
+            storageClassName: "",
+            hostPath: {
+              path: "/tmp/#{name}",
+              type: "DirectoryOrCreate"
+            }
           }
         }
       end
@@ -279,8 +454,97 @@ module SpecSupport
           "kind" => "IngressClass",
           "metadata" => { "name" => name, "labels" => labels },
           "spec" => {
-            "controller" => "e2e-test-controller.local"
+            "controller" => "kruby-e2e.example/controller"
           }
+        }
+      end
+
+      def storage_class(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "StorageClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "provisioner" => "kubernetes.io/no-provisioner",
+          "volumeBindingMode" => "WaitForFirstConsumer"
+        }
+      end
+
+      def csi_driver(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "CSIDriver",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "attachRequired" => false,
+            "podInfoOnMount" => false,
+            "volumeLifecycleModes" => ["Persistent"]
+          }
+        }
+      end
+
+      def csi_storage_capacity(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "CSIStorageCapacity",
+          "metadata" => { "name" => name, "labels" => labels },
+          "storageClassName" => "kruby-e2e-no-provisioner",
+          "capacity" => "1Mi"
+        }
+      end
+
+      def horizontal_pod_autoscaler(name:, labels: {})
+        {
+          "apiVersion" => "autoscaling/v2",
+          "kind" => "HorizontalPodAutoscaler",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "minReplicas" => 1,
+            "maxReplicas" => 3,
+            "scaleTargetRef" => {
+              "apiVersion" => "apps/v1",
+              "kind" => "Deployment",
+              "name" => "#{name}-target"
+            }
+          }
+        }
+      end
+
+      def pod_disruption_budget(name:, labels: {})
+        {
+          "apiVersion" => "policy/v1",
+          "kind" => "PodDisruptionBudget",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "maxUnavailable" => 1,
+            "selector" => {
+              "matchLabels" => {
+                "app.kubernetes.io/instance" => name
+              }
+            }
+          }
+        }
+      end
+
+      def lease(name:, labels: {})
+        {
+          "apiVersion" => "coordination.k8s.io/v1",
+          "kind" => "Lease",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "holderIdentity" => "kruby-e2e",
+            "leaseDurationSeconds" => 30
+          }
+        }
+      end
+
+      def priority_class(name:, labels: {})
+        {
+          "apiVersion" => "scheduling.k8s.io/v1",
+          "kind" => "PriorityClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "value" => 1000,
+          "globalDefault" => false,
+          "description" => "kruby E2E priority class"
         }
       end
     end

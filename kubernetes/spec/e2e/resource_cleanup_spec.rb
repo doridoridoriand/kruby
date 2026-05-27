@@ -25,4 +25,18 @@ RSpec.describe SpecSupport::E2E::ResourceCleanup do
       "-n", "kruby-e2e-test", "get", "serviceaccount", "default", "-o", "name", allow_failure: true
     ).exactly(3).times
   end
+
+  it "deletes cluster-scoped tracked resources without a namespace flag" do
+    cluster_manager = instance_double("ClusterManager")
+    cleanup = described_class.new(cluster_manager: cluster_manager)
+
+    allow(cluster_manager).to receive(:kubectl).and_return(success_result)
+
+    cleanup.track_resource(namespace: nil, resource_type: "namespace", name: "kruby-e2e-test")
+    cleanup.cleanup
+
+    expect(cluster_manager).to have_received(:kubectl).with(
+      "delete", "namespace", "kruby-e2e-test", "--ignore-not-found=true", allow_failure: true
+    )
+  end
 end
