@@ -149,6 +149,53 @@ module SpecSupport
         }
       end
 
+      def endpoints(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "Endpoints",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          subsets: [
+            {
+              addresses: [
+                {
+                  ip: "10.0.0.1"
+                }
+              ],
+              ports: [
+                {
+                  name: "http",
+                  port: 80,
+                  protocol: "TCP"
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      def persistent_volume_claim(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "PersistentVolumeClaim",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            storageClassName: "",
+            accessModes: ["ReadWriteOnce"],
+            resources: {
+              requests: {
+                storage: "1Mi"
+              }
+            }
+          }
+        }
+      end
+
       def role(name:, labels: {})
         {
           apiVersion: "rbac.authorization.k8s.io/v1",
@@ -279,7 +326,7 @@ module SpecSupport
           "kind" => "IngressClass",
           "metadata" => { "name" => name, "labels" => labels },
           "spec" => {
-            "controller" => "e2e-test-controller.local"
+            "controller" => "kruby-e2e.example/controller"
           }
         }
       end

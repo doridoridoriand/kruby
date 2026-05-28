@@ -22,10 +22,10 @@ RSpec.describe SpecSupport::E2E::Executor do
     expect(executor.send(:api_method_name, update_deployment)).to eq("AppsV1Api#replace_namespaced_deployment")
     expect(executor.send(:api_method_name, update_job)).to eq("BatchV1Api#replace_namespaced_job")
 
-    expect(executor.send(:api_method_name, watch_pod)).to eq("CoreV1Api#watch_namespaced_pod")
-    expect(executor.send(:api_method_name, watch_service)).to eq("CoreV1Api#watch_namespaced_service")
-    expect(executor.send(:api_method_name, watch_deployment)).to eq("AppsV1Api#watch_namespaced_deployment")
-    expect(executor.send(:api_method_name, watch_job)).to eq("BatchV1Api#watch_namespaced_job")
+    expect(executor.send(:api_method_name, watch_pod)).to eq("CoreV1Api#list_namespaced_pod(watch: true)")
+    expect(executor.send(:api_method_name, watch_service)).to eq("CoreV1Api#list_namespaced_service(watch: true)")
+    expect(executor.send(:api_method_name, watch_deployment)).to eq("AppsV1Api#list_namespaced_deployment(watch: true)")
+    expect(executor.send(:api_method_name, watch_job)).to eq("BatchV1Api#list_namespaced_job(watch: true)")
   end
 
   it "maps config-maps, secrets, and namespaces to CoreV1Api methods" do
@@ -55,5 +55,18 @@ RSpec.describe SpecSupport::E2E::Executor do
       expect(executor.send(:api_method_name, secret)).to eq("CoreV1Api##{api_action[1]}")
       expect(executor.send(:api_method_name, ns)).to eq("CoreV1Api##{api_action[2]}")
     end
+  end
+
+  it "maps every registered full-mode selector to an API method name" do
+    executor = described_class.new
+    dispatcher = SpecSupport::E2E::ModeDispatcher.new
+    selection = dispatcher.dispatch(SpecSupport::E2E::RunContext.from_env("E2E_MODE" => "full"))
+
+    unmapped = selection.resolved_targets.select do |target_id|
+      parsed = SpecSupport::E2E::TargetSelector.parse(target_id)
+      executor.send(:api_method_name, parsed).nil?
+    end
+
+    expect(unmapped).to eq([])
   end
 end

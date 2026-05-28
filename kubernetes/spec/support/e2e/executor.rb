@@ -33,6 +33,75 @@ module SpecSupport
         end
       end
 
+      OPERATION_METHOD_KEYS = {
+        "create" => :create_method,
+        "get" => :read_method,
+        "list" => :list_method,
+        "update" => :replace_method,
+        "patch" => :patch_method,
+        "delete" => :delete_method,
+        "watch" => :list_method
+      }.freeze
+
+      CATALOG_RESOURCE_EXECUTIONS = {
+        ["core", "v1", "endpoints"] => {
+          api_class: "CoreV1Api",
+          factory: :endpoints,
+          name_prefix: "endpoints",
+          namespace_scoped: true,
+          kubectl_resource: "endpoints",
+          create_method: :create_namespaced_endpoints,
+          read_method: :read_namespaced_endpoints,
+          list_method: :list_namespaced_endpoints,
+          replace_method: :replace_namespaced_endpoints,
+          patch_method: :patch_namespaced_endpoints,
+          delete_method: :delete_namespaced_endpoints
+        },
+        ["core", "v1", "persistentvolumeclaims"] => {
+          api_class: "CoreV1Api",
+          factory: :persistent_volume_claim,
+          name_prefix: "pvc",
+          namespace_scoped: true,
+          kubectl_resource: "persistentvolumeclaim",
+          create_method: :create_namespaced_persistent_volume_claim,
+          read_method: :read_namespaced_persistent_volume_claim,
+          list_method: :list_namespaced_persistent_volume_claim,
+          replace_method: :replace_namespaced_persistent_volume_claim,
+          patch_method: :patch_namespaced_persistent_volume_claim,
+          delete_method: :delete_namespaced_persistent_volume_claim
+        },
+        ["core", "v1", "nodes"] => {
+          api_class: "CoreV1Api",
+          namespace_scoped: false,
+          read_method: :read_node,
+          list_method: :list_node,
+          patch_method: :patch_node
+        }
+      }.freeze
+
+      WATCH_ONLY_EXECUTIONS = {
+        ["core", "v1", "pods"] => {
+          api_class: "CoreV1Api",
+          namespace_scoped: true,
+          list_method: :list_namespaced_pod
+        },
+        ["core", "v1", "services"] => {
+          api_class: "CoreV1Api",
+          namespace_scoped: true,
+          list_method: :list_namespaced_service
+        },
+        ["apps", "v1", "deployments"] => {
+          api_class: "AppsV1Api",
+          namespace_scoped: true,
+          list_method: :list_namespaced_deployment
+        },
+        ["batch", "v1", "jobs"] => {
+          api_class: "BatchV1Api",
+          namespace_scoped: true,
+          list_method: :list_namespaced_job
+        }
+      }.freeze
+
       attr_reader :run_id
 
       def initialize(mode_dispatcher: ModeDispatcher.new,
@@ -189,6 +258,20 @@ module SpecSupport
         ]
 
         operation = parsed_target.fetch(:operation)
+        resource_definition = CATALOG_RESOURCE_EXECUTIONS[key]
+
+        if resource_definition
+          execute_catalog_resource_operation(resource_definition, operation, namespace: namespace, cleanup: cleanup)
+          return
+        end
+
+        if operation == "watch"
+          watch_definition = WATCH_ONLY_EXECUTIONS[key]
+          if watch_definition
+            execute_watch_operation(watch_definition, namespace: namespace)
+            return
+          end
+        end
 
         case key
         when %w[core v1 pods]
@@ -430,6 +513,158 @@ module SpecSupport
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for batch/v1/jobs"
         end
+      end
+
+      def execute_catalog_resource_operation(definition, operation, namespace:, cleanup:)
+        method_key = OPERATION_METHOD_KEYS.fetch(operation, nil)
+        method_name = method_key && definition[method_key]
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for catalog resource" unless method_name
+
+        api = Kubernetes.const_get(definition.fetch(:api_class)).new(build_api_client)
+
+        case operation
+        when "create"
+          name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup)
+          resource = read_catalog_resource(api, definition, name, namespace: namespace)
+          assert_resource_name!(resource, name)
+        when "get"
+          name = definition[:factory] ? seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup) : first_node_name!(api)
+          resource = read_catalog_resource(api, definition, name, namespace: namespace)
+          assert_resource_name!(resource, name)
+        when "list"
+          name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup) if definition[:factory]
+          list = list_catalog_resources(api, definition, namespace: namespace)
+          if name
+            assert_list_includes!(list, name)
+          else
+            raise "expected at least one resource in list" if resource_items(list).empty?
+          end
+        when "patch"
+          if definition[:factory]
+            name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup)
+          else
+            name = first_node_name!(api)
+            cleanup.register { remove_node_label(api, name, "e2e-patched") }
+          end
+
+          patch_catalog_resource(api, definition, name, namespace: namespace, key: "e2e-patched", value: "true")
+          resource = read_catalog_resource(api, definition, name, namespace: namespace)
+          labels = resource_labels(resource)
+          raise "patch verification failed for #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup)
+          with_conflict_retry do
+            resource = read_catalog_resource(api, definition, name, namespace: namespace)
+            replace_catalog_resource(
+              api,
+              definition,
+              name,
+              with_updated_label(resource, key: "e2e-updated", value: "true"),
+              namespace: namespace
+            )
+          end
+          resource = read_catalog_resource(api, definition, name, namespace: namespace)
+          labels = resource_labels(resource)
+          raise "update verification failed for #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup)
+          delete_catalog_resource(api, definition, name, namespace: namespace)
+          wait_for_resource_absence!("#{definition.fetch(:api_class)} #{name}") do
+            resource_present? { read_catalog_resource(api, definition, name, namespace: namespace) }
+          end
+        when "watch"
+          seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup) if definition[:factory]
+          execute_watch_operation(definition, namespace: namespace, api: api)
+        end
+      end
+
+      def seed_catalog_resource(api, definition, namespace:, cleanup:)
+        name = resource_name(definition.fetch(:name_prefix))
+        body = Factories.public_send(definition.fetch(:factory), name: name, labels: base_labels(name))
+
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:create_method), namespace, body)
+          cleanup.track_resource(namespace: namespace, resource_type: definition.fetch(:kubectl_resource), name: name)
+        else
+          api.public_send(definition.fetch(:create_method), body)
+          cleanup.register { api.public_send(definition.fetch(:delete_method), name) rescue nil }
+        end
+
+        name
+      end
+
+      def read_catalog_resource(api, definition, name, namespace:)
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:read_method), name, namespace)
+        else
+          api.public_send(definition.fetch(:read_method), name)
+        end
+      end
+
+      def list_catalog_resources(api, definition, namespace:)
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:list_method), namespace)
+        else
+          api.public_send(definition.fetch(:list_method))
+        end
+      end
+
+      def patch_catalog_resource(api, definition, name, namespace:, key:, value:)
+        patch_body = [
+          {
+            op: "add",
+            path: "/metadata/labels/#{key}",
+            value: value
+          }
+        ]
+
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:patch_method), name, namespace, patch_body)
+        else
+          api.public_send(definition.fetch(:patch_method), name, patch_body)
+        end
+      end
+
+      def replace_catalog_resource(api, definition, name, body, namespace:)
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:replace_method), name, namespace, body)
+        else
+          api.public_send(definition.fetch(:replace_method), name, body)
+        end
+      end
+
+      def delete_catalog_resource(api, definition, name, namespace:)
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:delete_method), name, namespace)
+        else
+          api.public_send(definition.fetch(:delete_method), name)
+        end
+      end
+
+      def execute_watch_operation(definition, namespace:, api: nil)
+        api ||= Kubernetes.const_get(definition.fetch(:api_class)).new(build_api_client)
+        watch_opts = {
+          watch: true,
+          timeout_seconds: 1,
+          debug_return_type: "String"
+        }
+
+        if definition.fetch(:namespace_scoped)
+          api.public_send(definition.fetch(:list_method), namespace, watch_opts)
+        else
+          api.public_send(definition.fetch(:list_method), watch_opts)
+        end
+      end
+
+      def first_node_name!(api)
+        names = resource_items(api.list_node).map { |item| resource_name_from(item) }.compact
+        names.first || raise("expected at least one node in the cluster")
+      end
+
+      def remove_node_label(api, name, key)
+        api.patch_node(name, [{ op: "remove", path: "/metadata/labels/#{key}" }])
+      rescue StandardError => e
+        raise unless not_found_error?(e) || unprocessable_entity_error?(e)
       end
 
       def execute_role_operation(operation, namespace:, cleanup:)
@@ -1166,6 +1401,10 @@ module SpecSupport
         error.respond_to?(:code) && error.code.to_i == 409
       end
 
+      def unprocessable_entity_error?(error)
+        error.respond_to?(:code) && error.code.to_i == 422
+      end
+
       def with_conflict_retry(attempts: CONFLICT_RETRY_ATTEMPTS)
         current_attempt = 0
 
@@ -1183,8 +1422,14 @@ module SpecSupport
 
       def api_method_name(parsed_target)
         api_group = parsed_target.fetch(:api_group)
+        version = parsed_target.fetch(:version)
         resource = parsed_target.fetch(:resource)
         operation = parsed_target.fetch(:operation)
+        catalog_method_name = api_method_name_for_catalog_target(
+          [api_group, version, resource],
+          operation
+        )
+        return catalog_method_name if catalog_method_name
 
         case [api_group, resource, operation]
         when ["core", "pods", "create"] then "CoreV1Api#create_namespaced_pod"
@@ -1278,6 +1523,19 @@ module SpecSupport
         else
           nil
         end
+      end
+
+      def api_method_name_for_catalog_target(key, operation)
+        definition = CATALOG_RESOURCE_EXECUTIONS[key]
+        definition ||= WATCH_ONLY_EXECUTIONS[key] if operation == "watch"
+        return nil unless definition
+
+        method_key = OPERATION_METHOD_KEYS.fetch(operation, nil)
+        method_name = method_key && definition[method_key]
+        return nil unless method_name
+
+        suffix = operation == "watch" ? "(watch: true)" : ""
+        "#{definition.fetch(:api_class)}##{method_name}#{suffix}"
       end
 
       def monotonic_time

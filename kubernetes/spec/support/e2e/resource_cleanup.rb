@@ -44,15 +44,10 @@ module SpecSupport
 
       def track_resource(namespace:, resource_type:, name:)
         register do
-          @cluster_manager.kubectl(
-            "-n",
-            namespace,
-            "delete",
-            resource_type,
-            name,
-            "--ignore-not-found=true",
-            allow_failure: true
-          )
+          args = ["delete", resource_type, name, "--ignore-not-found=true"]
+          args.unshift("-n", namespace) unless namespace.nil?
+
+          @cluster_manager.kubectl(*args, allow_failure: true)
         end
       end
 
