@@ -8,6 +8,9 @@ require_relative "targets/networking_v1_networkpolicies"
 require_relative "targets/networking_v1_ingressclasses"
 require_relative "targets/core_v1_namespaces"
 require_relative "targets/apps_v1_deployments"
+require_relative "targets/apps_v1_daemonsets"
+require_relative "targets/apps_v1_replicasets"
+require_relative "targets/apps_v1_statefulsets"
 require_relative "targets/batch_v1_jobs"
 require_relative "targets/core_v1_config_maps"
 require_relative "targets/core_v1_pods"
@@ -68,7 +71,10 @@ module SpecSupport
         Targets::CoreV1Secrets.register!(catalog)
         Targets::CoreV1PersistentVolumeClaims.register!(catalog)
         Targets::CoreV1Services.register!(catalog)
+        Targets::AppsV1DaemonSets.register!(catalog)
         Targets::AppsV1Deployments.register!(catalog)
+        Targets::AppsV1ReplicaSets.register!(catalog)
+        Targets::AppsV1StatefulSets.register!(catalog)
         Targets::BatchV1Jobs.register!(catalog)
         Targets::RbacAuthorizationV1Roles.register!(catalog)
         Targets::RbacAuthorizationV1Clusterroles.register!(catalog)

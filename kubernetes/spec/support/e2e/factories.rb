@@ -58,6 +58,111 @@ module SpecSupport
         }
       end
 
+      def daemon_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "DaemonSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                nodeSelector: {
+                  "kruby-e2e-node" => "never"
+                },
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
+      def replica_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "ReplicaSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            replicas: 0,
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
+      def stateful_set(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          apiVersion: "apps/v1",
+          kind: "StatefulSet",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            replicas: 0,
+            serviceName: "#{name}-headless",
+            selector: {
+              matchLabels: {
+                app: name
+              }
+            },
+            template: {
+              metadata: {
+                labels: pod_labels
+              },
+              spec: {
+                containers: [
+                  {
+                    name: "pause",
+                    image: "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
       def job(name:, labels: {})
         pod_labels = labels.merge("job" => name)
 
