@@ -10,6 +10,7 @@ require "rubygems/package"
 require "shellwords"
 require "kubernetes/version"
 require "kubernetes/release/changelog"
+require "kubernetes/release/publish_guard"
 
 def run_command(*command, env: {})
   return if system(env, *command)
@@ -166,8 +167,13 @@ end
 
 begin
   parser.parse!
+  unless ARGV.empty?
+    raise Kubernetes::Release::Changelog::Error,
+          "unexpected arguments: #{Shellwords.join(ARGV)}"
+  end
 
   options[:tag] ||= "v#{options[:version]}"
+  package_root = File.join(options[:repo_root], "kubernetes")
   gemspec_path = File.join(options[:repo_root], "kubernetes", "kubernetes.gemspec")
   gem_path = if options[:gem]
                File.expand_path(options[:gem])
@@ -203,6 +209,18 @@ begin
   unless remote_sha == head_sha
     raise Kubernetes::Release::Changelog::Error,
           "#{options[:remote]}/#{options[:tag]} points to #{remote_sha}, but HEAD is #{head_sha}"
+  end
+
+  unless options[:gem]
+    untracked_files = Kubernetes::Release::PublishGuard.untracked_gemspec_files(
+      repo_root: options[:repo_root],
+      package_root: package_root,
+      gemspec_path: gemspec_path
+    )
+    unless untracked_files.empty?
+      raise Kubernetes::Release::Changelog::Error,
+            "gem package contains files that are not tracked by git:\n#{untracked_files.join("\n")}"
+    end
   end
 
   published_versions = rubygems_versions(options[:host])
