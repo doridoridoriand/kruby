@@ -301,6 +301,29 @@ module SpecSupport
         }
       end
 
+      def persistent_volume(name:, labels: {})
+        {
+          apiVersion: "v1",
+          kind: "PersistentVolume",
+          metadata: {
+            name: name,
+            labels: labels
+          },
+          spec: {
+            capacity: {
+              storage: "1Mi"
+            },
+            accessModes: ["ReadWriteOnce"],
+            persistentVolumeReclaimPolicy: "Retain",
+            storageClassName: "",
+            hostPath: {
+              path: "/tmp/#{name}",
+              type: "DirectoryOrCreate"
+            }
+          }
+        }
+      end
+
       def role(name:, labels: {})
         {
           apiVersion: "rbac.authorization.k8s.io/v1",
@@ -433,6 +456,39 @@ module SpecSupport
           "spec" => {
             "controller" => "kruby-e2e.example/controller"
           }
+        }
+      end
+
+      def storage_class(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "StorageClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "provisioner" => "kubernetes.io/no-provisioner",
+          "volumeBindingMode" => "WaitForFirstConsumer"
+        }
+      end
+
+      def csi_driver(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "CSIDriver",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "attachRequired" => false,
+            "podInfoOnMount" => false,
+            "volumeLifecycleModes" => ["Persistent"]
+          }
+        }
+      end
+
+      def csi_storage_capacity(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "CSIStorageCapacity",
+          "metadata" => { "name" => name, "labels" => labels },
+          "storageClassName" => "kruby-e2e-no-provisioner",
+          "capacity" => "1Mi"
         }
       end
     end
