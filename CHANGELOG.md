@@ -10,6 +10,23 @@ Historical releases published before this file was introduced are summarized as 
 
 - Nothing yet.
 
+## [1.36.0.2] - 2026-05-28
+
+### Added
+
+- Added GitHub Actions CI for Ruby 3.3 and 3.4 with gem build verification.
+- Added broad Kind-backed E2E coverage across core/v1, apps/v1, RBAC, networking.k8s.io, storage.k8s.io, autoscaling, policy, coordination.k8s.io, and scheduling.k8s.io API resources.
+- Added model serialization/deserialization coverage and unit coverage for version, configuration loading, ConfigError, and ApiError behavior.
+
+### Changed
+
+- Expanded the E2E support layer with reusable target registration, factories, execution mapping, resource cleanup, failure artifacts, and validation documentation.
+- Hardened release and CI workflows by pinning GitHub Actions and disabling persisted checkout credentials.
+
+### Fixed
+
+- Preserved string messages passed to `Kubernetes::ApiError.new`, so `#message` returns the caller-provided message.
+
 ## [1.36.0.1] - 2026-05-25
 
 ### Added
