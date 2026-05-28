@@ -1,0 +1,247 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../../kubernetes/lib", __dir__))
+
+require "fileutils"
+require "open3"
+require "optparse"
+require "rubygems/package"
+require "shellwords"
+require "kubernetes/version"
+require "kubernetes/release/changelog"
+
+def run_command(*command, env: {})
+  return if system(env, *command)
+
+  raise Kubernetes::Release::Changelog::Error, "command failed: #{Shellwords.join(command)}"
+end
+
+def capture_command(*command, env: {})
+  output, status = Open3.capture2e(env, *command)
+  return output if status.success?
+
+  message = "command failed: #{Shellwords.join(command)}"
+  details = output.strip
+  message = "#{message}\n#{details}" unless details.empty?
+  raise Kubernetes::Release::Changelog::Error, message
+end
+
+def tracked_changes_present?(repo_root)
+  !system("git", "-C", repo_root, "diff", "--quiet") ||
+    !system("git", "-C", repo_root, "diff", "--cached", "--quiet")
+end
+
+def git_head(repo_root)
+  capture_command("git", "-C", repo_root, "rev-parse", "HEAD").strip
+end
+
+def local_tag_target(repo_root, tag_name)
+  capture_command("git", "-C", repo_root, "rev-parse", "#{tag_name}^{commit}").strip
+rescue Kubernetes::Release::Changelog::Error
+  raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} does not exist locally"
+end
+
+def remote_tag_target(repo_root, remote, tag_name)
+  output = capture_command(
+    "git", "-C", repo_root, "ls-remote", "--tags", remote,
+    "refs/tags/#{tag_name}", "refs/tags/#{tag_name}^{}"
+  )
+  refs = output.lines.map { |line| line.strip.split(/\s+/, 2) }
+  peeled = refs.find { |(_sha, ref)| ref == "refs/tags/#{tag_name}^{}" }
+  direct = refs.find { |(_sha, ref)| ref == "refs/tags/#{tag_name}" }
+  target = (peeled || direct)&.first
+  raise Kubernetes::Release::Changelog::Error, "tag #{tag_name} does not exist on #{remote}" unless target
+
+  target
+end
+
+def rubygems_versions(host)
+  output = capture_command(
+    "gem", "list", "--remote", "--exact", "kruby", "--all",
+    "--clear-sources", "--source", host
+  )
+  version_list = output[/\(([^)]*)\)/, 1].to_s
+  version_list.split(",").map(&:strip).reject(&:empty?)
+end
+
+def rubygems_version_visible?(host, version, attempts: 6, delay_seconds: 5)
+  attempts.times do |index|
+    return true if rubygems_versions(host).include?(version)
+
+    sleep(delay_seconds) if index + 1 < attempts
+  end
+
+  false
+end
+
+def build_gem(gemspec_path, gem_path)
+  FileUtils.mkdir_p(File.dirname(gem_path))
+  FileUtils.rm_f(gem_path)
+
+  run_command("gem", "build", gemspec_path, "--output", gem_path)
+  raise Kubernetes::Release::Changelog::Error, "gem build did not create #{gem_path}" unless File.file?(gem_path)
+
+  gem_path
+end
+
+def verify_gem_package!(gem_path, version)
+  package = Gem::Package.new(gem_path)
+  spec = package.spec
+
+  unless spec.name == "kruby"
+    raise Kubernetes::Release::Changelog::Error, "expected gem name kruby, got #{spec.name}"
+  end
+
+  unless spec.version.to_s == version
+    raise Kubernetes::Release::Changelog::Error,
+          "expected gem version #{version}, got #{spec.version}"
+  end
+
+  forbidden = spec.files.grep(/\A(?:spec|test|features|docs)\//)
+  return spec if forbidden.empty?
+
+  raise Kubernetes::Release::Changelog::Error,
+        "gem package contains forbidden files:\n#{forbidden.join("\n")}"
+rescue Gem::Package::FormatError => e
+  raise Kubernetes::Release::Changelog::Error, e.message
+end
+
+options = {
+  changelog: File.expand_path("../../CHANGELOG.md", __dir__),
+  dry_run: false,
+  gem: nil,
+  host: "https://rubygems.org",
+  key: nil,
+  output_dir: File.expand_path("../../kubernetes/tmp/release", __dir__),
+  remote: "origin",
+  repo_root: File.expand_path("../..", __dir__),
+  tag: nil,
+  version: Kubernetes::VERSION
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: scripts/release/publish [options]"
+
+  opts.on("--version VERSION", "Version to publish (default: current gem version)") do |value|
+    options[:version] = value
+  end
+
+  opts.on("--tag TAG", "Release tag to validate (default: vVERSION)") do |value|
+    options[:tag] = value
+  end
+
+  opts.on("--changelog PATH", "Path to CHANGELOG.md") do |value|
+    options[:changelog] = value
+  end
+
+  opts.on("--remote REMOTE", "Remote containing the release tag (default: origin)") do |value|
+    options[:remote] = value
+  end
+
+  opts.on("--host HOST", "RubyGems-compatible host (default: https://rubygems.org)") do |value|
+    options[:host] = value
+  end
+
+  opts.on("--key KEYNAME", "RubyGems API key name to pass to gem push") do |value|
+    options[:key] = value
+  end
+
+  opts.on("--otp CODE", "RubyGems MFA OTP code; GEM_HOST_OTP_CODE also works") do |value|
+    options[:otp] = value
+  end
+
+  opts.on("--gem PATH", "Publish an existing gem artifact instead of building one") do |value|
+    options[:gem] = value
+  end
+
+  opts.on("--output-dir DIR", "Directory for built gem artifacts") do |value|
+    options[:output_dir] = value
+  end
+
+  opts.on("--dry-run", "Run validation and build without pushing") do
+    options[:dry_run] = true
+  end
+end
+
+begin
+  parser.parse!
+
+  options[:tag] ||= "v#{options[:version]}"
+  gemspec_path = File.join(options[:repo_root], "kubernetes", "kubernetes.gemspec")
+  gem_path = if options[:gem]
+               File.expand_path(options[:gem])
+             else
+               File.join(File.expand_path(options[:output_dir]), "kruby-#{options[:version]}.gem")
+             end
+
+  unless options[:version] == Kubernetes::VERSION
+    raise Kubernetes::Release::Changelog::Error,
+          "requested version #{options[:version]} does not match Kubernetes::VERSION #{Kubernetes::VERSION}"
+  end
+
+  changelog = Kubernetes::Release::Changelog.new(options[:changelog])
+  changelog.validate_release!(
+    version: options[:version],
+    tag: options[:tag],
+    require_empty_unreleased: true
+  )
+
+  if tracked_changes_present?(options[:repo_root])
+    raise Kubernetes::Release::Changelog::Error,
+          "tracked changes must be committed before publishing #{options[:tag]}"
+  end
+
+  head_sha = git_head(options[:repo_root])
+  local_sha = local_tag_target(options[:repo_root], options[:tag])
+  unless local_sha == head_sha
+    raise Kubernetes::Release::Changelog::Error,
+          "local tag #{options[:tag]} points to #{local_sha}, but HEAD is #{head_sha}"
+  end
+
+  remote_sha = remote_tag_target(options[:repo_root], options[:remote], options[:tag])
+  unless remote_sha == head_sha
+    raise Kubernetes::Release::Changelog::Error,
+          "#{options[:remote]}/#{options[:tag]} points to #{remote_sha}, but HEAD is #{head_sha}"
+  end
+
+  published_versions = rubygems_versions(options[:host])
+  already_published = published_versions.include?(options[:version])
+  if already_published && !options[:dry_run]
+    raise Kubernetes::Release::Changelog::Error,
+          "kruby #{options[:version]} is already published on #{options[:host]}"
+  elsif already_published
+    puts "kruby #{options[:version]} is already published on #{options[:host]}; dry-run will not push"
+  else
+    puts "RubyGems availability OK for kruby #{options[:version]}"
+  end
+
+  if options[:gem]
+    raise Kubernetes::Release::Changelog::Error, "gem artifact not found: #{gem_path}" unless File.file?(gem_path)
+  else
+    build_gem(gemspec_path, gem_path)
+  end
+  verify_gem_package!(gem_path, options[:version])
+  puts "Gem artifact OK: #{gem_path}"
+
+  if options[:dry_run]
+    puts "Dry run complete; did not push kruby #{options[:version]}"
+    exit 0
+  end
+
+  push_env = {}
+  push_env["GEM_HOST_OTP_CODE"] = options[:otp] if options[:otp]
+  push_command = ["gem", "push", gem_path, "--host", options[:host]]
+  push_command += ["--key", options[:key]] if options[:key]
+  run_command(*push_command, env: push_env)
+
+  unless rubygems_version_visible?(options[:host], options[:version])
+    raise Kubernetes::Release::Changelog::Error,
+          "push completed, but kruby #{options[:version]} is not visible on #{options[:host]}"
+  end
+
+  puts "Published kruby #{options[:version]} to #{options[:host]}"
+rescue OptionParser::ParseError, Kubernetes::Release::Changelog::Error => e
+  warn e.message
+  exit 1
+end
