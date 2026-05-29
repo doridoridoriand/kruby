@@ -49,3 +49,22 @@ After pushing the release commit and the `v<version>` tag, GitHub Actions will:
 4. Create a GitHub Release using the matching changelog section as release notes
 
 The workflow does not publish to RubyGems. Gem publication remains a separate manual decision.
+
+## Publishing to RubyGems
+
+After the GitHub Release workflow succeeds, publish the same tagged release to RubyGems:
+
+```bash
+cd kubernetes
+bundle exec rake release:publish_dry_run
+GEM_HOST_OTP_CODE=123456 bundle exec rake release:publish
+```
+
+Equivalent root-level command:
+
+```bash
+scripts/release/publish --dry-run
+GEM_HOST_OTP_CODE=123456 scripts/release/publish
+```
+
+The publish script validates the changelog, verifies that `HEAD`, the local tag, and the remote tag all point at the same release commit, checks that the version is not already published on RubyGems, builds the gem under `kubernetes/tmp/release/`, verifies the packaged files, and then runs `gem push`. If MFA is required, pass the OTP with `GEM_HOST_OTP_CODE` or `--otp`.

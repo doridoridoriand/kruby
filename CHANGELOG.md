@@ -8,7 +8,9 @@ Historical releases published before this file was introduced are summarized as 
 
 ## [Unreleased]
 
-- Nothing yet.
+### Added
+
+- Added a RubyGems publish script and Rake tasks to validate, build, package-check, and push release gems with MFA support.
 
 ## [1.36.0.2] - 2026-05-28
 
