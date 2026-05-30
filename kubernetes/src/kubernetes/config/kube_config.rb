@@ -49,6 +49,12 @@ module Kubernetes
       File.dirname(path)
     end
 
+    def resolve_path(file_path)
+      return file_path unless file_path
+      return file_path if file_path.start_with?('/')
+      File.join(File.expand_path(base_path), file_path)
+    end
+
     def config
       @config ||= File.open(path) do |io|
         ::YAML.safe_load(io.read)
@@ -98,6 +104,7 @@ module Kubernetes
     def find_cluster(name)
       find_by_name(config['clusters'], 'cluster', name).tap do |cluster|
         Kubernetes.create_temp_file_and_set(cluster, 'certificate-authority')
+        cluster['certificate-authority'] = resolve_path(cluster['certificate-authority'])
         cluster['verify_ssl'] = !cluster['insecure-skip-tls-verify']
       end
     end
@@ -108,6 +115,8 @@ module Kubernetes
 
         Kubernetes.create_temp_file_and_set(user, 'client-certificate')
         Kubernetes.create_temp_file_and_set(user, 'client-key')
+        user['client-certificate'] = resolve_path(user['client-certificate'])
+        user['client-key'] = resolve_path(user['client-key'])
         load_token_file(user)
         setup_auth(user)
       end
@@ -117,6 +126,7 @@ module Kubernetes
       # If tokenFile is specified, then set token
       return unless !user['token'] && user['tokenFile']
 
+      user['tokenFile'] = resolve_path(user['tokenFile'])
       File.open(user['tokenFile']) do |io|
         user['token'] = io.read.chomp
       end

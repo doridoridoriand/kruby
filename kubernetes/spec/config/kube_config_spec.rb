@@ -236,7 +236,7 @@ describe Kubernetes::KubeConfig do
       it 'should resolve relative certificate-authority path' do
         cluster = relative_kube_config.find_cluster('ssl-relative')
         expect(cluster['certificate-authority']).to eq(
-          File.join(config_dir, 'certs', 'ca.crt')
+          File.join(config_dir, '..', 'certs', 'ca.crt')
         )
       end
 
@@ -250,10 +250,10 @@ describe Kubernetes::KubeConfig do
       it 'should resolve relative client certificate paths' do
         user = relative_kube_config.find_user('user_relative')
         expect(user['client-certificate']).to eq(
-          File.join(config_dir, 'certs', 'client.crt')
+          File.join(config_dir, '..', 'certs', 'client.crt')
         )
         expect(user['client-key']).to eq(
-          File.join(config_dir, 'certs', 'client.key')
+          File.join(config_dir, '..', 'certs', 'client.key')
         )
       end
 
@@ -279,9 +279,9 @@ describe Kubernetes::KubeConfig do
             expected = Kubernetes::Configuration.new do |c|
               c.scheme = 'https'
               c.host = 'test-host:443'
-              c.ssl_ca_cert = File.join(config_dir, 'certs', 'ca.crt')
-              c.cert_file = File.join(config_dir, 'certs', 'client.crt')
-              c.key_file = File.join(config_dir, 'certs', 'client.key')
+              c.ssl_ca_cert = File.join(config_dir, '..', 'certs', 'ca.crt')
+              c.cert_file = File.join(config_dir, '..', 'certs', 'client.crt')
+              c.key_file = File.join(config_dir, '..', 'certs', 'client.key')
               c.api_key[Kubernetes::KubeConfig::AUTH_KEY] = 'Bearer token1'
             end
             actual = Kubernetes::Configuration.new

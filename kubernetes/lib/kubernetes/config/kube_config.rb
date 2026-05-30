@@ -51,8 +51,8 @@ module Kubernetes
 
     def resolve_path(file_path)
       return file_path unless file_path
-      return file_path if File.absolute_path?(file_path)
-      File.join(base_path, file_path)
+      return file_path if file_path.start_with?('/')
+      File.join(File.expand_path(base_path), file_path)
     end
 
     def config

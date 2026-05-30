@@ -4,7 +4,7 @@ clusters:
 - name: ssl-relative
   cluster:
     server: https://test-host
-    certificate-authority: certs/ca.crt
+    certificate-authority: ../certs/ca.crt
 - name: ssl-absolute
   cluster:
     server: https://test-host
@@ -22,9 +22,9 @@ current-context: context_relative
 users:
 - name: user_relative
   user:
-    client-certificate: certs/client.crt
-    client-key: certs/client.key
-    tokenFile: tokens/token
+    client-certificate: ../certs/client.crt
+    client-key: ../certs/client.key
+    tokenFile: ../tokens/token
 - name: user_absolute
   user:
     client-certificate: /absolute/path/to/client.crt
