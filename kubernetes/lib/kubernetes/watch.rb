@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require 'json'
+require 'cgi'
 
 # The Kubernetes module encapsulates the Kubernetes client for Ruby
 module Kubernetes
@@ -24,9 +25,12 @@ module Kubernetes
     end
 
     def make_url(path, resource_version)
-      query = '?watch=true'
-      query += "&resourceVersion=#{resource_version}" if resource_version
-      path + query
+      uri = URI.parse(path)
+      query = URI.decode_www_form(uri.query || '').to_h
+      query['watch'] = 'true'
+      query['resourceVersion'] = resource_version if resource_version
+      query_string = CGI.encode_www_form(query)
+      "#{uri.path}?#{query_string}"
     end
 
     def connect(path, resource_version = nil, &_block)
