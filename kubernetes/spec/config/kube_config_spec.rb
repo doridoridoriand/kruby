@@ -282,7 +282,7 @@ describe Kubernetes::KubeConfig do
               c.ssl_ca_cert = File.join(config_dir, 'certs', 'ca.crt')
               c.cert_file = File.join(config_dir, 'certs', 'client.crt')
               c.key_file = File.join(config_dir, 'certs', 'client.key')
-              c.verify_ssl = true
+              c.api_key[Kubernetes::KubeConfig::AUTH_KEY] = 'Bearer token1'
             end
             actual = Kubernetes::Configuration.new
             relative_kube_config.configure(actual, 'context_relative')
