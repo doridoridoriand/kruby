@@ -86,8 +86,8 @@ module Kubernetes
 
     def setup_ssl(cluster, user, config)
       # rubocop:disable DoubleNegation
-      config.verify_ssl = !!cluster['verify-ssl']
-      config.verify_ssl_host = !!cluster['verify-ssl']
+      config.verify_ssl = !!cluster['verify_ssl']
+      config.verify_ssl_host = !!cluster['verify_ssl']
       # rubocop:enable DoubleNegation
 
       config.ssl_ca_cert = cluster['certificate-authority']
