@@ -70,6 +70,8 @@ describe Kubernetes::KubeConfig do
 
         kube_config.configure(actual, 'context_ssl')
         expect(actual).to be_same_configuration_as(expected)
+        expect(actual.verify_ssl_host).to be_truthy
+        expect(actual.verify_ssl).to be_truthy
       end
     end
 
