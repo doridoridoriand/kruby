@@ -29,7 +29,7 @@ module Kubernetes
       query = URI.decode_www_form(uri.query || '').to_h
       query['watch'] = 'true'
       query['resourceVersion'] = resource_version if resource_version
-      query_string = query.map { |k, v| "#{URI.encode_www_form_component(k)}=#{URI.encode_www_form_component(v)}" }.join('&')
+      query_string = query.map { |k, v| "#{URI.encode_www_form_component(k).gsub('+', '%20')}=#{URI.encode_www_form_component(v).gsub('+', '%20')}" }.join('&')
       "#{uri.path}?#{query_string}"
     end
 
