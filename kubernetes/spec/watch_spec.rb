@@ -154,4 +154,36 @@ describe 'WatchClient' do
     expect(last).to eq('')
     expect(data).to eq(%w[baz blah])
   end
+
+  describe '#make_url' do
+    let(:watch) { Kubernetes::Watch.new(nil) }
+
+    it 'should construct URL with watch=true' do
+      expect(watch.make_url('/some/path', nil)).to match(/\?watch=true/)
+    end
+
+    it 'should construct URL with watch=true and resourceVersion' do
+      url = watch.make_url('/some/path', '123')
+      expect(url).to match(/watch=true/)
+      expect(url).to match(/resourceVersion=123/)
+    end
+
+    it 'should handle path with existing query parameters' do
+      url = watch.make_url('/api/v1/pods?labelSelector=app%3Dweb', '456')
+      expect(url).to match(/watch=true/)
+      expect(url).to match(/resourceVersion=456/)
+      expect(url).to match(/labelSelector=app%3Dweb/)
+    end
+
+    it 'should URL encode resourceVersion' do
+      url = watch.make_url('/api/v1/pods', 'rv with spaces')
+      expect(url).to match(/resourceVersion=rv%20with%20spaces/)
+    end
+
+    it 'should preserve existing query parameters while adding watch' do
+      url = watch.make_url('/api/v1/pods?fieldSelector=status%3DRunning', nil)
+      expect(url).to match(/watch=true/)
+      expect(url).to match(/fieldSelector=status%3DRunning/)
+    end
+  end
 end
