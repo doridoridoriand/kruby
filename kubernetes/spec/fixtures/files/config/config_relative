@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: ssl-relative
+  cluster:
+    server: https://test-host
+    certificate-authority: ../certs/ca.crt
+- name: ssl-absolute
+  cluster:
+    server: https://test-host
+    certificate-authority: /absolute/path/to/ca.crt
+contexts:
+- name: context_relative
+  context:
+    cluster: ssl-relative
+    user: user_relative
+- name: context_absolute
+  context:
+    cluster: ssl-absolute
+    user: user_absolute
+current-context: context_relative
+users:
+- name: user_relative
+  user:
+    client-certificate: ../certs/client.crt
+    client-key: ../certs/client.key
+    tokenFile: ../tokens/token
+- name: user_absolute
+  user:
+    client-certificate: /absolute/path/to/client.crt
+    client-key: /absolute/path/to/client.key

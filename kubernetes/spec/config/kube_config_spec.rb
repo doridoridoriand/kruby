@@ -227,6 +227,74 @@ describe Kubernetes::KubeConfig do
     end
   end
 
+  context 'relative path resolution' do
+    let(:relative_config_file) do
+      Kubernetes::Testing.file_fixture('config/config_relative').to_s
+    end
+    let(:relative_kube_config) { Kubernetes::KubeConfig.new(relative_config_file) }
+    let(:config_dir) { File.dirname(relative_config_file) }
+
+    context '#find_cluster with relative certificate-authority' do
+      it 'should resolve relative certificate-authority path' do
+        cluster = relative_kube_config.find_cluster('ssl-relative')
+        expect(cluster['certificate-authority']).to eq(
+          File.expand_path('..', config_dir) + '/certs/ca.crt'
+        )
+      end
+
+      it 'should leave absolute certificate-authority path unchanged' do
+        cluster = relative_kube_config.find_cluster('ssl-absolute')
+        expect(cluster['certificate-authority']).to eq('/absolute/path/to/ca.crt')
+      end
+    end
+
+    context '#find_user with relative client-certificate and client-key' do
+      it 'should resolve relative client certificate paths' do
+        user = relative_kube_config.find_user('user_relative')
+        expect(user['client-certificate']).to eq(
+          File.expand_path('..', config_dir) + '/certs/client.crt'
+        )
+        expect(user['client-key']).to eq(
+          File.expand_path('..', config_dir) + '/certs/client.key'
+        )
+      end
+
+      it 'should leave absolute client certificate paths unchanged' do
+        user = relative_kube_config.find_user('user_absolute')
+        expect(user['client-certificate']).to eq('/absolute/path/to/client.crt')
+        expect(user['client-key']).to eq('/absolute/path/to/client.key')
+      end
+    end
+
+    context '#load_token_file with relative tokenFile' do
+      it 'should resolve relative tokenFile path and read token' do
+        user = relative_kube_config.find_user('user_relative')
+        expect(user['authorization']).to eq('Bearer token1')
+      end
+    end
+
+    context '#configure from a different working directory' do
+      it 'should resolve file paths relative to kubeconfig location' do
+        Dir.mktmpdir do |tmpdir|
+          # Run configure from a completely different directory
+          Dir.chdir(tmpdir) do
+            expected = Kubernetes::Configuration.new do |c|
+              c.scheme = 'https'
+              c.host = 'test-host:443'
+              c.ssl_ca_cert = File.expand_path('..', config_dir) + '/certs/ca.crt'
+              c.cert_file = File.expand_path('..', config_dir) + '/certs/client.crt'
+              c.key_file = File.expand_path('..', config_dir) + '/certs/client.key'
+              c.api_key[Kubernetes::KubeConfig::AUTH_KEY] = 'Bearer token1'
+            end
+            actual = Kubernetes::Configuration.new
+            relative_kube_config.configure(actual, 'context_relative')
+            expect(actual).to be_same_configuration_as(expected)
+          end
+        end
+      end
+    end
+  end
+
   context '#list_context_names' do
     it 'should list context names' do
       # rubocop:disable LineLength
