@@ -6,10 +6,10 @@
 
 ### 現在のステータス
 
-- **バージョン**: 1.35.0.3
-- **対応Kubernetes API**: release-1.35
+- **バージョン**: 1.36.0.2
+- **対応Kubernetes API**: release-1.36
 - **メンテナンス状況**: アクティブ（コミュニティメンテナンス）
-- **最終更新日**: 2026年1月18日
+- **最終更新日**: 2026年6月1日
 
 このクライアントは、Pod、Service、Deployment、ConfigMapなどのKubernetesリソースの作成、読み取り、更新、削除（CRUD操作）をRubyから実行できます。
 
@@ -35,6 +35,7 @@
 2026年1月、このリポジトリは独立したプロジェクトとして復活しました：
 
 - **2026年1月18日**: Kubernetes 1.35対応として再生成
+- **2026年6月1日**: Kubernetes 1.36対応として再生成
 - **リポジトリ**: [github.com/doridoridoriand/kruby](https://github.com/doridoridoriand/kruby)
 - **方針**: コミュニティ主導でメンテナンスを継続
 
@@ -45,21 +46,22 @@
 
 ### Kubernetes APIバージョン
 
-- **対応バージョン**: Kubernetes 1.31-1.35（OpenAPI: release-1.35）
-- **クライアントバージョン**: 1.35.0.3
-- **最終更新日**: 2026年1月18日
+- **対応バージョン**: Kubernetes 1.31-1.36（OpenAPI: release-1.36）
+- **クライアントバージョン**: 1.36.0.2
+- **最終更新日**: 2026年6月1日
 
-このクライアントは、Kubernetes 1.31-1.35のAPIリソースとエンドポイントに対応しています。
+このクライアントは、Kubernetes 1.31-1.36のAPIリソースとエンドポイントに対応しています。
 
 #### Compatibility matrix
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.35 | 1.35.0.3 |
-| 1.32 | release-1.35 | 1.35.0.3 |
-| 1.33 | release-1.35 | 1.35.0.3 |
-| 1.34 | release-1.35 | 1.35.0.3 |
-| 1.35 | release-1.35 | 1.35.0.3 |
+| 1.31 | release-1.36 | 1.36.0.2 |
+| 1.32 | release-1.36 | 1.36.0.2 |
+| 1.33 | release-1.36 | 1.36.0.2 |
+| 1.34 | release-1.36 | 1.36.0.2 |
+| 1.35 | release-1.36 | 1.36.0.2 |
+| 1.36 | release-1.36 | 1.36.0.2 |
 
 ### OpenAPI Generatorバージョン
 
@@ -73,7 +75,7 @@ Kubernetesは複数のプログラミング言語向けに公式クライアン�
 
 | 言語 | リポジトリ | 最新対応バージョン | メンテナンス状況 |
 |------|-----------|-------------------|-----------------|
-| **Ruby** | doridoridoriand/kruby | 1.35 | コミュニティメンテナンス |
+| **Ruby** | doridoridoriand/kruby | 1.36 | コミュニティメンテナンス |
 | Python | kubernetes-client/python | 1.31+ | 公式メンテナンス |
 | Go | kubernetes/client-go | 1.31+ | 公式メンテナンス |
 | Java | kubernetes-client/java | 1.31+ | 公式メンテナンス |
@@ -122,14 +124,14 @@ cd kubernetes
 gem build kubernetes.gemspec
 ```
 
-これにより、`kruby-1.35.0.3.gem`ファイルが生成されます。
+これにより、`kruby-1.36.0.2.gem`ファイルが生成されます。
 
 ### ローカルインストール
 
 ビルドしたgemをローカル環境にインストールします：
 
 ```bash
-gem install ./kruby-1.35.0.3.gem
+gem install ./kruby-1.36.0.2.gem
 ```
 
 ### 開発用インストール
@@ -355,7 +357,7 @@ bundle install
 
 ```bash
 gem build kubernetes.gemspec
-gem install ./kruby-1.35.0.3.gem
+gem install ./kruby-1.36.0.2.gem
 ```
 
 ### テストの実行
