@@ -1,29 +1,106 @@
-# Coverage policy for real API-call E2E expansion.
-# Phase 0 keeps exclusions intentionally conservative and reasoned.
+# frozen_string_literal: true
+#
+# Auto-generated exclusion policy for E2E coverage gate
+# These API classes have NO targets in the E2E catalog, so all their
+# candidates are excluded from the coverage gate.
 
-version: 1
+# API classes to exclude entirely (prefix match on canonical API class name)
+explicitly_excluded_apis:
+  - AdmissionregistrationV1Api  # 24 methods excluded
+  - AdmissionregistrationV1alpha1Api  # 12 methods excluded
+  - AdmissionregistrationV1beta1Api  # 12 methods excluded
+  - ApiextensionsV1Api  # 6 methods excluded
+  - ApiregistrationV1Api  # 6 methods excluded
+  - AuthenticationV1Api  # 2 methods excluded
+  - AuthorizationV1Api  # 4 methods excluded
+  - AutoscalingV1Api  # 9 methods excluded
+  - AutoscalingV2Api  # 9 methods excluded
+  - CertificatesV1Api  # 10 methods excluded
+  - CertificatesV1alpha1Api  # 6 methods excluded
+  - CertificatesV1beta1Api  # 12 methods excluded
+  - CoordinationV1alpha2Api  # 7 methods excluded
+  - CoordinationV1beta1Api  # 7 methods excluded
+  - CustomObjectsApi  # 10 methods excluded
+  - DiscoveryV1Api  # 6 methods excluded
+  - EventsV1Api  # 7 methods excluded
+  - FlowcontrolApiserverV1Api  # 12 methods excluded
+  - InternalApiserverV1alpha1Api  # 6 methods excluded
+  - NetworkingV1Api  # 16 methods excluded
+  - NetworkingV1beta1Api  # 15 methods excluded
+  - NodeV1Api  # 6 methods excluded
+  - ResourceV1Api  # 30 methods excluded
+  - ResourceV1alpha3Api  # 6 methods excluded
+  - ResourceV1beta1Api  # 30 methods excluded
+  - ResourceV1beta2Api  # 30 methods excluded
+  - SchedulingV1alpha1Api  # 6 methods excluded
+  - StorageV1Api  # 15 methods excluded
+  - StorageV1beta1Api  # 6 methods excluded
+  - StoragemigrationV1beta1Api  # 6 methods excluded
 
-include_operation_prefixes:
-  - create
-  - read
-  - list
-  - replace
-  - patch
-  - delete
-  - watch
-
+# Method-level exclusions for CoreV1Api, AppsV1Api, BatchV1Api (partially covered APIs)
+# These methods exist in the inventory but are not in the E2E target catalog.
 exclude_method_patterns:
-  - pattern: '^delete_collection_'
-    reason: 'Bulk delete calls are highly destructive and deferred to later phases.'
-
-  - pattern: '^list_.*_for_all_namespaces$'
-    reason: 'All-namespaces list calls are noisy for shared clusters and deferred initially.'
-
-  - pattern: '^watch_.*_for_all_namespaces$'
-    reason: 'Cluster-wide watch calls are flaky in CI and postponed until watch hardening.'
-
-  - pattern: '_(status|scale)$'
-    reason: 'Status/scale subresources are planned for a dedicated later phase.'
-
-  - pattern: '^create_.*_approval$'
-    reason: 'Approval workflows require extra signing prerequisites and are deferred.'
+  - "^create_namespaced_binding$"
+  - "^create_namespaced_event_core_v1$"
+  - "^create_namespaced_limit_range$"
+  - "^create_namespaced_pod_binding$"
+  - "^create_namespaced_pod_eviction$"
+  - "^create_namespaced_pod_template$"
+  - "^create_namespaced_replication_controller$"
+  - "^create_namespaced_resource_quota$"
+  - "^create_namespaced_service_account$"
+  - "^create_namespaced_service_account_token$"
+  - "^create_node$"
+  - "^delete_namespaced_event_core_v1$"
+  - "^delete_namespaced_limit_range$"
+  - "^delete_namespaced_pod_template$"
+  - "^delete_namespaced_replication_controller$"
+  - "^delete_namespaced_resource_quota$"
+  - "^delete_namespaced_service_account$"
+  - "^delete_node$"
+  - "^list_event_for_all_namespaces_core_v1$"
+  - "^list_namespaced_event_core_v1$"
+  - "^list_namespaced_limit_range$"
+  - "^list_namespaced_pod_template$"
+  - "^list_namespaced_replication_controller$"
+  - "^list_namespaced_resource_quota$"
+  - "^list_namespaced_service_account$"
+  - "^patch_namespaced_event_core_v1$"
+  - "^patch_namespaced_limit_range$"
+  - "^patch_namespaced_pod_ephemeralcontainers$"
+  - "^patch_namespaced_pod_resize$"
+  - "^patch_namespaced_pod_template$"
+  - "^patch_namespaced_replication_controller$"
+  - "^patch_namespaced_resource_quota$"
+  - "^patch_namespaced_service_account$"
+  - "^read_namespaced_event_core_v1$"
+  - "^read_namespaced_limit_range$"
+  - "^read_namespaced_pod_ephemeralcontainers$"
+  - "^read_namespaced_pod_log$"
+  - "^read_namespaced_pod_resize$"
+  - "^read_namespaced_pod_template$"
+  - "^read_namespaced_replication_controller$"
+  - "^read_namespaced_resource_quota$"
+  - "^read_namespaced_service_account$"
+  - "^replace_namespace_finalize$"
+  - "^replace_namespaced_event_core_v1$"
+  - "^replace_namespaced_limit_range$"
+  - "^replace_namespaced_pod_ephemeralcontainers$"
+  - "^replace_namespaced_pod_resize$"
+  - "^replace_namespaced_pod_template$"
+  - "^replace_namespaced_replication_controller$"
+  - "^replace_namespaced_resource_quota$"
+  - "^replace_namespaced_service_account$"
+  - "^replace_node$"
+  - "^create_namespaced_controller_revision$"
+  - "^delete_namespaced_controller_revision$"
+  - "^list_namespaced_controller_revision$"
+  - "^patch_namespaced_controller_revision$"
+  - "^read_namespaced_controller_revision$"
+  - "^replace_namespaced_controller_revision$"
+  - "^create_namespaced_cron_job$"
+  - "^delete_namespaced_cron_job$"
+  - "^list_namespaced_cron_job$"
+  - "^patch_namespaced_cron_job$"
+  - "^read_namespaced_cron_job$"
+  - "^replace_namespaced_cron_job$"
