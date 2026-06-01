@@ -32,7 +32,8 @@ explicitly_excluded_apis:
   - ResourceV1alpha3Api  # 6 methods excluded
   - ResourceV1beta1Api  # 30 methods excluded
   - ResourceV1beta2Api  # 30 methods excluded
-  - SchedulingV1alpha1Api  # 6 methods excluded
+  - "SchedulingV1alpha1Api"  # 6 methods excluded
+  - SchedulingV1alpha2Api  # 18 methods excluded (K8s 1.36 PodGroup, Workload)
   - StorageV1Api  # 15 methods excluded
   - StorageV1beta1Api  # 6 methods excluded
   - StoragemigrationV1beta1Api  # 6 methods excluded
@@ -40,6 +41,44 @@ explicitly_excluded_apis:
 # Method-level exclusions for CoreV1Api, AppsV1Api, BatchV1Api (partially covered APIs)
 # These methods exist in the inventory but are not in the E2E target catalog.
 exclude_method_patterns:
+  # --- Bulk delete operations (not individually testable) ---
+  - pattern: "^delete_collection_"
+    reason: "delete_collection operations are bulk deletes, not individually testable"
+  # --- Cluster-wide list operations (*_for_all_namespaces) ---
+  - pattern: "_for_all_namespaces$"
+    reason: "Cluster-wide list operations are not in E2E target catalog"
+  # --- Status subresource operations ---
+  - pattern: "_status$"
+    reason: "Status subresource operations are not directly tested"
+  # --- Scale subresource operations ---
+  - pattern: "_scale$"
+    reason: "Scale subresource operations are not directly tested"
+  # --- Namespace status ---
+  - pattern: "^patch_namespace_status$"
+    reason: "Namespace status operation not in catalog"
+  - pattern: "^read_namespace_status$"
+    reason: "Namespace status operation not in catalog"
+  - pattern: "^replace_namespace_status$"
+    reason: "Namespace status operation not in catalog"
+  # --- Component status ---
+  - pattern: "^list_component_status$"
+    reason: "Component status not in catalog"
+  - pattern: "^read_component_status$"
+    reason: "Component status not in catalog"
+  # --- Event operations (CoreV1Api) ---
+  - pattern: "^create_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  - pattern: "^delete_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  - pattern: "^list_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  - pattern: "^patch_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  - pattern: "^read_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  - pattern: "^replace_namespaced_event$"
+    reason: "Event CRUD not in catalog"
+  # --- Already-excluded specific methods (legacy) ---
   - "^create_namespaced_binding$"
   - "^create_namespaced_event_core_v1$"
   - "^create_namespaced_limit_range$"

@@ -134,7 +134,7 @@ RSpec.describe SpecSupport::E2E::CoverageGate do
   describe "#check with real inventory" do
     it "loads the real coverage inventory and passes the gate" do
       real_inventory = File.expand_path("../../../../specs/002-real-api-e2e-coverage/coverage_inventory.json", __dir__)
-      real_policy = File.expand_path("../support/e2e/coverage_policy.yml", __dir__)
+      real_policy = File.expand_path("coverage_policy.yml", __dir__)
 
       skip "Real inventory not found" unless File.exist?(real_inventory)
       skip "Real policy not found" unless File.exist?(real_policy)
