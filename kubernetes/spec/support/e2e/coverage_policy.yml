@@ -32,7 +32,7 @@ explicitly_excluded_apis:
   - ResourceV1alpha3Api  # 6 methods excluded
   - ResourceV1beta1Api  # 30 methods excluded
   - ResourceV1beta2Api  # 30 methods excluded
-  - "SchedulingV1alpha1Api"  # 6 methods excluded
+  - SchedulingV1alpha1Api  # 6 methods excluded
   - SchedulingV1alpha2Api  # 18 methods excluded (K8s 1.36 PodGroup, Workload)
   - StorageV1Api  # 15 methods excluded
   - StorageV1beta1Api  # 6 methods excluded
