@@ -402,7 +402,56 @@ module SpecSupport
         "SchedulingV1Api#list_priority_class",
         "SchedulingV1Api#replace_priority_class",
         "SchedulingV1Api#patch_priority_class",
-        "SchedulingV1Api#delete_priority_class"
+        "SchedulingV1Api#delete_priority_class",
+        # CoreV1Api — limit ranges
+        "CoreV1Api#create_namespaced_limit_range",
+        "CoreV1Api#read_namespaced_limit_range",
+        "CoreV1Api#list_namespaced_limit_range",
+        "CoreV1Api#replace_namespaced_limit_range",
+        "CoreV1Api#patch_namespaced_limit_range",
+        "CoreV1Api#delete_namespaced_limit_range",
+        # CoreV1Api — resource quotas
+        "CoreV1Api#create_namespaced_resource_quota",
+        "CoreV1Api#read_namespaced_resource_quota",
+        "CoreV1Api#list_namespaced_resource_quota",
+        "CoreV1Api#replace_namespaced_resource_quota",
+        "CoreV1Api#patch_namespaced_resource_quota",
+        "CoreV1Api#delete_namespaced_resource_quota",
+        # CoreV1Api — service accounts
+        "CoreV1Api#create_namespaced_service_account",
+        "CoreV1Api#read_namespaced_service_account",
+        "CoreV1Api#list_namespaced_service_account",
+        "CoreV1Api#replace_namespaced_service_account",
+        "CoreV1Api#patch_namespaced_service_account",
+        "CoreV1Api#delete_namespaced_service_account",
+        # CoreV1Api — pod templates
+        "CoreV1Api#create_namespaced_pod_template",
+        "CoreV1Api#read_namespaced_pod_template",
+        "CoreV1Api#list_namespaced_pod_template",
+        "CoreV1Api#replace_namespaced_pod_template",
+        "CoreV1Api#patch_namespaced_pod_template",
+        "CoreV1Api#delete_namespaced_pod_template",
+        # CoreV1Api — replication controllers
+        "CoreV1Api#create_namespaced_replication_controller",
+        "CoreV1Api#read_namespaced_replication_controller",
+        "CoreV1Api#list_namespaced_replication_controller",
+        "CoreV1Api#replace_namespaced_replication_controller",
+        "CoreV1Api#patch_namespaced_replication_controller",
+        "CoreV1Api#delete_namespaced_replication_controller",
+        # AppsV1Api — controller revisions
+        "AppsV1Api#create_namespaced_controller_revision",
+        "AppsV1Api#read_namespaced_controller_revision",
+        "AppsV1Api#list_namespaced_controller_revision",
+        "AppsV1Api#replace_namespaced_controller_revision",
+        "AppsV1Api#patch_namespaced_controller_revision",
+        "AppsV1Api#delete_namespaced_controller_revision",
+        # BatchV1Api — cron jobs
+        "BatchV1Api#create_namespaced_cron_job",
+        "BatchV1Api#read_namespaced_cron_job",
+        "BatchV1Api#list_namespaced_cron_job",
+        "BatchV1Api#replace_namespaced_cron_job",
+        "BatchV1Api#patch_namespaced_cron_job",
+        "BatchV1Api#delete_namespaced_cron_job"
       ].freeze
     end
   end

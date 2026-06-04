@@ -215,6 +215,97 @@ module SpecSupport
           replace_method: :replace_priority_class,
           patch_method: :patch_priority_class,
           delete_method: :delete_priority_class
+        },
+        ["core", "v1", "limit-ranges"] => {
+          api_class: "CoreV1Api",
+          factory: :limit_range,
+          name_prefix: "limitrange",
+          namespace_scoped: true,
+          kubectl_resource: "limitrange",
+          create_method: :create_namespaced_limit_range,
+          read_method: :read_namespaced_limit_range,
+          list_method: :list_namespaced_limit_range,
+          replace_method: :replace_namespaced_limit_range,
+          patch_method: :patch_namespaced_limit_range,
+          delete_method: :delete_namespaced_limit_range
+        },
+        ["core", "v1", "resource-quotas"] => {
+          api_class: "CoreV1Api",
+          factory: :resource_quota,
+          name_prefix: "resourcequota",
+          namespace_scoped: true,
+          kubectl_resource: "resourcequota",
+          create_method: :create_namespaced_resource_quota,
+          read_method: :read_namespaced_resource_quota,
+          list_method: :list_namespaced_resource_quota,
+          replace_method: :replace_namespaced_resource_quota,
+          patch_method: :patch_namespaced_resource_quota,
+          delete_method: :delete_namespaced_resource_quota
+        },
+        ["core", "v1", "service-accounts"] => {
+          api_class: "CoreV1Api",
+          factory: :service_account,
+          name_prefix: "serviceaccount",
+          namespace_scoped: true,
+          kubectl_resource: "serviceaccount",
+          create_method: :create_namespaced_service_account,
+          read_method: :read_namespaced_service_account,
+          list_method: :list_namespaced_service_account,
+          replace_method: :replace_namespaced_service_account,
+          patch_method: :patch_namespaced_service_account,
+          delete_method: :delete_namespaced_service_account
+        },
+        ["core", "v1", "pod-templates"] => {
+          api_class: "CoreV1Api",
+          factory: :pod_template,
+          name_prefix: "podtemplate",
+          namespace_scoped: true,
+          kubectl_resource: "podtemplate",
+          create_method: :create_namespaced_pod_template,
+          read_method: :read_namespaced_pod_template,
+          list_method: :list_namespaced_pod_template,
+          replace_method: :replace_namespaced_pod_template,
+          patch_method: :patch_namespaced_pod_template,
+          delete_method: :delete_namespaced_pod_template
+        },
+        ["core", "v1", "replication-controllers"] => {
+          api_class: "CoreV1Api",
+          factory: :replication_controller,
+          name_prefix: "rc",
+          namespace_scoped: true,
+          kubectl_resource: "replicationcontroller",
+          create_method: :create_namespaced_replication_controller,
+          read_method: :read_namespaced_replication_controller,
+          list_method: :list_namespaced_replication_controller,
+          replace_method: :replace_namespaced_replication_controller,
+          patch_method: :patch_namespaced_replication_controller,
+          delete_method: :delete_namespaced_replication_controller
+        },
+        ["apps", "v1", "controller-revisions"] => {
+          api_class: "AppsV1Api",
+          factory: :controller_revision,
+          name_prefix: "controllerrevision",
+          namespace_scoped: true,
+          kubectl_resource: "controllerrevision",
+          create_method: :create_namespaced_controller_revision,
+          read_method: :read_namespaced_controller_revision,
+          list_method: :list_namespaced_controller_revision,
+          replace_method: :replace_namespaced_controller_revision,
+          patch_method: :patch_namespaced_controller_revision,
+          delete_method: :delete_namespaced_controller_revision
+        },
+        ["batch", "v1", "cron-jobs"] => {
+          api_class: "BatchV1Api",
+          factory: :cron_job,
+          name_prefix: "cronjob",
+          namespace_scoped: true,
+          kubectl_resource: "cronjob",
+          create_method: :create_namespaced_cron_job,
+          read_method: :read_namespaced_cron_job,
+          list_method: :list_namespaced_cron_job,
+          replace_method: :replace_namespaced_cron_job,
+          patch_method: :patch_namespaced_cron_job,
+          delete_method: :delete_namespaced_cron_job
         }
       }.freeze
 

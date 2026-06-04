@@ -547,6 +547,144 @@ module SpecSupport
           "description" => "kruby E2E priority class"
         }
       end
+
+      def limit_range(name:, labels: {})
+        {
+          "apiVersion" => "v1",
+          "kind" => "LimitRange",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "limits" => [
+              {
+                "type" => "Container",
+                "default" => {
+                  "cpu" => "500m",
+                  "memory" => "256Mi"
+                },
+                "max" => {
+                  "cpu" => "1",
+                  "memory" => "512Mi"
+                },
+                "min" => {
+                  "cpu" => "10m",
+                  "memory" => "16Mi"
+                }
+              }
+            ]
+          }
+        }
+      end
+
+      def resource_quota(name:, labels: {})
+        {
+          "apiVersion" => "v1",
+          "kind" => "ResourceQuota",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "hard" => {
+              "pods" => "10",
+              "requests.cpu" => "4",
+              "requests.memory" => "8Gi"
+            }
+          }
+        }
+      end
+
+      def service_account(name:, labels: {})
+        {
+          "apiVersion" => "v1",
+          "kind" => "ServiceAccount",
+          "metadata" => { "name" => name, "labels" => labels }
+        }
+      end
+
+      def pod_template(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          "apiVersion" => "v1",
+          "kind" => "PodTemplate",
+          "metadata" => { "name" => name, "labels" => labels },
+          "template" => {
+            "metadata" => { "labels" => pod_labels },
+            "spec" => {
+              "containers" => [
+                {
+                  "name" => "pause",
+                  "image" => "registry.k8s.io/pause:3.9"
+                }
+              ]
+            }
+          }
+        }
+      end
+
+      def replication_controller(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          "apiVersion" => "v1",
+          "kind" => "ReplicationController",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "replicas" => 1,
+            "selector" => { "app" => name },
+            "template" => {
+              "metadata" => { "labels" => pod_labels },
+              "spec" => {
+                "containers" => [
+                  {
+                    "name" => "pause",
+                    "image" => "registry.k8s.io/pause:3.9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      end
+
+      def controller_revision(name:, labels: {})
+        {
+          "apiVersion" => "apps/v1",
+          "kind" => "ControllerRevision",
+          "metadata" => { "name" => name, "labels" => labels },
+          "data" => {
+            "state" => "initialized"
+          },
+          "revision" => 1
+        }
+      end
+
+      def cron_job(name:, labels: {})
+        pod_labels = labels.merge("app" => name)
+
+        {
+          "apiVersion" => "batch/v1",
+          "kind" => "CronJob",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "schedule" => "0 0 * * *",
+            "jobTemplate" => {
+              "spec" => {
+                "template" => {
+                  "metadata" => { "labels" => pod_labels },
+                  "spec" => {
+                    "restartPolicy" => "OnFailure",
+                    "containers" => [
+                      {
+                        "name" => "busybox",
+                        "image" => "registry.k8s.io/busybox:1.28",
+                        "args" => ["echo", "hello"]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      end
     end
   end
 end

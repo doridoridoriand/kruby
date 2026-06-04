@@ -89,4 +89,106 @@ RSpec.describe SpecSupport::E2E::Executor do
 
     expect(unmapped).to eq([])
   end
+
+  it "maps new core, apps, and batch resources to API method names" do
+    executor = described_class.new
+
+    # LimitRange (core/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("core/v1/limit-ranges:#{op}")
+      expected = {
+        "create" => "CoreV1Api#create_namespaced_limit_range",
+        "get" => "CoreV1Api#read_namespaced_limit_range",
+        "list" => "CoreV1Api#list_namespaced_limit_range",
+        "update" => "CoreV1Api#replace_namespaced_limit_range",
+        "patch" => "CoreV1Api#patch_namespaced_limit_range",
+        "delete" => "CoreV1Api#delete_namespaced_limit_range"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # ResourceQuota (core/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("core/v1/resource-quotas:#{op}")
+      expected = {
+        "create" => "CoreV1Api#create_namespaced_resource_quota",
+        "get" => "CoreV1Api#read_namespaced_resource_quota",
+        "list" => "CoreV1Api#list_namespaced_resource_quota",
+        "update" => "CoreV1Api#replace_namespaced_resource_quota",
+        "patch" => "CoreV1Api#patch_namespaced_resource_quota",
+        "delete" => "CoreV1Api#delete_namespaced_resource_quota"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # ServiceAccount (core/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("core/v1/service-accounts:#{op}")
+      expected = {
+        "create" => "CoreV1Api#create_namespaced_service_account",
+        "get" => "CoreV1Api#read_namespaced_service_account",
+        "list" => "CoreV1Api#list_namespaced_service_account",
+        "update" => "CoreV1Api#replace_namespaced_service_account",
+        "patch" => "CoreV1Api#patch_namespaced_service_account",
+        "delete" => "CoreV1Api#delete_namespaced_service_account"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # PodTemplate (core/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("core/v1/pod-templates:#{op}")
+      expected = {
+        "create" => "CoreV1Api#create_namespaced_pod_template",
+        "get" => "CoreV1Api#read_namespaced_pod_template",
+        "list" => "CoreV1Api#list_namespaced_pod_template",
+        "update" => "CoreV1Api#replace_namespaced_pod_template",
+        "patch" => "CoreV1Api#patch_namespaced_pod_template",
+        "delete" => "CoreV1Api#delete_namespaced_pod_template"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # ReplicationController (core/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("core/v1/replication-controllers:#{op}")
+      expected = {
+        "create" => "CoreV1Api#create_namespaced_replication_controller",
+        "get" => "CoreV1Api#read_namespaced_replication_controller",
+        "list" => "CoreV1Api#list_namespaced_replication_controller",
+        "update" => "CoreV1Api#replace_namespaced_replication_controller",
+        "patch" => "CoreV1Api#patch_namespaced_replication_controller",
+        "delete" => "CoreV1Api#delete_namespaced_replication_controller"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # ControllerRevision (apps/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("apps/v1/controller-revisions:#{op}")
+      expected = {
+        "create" => "AppsV1Api#create_namespaced_controller_revision",
+        "get" => "AppsV1Api#read_namespaced_controller_revision",
+        "list" => "AppsV1Api#list_namespaced_controller_revision",
+        "update" => "AppsV1Api#replace_namespaced_controller_revision",
+        "patch" => "AppsV1Api#patch_namespaced_controller_revision",
+        "delete" => "AppsV1Api#delete_namespaced_controller_revision"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+
+    # CronJob (batch/v1)
+    %w[create get list update patch delete].each do |op|
+      sel = SpecSupport::E2E::TargetSelector.parse("batch/v1/cron-jobs:#{op}")
+      expected = {
+        "create" => "BatchV1Api#create_namespaced_cron_job",
+        "get" => "BatchV1Api#read_namespaced_cron_job",
+        "list" => "BatchV1Api#list_namespaced_cron_job",
+        "update" => "BatchV1Api#replace_namespaced_cron_job",
+        "patch" => "BatchV1Api#patch_namespaced_cron_job",
+        "delete" => "BatchV1Api#delete_namespaced_cron_job"
+      }
+      expect(executor.send(:api_method_name, sel)).to eq(expected[op])
+    end
+  end
 end

@@ -31,6 +31,13 @@ require_relative "targets/storage_k8s_io_v1_csistoragecapacities"
 require_relative "targets/storage_k8s_io_v1_storageclasses"
 require_relative "targets/policy_v1_poddisruptionbudgets"
 require_relative "targets/scheduling_k8s_io_v1_priorityclasses"
+require_relative "targets/core_v1_limit_ranges"
+require_relative "targets/core_v1_resource_quotas"
+require_relative "targets/core_v1_service_accounts"
+require_relative "targets/core_v1_pod_templates"
+require_relative "targets/core_v1_replication_controllers"
+require_relative "targets/apps_v1_controller_revisions"
+require_relative "targets/batch_v1_cron_jobs"
 
 module SpecSupport
   module E2E
@@ -105,6 +112,13 @@ module SpecSupport
         Targets::PolicyV1PodDisruptionBudgets.register!(catalog)
         Targets::CoordinationK8sIoV1Leases.register!(catalog)
         Targets::SchedulingK8sIoV1PriorityClasses.register!(catalog)
+        Targets::CoreV1LimitRanges.register!(catalog)
+        Targets::CoreV1ResourceQuotas.register!(catalog)
+        Targets::CoreV1ServiceAccounts.register!(catalog)
+        Targets::CoreV1PodTemplates.register!(catalog)
+        Targets::CoreV1ReplicationControllers.register!(catalog)
+        Targets::AppsV1ControllerRevisions.register!(catalog)
+        Targets::BatchV1CronJobs.register!(catalog)
         catalog
       end
 
