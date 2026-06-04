@@ -3,7 +3,7 @@
 require "spec_helper"
 
 RSpec.describe "full mode core/v1 config maps coverage" do
-  it "contains CRUD selectors for core/v1 config maps" do
+  it "contains CRUD plus delete_collection selectors for core/v1 config maps" do
     context = SpecSupport::E2E::RunContext.from_env("E2E_MODE" => "full")
     dispatcher = SpecSupport::E2E::ModeDispatcher.new
 

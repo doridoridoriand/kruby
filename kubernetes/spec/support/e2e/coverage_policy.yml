@@ -43,7 +43,7 @@ explicitly_excluded_apis:
 exclude_method_patterns:
   # --- Bulk delete operations (not individually testable) ---
   - pattern: "^delete_collection_(?!namespaced_config_map$)"
-    reason: "delete_collection operations are bulk deletes, not individually testable"
+    reason: "delete_collection operations stay excluded by default; namespaced config maps are covered separately"
   # --- Cluster-wide list operations (*_for_all_namespaces) ---
   - pattern: "_for_all_namespaces$"
     reason: "Cluster-wide list operations are not in E2E target catalog"
