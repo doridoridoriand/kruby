@@ -233,6 +233,7 @@ module SpecSupport
         "CoreV1Api#replace_namespaced_config_map",
         "CoreV1Api#patch_namespaced_config_map",
         "CoreV1Api#delete_namespaced_config_map",
+        "CoreV1Api#delete_collection_namespaced_config_map",
         # CoreV1Api — secrets
         "CoreV1Api#create_namespaced_secret",
         "CoreV1Api#read_namespaced_secret",

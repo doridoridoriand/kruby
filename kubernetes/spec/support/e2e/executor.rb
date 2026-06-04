@@ -1277,6 +1277,15 @@ module SpecSupport
           wait_for_resource_absence!("configmap #{namespace}/#{name}") do
             resource_present? { api.read_namespaced_config_map(name, namespace) }
           end
+        when "delete_collection"
+          name = seed_config_map(api, namespace: namespace, cleanup: cleanup)
+          api.delete_collection_namespaced_config_map(
+            namespace,
+            label_selector: "app.kubernetes.io/instance=#{name}"
+          )
+          wait_for_resource_absence!("configmap collection #{namespace}/#{name}") do
+            resource_present? { api.read_namespaced_config_map(name, namespace) }
+          end
         else
           raise UnsupportedTargetError, "operation '#{operation}' is not implemented for core/v1/config-maps"
         end
@@ -1647,6 +1656,7 @@ module SpecSupport
         when ["core", "config-maps", "update"] then "CoreV1Api#replace_namespaced_config_map"
         when ["core", "config-maps", "patch"] then "CoreV1Api#patch_namespaced_config_map"
         when ["core", "config-maps", "delete"] then "CoreV1Api#delete_namespaced_config_map"
+        when ["core", "config-maps", "delete_collection"] then "CoreV1Api#delete_collection_namespaced_config_map"
         when ["core", "secrets", "create"] then "CoreV1Api#create_namespaced_secret"
         when ["core", "secrets", "get"] then "CoreV1Api#read_namespaced_secret"
         when ["core", "secrets", "list"] then "CoreV1Api#list_namespaced_secret"

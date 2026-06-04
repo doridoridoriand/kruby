@@ -3,8 +3,8 @@
 module SpecSupport
   module E2E
     class TargetSelector
-      OPERATIONS = %w[create get list update patch delete watch].freeze
-      SELECTOR_PATTERN = %r{\A(?<api_group>[a-z0-9][a-z0-9.-]*)/(?<version>[a-z0-9][a-z0-9.-]*)/(?<resource>[a-z0-9][a-z0-9.-]*):(?<operation>[a-z]+)\z}.freeze
+      OPERATIONS = %w[create get list update patch delete delete_collection watch].freeze
+      SELECTOR_PATTERN = %r{\A(?<api_group>[a-z0-9][a-z0-9.-]*)/(?<version>[a-z0-9][a-z0-9.-]*)/(?<resource>[a-z0-9][a-z0-9.-]*):(?<operation>[a-z_]+)\z}.freeze
 
       def self.parse(selector)
         raw = selector.to_s.strip
