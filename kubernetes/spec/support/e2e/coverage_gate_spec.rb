@@ -80,7 +80,7 @@ RSpec.describe SpecSupport::E2E::CoverageGate do
       expect(result.passing).to be true
     end
 
-    it "excludes methods matching exclude_method_patterns" do
+    it "excludes methods matching exclude_method_patterns (string form)" do
       inventory_json["candidates"] << { "api" => "core_v1_api", "method" => "create_namespaced_binding" }
       File.write(inventory_path, JSON.generate(inventory_json))
 
@@ -94,6 +94,46 @@ RSpec.describe SpecSupport::E2E::CoverageGate do
       result = subject.check
 
       expect(result.excluded).to eq(1)
+      expect(result.missing).to eq(0)
+      expect(result.passing).to be true
+    end
+
+    it "excludes methods matching Hash { pattern, reason } form" do
+      inventory_json["candidates"] << { "api" => "core_v1_api", "method" => "delete_collection_namespaced_pod" }
+      File.write(inventory_path, JSON.generate(inventory_json))
+
+      policy_yaml_text = <<~YAML
+        explicitly_excluded_apis: []
+        exclude_method_patterns:
+          - pattern: "^delete_collection_"
+            reason: "Bulk delete operations are not individually testable"
+      YAML
+      File.write(policy_path, policy_yaml_text)
+
+      result = subject.check
+
+      expect(result.excluded).to eq(1)
+      expect(result.missing).to eq(0)
+      expect(result.passing).to be true
+    end
+
+    it "handles mixed string and Hash entries in exclude_method_patterns" do
+      inventory_json["candidates"] << { "api" => "core_v1_api", "method" => "delete_collection_namespaced_pod" }
+      inventory_json["candidates"] << { "api" => "core_v1_api", "method" => "create_namespaced_binding" }
+      File.write(inventory_path, JSON.generate(inventory_json))
+
+      policy_yaml_text = <<~YAML
+        explicitly_excluded_apis: []
+        exclude_method_patterns:
+          - pattern: "^delete_collection_"
+            reason: "Bulk delete operations are not individually testable"
+          - "^create_namespaced_binding$"
+      YAML
+      File.write(policy_path, policy_yaml_text)
+
+      result = subject.check
+
+      expect(result.excluded).to eq(2)
       expect(result.missing).to eq(0)
       expect(result.passing).to be true
     end
@@ -134,7 +174,7 @@ RSpec.describe SpecSupport::E2E::CoverageGate do
   describe "#check with real inventory" do
     it "loads the real coverage inventory and passes the gate" do
       real_inventory = File.expand_path("../../../../specs/002-real-api-e2e-coverage/coverage_inventory.json", __dir__)
-      real_policy = File.expand_path("../support/e2e/coverage_policy.yml", __dir__)
+      real_policy = File.expand_path("coverage_policy.yml", __dir__)
 
       skip "Real inventory not found" unless File.exist?(real_inventory)
       skip "Real policy not found" unless File.exist?(real_policy)
