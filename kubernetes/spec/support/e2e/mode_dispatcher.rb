@@ -51,6 +51,7 @@ module SpecSupport
         "update" => 40,
         "patch" => 50,
         "delete" => 60,
+        "delete_collection" => 65,
         "watch" => 70
       }.freeze
 

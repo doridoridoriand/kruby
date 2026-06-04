@@ -55,6 +55,26 @@ RSpec.describe SpecSupport::E2E::Executor do
       expect(executor.send(:api_method_name, secret)).to eq("CoreV1Api##{api_action[1]}")
       expect(executor.send(:api_method_name, ns)).to eq("CoreV1Api##{api_action[2]}")
     end
+
+    delete_collection_config_map = SpecSupport::E2E::TargetSelector.parse("core/v1/config-maps:delete_collection")
+    expect(executor.send(:api_method_name, delete_collection_config_map))
+      .to eq("CoreV1Api#delete_collection_namespaced_config_map")
+  end
+
+  it "executes config-map delete_collection with a label selector scoped to the seeded resource" do
+    executor = described_class.new
+    api = instance_double(Kubernetes::CoreV1Api)
+    cleanup = instance_double("Cleanup")
+
+    allow(executor).to receive(:build_api_client).and_return(double("api_client"))
+    allow(Kubernetes::CoreV1Api).to receive(:new).and_return(api)
+    allow(executor).to receive(:seed_config_map).with(api, namespace: "test-ns", cleanup: cleanup).and_return("cm-123")
+    allow(executor).to receive(:wait_for_resource_absence!).with("configmap collection test-ns/cm-123")
+
+    expect(api).to receive(:delete_collection_namespaced_config_map)
+      .with("test-ns", label_selector: "app.kubernetes.io/instance=cm-123")
+
+    executor.send(:execute_config_map_operation, "delete_collection", namespace: "test-ns", cleanup: cleanup)
   end
 
   it "maps every registered full-mode selector to an API method name" do

@@ -9,7 +9,7 @@ RSpec.describe "full mode core/v1 config maps coverage" do
 
     selection = dispatcher.dispatch(context)
 
-    expected_ops = %w[create get list update patch delete].map do |op|
+    expected_ops = %w[create get list update patch delete delete_collection].map do |op|
       "core/v1/config-maps:#{op}"
     end
 
