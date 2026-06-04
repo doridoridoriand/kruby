@@ -1,0 +1,66 @@
+name: Nightly E2E
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-e2e-matrix:
+    name: Full E2E matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+          working-directory: kubernetes
+
+      - name: Install kind
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64
+          chmod +x /tmp/kind
+          sudo mv /tmp/kind /usr/local/bin/kind
+          kind version
+
+      - name: Install kubectl
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/kubectl https://dl.k8s.io/release/v1.35.0/bin/linux/amd64/kubectl
+          chmod +x /tmp/kubectl
+          sudo mv /tmp/kubectl /usr/local/bin/kubectl
+          kubectl version --client
+
+      - name: Check Docker
+        run: docker version
+
+      - name: Run full E2E matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/e2e/run-e2e-matrix --mode full
+
+      - name: Upload E2E artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nightly-e2e-artifacts
+          path: |
+            kubernetes/tmp/e2e/**
+            kubernetes/spec/reports/e2e/**
+          if-no-files-found: warn
+          retention-days: 14

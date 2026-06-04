@@ -47,3 +47,89 @@ jobs:
           rm -f kruby-*.gem
           gem build kubernetes.gemspec
           ruby -e 'abort("gem was not built") if Dir["kruby-*.gem"].empty?'
+
+  coverage-integrity:
+    name: Coverage integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+          working-directory: kubernetes
+
+      - name: Run package guard
+        working-directory: kubernetes
+        run: bundle exec rake e2e:package_guard
+
+      - name: Verify coverage inventory freshness
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          artifact_dir="$GITHUB_WORKSPACE/kubernetes/tmp/ci"
+          mkdir -p "$artifact_dir"
+
+          generated_json="$artifact_dir/coverage_inventory.generated.json"
+          generated_normalized="$artifact_dir/coverage_inventory.generated.normalized.json"
+          committed_normalized="$artifact_dir/coverage_inventory.committed.normalized.json"
+
+          scripts/e2e/generate-coverage-inventory --output "$generated_json"
+
+          ruby -rjson -e '
+            generated_path, committed_path, generated_normalized_path, committed_normalized_path = ARGV
+
+            normalize = lambda do |path|
+              data = JSON.parse(File.read(path))
+              data.delete("generatedAt")
+              JSON.pretty_generate(data)
+            end
+
+            File.write(generated_normalized_path, normalize.call(generated_path))
+            File.write(committed_normalized_path, normalize.call(committed_path))
+          ' \
+            "$generated_json" \
+            "specs/002-real-api-e2e-coverage/coverage_inventory.json" \
+            "$generated_normalized" \
+            "$committed_normalized"
+
+          if ! diff -u "$committed_normalized" "$generated_normalized"; then
+            echo "coverage inventory drift detected; run scripts/e2e/generate-coverage-inventory and commit the result" >&2
+            exit 1
+          fi
+
+      - name: Run coverage gate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ruby -I kubernetes/spec -e '
+            require "support/e2e/coverage_gate"
+
+            gate = SpecSupport::E2E::CoverageGate.new
+            result = gate.check
+            puts result.to_s
+
+            report_path = gate.write_report(result)
+            puts "coverage gate report: #{report_path}"
+
+            exit(result.passing ? 0 : 1)
+          '
+
+      - name: Upload coverage artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coverage-integrity-artifacts
+          path: |
+            kubernetes/tmp/ci/**
+            specs/002-real-api-e2e-coverage/coverage_gate_report.json
+          if-no-files-found: warn
+          retention-days: 14
