@@ -582,9 +582,9 @@ module SpecSupport
           "metadata" => { "name" => name, "labels" => labels },
           "spec" => {
             "hard" => {
-              "pods" => "10",
-              "requests.cpu" => "4",
-              "requests.memory" => "8Gi"
+              "pods" => "100",
+              "requests.cpu" => "50",
+              "requests.memory" => "100Gi"
             }
           }
         }
