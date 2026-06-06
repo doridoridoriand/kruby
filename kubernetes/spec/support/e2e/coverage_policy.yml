@@ -34,6 +34,9 @@ explicitly_excluded_apis:
   - ResourceV1beta2Api  # 30 methods excluded — beta ResourceClaim, requires Device Plugin infrastructure
   - SchedulingV1alpha1Api  # 6 methods excluded — alpha PriorityLevelConfiguration, superseded by v1
   - SchedulingV1alpha2Api  # 18 methods excluded (K8s 1.36 PodGroup, Workload) — alpha scheduling, experimental
+  - NetworkingV1beta1Api  # 38 methods excluded — beta networking IPAddress/ServiceCIDR, superseded by v1
+  - StorageV1beta1Api  # 26 methods excluded — beta VolumeAttributesClass, superseded by v1
+  - StoragemigrationV1beta1Api  # 24 methods excluded — beta StorageVersionMigration, requires apiserver restart
 
 # Method-level exclusions for partially covered APIs
 # These methods exist in the inventory but are not in the E2E target catalog.
@@ -42,7 +45,8 @@ exclude_method_patterns:
   - pattern: "^delete_collection_(?!namespaced_config_map$)"
     reason: "delete_collection operations stay excluded by default; namespaced config maps are covered separately"
   # --- Cluster-wide list operations (*_for_all_namespaces) ---
-  - pattern: "_for_all_namespaces$"
+  # Note: new-style method names embed "_for_all_namespaces_" mid-string, so we match mid-string too.
+  - pattern: "_for_all_namespaces"
     reason: "Cluster-wide list operations are not in E2E target catalog"
   # --- Status subresource operations ---
   - pattern: "_status$"

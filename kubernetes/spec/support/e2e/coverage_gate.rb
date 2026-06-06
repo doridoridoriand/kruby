@@ -373,14 +373,13 @@ module SpecSupport
         "StorageV1Api#replace_storage_class",
         "StorageV1Api#patch_storage_class",
         "StorageV1Api#delete_storage_class",
-        # AutoscalingV2Api — HPA
-        "AutoscalingV2Api#create_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#read_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#list_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#replace_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#patch_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#delete_namespaced_horizontal_pod_autoscaler",
-        "AutoscalingV2Api#watch_namespaced_horizontal_pod_autoscaler",
+        # AutoscalingV2Api — HPA (method names include full HTTP path suffix)
+        "AutoscalingV2Api#create_namespaced_horizontal_pod_autoscaler_post_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers",
+        "AutoscalingV2Api#read_namespaced_horizontal_pod_autoscaler_get_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name",
+        "AutoscalingV2Api#list_namespaced_horizontal_pod_autoscaler_get_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers",
+        "AutoscalingV2Api#replace_namespaced_horizontal_pod_autoscaler_put_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name",
+        "AutoscalingV2Api#patch_namespaced_horizontal_pod_autoscaler_patch_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name",
+        "AutoscalingV2Api#delete_namespaced_horizontal_pod_autoscaler_delete_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name",
         # PolicyV1Api — PDB
         "PolicyV1Api#create_namespaced_pod_disruption_budget",
         "PolicyV1Api#read_namespaced_pod_disruption_budget",
