@@ -90,13 +90,13 @@ module Kubernetes
       Configuration.instance_variable_set(:@in_cluster_config, self)
       Configuration.prepend(Module.new do
         # rubocop:disable Metrics/LineLength
-        def api_key_with_prefix(identifier)
+        def api_key_with_prefix(identifier, param_alias = nil)
           in_cluster_config = self.class.instance_variable_get(:@in_cluster_config)
           if identifier == 'authorization' && @api_key.key?(identifier) && in_cluster_config.token_expires_at <= Time.now
             in_cluster_config.load_token
             @api_key[identifier] = 'Bearer ' + in_cluster_config.token
           end
-          super identifier
+          super identifier, param_alias
         end
         # rubocop:enable Metrics/LineLength
       end)

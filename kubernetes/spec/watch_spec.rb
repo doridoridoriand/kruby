@@ -234,8 +234,8 @@ RSpec.describe Kubernetes::Watch do
   describe "#connect — watch event types" do
     it "receives ADDED, MODIFIED, DELETED events" do
       body = '{"type":"ADDED","object":{"kind":"Pod","metadata":{"name":"nginx"}}}' \
-           "\n{'type':'MODIFIED','object':{'kind':'Pod','metadata':{'name':'nginx','status':'Running'}}}" \
-           "\n{'type':'DELETED','object':{'kind':'Pod','metadata':{'name':'nginx'}}}\n"
+             "\n{\"type\":\"MODIFIED\",\"object\":{\"kind\":\"Pod\",\"metadata\":{\"name\":\"nginx\",\"status\":\"Running\"}}}" \
+             "\n{\"type\":\"DELETED\",\"object\":{\"kind\":\"Pod\",\"metadata\":{\"name\":\"nginx\"}}}\n"
 
       WebMock.stub_request(:get, "http://k8s.example.com:8080/api/v1/pods?watch=true")
              .with(headers: { "Content-Type" => "application/json", "Expect" => "" })
@@ -251,7 +251,7 @@ RSpec.describe Kubernetes::Watch do
     end
 
     it "receives ERROR events" do
-      body = '{"type":"ERROR","object":{"kind":"Status","message":"too old resource version"}}\n'
+      body = "{\"type\":\"ERROR\",\"object\":{\"kind\":\"Status\",\"message\":\"too old resource version\"}}\n"
 
       WebMock.stub_request(:get, "http://k8s.example.com:8080/api/v1/pods?watch=true")
              .with(headers: { "Content-Type" => "application/json", "Expect" => "" })
