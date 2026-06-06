@@ -685,6 +685,38 @@ module SpecSupport
           }
         }
       end
+
+      def volume_attributes_class(name:, labels: {})
+        {
+          "apiVersion" => "storage.k8s.io/v1",
+          "kind" => "VolumeAttributesClass",
+          "metadata" => { "name" => name, "labels" => labels },
+          "driverName" => "kruby-e2e.example/driver",
+          "parameters" => { "key" => "value" }
+        }
+      end
+
+      def ip_address(name:, labels: {})
+        {
+          "apiVersion" => "networking.k8s.io/v1",
+          "kind" => "IPAddress",
+          "metadata" => { "name" => name, "labels" => labels },
+          "parent" => "eth0",
+          "type" => "Host",
+          "address" => "192.0.2.1/24"
+        }
+      end
+
+      def service_cidr(name:, labels: {})
+        {
+          "apiVersion" => "networking.k8s.io/v1",
+          "kind" => "ServiceCIDR",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "cidrs" => ["192.168.255.0/24"]
+          }
+        }
+      end
     end
   end
 end

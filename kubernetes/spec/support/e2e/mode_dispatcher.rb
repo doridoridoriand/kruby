@@ -38,6 +38,12 @@ require_relative "targets/core_v1_pod_templates"
 require_relative "targets/core_v1_replication_controllers"
 require_relative "targets/apps_v1_controller_revisions"
 require_relative "targets/batch_v1_cron_jobs"
+require_relative "targets/storage_k8s_io_v1_volumeattachments"
+require_relative "targets/storage_k8s_io_v1_csinodes"
+require_relative "targets/storage_k8s_io_v1_volumeattributesclasses"
+require_relative "targets/networking_v1_ipaddresses"
+require_relative "targets/networking_v1_servicecidrs"
+require_relative "targets/custom_v1_customobjects"
 
 module SpecSupport
   module E2E
@@ -72,7 +78,8 @@ module SpecSupport
         "autoscaling" => 70,
         "policy" => 80,
         "coordination.k8s.io" => 90,
-        "scheduling.k8s.io" => 100
+        "scheduling.k8s.io" => 100,
+        "custom" => 110
       }.freeze
 
       attr_reader :target_catalog
@@ -119,6 +126,12 @@ module SpecSupport
         Targets::CoreV1ReplicationControllers.register!(catalog)
         Targets::AppsV1ControllerRevisions.register!(catalog)
         Targets::BatchV1CronJobs.register!(catalog)
+        Targets::StorageK8sIoV1VolumeAttachments.register!(catalog)
+        Targets::StorageK8sIoV1Csinodes.register!(catalog)
+        Targets::StorageK8sIoV1VolumeAttributesClasses.register!(catalog)
+        Targets::NetworkingV1IpAddresses.register!(catalog)
+        Targets::NetworkingV1ServiceCidrs.register!(catalog)
+        Targets::CustomV1Customobjects.register!(catalog)
         catalog
       end
 
