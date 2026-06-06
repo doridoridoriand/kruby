@@ -9,7 +9,7 @@
 #   skip_unless_resource_served!("storage.k8s.io", "v1", "VolumeAttributesClass")
 #
 # Or as a module included in specs:
-#   include SpecSupport::E2E::ApiDiscovery::Matchers
+#   include SpecSupport::E2E::Matchers
 #
 module SpecSupport
   module E2E
@@ -102,35 +102,33 @@ module SpecSupport
       end
     end
 
-    module ApiDiscovery
-      module Matchers
-        def skip_unless_resource_served!(group, version, kind, message: nil)
-          raise ArgumentError, "group required" if group.nil? || group.empty?
-          raise ArgumentError, "version required" if version.nil? || version.empty?
-          raise ArgumentError, "kind required" if kind.nil? || kind.empty?
+    module Matchers
+      def skip_unless_resource_served!(group, version, kind, message: nil)
+        raise ArgumentError, "group required" if group.nil? || group.empty?
+        raise ArgumentError, "version required" if version.nil? || version.empty?
+        raise ArgumentError, "kind required" if kind.nil? || kind.empty?
 
-          discovery = api_discovery
-          unless discovery.resource_served?(group, version, kind)
-            message ||= "Resource #{group}/#{version}/#{kind} not served by cluster"
-            skip(message)
-          end
+        discovery = api_discovery
+        unless discovery.resource_served?(group, version, kind)
+          message ||= "Resource #{group}/#{version}/#{kind} not served by cluster"
+          skip(message)
         end
+      end
 
-        def skip_unless_kind_incompatible_served!(selector, message: nil)
-          raise ArgumentError, "selector required" if selector.nil? || selector.empty?
+      def skip_unless_kind_incompatible_served!(selector, message: nil)
+        raise ArgumentError, "selector required" if selector.nil? || selector.empty?
 
-          discovery = api_discovery
-          unless discovery.kind_incompatible_resource_served?(selector)
-            message ||= "Kind-incompatible resource #{selector} not served by cluster"
-            skip(message)
-          end
+        discovery = api_discovery
+        unless discovery.kind_incompatible_resource_served?(selector)
+          message ||= "Kind-incompatible resource #{selector} not served by cluster"
+          skip(message)
         end
+      end
 
-        def api_discovery
-          @api_discovery ||= begin
-            api_client = Kubernetes::ApiClient.default
-            ApiDiscovery.new(api_client)
-          end
+      def api_discovery
+        @api_discovery ||= begin
+          api_client = Kubernetes::ApiClient.default
+          ApiDiscovery.new(api_client)
         end
       end
     end
