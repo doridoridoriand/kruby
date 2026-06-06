@@ -451,7 +451,51 @@ module SpecSupport
         "BatchV1Api#list_namespaced_cron_job",
         "BatchV1Api#replace_namespaced_cron_job",
         "BatchV1Api#patch_namespaced_cron_job",
-        "BatchV1Api#delete_namespaced_cron_job"
+        "BatchV1Api#delete_namespaced_cron_job",
+        # StorageV1Api — volume attachments (existing resources only: get, list, patch)
+        "StorageV1Api#read_volume_attachment",
+        "StorageV1Api#list_volume_attachment",
+        "StorageV1Api#patch_volume_attachment",
+        # StorageV1Api — CSI nodes (existing resources only: get, list, patch)
+        "StorageV1Api#read_csi_node",
+        "StorageV1Api#list_csi_node",
+        "StorageV1Api#patch_csi_node",
+        # StorageV1Api — volume attributes classes (full CRUD)
+        "StorageV1Api#create_volume_attributes_class",
+        "StorageV1Api#read_volume_attributes_class",
+        "StorageV1Api#list_volume_attributes_class",
+        "StorageV1Api#replace_volume_attributes_class",
+        "StorageV1Api#patch_volume_attributes_class",
+        "StorageV1Api#delete_volume_attributes_class",
+        # NetworkingV1Api — IP addresses (full CRUD)
+        "NetworkingV1Api#create_ip_address",
+        "NetworkingV1Api#read_ip_address",
+        "NetworkingV1Api#list_ip_address",
+        "NetworkingV1Api#replace_ip_address",
+        "NetworkingV1Api#patch_ip_address",
+        "NetworkingV1Api#delete_ip_address",
+        # NetworkingV1Api — service CIDRs (full CRUD)
+        "NetworkingV1Api#create_service_cidr",
+        "NetworkingV1Api#read_service_cidr",
+        "NetworkingV1Api#list_service_cidr",
+        "NetworkingV1Api#replace_service_cidr",
+        "NetworkingV1Api#patch_service_cidr",
+        "NetworkingV1Api#delete_service_cidr",
+        # CustomObjectsApi — namespaced custom objects (full CRUD + watch)
+        "CustomObjectsApi#create_namespaced_custom_object",
+        "CustomObjectsApi#get_namespaced_custom_object",
+        "CustomObjectsApi#list_namespaced_custom_object",
+        "CustomObjectsApi#replace_namespaced_custom_object",
+        "CustomObjectsApi#patch_namespaced_custom_object",
+        "CustomObjectsApi#delete_namespaced_custom_object",
+        "CustomObjectsApi#list_custom_object_for_all_namespaces",
+        # CustomObjectsApi — cluster-scoped custom objects (full CRUD + watch)
+        "CustomObjectsApi#create_cluster_custom_object",
+        "CustomObjectsApi#get_cluster_custom_object",
+        "CustomObjectsApi#list_cluster_custom_object",
+        "CustomObjectsApi#replace_cluster_custom_object",
+        "CustomObjectsApi#patch_cluster_custom_object",
+        "CustomObjectsApi#delete_cluster_custom_object"
       ].freeze
     end
   end
