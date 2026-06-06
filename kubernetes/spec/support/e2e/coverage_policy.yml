@@ -45,7 +45,8 @@ exclude_method_patterns:
   - pattern: "^delete_collection_(?!namespaced_config_map$)"
     reason: "delete_collection operations stay excluded by default; namespaced config maps are covered separately"
   # --- Cluster-wide list operations (*_for_all_namespaces) ---
-  - pattern: "_for_all_namespaces$"
+  # Note: new-style method names embed "_for_all_namespaces_" mid-string, so we match mid-string too.
+  - pattern: "_for_all_namespaces"
     reason: "Cluster-wide list operations are not in E2E target catalog"
   # --- Status subresource operations ---
   - pattern: "_status$"
