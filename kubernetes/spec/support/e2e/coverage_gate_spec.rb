@@ -16,7 +16,7 @@ RSpec.describe SpecSupport::E2E::CoverageGate do
         { "api" => "networking_v1_api", "method" => "read_namespaced_ingress" },
         { "api" => "batch_v1_api", "method" => "create_namespaced_job" },
         { "api" => "storage_v1_api", "method" => "create_storage_class" },
-        { "api" => "autoscaling_v2_api", "method" => "create_namespaced_horizontal_pod_autoscaler" }
+        { "api" => "autoscaling_v2_api", "method" => "create_namespaced_horizontal_pod_autoscaler_post_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers" }
       ]
     }
   end
