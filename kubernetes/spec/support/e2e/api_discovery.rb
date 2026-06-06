@@ -9,7 +9,7 @@
 #   skip_unless_resource_served!("storage.k8s.io", "v1", "VolumeAttributesClass")
 #
 # Or as a module included in specs:
-#   include SpecSupport::E2E::ApiDiscovery::Matchers
+#   include SpecSupport::E2E::ApiDiscoveryMatchers::Matchers
 #
 module SpecSupport
   module E2E
@@ -102,7 +102,9 @@ module SpecSupport
       end
     end
 
-    module ApiDiscovery
+    # NOTE: Named ApiDiscoveryMatchers (not nested under ApiDiscovery class) to avoid
+    # Ruby's "X is not a module" error when the same name is used for both class and module.
+    module ApiDiscoveryMatchers
       module Matchers
         def skip_unless_resource_served!(group, version, kind, message: nil)
           raise ArgumentError, "group required" if group.nil? || group.empty?
