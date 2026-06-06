@@ -306,6 +306,63 @@ module SpecSupport
           replace_method: :replace_namespaced_cron_job,
           patch_method: :patch_namespaced_cron_job,
           delete_method: :delete_namespaced_cron_job
+        },
+        ["storage.k8s.io", "v1", "volumeattachments"] => {
+          api_class: "StorageV1Api",
+          name_prefix: "volumeattachment",
+          namespace_scoped: false,
+          kubectl_resource: "volumeattachment",
+          read_method: :read_volume_attachment,
+          list_method: :list_volume_attachment,
+          patch_method: :patch_volume_attachment
+        },
+        ["storage.k8s.io", "v1", "csinodes"] => {
+          api_class: "StorageV1Api",
+          name_prefix: "csinode",
+          namespace_scoped: false,
+          kubectl_resource: "csinode",
+          read_method: :read_csi_node,
+          list_method: :list_csi_node,
+          patch_method: :patch_csi_node
+        },
+        ["storage.k8s.io", "v1", "volumeattributesclasses"] => {
+          api_class: "StorageV1Api",
+          factory: :volume_attributes_class,
+          name_prefix: "vac",
+          namespace_scoped: false,
+          kubectl_resource: "volumeattributesclass",
+          create_method: :create_volume_attributes_class,
+          read_method: :read_volume_attributes_class,
+          list_method: :list_volume_attributes_class,
+          replace_method: :replace_volume_attributes_class,
+          patch_method: :patch_volume_attributes_class,
+          delete_method: :delete_volume_attributes_class
+        },
+        ["networking.k8s.io", "v1", "ipaddresses"] => {
+          api_class: "NetworkingV1Api",
+          factory: :ip_address,
+          name_prefix: "ipaddr",
+          namespace_scoped: false,
+          kubectl_resource: "ipaddress",
+          create_method: :create_ip_address,
+          read_method: :read_ip_address,
+          list_method: :list_ip_address,
+          replace_method: :replace_ip_address,
+          patch_method: :patch_ip_address,
+          delete_method: :delete_ip_address
+        },
+        ["networking.k8s.io", "v1", "servicecidrs"] => {
+          api_class: "NetworkingV1Api",
+          factory: :service_cidr,
+          name_prefix: "svcidr",
+          namespace_scoped: false,
+          kubectl_resource: "servicecidr",
+          create_method: :create_service_cidr,
+          read_method: :read_service_cidr,
+          list_method: :list_service_cidr,
+          replace_method: :replace_service_cidr,
+          patch_method: :patch_service_cidr,
+          delete_method: :delete_service_cidr
         }
       }.freeze
 
@@ -532,6 +589,8 @@ module SpecSupport
           execute_secret_operation(operation, namespace: namespace, cleanup: cleanup)
         when ["core", "v1", "namespaces"]
           execute_namespace_operation(operation, namespace: namespace, cleanup: cleanup)
+        when ["custom", "v1", "customobjects"], ["custom", "v1", "customobjects-cluster"]
+          execute_custom_object_operation(operation, namespace: namespace, cleanup: cleanup, cluster_scoped: key == ["custom", "v1", "customobjects-cluster"])
         else
           raise UnsupportedTargetError, "no executor registered for #{parsed_target.fetch(:id)}"
         end
@@ -758,7 +817,7 @@ module SpecSupport
           resource = read_catalog_resource(api, definition, name, namespace: namespace)
           assert_resource_name!(resource, name)
         when "get"
-          name = definition[:factory] ? seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup) : first_node_name!(api)
+          name = definition[:factory] ? seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup) : first_resource_name_from_list(api, definition)
           resource = read_catalog_resource(api, definition, name, namespace: namespace)
           assert_resource_name!(resource, name)
         when "list"
@@ -773,8 +832,8 @@ module SpecSupport
           if definition[:factory]
             name = seed_catalog_resource(api, definition, namespace: namespace, cleanup: cleanup)
           else
-            name = first_node_name!(api)
-            cleanup.register { remove_node_label(api, name, "e2e-patched") }
+            name = first_resource_name_from_list(api, definition)
+            cleanup.register { patch_catalog_resource(api, definition, name, namespace: nil, key: "e2e-patched", value: "false") rescue nil }
           end
 
           patch_catalog_resource(api, definition, name, namespace: namespace, key: "e2e-patched", value: "true")
@@ -837,6 +896,12 @@ module SpecSupport
         else
           api.public_send(definition.fetch(:list_method))
         end
+      end
+
+      def first_resource_name_from_list(api, definition)
+        list = list_catalog_resources(api, definition, namespace: nil)
+        names = resource_items(list).map { |item| resource_name_from(item) }.compact
+        names.first || raise("expected at least one #{definition.fetch(:api_class)} resource in the cluster")
       end
 
       def patch_catalog_resource(api, definition, name, namespace:, key:, value:)
@@ -1527,6 +1592,191 @@ module SpecSupport
         name
       end
 
+      # CustomObjectsApi E2E: requires a test CRD. We install a minimal CRD via
+      # ApiextensionsV1Api, then exercise CRUD through CustomObjectsApi.
+      TEST_CRD_GROUP = "kruby-e2e.cyberagent.co.jp"
+      TEST_CRD_VERSION = "v1"
+      TEST_CRD_PLURAL = "samplecrs"
+
+      def execute_custom_object_operation(operation, namespace:, cleanup:, cluster_scoped:)
+        api = Kubernetes::CustomObjectsApi.new(build_api_client)
+        crd_api = Kubernetes::ApiextensionsV1Api.new(build_api_client)
+
+        # Ensure CRD exists (lazy one-time setup)
+        ensure_test_crd(crd_api, cleanup: cleanup, cluster_scoped: cluster_scoped)
+
+        case operation
+        when "create"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          obj = read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          assert_resource_name!(obj, name)
+        when "get"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          obj = read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          assert_resource_name!(obj, name)
+        when "list"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          list = list_custom_objects(api, namespace: namespace, cluster_scoped: cluster_scoped)
+          assert_list_includes!(list, name)
+        when "patch"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          patch_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          obj = read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          labels = resource_labels(obj)
+          raise "patch verification failed for custom object #{name}" unless labels["e2e-patched"] == "true"
+        when "update"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          with_conflict_retry do
+            obj = read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+            replace_custom_object(api, name, with_updated_label(obj, key: "e2e-updated", value: "true"), namespace: namespace, cluster_scoped: cluster_scoped)
+          end
+          obj = read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          labels = resource_labels(obj)
+          raise "update verification failed for custom object #{name}" unless labels["e2e-updated"] == "true"
+        when "delete"
+          name = seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          delete_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped)
+          wait_for_resource_absence!("custom object #{name}") do
+            resource_present? { read_custom_object(api, name, namespace: namespace, cluster_scoped: cluster_scoped) }
+          end
+        when "watch"
+          seed_custom_object(api, namespace: namespace, cleanup: cleanup, cluster_scoped: cluster_scoped)
+          watch_custom_objects(api, namespace: namespace, cluster_scoped: cluster_scoped)
+        else
+          raise UnsupportedTargetError, "operation '#{operation}' is not implemented for custom/v1/customobjects"
+        end
+      end
+
+      def ensure_test_crd(crd_api, cleanup:, cluster_scoped:)
+        crd_name = "#{TEST_CRD_PLURAL}.#{TEST_CRD_GROUP}"
+        crd_body = {
+          "apiVersion" => "apiextensions.k8s.io/v1",
+          "kind" => "CustomResourceDefinition",
+          "metadata" => { "name" => crd_name },
+          "spec" => {
+            "group" => TEST_CRD_GROUP,
+            "versions" => [{
+              "name" => TEST_CRD_VERSION,
+              "served" => true,
+              "storage" => true,
+              "schema" => {
+                "openAPIV3Schema" => {
+                  "type" => "object",
+                  "properties" => {
+                    "spec" => { "type" => "object" }
+                  }
+                }
+              }
+            }],
+            "scope" => cluster_scoped ? "Cluster" : "Namespaced",
+            "names" => {
+              "plural" => TEST_CRD_PLURAL,
+              "singular" => "samplecr",
+              "kind" => "SampleCR",
+              "shortNames" => ["scr"]
+            }
+          }
+        }
+
+        begin
+          crd_api.read_custom_resource_definition(crd_name)
+        rescue StandardError => e
+          return if e.respond_to?(:code) && e.code == 404
+          raise
+        end
+
+        # CRD exists; no cleanup needed (cluster-scoped CRDs are not our ephemeral test artifacts)
+      rescue StandardError => e
+        raise unless e.respond_to?(:code) && e.code == 404
+
+        # CRD does not exist — try to create it
+        crd_api.create_custom_resource_definition(crd_body)
+        # Wait briefly for CRD to become available
+        sleep(2)
+        cleanup.register do
+          begin
+            crd_api.delete_custom_resource_definition(crd_name)
+          rescue StandardError
+          end
+        end
+      end
+
+      def seed_custom_object(api, namespace:, cleanup:, cluster_scoped:)
+        name = resource_name("scr")
+        body = custom_object_body(name: name, labels: base_labels(name))
+
+        if cluster_scoped
+          api.create_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, body)
+          cleanup.register do
+            api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name) rescue nil
+          end
+        else
+          api.create_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, body)
+          cleanup.track_resource(namespace: namespace, resource_type: "custom", name: name)
+        end
+
+        name
+      end
+
+      def read_custom_object(api, name, namespace:, cluster_scoped:)
+        if cluster_scoped
+          api.get_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name)
+        else
+          api.get_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name)
+        end
+      end
+
+      def list_custom_objects(api, namespace:, cluster_scoped:)
+        if cluster_scoped
+          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL)
+        else
+          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL)
+        end
+      end
+
+      def patch_custom_object(api, name, namespace:, cluster_scoped:)
+        patch_body = [{ "op" => "add", "path" => "/metadata/labels/e2e-patched", "value" => "true" }]
+        if cluster_scoped
+          api.patch_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name, patch_body)
+        else
+          api.patch_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name, patch_body)
+        end
+      end
+
+      def replace_custom_object(api, name, body, namespace:, cluster_scoped:)
+        if cluster_scoped
+          api.replace_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name, body)
+        else
+          api.replace_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name, body)
+        end
+      end
+
+      def delete_custom_object(api, name, namespace:, cluster_scoped:)
+        if cluster_scoped
+          api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name)
+        else
+          api.delete_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name)
+        end
+      end
+
+      def watch_custom_objects(api, namespace:, cluster_scoped:)
+        opts = { watch: true, timeout_seconds: 1, debug_return_type: "String" }
+        if cluster_scoped
+          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, opts)
+        else
+          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, opts)
+        end
+      end
+
+      def custom_object_body(name:, labels:)
+        {
+          "apiVersion" => "#{TEST_CRD_GROUP}/#{TEST_CRD_VERSION}",
+          "kind" => "SampleCR",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => { "testKey" => "testValue" }
+        }
+      end
+
       def base_labels(name)
         {
           "app.kubernetes.io/name" => "kruby-e2e",
@@ -1760,6 +2010,44 @@ module SpecSupport
         when ["core", "namespaces", "update"] then "CoreV1Api#replace_namespace"
         when ["core", "namespaces", "patch"] then "CoreV1Api#patch_namespace"
         when ["core", "namespaces", "delete"] then "CoreV1Api#delete_namespace"
+        when ["storage.k8s.io", "volumeattachments", "get"] then "StorageV1Api#read_volume_attachment"
+        when ["storage.k8s.io", "volumeattachments", "list"] then "StorageV1Api#list_volume_attachment"
+        when ["storage.k8s.io", "volumeattachments", "patch"] then "StorageV1Api#patch_volume_attachment"
+        when ["storage.k8s.io", "csinodes", "get"] then "StorageV1Api#read_csi_node"
+        when ["storage.k8s.io", "csinodes", "list"] then "StorageV1Api#list_csi_node"
+        when ["storage.k8s.io", "csinodes", "patch"] then "StorageV1Api#patch_csi_node"
+        when ["storage.k8s.io", "volumeattributesclasses", "create"] then "StorageV1Api#create_volume_attributes_class"
+        when ["storage.k8s.io", "volumeattributesclasses", "get"] then "StorageV1Api#read_volume_attributes_class"
+        when ["storage.k8s.io", "volumeattributesclasses", "list"] then "StorageV1Api#list_volume_attributes_class"
+        when ["storage.k8s.io", "volumeattributesclasses", "update"] then "StorageV1Api#replace_volume_attributes_class"
+        when ["storage.k8s.io", "volumeattributesclasses", "patch"] then "StorageV1Api#patch_volume_attributes_class"
+        when ["storage.k8s.io", "volumeattributesclasses", "delete"] then "StorageV1Api#delete_volume_attributes_class"
+        when ["networking.k8s.io", "ipaddresses", "create"] then "NetworkingV1Api#create_ip_address"
+        when ["networking.k8s.io", "ipaddresses", "get"] then "NetworkingV1Api#read_ip_address"
+        when ["networking.k8s.io", "ipaddresses", "list"] then "NetworkingV1Api#list_ip_address"
+        when ["networking.k8s.io", "ipaddresses", "update"] then "NetworkingV1Api#replace_ip_address"
+        when ["networking.k8s.io", "ipaddresses", "patch"] then "NetworkingV1Api#patch_ip_address"
+        when ["networking.k8s.io", "ipaddresses", "delete"] then "NetworkingV1Api#delete_ip_address"
+        when ["networking.k8s.io", "servicecidrs", "create"] then "NetworkingV1Api#create_service_cidr"
+        when ["networking.k8s.io", "servicecidrs", "get"] then "NetworkingV1Api#read_service_cidr"
+        when ["networking.k8s.io", "servicecidrs", "list"] then "NetworkingV1Api#list_service_cidr"
+        when ["networking.k8s.io", "servicecidrs", "update"] then "NetworkingV1Api#replace_service_cidr"
+        when ["networking.k8s.io", "servicecidrs", "patch"] then "NetworkingV1Api#patch_service_cidr"
+        when ["networking.k8s.io", "servicecidrs", "delete"] then "NetworkingV1Api#delete_service_cidr"
+        when ["custom", "customobjects", "create"] then "CustomObjectsApi#create_namespaced_custom_object"
+        when ["custom", "customobjects", "get"] then "CustomObjectsApi#get_namespaced_custom_object"
+        when ["custom", "customobjects", "list"] then "CustomObjectsApi#list_namespaced_custom_object"
+        when ["custom", "customobjects", "update"] then "CustomObjectsApi#replace_namespaced_custom_object"
+        when ["custom", "customobjects", "patch"] then "CustomObjectsApi#patch_namespaced_custom_object"
+        when ["custom", "customobjects", "delete"] then "CustomObjectsApi#delete_namespaced_custom_object"
+        when ["custom", "customobjects", "watch"] then "CustomObjectsApi#list_namespaced_custom_object (watch)"
+        when ["custom", "customobjects-cluster", "create"] then "CustomObjectsApi#create_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "get"] then "CustomObjectsApi#get_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "list"] then "CustomObjectsApi#list_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "update"] then "CustomObjectsApi#replace_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "patch"] then "CustomObjectsApi#patch_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "delete"] then "CustomObjectsApi#delete_cluster_custom_object"
+        when ["custom", "customobjects-cluster", "watch"] then "CustomObjectsApi#list_cluster_custom_object (watch)"
         else
           nil
         end
