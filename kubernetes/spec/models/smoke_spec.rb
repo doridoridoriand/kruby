@@ -21,7 +21,7 @@ RSpec.describe "model serialization smoke (auto-generated)" do
     # Add any model filenames that should be excluded here
   ]).freeze
 
-  subject(:model_files) { MODEL_FILES - EXCLUDED_MODELS }
+  subject(:model_files) { MODEL_FILES - EXCLUDED_MODELS.to_a }
 
   it "covers all model files" do
     expect(model_files.length).to eq(MODEL_FILES.length),

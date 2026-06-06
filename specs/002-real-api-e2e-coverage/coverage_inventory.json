@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T09:43:47Z",
+  "generatedAt": "2026-06-06T16:09:41Z",
   "policy": {
     "path": "kubernetes/spec/support/e2e/coverage_policy.yml",
     "loaded": true,
@@ -12,52 +12,52 @@
       "delete",
       "watch"
     ],
-    "excludeRuleCount": 15
+    "excludeRuleCount": 46
   },
   "totals": {
     "apiFiles": 65,
     "methodsTotal": 1937,
     "methodsWithoutHttpInfo": 1001,
     "methodsWithHttpInfo": 936,
-    "candidateMethods": 555,
-    "excludedByPolicy": 261,
+    "candidateMethods": 525,
+    "excludedByPolicy": 291,
     "nonTargetOperations": 185
   },
   "operations": {
     "create": {
       "total": 198,
-      "candidate": 98,
-      "excludedByPolicy": 1,
+      "candidate": 92,
+      "excludedByPolicy": 7,
       "httpInfoVariant": 99
     },
     "delete": {
       "total": 354,
-      "candidate": 89,
-      "excludedByPolicy": 88,
+      "candidate": 83,
+      "excludedByPolicy": 94,
       "httpInfoVariant": 177
     },
     "list": {
       "total": 264,
-      "candidate": 95,
-      "excludedByPolicy": 37,
+      "candidate": 91,
+      "excludedByPolicy": 41,
       "httpInfoVariant": 132
     },
     "patch": {
       "total": 274,
-      "candidate": 91,
-      "excludedByPolicy": 46,
+      "candidate": 87,
+      "excludedByPolicy": 50,
       "httpInfoVariant": 137
     },
     "read": {
       "total": 266,
-      "candidate": 90,
-      "excludedByPolicy": 43,
+      "candidate": 86,
+      "excludedByPolicy": 47,
       "httpInfoVariant": 133
     },
     "replace": {
       "total": 276,
-      "candidate": 92,
-      "excludedByPolicy": 46,
+      "candidate": 86,
+      "excludedByPolicy": 52,
       "httpInfoVariant": 138
     }
   },
@@ -518,8 +518,8 @@
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "counts": {
         "methodsTotal": 89,
-        "candidateMethods": 30,
-        "excludedByPolicy": 13,
+        "candidateMethods": 24,
+        "excludedByPolicy": 19,
         "nonTargetOperations": 2,
         "httpInfoVariants": 44
       }
@@ -716,8 +716,8 @@
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "counts": {
         "methodsTotal": 95,
-        "candidateMethods": 36,
-        "excludedByPolicy": 10,
+        "candidateMethods": 12,
+        "excludedByPolicy": 34,
         "nonTargetOperations": 2,
         "httpInfoVariants": 47
       }
@@ -3318,14 +3318,6 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 30,
-      "method": "create_ingress_class",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 103,
       "method": "create_ip_address",
       "operation": "create",
@@ -3353,14 +3345,6 @@
       "line": 334,
       "method": "create_service_cidr",
       "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 932,
-      "method": "delete_ingress_class",
-      "operation": "delete",
       "classification": "candidate"
     },
     {
@@ -3398,14 +3382,6 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 1408,
-      "method": "list_ingress_class",
-      "operation": "list",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 1590,
       "method": "list_ip_address",
       "operation": "list",
@@ -3433,14 +3409,6 @@
       "line": 1966,
       "method": "list_service_cidr",
       "operation": "list",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 2052,
-      "method": "patch_ingress_class",
-      "operation": "patch",
       "classification": "candidate"
     },
     {
@@ -3478,14 +3446,6 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 2653,
-      "method": "read_ingress_class",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 2717,
       "method": "read_ip_address",
       "operation": "read",
@@ -3513,14 +3473,6 @@
       "line": 2991,
       "method": "read_service_cidr",
       "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "networking_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
-      "line": 3123,
-      "method": "replace_ingress_class",
-      "operation": "replace",
       "classification": "candidate"
     },
     {
@@ -4838,89 +4790,9 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 30,
-      "method": "create_csi_driver",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 103,
-      "method": "create_csi_node",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 177,
-      "method": "create_namespaced_csi_storage_capacity",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 255,
-      "method": "create_storage_class",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 328,
-      "method": "create_volume_attachment",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 401,
       "method": "create_volume_attributes_class",
       "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1095,
-      "method": "delete_csi_driver",
-      "operation": "delete",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1176,
-      "method": "delete_csi_node",
-      "operation": "delete",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1258,
-      "method": "delete_namespaced_csi_storage_capacity",
-      "operation": "delete",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1344,
-      "method": "delete_storage_class",
-      "operation": "delete",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1425,
-      "method": "delete_volume_attachment",
-      "operation": "delete",
       "classification": "candidate"
     },
     {
@@ -4934,32 +4806,8 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1646,
-      "method": "list_csi_driver",
-      "operation": "list",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 1737,
       "method": "list_csi_node",
-      "operation": "list",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 1920,
-      "method": "list_namespaced_csi_storage_capacity",
-      "operation": "list",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2016,
-      "method": "list_storage_class",
       "operation": "list",
       "classification": "candidate"
     },
@@ -4982,32 +4830,8 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2284,
-      "method": "patch_csi_driver",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2368,
       "method": "patch_csi_node",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2453,
-      "method": "patch_namespaced_csi_storage_capacity",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2542,
-      "method": "patch_storage_class",
       "operation": "patch",
       "classification": "candidate"
     },
@@ -5030,32 +4854,8 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2873,
-      "method": "read_csi_driver",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2937,
       "method": "read_csi_node",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3002,
-      "method": "read_namespaced_csi_storage_capacity",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3071,
-      "method": "read_storage_class",
       "operation": "read",
       "classification": "candidate"
     },
@@ -5073,46 +4873,6 @@
       "line": 3263,
       "method": "read_volume_attributes_class",
       "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3331,
-      "method": "replace_csi_driver",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3410,
-      "method": "replace_csi_node",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3490,
-      "method": "replace_namespaced_csi_storage_capacity",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3574,
-      "method": "replace_storage_class",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3653,
-      "method": "replace_volume_attachment",
-      "operation": "replace",
       "classification": "candidate"
     },
     {
@@ -13470,6 +13230,16 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 30,
+      "method": "create_ingress_class",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass creation not in catalog (only Ingress, NetworkPolicy, IPAddress, ServiceCIDR covered)",
+      "exclusionRule": "^create_ingress_class$"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 43,
       "method": "create_ingress_class_with_http_info",
       "operation": "create",
@@ -13610,6 +13380,16 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 932,
+      "method": "delete_ingress_class",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass delete not in catalog",
+      "exclusionRule": "^delete_ingress_class$"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 948,
       "method": "delete_ingress_class_with_http_info",
       "operation": "delete",
@@ -13669,6 +13449,16 @@
       "operation": null,
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 1408,
+      "method": "list_ingress_class",
+      "operation": "list",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass list not in catalog",
+      "exclusionRule": "^list_ingress_class$"
     },
     {
       "api": "networking_v1_api",
@@ -13756,6 +13546,16 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 2052,
+      "method": "patch_ingress_class",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass patch not in catalog",
+      "exclusionRule": "^patch_ingress_class$"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 2067,
       "method": "patch_ingress_class_with_http_info",
       "operation": "patch",
@@ -13839,6 +13639,16 @@
     {
       "api": "networking_v1_api",
       "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 2653,
+      "method": "read_ingress_class",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass read not in catalog",
+      "exclusionRule": "^read_ingress_class$"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
       "line": 2663,
       "method": "read_ingress_class_with_http_info",
       "operation": "read",
@@ -13918,6 +13728,16 @@
       "operation": "read",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "networking_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/networking_v1_api.rb",
+      "line": 3123,
+      "method": "replace_ingress_class",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "IngressClass replace not in catalog",
+      "exclusionRule": "^replace_ingress_class$"
     },
     {
       "api": "networking_v1_api",
@@ -17053,11 +16873,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 30,
+      "method": "create_csi_driver",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver creation requires CSI driver infrastructure",
+      "exclusionRule": "^create_csi_driver$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 43,
       "method": "create_csi_driver_with_http_info",
       "operation": "create",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 103,
+      "method": "create_csi_node",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "CSINode is managed by kubelet, not manually created",
+      "exclusionRule": "^create_csi_node$"
     },
     {
       "api": "storage_v1_api",
@@ -17071,6 +16911,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 177,
+      "method": "create_namespaced_csi_storage_capacity",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity is managed by CSI driver, not manually created",
+      "exclusionRule": "^create_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 191,
       "method": "create_namespaced_csi_storage_capacity_with_http_info",
       "operation": "create",
@@ -17080,11 +16930,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 255,
+      "method": "create_storage_class",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass creation requires CSI driver infrastructure",
+      "exclusionRule": "^create_storage_class$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 268,
       "method": "create_storage_class_with_http_info",
       "operation": "create",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 328,
+      "method": "create_volume_attachment",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "VolumeAttachment is managed by cloud-provider controller, not manually created",
+      "exclusionRule": "^create_volume_attachment$"
     },
     {
       "api": "storage_v1_api",
@@ -17221,11 +17091,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1095,
+      "method": "delete_csi_driver",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver delete requires CSI driver infrastructure",
+      "exclusionRule": "^delete_csi_driver$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 1111,
       "method": "delete_csi_driver_with_http_info",
       "operation": "delete",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1176,
+      "method": "delete_csi_node",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "CSINode delete requires CSI driver infrastructure",
+      "exclusionRule": "^delete_csi_node$"
     },
     {
       "api": "storage_v1_api",
@@ -17239,6 +17129,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1258,
+      "method": "delete_namespaced_csi_storage_capacity",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity delete requires CSI driver infrastructure",
+      "exclusionRule": "^delete_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 1275,
       "method": "delete_namespaced_csi_storage_capacity_with_http_info",
       "operation": "delete",
@@ -17248,11 +17148,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1344,
+      "method": "delete_storage_class",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass delete requires CSI driver infrastructure",
+      "exclusionRule": "^delete_storage_class$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 1360,
       "method": "delete_storage_class_with_http_info",
       "operation": "delete",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1425,
+      "method": "delete_volume_attachment",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "VolumeAttachment delete requires cloud-provider infrastructure",
+      "exclusionRule": "^delete_volume_attachment$"
     },
     {
       "api": "storage_v1_api",
@@ -17289,6 +17209,16 @@
       "operation": null,
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1646,
+      "method": "list_csi_driver",
+      "operation": "list",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver list requires CSI driver infrastructure",
+      "exclusionRule": "^list_csi_driver$"
     },
     {
       "api": "storage_v1_api",
@@ -17330,11 +17260,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 1920,
+      "method": "list_namespaced_csi_storage_capacity",
+      "operation": "list",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity list requires CSI driver infrastructure",
+      "exclusionRule": "^list_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 1941,
       "method": "list_namespaced_csi_storage_capacity_with_http_info",
       "operation": "list",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2016,
+      "method": "list_storage_class",
+      "operation": "list",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass list requires CSI driver infrastructure",
+      "exclusionRule": "^list_storage_class$"
     },
     {
       "api": "storage_v1_api",
@@ -17366,6 +17316,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2284,
+      "method": "patch_csi_driver",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver patch requires CSI driver infrastructure",
+      "exclusionRule": "^patch_csi_driver$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2299,
       "method": "patch_csi_driver_with_http_info",
       "operation": "patch",
@@ -17384,11 +17344,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2453,
+      "method": "patch_namespaced_csi_storage_capacity",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity patch requires CSI driver infrastructure",
+      "exclusionRule": "^patch_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2469,
       "method": "patch_namespaced_csi_storage_capacity_with_http_info",
       "operation": "patch",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2542,
+      "method": "patch_storage_class",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass patch requires CSI driver infrastructure",
+      "exclusionRule": "^patch_storage_class$"
     },
     {
       "api": "storage_v1_api",
@@ -17439,6 +17419,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2873,
+      "method": "read_csi_driver",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver read requires CSI driver infrastructure",
+      "exclusionRule": "^read_csi_driver$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2883,
       "method": "read_csi_driver_with_http_info",
       "operation": "read",
@@ -17457,11 +17447,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3002,
+      "method": "read_namespaced_csi_storage_capacity",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity read requires CSI driver infrastructure",
+      "exclusionRule": "^read_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 3013,
       "method": "read_namespaced_csi_storage_capacity_with_http_info",
       "operation": "read",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3071,
+      "method": "read_storage_class",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass read requires CSI driver infrastructure",
+      "exclusionRule": "^read_storage_class$"
     },
     {
       "api": "storage_v1_api",
@@ -17512,11 +17522,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3331,
+      "method": "replace_csi_driver",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "CSIDriver replace requires CSI driver infrastructure",
+      "exclusionRule": "^replace_csi_driver$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 3345,
       "method": "replace_csi_driver_with_http_info",
       "operation": "replace",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3410,
+      "method": "replace_csi_node",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "CSINode replace requires CSI driver infrastructure",
+      "exclusionRule": "^replace_csi_node$"
     },
     {
       "api": "storage_v1_api",
@@ -17530,6 +17560,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3490,
+      "method": "replace_namespaced_csi_storage_capacity",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "CSIStorageCapacity replace requires CSI driver infrastructure",
+      "exclusionRule": "^replace_namespaced_csi_storage_capacity$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 3505,
       "method": "replace_namespaced_csi_storage_capacity_with_http_info",
       "operation": "replace",
@@ -17539,11 +17579,31 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3574,
+      "method": "replace_storage_class",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "StorageClass replace requires CSI driver infrastructure",
+      "exclusionRule": "^replace_storage_class$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 3588,
       "method": "replace_storage_class_with_http_info",
       "operation": "replace",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3653,
+      "method": "replace_volume_attachment",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "VolumeAttachment replace requires cloud-provider infrastructure",
+      "exclusionRule": "^replace_volume_attachment$"
     },
     {
       "api": "storage_v1_api",
