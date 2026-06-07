@@ -19,6 +19,8 @@ module SpecSupport
     class Executor
       DELETE_WAIT_TIMEOUT_SECONDS = 20
       DELETE_WAIT_INTERVAL_SECONDS = 0.2
+      CRD_ESTABLISH_TIMEOUT_SECONDS = 20
+      CRD_ESTABLISH_INTERVAL_SECONDS = 0.2
       CONFLICT_RETRY_ATTEMPTS = 10
       CONFLICT_RETRY_INTERVAL_SECONDS = 0.2
 
@@ -312,6 +314,7 @@ module SpecSupport
           name_prefix: "volumeattachment",
           namespace_scoped: false,
           kubectl_resource: "volumeattachment",
+          allow_empty_list: true,
           read_method: :read_volume_attachment,
           list_method: :list_volume_attachment,
           patch_method: :patch_volume_attachment
@@ -825,7 +828,7 @@ module SpecSupport
           list = list_catalog_resources(api, definition, namespace: namespace)
           if name
             assert_list_includes!(list, name)
-          else
+          elsif !definition[:allow_empty_list]
             raise "expected at least one resource in list" if resource_items(list).empty?
           end
         when "patch"
@@ -868,7 +871,7 @@ module SpecSupport
       end
 
       def seed_catalog_resource(api, definition, namespace:, cleanup:)
-        name = resource_name(definition.fetch(:name_prefix))
+        name = catalog_resource_name(definition)
         body = Factories.public_send(definition.fetch(:factory), name: name, labels: base_labels(name))
 
         if definition.fetch(:namespace_scoped)
@@ -902,6 +905,18 @@ module SpecSupport
         list = list_catalog_resources(api, definition, namespace: nil)
         names = resource_items(list).map { |item| resource_name_from(item) }.compact
         names.first || raise("expected at least one #{definition.fetch(:api_class)} resource in the cluster")
+      end
+
+      def catalog_resource_name(definition)
+        return test_ip_address_name if definition[:factory] == :ip_address
+
+        resource_name(definition.fetch(:name_prefix))
+      end
+
+      def test_ip_address_name
+        @test_ip_address_octet ||= SecureRandom.random_number(200)
+        @test_ip_address_octet += 1
+        "192.0.2.#{@test_ip_address_octet}"
       end
 
       def patch_catalog_resource(api, definition, name, namespace:, key:, value:)
@@ -1596,7 +1611,8 @@ module SpecSupport
       # ApiextensionsV1Api, then exercise CRUD through CustomObjectsApi.
       TEST_CRD_GROUP = "kruby-e2e.cyberagent.co.jp"
       TEST_CRD_VERSION = "v1"
-      TEST_CRD_PLURAL = "samplecrs"
+      TEST_CRD_NAMESPACED_PLURAL = "samplecrs"
+      TEST_CRD_CLUSTER_PLURAL = "clustersamplecrs"
 
       def execute_custom_object_operation(operation, namespace:, cleanup:, cluster_scoped:)
         api = Kubernetes::CustomObjectsApi.new(build_api_client)
@@ -1648,7 +1664,9 @@ module SpecSupport
       end
 
       def ensure_test_crd(crd_api, cleanup:, cluster_scoped:)
-        crd_name = "#{TEST_CRD_PLURAL}.#{TEST_CRD_GROUP}"
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
+        kind = test_crd_kind(cluster_scoped: cluster_scoped)
+        crd_name = "#{plural}.#{TEST_CRD_GROUP}"
         crd_body = {
           "apiVersion" => "apiextensions.k8s.io/v1",
           "kind" => "CustomResourceDefinition",
@@ -1670,48 +1688,46 @@ module SpecSupport
             }],
             "scope" => cluster_scoped ? "Cluster" : "Namespaced",
             "names" => {
-              "plural" => TEST_CRD_PLURAL,
-              "singular" => "samplecr",
-              "kind" => "SampleCR",
-              "shortNames" => ["scr"]
+              "plural" => plural,
+              "singular" => cluster_scoped ? "clustersamplecr" : "samplecr",
+              "kind" => kind,
+              "shortNames" => [cluster_scoped ? "cscr" : "scr"]
             }
           }
         }
 
         begin
-          crd_api.read_custom_resource_definition(crd_name)
+          crd = crd_api.read_custom_resource_definition(crd_name)
+          return if crd_established?(crd)
+
+          wait_for_crd_established!(crd_api, crd_name)
+          return
         rescue StandardError => e
-          return if e.respond_to?(:code) && e.code == 404
-          raise
+          raise unless not_found_error?(e)
         end
 
-        # CRD exists; no cleanup needed (cluster-scoped CRDs are not our ephemeral test artifacts)
-      rescue StandardError => e
-        raise unless e.respond_to?(:code) && e.code == 404
-
-        # CRD does not exist — try to create it
         crd_api.create_custom_resource_definition(crd_body)
-        # Wait briefly for CRD to become available
-        sleep(2)
         cleanup.register do
           begin
             crd_api.delete_custom_resource_definition(crd_name)
           rescue StandardError
           end
         end
+        wait_for_crd_established!(crd_api, crd_name)
       end
 
       def seed_custom_object(api, namespace:, cleanup:, cluster_scoped:)
         name = resource_name("scr")
-        body = custom_object_body(name: name, labels: base_labels(name))
+        body = custom_object_body(name: name, labels: base_labels(name), cluster_scoped: cluster_scoped)
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
 
         if cluster_scoped
-          api.create_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, body)
+          api.create_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, body)
           cleanup.register do
-            api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name) rescue nil
+            api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, name) rescue nil
           end
         else
-          api.create_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, body)
+          api.create_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, body)
           cleanup.track_resource(namespace: namespace, resource_type: "custom", name: name)
         end
 
@@ -1719,62 +1735,116 @@ module SpecSupport
       end
 
       def read_custom_object(api, name, namespace:, cluster_scoped:)
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.get_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name)
+          api.get_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, name)
         else
-          api.get_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name)
+          api.get_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, name)
         end
       end
 
       def list_custom_objects(api, namespace:, cluster_scoped:)
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL)
+          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural)
         else
-          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL)
+          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural)
         end
       end
 
       def patch_custom_object(api, name, namespace:, cluster_scoped:)
         patch_body = [{ "op" => "add", "path" => "/metadata/labels/e2e-patched", "value" => "true" }]
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.patch_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name, patch_body)
+          api.patch_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, name, patch_body)
         else
-          api.patch_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name, patch_body)
+          api.patch_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, name, patch_body)
         end
       end
 
       def replace_custom_object(api, name, body, namespace:, cluster_scoped:)
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.replace_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name, body)
+          api.replace_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, name, body)
         else
-          api.replace_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name, body)
+          api.replace_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, name, body)
         end
       end
 
       def delete_custom_object(api, name, namespace:, cluster_scoped:)
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, name)
+          api.delete_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, name)
         else
-          api.delete_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, name)
+          api.delete_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, name)
         end
       end
 
       def watch_custom_objects(api, namespace:, cluster_scoped:)
         opts = { watch: true, timeout_seconds: 1, debug_return_type: "String" }
+        plural = test_crd_plural(cluster_scoped: cluster_scoped)
         if cluster_scoped
-          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, TEST_CRD_PLURAL, opts)
+          api.list_cluster_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, plural, opts)
         else
-          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, TEST_CRD_PLURAL, opts)
+          api.list_namespaced_custom_object(TEST_CRD_GROUP, TEST_CRD_VERSION, namespace, plural, opts)
         end
       end
 
-      def custom_object_body(name:, labels:)
+      def custom_object_body(name:, labels:, cluster_scoped:)
         {
           "apiVersion" => "#{TEST_CRD_GROUP}/#{TEST_CRD_VERSION}",
-          "kind" => "SampleCR",
+          "kind" => test_crd_kind(cluster_scoped: cluster_scoped),
           "metadata" => { "name" => name, "labels" => labels },
           "spec" => { "testKey" => "testValue" }
         }
+      end
+
+      def test_crd_plural(cluster_scoped:)
+        cluster_scoped ? TEST_CRD_CLUSTER_PLURAL : TEST_CRD_NAMESPACED_PLURAL
+      end
+
+      def test_crd_kind(cluster_scoped:)
+        cluster_scoped ? "ClusterSampleCR" : "SampleCR"
+      end
+
+      def wait_for_crd_established!(crd_api, crd_name, timeout_seconds: CRD_ESTABLISH_TIMEOUT_SECONDS)
+        deadline = monotonic_time + timeout_seconds
+        loop do
+          crd = crd_api.read_custom_resource_definition(crd_name)
+          return if crd_established?(crd)
+
+          break if monotonic_time >= deadline
+
+          sleep CRD_ESTABLISH_INTERVAL_SECONDS
+        end
+
+        raise "timed out waiting for CRD #{crd_name} to become Established after #{timeout_seconds}s"
+      end
+
+      def crd_established?(crd)
+        crd_conditions(crd).any? do |condition|
+          condition_value(condition, "type") == "Established" &&
+            condition_value(condition, "status") == "True"
+        end
+      end
+
+      def crd_conditions(crd)
+        if crd.is_a?(Hash)
+          status = crd["status"] || crd[:status] || {}
+          return status["conditions"] || status[:conditions] || []
+        end
+
+        return Array(crd.status.conditions) if crd.respond_to?(:status) && crd.status&.respond_to?(:conditions)
+
+        []
+      end
+
+      def condition_value(condition, key)
+        return condition[key] if condition.is_a?(Hash) && condition.key?(key)
+        return condition[key.to_sym] if condition.is_a?(Hash) && condition.key?(key.to_sym)
+        return condition.public_send(key) if condition.respond_to?(key)
+
+        nil
       end
 
       def base_labels(name)
@@ -1801,7 +1871,7 @@ module SpecSupport
       end
 
       def resource_items(list_response)
-        return Array(list_response["items"]) if list_response.is_a?(Hash)
+        return Array(list_response["items"] || list_response[:items]) if list_response.is_a?(Hash)
         return Array(list_response.items) if list_response.respond_to?(:items)
 
         []
@@ -1836,9 +1906,11 @@ module SpecSupport
 
       def with_updated_label(resource, key:, value:)
         if resource.is_a?(Hash)
-          resource["metadata"] ||= {}
-          resource["metadata"]["labels"] ||= {}
-          resource["metadata"]["labels"][key] = value
+          metadata_key = resource.key?("metadata") ? "metadata" : :metadata
+          resource[metadata_key] ||= {}
+          labels_key = resource[metadata_key].key?("labels") ? "labels" : :labels
+          resource[metadata_key][labels_key] ||= {}
+          resource[metadata_key][labels_key][key] = value
           return resource
         end
 

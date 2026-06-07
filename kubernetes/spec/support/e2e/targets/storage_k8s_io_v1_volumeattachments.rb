@@ -7,7 +7,7 @@ module SpecSupport
         module_function
 
         def register!(catalog)
-          %w[get list patch].each do |operation|
+          %w[list].each do |operation|
             catalog.register(
               api_group: "storage.k8s.io",
               version: "v1",
