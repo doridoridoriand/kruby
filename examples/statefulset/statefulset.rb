@@ -33,10 +33,10 @@ headless_service = Kubernetes::V1Service.new({
     namespace: "default",
   },
   spec: {
-    "clusterIP" => "None",
+    cluster_ip: "None",
     selector: { "app" => "nginx-stateful" },
     ports: [
-      { name: "web", port: 80, "targetPort" => 80 },
+      { name: "web", port: 80, target_port: 80 },
     ],
   },
 })
@@ -48,17 +48,17 @@ stateful_set = Kubernetes::V1StatefulSet.new({
     namespace: "default",
   },
   spec: {
-    "serviceName" => "nginx-headless",
+    service_name: "nginx-headless",
     replicas: 2,
-    "podManagementPolicy" => "OrderedReady",
-    "updateStrategy" => {
+    pod_management_policy: "OrderedReady",
+    update_strategy: {
       type: "RollingUpdate",
-      "rollingUpdate" => {
+      rolling_update: {
         partition: 0,
       },
     },
     selector: {
-      "matchLabels" => { "app" => "nginx-stateful" },
+      match_labels: { "app" => "nginx-stateful" },
     },
     template: {
       metadata: {
@@ -69,19 +69,19 @@ stateful_set = Kubernetes::V1StatefulSet.new({
           {
             name: "nginx",
             image: "nginx:1.27",
-            ports: [{ "containerPort" => 80, name: "web" }],
-            "volumeMounts" => [
-              { name: "data", "mountPath" => "/usr/share/nginx/html" },
+            ports: [{ container_port: 80, name: "web" }],
+            volume_mounts: [
+              { name: "data", mount_path: "/usr/share/nginx/html" },
             ],
           },
         ],
       },
     },
-    "volumeClaimTemplates" => [
+    volume_claim_templates: [
       {
         metadata: { name: "data" },
         spec: {
-          "accessModes" => ["ReadWriteOnce"],
+          access_modes: ["ReadWriteOnce"],
           resources: {
             requests: { storage: "1Gi" },
           },
@@ -94,18 +94,22 @@ stateful_set = Kubernetes::V1StatefulSet.new({
 puts "Creating headless Service..."
 service = core_client.create_namespaced_service("default", headless_service)
 puts "Created: #{service.metadata.name}"
+sleep 3
 
 puts "Creating StatefulSet..."
 result = apps_client.create_namespaced_stateful_set("default", stateful_set)
 puts "Created: #{result.metadata.name} (replicas: #{result.spec.replicas})"
+sleep 3
 
 # Get
 puts "\nReading StatefulSet..."
 pp apps_client.read_namespaced_stateful_set("web-statefulset", "default")
+sleep 3
 
 # List
 puts "\nListing StatefulSets..."
 pp apps_client.list_namespaced_stateful_set("default")
+sleep 3
 
 # Delete
 puts "\nDeleting StatefulSet..."

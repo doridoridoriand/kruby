@@ -39,10 +39,12 @@ end
 puts "\nCreating ConfigMap for real..."
 core_client.create_namespaced_config_map("default", config_map)
 puts "Created successfully"
+sleep 3
 
 # Verify it now exists
 puts "\nVerifying it exists..."
 pp core_client.read_namespaced_config_map("dry-run-test", "default")
+sleep 3
 
 # Cleanup
 core_client.delete_namespaced_config_map("dry-run-test", "default")

@@ -12,16 +12,16 @@ network_policy = Kubernetes::V1NetworkPolicy.new({
     namespace: "default",
   },
   spec: {
-    "podSelector" => {
-      "matchLabels" => { "app" => "backend" },
+    pod_selector: {
+      match_labels: { "app" => "backend" },
     },
-    "policyTypes" => ["Ingress"],
+    policy_types: ["Ingress"],
     ingress: [
       {
         from: [
           {
-            "podSelector" => {
-              "matchLabels" => { "app" => "frontend" },
+            pod_selector: {
+              match_labels: { "app" => "frontend" },
             },
           },
         ],
@@ -40,14 +40,17 @@ puts "Creating NetworkPolicy..."
 result = networking_client.create_namespaced_network_policy("default", network_policy)
 puts "Created: #{result.metadata.name}"
 puts "  policyTypes: #{result.spec.policy_types.join(', ')}"
+sleep 3
 
 # Get
 puts "\nReading NetworkPolicy..."
 pp networking_client.read_namespaced_network_policy("allow-frontend-ingress", "default")
+sleep 3
 
 # List
 puts "\nListing NetworkPolicies..."
 pp networking_client.list_namespaced_network_policy("default")
+sleep 3
 
 # Delete
 puts "\nDeleting NetworkPolicy..."
