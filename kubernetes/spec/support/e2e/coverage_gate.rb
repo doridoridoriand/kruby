@@ -12,6 +12,7 @@
 #   puts result.report
 
 require "json"
+require "time"
 require "yaml"
 
 module SpecSupport

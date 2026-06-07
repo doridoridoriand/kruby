@@ -3,7 +3,7 @@ require "pp"
 
 config = Kubernetes::Configuration.default_config
 Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
-events_client = Kubernetes::EventsV1Api.new(Kubernetes::ApiClient.new(config))
+events_client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 namespace = ENV["NAMESPACE"] || "default"
 

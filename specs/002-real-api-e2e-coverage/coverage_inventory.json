@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T16:30:25Z",
+  "generatedAt": "2026-06-07T00:04:14Z",
   "policy": {
     "path": "kubernetes/spec/support/e2e/coverage_policy.yml",
     "loaded": true,
@@ -12,15 +12,15 @@
       "delete",
       "watch"
     ],
-    "excludeRuleCount": 46
+    "excludeRuleCount": 49
   },
   "totals": {
     "apiFiles": 65,
     "methodsTotal": 1937,
     "methodsWithoutHttpInfo": 1001,
     "methodsWithHttpInfo": 936,
-    "candidateMethods": 518,
-    "excludedByPolicy": 298,
+    "candidateMethods": 515,
+    "excludedByPolicy": 301,
     "nonTargetOperations": 185
   },
   "operations": {
@@ -44,14 +44,14 @@
     },
     "patch": {
       "total": 274,
-      "candidate": 87,
-      "excludedByPolicy": 50,
+      "candidate": 85,
+      "excludedByPolicy": 52,
       "httpInfoVariant": 137
     },
     "read": {
       "total": 266,
-      "candidate": 86,
-      "excludedByPolicy": 47,
+      "candidate": 85,
+      "excludedByPolicy": 48,
       "httpInfoVariant": 133
     },
     "replace": {
@@ -716,8 +716,8 @@
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "counts": {
         "methodsTotal": 95,
-        "candidateMethods": 12,
-        "excludedByPolicy": 34,
+        "candidateMethods": 9,
+        "excludedByPolicy": 37,
         "nonTargetOperations": 2,
         "httpInfoVariants": 47
       }
@@ -4774,22 +4774,6 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2368,
-      "method": "patch_csi_node",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 2626,
-      "method": "patch_volume_attachment",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2794,
       "method": "patch_volume_attributes_class",
       "operation": "patch",
@@ -4800,14 +4784,6 @@
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2937,
       "method": "read_csi_node",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "storage_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
-      "line": 3135,
-      "method": "read_volume_attachment",
       "operation": "read",
       "classification": "candidate"
     },
@@ -17349,6 +17325,16 @@
     {
       "api": "storage_v1_api",
       "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2368,
+      "method": "patch_csi_node",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "CSINode patch mutates kubelet-managed node storage state and is rejected by kind",
+      "exclusionRule": "^patch_csi_node$"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
       "line": 2383,
       "method": "patch_csi_node_with_http_info",
       "operation": "patch",
@@ -17392,6 +17378,16 @@
       "operation": "patch",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 2626,
+      "method": "patch_volume_attachment",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "VolumeAttachment patch requires an attach controller-created object, which kind does not provide",
+      "exclusionRule": "^patch_volume_attachment$"
     },
     {
       "api": "storage_v1_api",
@@ -17495,6 +17491,16 @@
       "operation": "read",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "storage_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/storage_v1_api.rb",
+      "line": 3135,
+      "method": "read_volume_attachment",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "VolumeAttachment read requires an attach controller-created object, which kind does not provide",
+      "exclusionRule": "^read_volume_attachment$"
     },
     {
       "api": "storage_v1_api",
