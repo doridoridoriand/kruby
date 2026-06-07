@@ -1,0 +1,57 @@
+require "kruby"
+require "pp"
+
+config = Kubernetes::Configuration.default_config
+Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
+
+client = Kubernetes::AppsV1Api.new(Kubernetes::ApiClient.new(config))
+
+deployment = Kubernetes::V1Deployment.new({
+  metadata: {
+    name: "nginx-deployment",
+    namespace: "default",
+    labels: { "app" => "nginx" },
+  },
+  spec: {
+    replicas: 2,
+    selector: {
+      match_labels: { "app" => "nginx" },
+    },
+    template: {
+      metadata: {
+        labels: { "app" => "nginx" },
+      },
+      spec: {
+        containers: [
+          {
+            name: "nginx",
+            image: "nginx:1.27",
+            ports: [{ container_port: 80 }],
+          },
+        ],
+      },
+    },
+  },
+})
+
+# Create
+puts "Creating deployment..."
+result = client.create_namespaced_deployment("default", deployment)
+puts "Created: #{result.metadata.name}"
+
+# Get
+puts "\nGetting deployment..."
+pp client.read_namespaced_deployment("nginx-deployment", "default")
+
+# List
+puts "\nListing deployments..."
+pp client.list_namespaced_deployment("default")
+
+# Scale (update replicas to 3)
+puts "\nScaling to 3 replicas..."
+deployment.spec.replicas = 3
+pp client.replace_namespaced_deployment("nginx-deployment", "default", deployment)
+
+# Delete
+puts "\nDeleting deployment..."
+pp client.delete_namespaced_deployment("nginx-deployment", "default")
