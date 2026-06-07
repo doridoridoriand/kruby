@@ -87,7 +87,7 @@ module SpecSupport
           "/apis/#{group}/#{version}"
         end
 
-        body, = api_client.call_api(:get, path, return_type: "String")
+        body, = api_client.call_api(:get, path, return_type: "String", auth_names: ["BearerToken"])
         return [] if body.nil? || body.empty?
 
         payload = body.is_a?(String) ? JSON.parse(body) : body

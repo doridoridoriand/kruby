@@ -310,4 +310,11 @@ RSpec.describe SpecSupport::E2E::Executor do
 
     expect(executor.send(:catalog_resource_name, definition)).to match(/\A192\.0\.2\.\d{1,3}\z/)
   end
+
+  it "keeps generated IPAddress names within the valid IPv4 host octet range" do
+    executor.instance_variable_set(:@test_ip_address_octet, 253)
+
+    expect(executor.send(:test_ip_address_name)).to eq("192.0.2.254")
+    expect(executor.send(:test_ip_address_name)).to eq("192.0.2.1")
+  end
 end

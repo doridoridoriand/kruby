@@ -914,8 +914,8 @@ module SpecSupport
       end
 
       def test_ip_address_name
-        @test_ip_address_octet ||= SecureRandom.random_number(200)
-        @test_ip_address_octet += 1
+        current = @test_ip_address_octet || SecureRandom.random_number(254)
+        @test_ip_address_octet = (current % 254) + 1
         "192.0.2.#{@test_ip_address_octet}"
       end
 

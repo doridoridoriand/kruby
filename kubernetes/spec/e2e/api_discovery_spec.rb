@@ -11,7 +11,7 @@ RSpec.describe SpecSupport::E2E::ApiDiscovery do
     body = JSON.generate("resources" => resources)
 
     allow(api_client).to receive(:call_api)
-      .with(:get, path, return_type: "String")
+      .with(:get, path, return_type: "String", auth_names: ["BearerToken"])
       .and_return([body, 200, {}])
   end
 
