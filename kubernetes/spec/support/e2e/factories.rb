@@ -701,9 +701,13 @@ module SpecSupport
           "apiVersion" => "networking.k8s.io/v1",
           "kind" => "IPAddress",
           "metadata" => { "name" => name, "labels" => labels },
-          "parent" => "eth0",
-          "type" => "Host",
-          "address" => "192.0.2.1/24"
+          "spec" => {
+            "parentRef" => {
+              "resource" => "services",
+              "namespace" => "default",
+              "name" => "kruby-e2e-ip-#{name.tr('.', '-')}"
+            }
+          }
         }
       end
 

@@ -24,7 +24,7 @@ RSpec.describe Kubernetes::ApiClient do
       data, status, headers = api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
 
       expect(status).to eq(200)
-      expect(data).to eq("message" => "ok")
+      expect(data).to eq(message: "ok")
     end
 
     it "raises ApiError on 4xx response with code and body" do
@@ -40,12 +40,12 @@ RSpec.describe Kubernetes::ApiClient do
       allow(api_client).to receive(:build_request).and_return(request)
       allow(api_client).to receive(:deserialize)
 
-      error = expect do
+      expect do
         api_client.call_api(:get, "/api/v1/pods/notfound")
-      end.to raise_error(Kubernetes::ApiError)
-
-      expect(error.code).to eq(404)
-      expect(error.response_body).to eq('{"message": "not found"}')
+      end.to raise_error(Kubernetes::ApiError) do |error|
+        expect(error.code).to eq(404)
+        expect(error.response_body).to eq('{"message": "not found"}')
+      end
     end
 
     it "raises ApiError on 5xx response with code and body" do
@@ -61,12 +61,12 @@ RSpec.describe Kubernetes::ApiClient do
       allow(api_client).to receive(:build_request).and_return(request)
       allow(api_client).to receive(:deserialize)
 
-      error = expect do
+      expect do
         api_client.call_api(:get, "/api/v1/pods")
-      end.to raise_error(Kubernetes::ApiError)
-
-      expect(error.code).to eq(500)
-      expect(error.response_body).to eq('{"message": "server error"}')
+      end.to raise_error(Kubernetes::ApiError) do |error|
+        expect(error.code).to eq(500)
+        expect(error.response_body).to eq('{"message": "server error"}')
+      end
     end
 
     it "raises ApiError on connection timeout" do
@@ -94,12 +94,12 @@ RSpec.describe Kubernetes::ApiClient do
       allow(request).to receive(:run).and_return(response)
       allow(api_client).to receive(:build_request).and_return(request)
 
-      error = expect do
+      expect do
         api_client.call_api(:get, "/api/v1/pods")
-      end.to raise_error(Kubernetes::ApiError)
-
-      expect(error.code).to eq(0)
-      expect(error.message).to include("Connection refused")
+      end.to raise_error(Kubernetes::ApiError) do |error|
+        expect(error.code).to eq(0)
+        expect(error.message).to include("Connection refused")
+      end
     end
 
     it "returns nil data when no return_type is specified" do
@@ -258,9 +258,9 @@ RSpec.describe Kubernetes::ApiClient do
 
   describe "#update_params_for_auth!" do
     it "injects header auth tokens" do
-      config.auth_settings = {
+      allow(config).to receive(:auth_settings).and_return(
         "BearerToken" => { type: "api_key", in: "header", key: "Authorization", value: "Bearer abc123" }
-      }
+      )
 
       header_params = {}
       query_params = {}
@@ -271,9 +271,9 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "injects query auth tokens" do
-      config.auth_settings = {
+      allow(config).to receive(:auth_settings).and_return(
         "ApiKey" => { type: "api_key", in: "query", key: "api_key", value: "secret-key" }
-      }
+      )
 
       header_params = {}
       query_params = {}
@@ -284,10 +284,10 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "handles multiple auth names" do
-      config.auth_settings = {
+      allow(config).to receive(:auth_settings).and_return(
         "BearerToken" => { type: "api_key", in: "header", key: "Authorization", value: "Bearer abc123" },
         "CustomHeader" => { type: "api_key", in: "header", key: "X-Custom", value: "custom-value" }
-      }
+      )
 
       header_params = {}
       query_params = {}
@@ -298,7 +298,7 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "skips unknown auth names" do
-      config.auth_settings = {}
+      allow(config).to receive(:auth_settings).and_return({})
 
       header_params = { "Existing" => "value" }
       query_params = {}
@@ -308,9 +308,9 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "raises ArgumentError for invalid auth location" do
-      config.auth_settings = {
+      allow(config).to receive(:auth_settings).and_return(
         "BadAuth" => { type: "api_key", in: "cookie", key: "session", value: "abc" }
-      }
+      )
 
       expect do
         api_client.update_params_for_auth!({}, {}, ["BadAuth"])
@@ -320,14 +320,17 @@ RSpec.describe Kubernetes::ApiClient do
 
   describe "#build_request_url" do
     it "prepends leading slash to path" do
-      config.base_url = "https://k8s.example.com"
+      config.scheme = "https"
+      config.host = "k8s.example.com"
 
       url = api_client.build_request_url("api/v1/pods")
       expect(url).to eq("https://k8s.example.com/api/v1/pods")
     end
 
     it "collapses multiple slashes" do
-      config.base_url = "https://k8s.example.com/api/v1"
+      config.scheme = "https"
+      config.host = "k8s.example.com"
+      config.base_path = "/api/v1"
 
       url = api_client.build_request_url("/pods")
       expect(url).to eq("https://k8s.example.com/api/v1/pods")
@@ -335,7 +338,9 @@ RSpec.describe Kubernetes::ApiClient do
 
     it "appends path to base_url with operation" do
       config.server_index = 0
-      config.server_settings = [{ url: "https://ops.k8s.example.com/api/v1", description: "ops" }]
+      allow(config).to receive(:server_settings).and_return(
+        [{ url: "https://ops.k8s.example.com/api/v1", description: "ops" }]
+      )
 
       url = api_client.build_request_url("pods", operation: :some_operation)
       expect(url).to include("k8s.example.com")
@@ -384,7 +389,7 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "converts Hash<String, String>" do
-      expect(api_client.convert_to_type({ key: 42 }, "Hash<String, String>")).to eq({ "key" => "42" })
+      expect(api_client.convert_to_type({ key: 42 }, "Hash<String, String>")).to eq(key: "42")
     end
   end
 
@@ -409,7 +414,7 @@ RSpec.describe Kubernetes::ApiClient do
                                  body: '<html>error</html>',
                                  headers: { "Content-Type" => "text/html" })
 
-      expect { api_client.deserialize(response, "String") }.to raise_error(/Content-Type is not supported/)
+      expect { api_client.deserialize(response, "Hash<String, String>") }.to raise_error(/Content-Type is not supported/)
     end
 
     it "handles Date return type" do
@@ -418,7 +423,7 @@ RSpec.describe Kubernetes::ApiClient do
                                  headers: { "Content-Type" => "application/json" })
 
       result = api_client.deserialize(response, "Date")
-      expect(result).to eq("2026-01-01")
+      expect(result).to eq(Date.new(2026, 1, 1))
     end
 
     it "handles Time return type" do
@@ -427,7 +432,7 @@ RSpec.describe Kubernetes::ApiClient do
                                  headers: { "Content-Type" => "application/json" })
 
       result = api_client.deserialize(response, "Time")
-      expect(result).to eq("2026-01-01T00:00:00Z")
+      expect(result).to eq(Time.utc(2026, 1, 1))
     end
 
     it "handles Array<String>" do
@@ -454,13 +459,11 @@ RSpec.describe Kubernetes::ApiClient do
       request = instance_double(Typhoeus::Request)
       tempfile = nil
 
-      # Simulate the callbacks being registered
-      allow(request).to receive(:on_headers)
-      allow(request).to receive(:on_body)
-      allow(request).to receive(:on_complete)
+      expect(request).to receive(:on_headers)
+      expect(request).to receive(:on_body)
+      expect(request).to receive(:on_complete)
 
-      # Should not raise
-      expect { api_client.download_file(request) }.not_to raise_error
+      api_client.download_file(request)
     end
 
     it "uses Content-Disposition filename for tempfile prefix" do
@@ -484,7 +487,7 @@ RSpec.describe Kubernetes::ApiClient do
 
     it "handles array" do
       result = api_client.object_to_hash([{ name: "a" }, { name: "b" }])
-      expect(result).to eq([{ "name" => "a" }, { "name" => "b" }])
+      expect(result).to eq([{ name: "a" }, { name: "b" }])
     end
 
     it "handles hash" do

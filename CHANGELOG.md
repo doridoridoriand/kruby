@@ -8,9 +8,31 @@ Historical releases published before this file was introduced are summarized as 
 
 ## [Unreleased]
 
+- Nothing yet.
+
+## [1.36.0.3] - 2026-06-07
+
 ### Added
 
 - Added a RubyGems publish script and Rake tasks to validate, build, package-check, and push release gems with MFA support.
+- Added an E2E coverage gate with exclusion policy, a CI coverage integrity gate, and a nightly multi-version Kind E2E matrix.
+- Added model serialization smoke coverage for all generated models.
+- Expanded Kind-backed E2E coverage for Core, Apps, Batch, ConfigMap delete collection, CustomObjects, networking.k8s.io, and storage.k8s.io resources.
+- Added unit coverage for ApiClient, Configuration, Watch, release publish guards, and kubeconfig path handling.
+
+### Changed
+
+- Updated Japanese documentation metadata and release checklist for Kubernetes 1.36/client 1.36.
+- Synced E2E coverage inventory and policy data with the expanded Kind coverage set.
+- Hardened E2E factories and API discovery support for full-mode Kind runs.
+
+### Fixed
+
+- Honored kubeconfig TLS verification settings when configuring SSL.
+- Resolved relative kubeconfig paths for certificate authorities, client certificates, client keys, and token files against the kubeconfig file directory.
+- Preserved existing query parameters and percent-encoded resource versions when constructing Watch URLs.
+- Kept in-cluster token refresh compatible with `api_key_with_prefix` alias arguments.
+- Avoided mutating server URL templates while substituting server variables and accepted string or symbol variable keys.
 
 ## [1.36.0.2] - 2026-05-28
 

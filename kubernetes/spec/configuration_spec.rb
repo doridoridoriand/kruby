@@ -42,9 +42,9 @@ RSpec.describe Kubernetes::Configuration do
 
     it "uses server_url when server_index is set" do
       config.server_index = 0
-      config.server_settings = [
+      allow(config).to receive(:server_settings).and_return([
         { url: "https://custom.k8s.example.com/api/v1", description: "custom server" }
-      ]
+      ])
 
       expect(config.base_url).to eq("https://custom.k8s.example.com/api/v1")
     end
@@ -107,7 +107,7 @@ RSpec.describe Kubernetes::Configuration do
 
     it "handles nil base_path" do
       config.base_path = nil
-      expect(config.base_path).to eq("/")
+      expect(config.base_path).to eq("")
     end
   end
 
@@ -220,8 +220,7 @@ RSpec.describe Kubernetes::Configuration do
 
       token = config.basic_auth_token
       expect(token).to start_with("Basic ")
-      # Decode and verify credentials
-      decoded = [token[7..-1]].pack("m").delete("\r\n")
+      decoded = token.delete_prefix("Basic ").unpack1("m").delete("\r\n")
       expect(decoded).to eq("admin:secret")
     end
   end

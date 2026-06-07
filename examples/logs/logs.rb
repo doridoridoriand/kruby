@@ -2,7 +2,7 @@ require "kruby"
 
 config = Kubernetes::Configuration.default_config
 Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
-logs_client = Kubernetes::LogsApi.new(Kubernetes::ApiClient.new(config))
+logs_client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 # Get logs from a running pod
 pod_name = ENV["POD_NAME"] || "nginx"

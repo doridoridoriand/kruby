@@ -260,21 +260,30 @@ module Kubernetes
       end
 
       server = servers[index]
-      url = server[:url]
+      url = server[:url].dup
 
       return url unless server.key? :variables
 
       # go through variable and assign a value
       server[:variables].each do |name, variable|
-        if variables.key?(name)
-          if (!server[:variables][name].key?(:enum_values) || server[:variables][name][:enum_values].include?(variables[name]))
-            url.gsub! "{" + name.to_s + "}", variables[name]
+        variable_key = if variables.key?(name)
+                         name
+                       elsif variables.key?(name.to_s)
+                         name.to_s
+                       elsif name.respond_to?(:to_sym) && variables.key?(name.to_sym)
+                         name.to_sym
+                       end
+
+        if variable_key
+          variable_value = variables[variable_key]
+          if (!variable.key?(:enum_values) || variable[:enum_values].include?(variable_value))
+            url.gsub! "{" + name.to_s + "}", variable_value
           else
-            fail ArgumentError, "The variable `#{name}` in the server URL has invalid value #{variables[name]}. Must be #{server[:variables][name][:enum_values]}."
+            fail ArgumentError, "The variable `#{name}` in the server URL has invalid value #{variable_value}. Must be #{variable[:enum_values]}."
           end
         else
           # use default value
-          url.gsub! "{" + name.to_s + "}", server[:variables][name][:default_value]
+          url.gsub! "{" + name.to_s + "}", variable[:default_value]
         end
       end
 

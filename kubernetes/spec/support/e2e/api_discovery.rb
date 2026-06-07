@@ -11,6 +11,8 @@
 # Or as a module included in specs:
 #   include SpecSupport::E2E::ApiDiscoveryMatchers::Matchers
 #
+require "json"
+
 module SpecSupport
   module E2E
     class ApiDiscovery
@@ -26,8 +28,8 @@ module SpecSupport
         validate_params(group, version, kind)
 
         resources = discover_resources(group, version)
-        resource = resources.find { |r| r["kind"] == kind }
-        resource && resource["namespaced"]
+        resource = resources.find { |r| resource_value(r, "kind") == kind }
+        resource && resource_value(resource, "namespaced")
       rescue StandardError
         false
       end
@@ -37,8 +39,8 @@ module SpecSupport
         validate_params(group, version, kind)
 
         resources = discover_resources(group, version)
-        resource = resources.find { |r| r["kind"] == kind }
-        resource && !resource["namespaced"]
+        resource = resources.find { |r| resource_value(r, "kind") == kind }
+        resource && !resource_value(resource, "namespaced")
       rescue StandardError
         false
       end
@@ -79,21 +81,31 @@ module SpecSupport
         raise ArgumentError, "group required" if group.nil? || group.empty?
         raise ArgumentError, "version required" if version.nil? || version.empty?
 
-        response = if group.empty? || group == "core"
-          # Core API group
-          api_client.call_api(:GET, "/api/#{version}", {}, {}, {})
+        path = if group.empty? || group == "core"
+          "/api/#{version}"
         else
-          # Named API group
-          api_client.call_api(:GET, "/apis/#{group}/#{version}", {}, {}, {})
+          "/apis/#{group}/#{version}"
         end
 
-        return [] unless response&.body
-        response.body["resources"] || []
+        body, = api_client.call_api(:get, path, return_type: "String", auth_names: ["BearerToken"])
+        return [] if body.nil? || body.empty?
+
+        payload = body.is_a?(String) ? JSON.parse(body) : body
+        resource_value(payload, "resources") || []
       rescue StandardError => e
         raise "Failed to discover resources for #{group}/#{version}: #{e.message}"
       end
 
       private
+
+      def resource_value(resource, key)
+        return nil unless resource.respond_to?(:key?)
+
+        return resource[key] if resource.key?(key)
+        return resource[key.to_sym] if resource.key?(key.to_sym)
+
+        nil
+      end
 
       def validate_params(group, version, kind)
         raise ArgumentError, "group required" if group.nil? || group.empty?
