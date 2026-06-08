@@ -41,13 +41,13 @@ role = Kubernetes::V1Role.new({
   },
   rules: [
     {
-      api_groups: [""],
+      "apiGroups" => [""],
       resources: ["pods", "services", "configmaps"],
       verbs: ["get", "list", "watch"],
     },
     # Includes create/update to demonstrate mutating Deployment permissions.
     {
-      api_groups: ["apps"],
+      "apiGroups" => ["apps"],
       resources: ["deployments"],
       verbs: ["get", "list", "watch", "create", "update"],
     },
@@ -72,7 +72,7 @@ role_binding = Kubernetes::V1RoleBinding.new({
     },
   ],
   role_ref: {
-    api_group: "rbac.authorization.k8s.io",
+    "apiGroup" => "rbac.authorization.k8s.io",
     kind: "Role",
     name: "app-role",
   },

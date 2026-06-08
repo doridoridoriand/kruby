@@ -2,39 +2,44 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-05-28 13:42:09 UTC
+生成時刻: 2026-06-08 15:22:20 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `codex/rubygems-publish-script` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `feat/examples-expand-clean` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `d22cecbc97f6efdadf6f517bf6e7664938090726` (`chore(release): add rubygems publish script`)
+- 基点の `HEAD`: `5b1005cca14b3081d820e6b369c96938eef18e80` (`Address review feedback on expanded examples`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/lib/kubernetes/release/publish_guard.rb`: staged addition.
-- `kubernetes/spec/release/publish_guard_spec.rb`: staged addition.
-- `kubernetes/spec/release/publish_script_spec.rb`: staged addition.
-- `scripts/release/publish`: staged modification.
+- `examples/cronjob/cronjob.rb`: staged modification.
+- `examples/deployment/deployment.rb`: staged modification.
+- `examples/horizontal-pod-autoscaler/horizontal-pod-autoscaler.rb`: staged modification.
+- `examples/ingress/ingress.rb`: staged modification.
+- `examples/network-policy/network-policy.rb`: staged modification.
+- `examples/persistent-volume-claim/persistent-volume-claim.rb`: staged modification.
+- `examples/rbac/rbac.rb`: staged modification.
+- `examples/service/service.rb`: staged modification.
+- `examples/statefulset/statefulset.rb`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `codex/rubygems-publish-script`
-- Base HEAD: `d22cecbc97f6efdadf6f517bf6e7664938090726`
+- Branch: `feat/examples-expand-clean`
+- Base HEAD: `5b1005cca14b3081d820e6b369c96938eef18e80`
 - Recent commits:
 
 ```text
-d22cecb chore(release): add rubygems publish script
-1f60fbc Merge pull request #73 from doridoridoriand/codex/release-1.36.0.2
-9100c79 release: prepare 1.36.0.2
-25e557c test(models): add serialization coverage (#72)
-9161489 Add model serialization specs
+5b1005c Address review feedback on expanded examples
+390d741 Merge master into examples expansion
+ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and events (#104)
+d3fe91b feat: add examples for cronjob, hpa, statefulset, network-policy, rbac, pvc, ingress, custom-object, dry-run, label-selector, multi-watch
+790401c feat: add examples for deployment, service, configmap, secret, logs, and events
 ```
 
 ## 5. Commands Run
@@ -43,11 +48,16 @@ d22cecb chore(release): add rubygems publish script
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/lib/kubernetes/release/publish_guard.rb | 63 ++++++++++++++++++
- kubernetes/spec/release/publish_guard_spec.rb      | 74 ++++++++++++++++++++++
- kubernetes/spec/release/publish_script_spec.rb     | 16 +++++
- scripts/release/publish                            | 18 ++++++
- 4 files changed, 171 insertions(+)
+ examples/cronjob/cronjob.rb                        |  8 ++++----
+ examples/deployment/deployment.rb                  | 13 +++++++-----
+ .../horizontal-pod-autoscaler.rb                   | 10 ++++-----
+ examples/ingress/ingress.rb                        |  6 +++---
+ examples/network-policy/network-policy.rb          | 10 ++++-----
+ .../persistent-volume-claim.rb                     |  4 ++--
+ examples/rbac/rbac.rb                              |  6 +++---
+ examples/service/service.rb                        |  4 ++--
+ examples/statefulset/statefulset.rb                | 24 +++++++++++-----------
+ 9 files changed, 44 insertions(+), 41 deletions(-)
 ```
 
 ## 6. Verification

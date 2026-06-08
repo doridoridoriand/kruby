@@ -15,7 +15,7 @@ deployment = Kubernetes::V1Deployment.new({
   spec: {
     replicas: 2,
     selector: {
-      match_labels: { "app" => "nginx" },
+      "matchLabels" => { "app" => "nginx" },
     },
     template: {
       metadata: {
@@ -26,7 +26,7 @@ deployment = Kubernetes::V1Deployment.new({
           {
             name: "nginx",
             image: "nginx:1.27",
-            ports: [{ container_port: 80 }],
+            ports: [{ "containerPort" => 80 }],
           },
         ],
       },
@@ -41,7 +41,8 @@ puts "Created: #{result.metadata.name}"
 
 # Get
 puts "\nGetting deployment..."
-pp client.read_namespaced_deployment("nginx-deployment", "default")
+current = client.read_namespaced_deployment("nginx-deployment", "default")
+pp current
 
 # List
 puts "\nListing deployments..."
@@ -49,8 +50,10 @@ pp client.list_namespaced_deployment("default")
 
 # Scale (update replicas to 3)
 puts "\nScaling to 3 replicas..."
-deployment.spec.replicas = 3
-pp client.replace_namespaced_deployment("nginx-deployment", "default", deployment)
+patch = [
+  { op: "replace", path: "/spec/replicas", value: 3 },
+]
+pp client.patch_namespaced_deployment("nginx-deployment", "default", patch)
 
 # Delete
 puts "\nDeleting deployment..."

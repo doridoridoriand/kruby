@@ -12,16 +12,16 @@ network_policy = Kubernetes::V1NetworkPolicy.new({
     namespace: "default",
   },
   spec: {
-    pod_selector: {
-      match_labels: { "app" => "backend" },
+    "podSelector" => {
+      "matchLabels" => { "app" => "backend" },
     },
-    policy_types: ["Ingress"],
+    "policyTypes" => ["Ingress"],
     ingress: [
       {
         from: [
           {
-            pod_selector: {
-              match_labels: { "app" => "frontend" },
+            "podSelector" => {
+              "matchLabels" => { "app" => "frontend" },
             },
           },
         ],
