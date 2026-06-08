@@ -90,5 +90,17 @@ pp apps_client.list_namespaced_stateful_set("default")
 puts "\nDeleting StatefulSet..."
 pp apps_client.delete_namespaced_stateful_set("web-statefulset", "default")
 
+puts "\nDeleting PVCs created by StatefulSet..."
+2.times do |ordinal|
+  pvc_name = "data-web-statefulset-#{ordinal}"
+  begin
+    pp core_client.delete_namespaced_persistent_volume_claim(pvc_name, "default")
+  rescue Kubernetes::ApiError => e
+    raise unless e.code.to_i == 404
+
+    puts "#{pvc_name}: already deleted"
+  end
+end
+
 puts "\nDeleting headless Service..."
 pp core_client.delete_namespaced_service("nginx-headless", "default")
