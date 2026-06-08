@@ -30,6 +30,8 @@ begin
   core_client.read_namespaced_config_map("dry-run-test", "default")
   puts "ERROR: ConfigMap exists — dry-run did not work correctly"
 rescue Kubernetes::ApiError => e
+  raise unless e.code.to_i == 404
+
   puts "Confirmed: #{e.code} - ConfigMap does not exist (as expected)"
 end
 

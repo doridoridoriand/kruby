@@ -10,11 +10,9 @@ ingress = Kubernetes::V1Ingress.new({
   metadata: {
     name: "nginx-ingress",
     namespace: "default",
-    annotations: {
-      "kubernetes.io/ingress.class" => "nginx",
-    },
   },
   spec: {
+    ingress_class_name: "nginx",
     rules: [
       {
         host: "example.com",

@@ -49,7 +49,12 @@ pp batch_client.list_namespaced_cron_job("default")
 # List Jobs created by the CronJob
 puts "\nListing Jobs in namespace..."
 jobs = batch_client.list_namespaced_job("default")
-puts "Found #{jobs.items.length} jobs"
+owned_jobs = jobs.items.select do |job|
+  Array(job.metadata.owner_references).any? do |owner|
+    owner.kind == "CronJob" && owner.name == result.metadata.name
+  end
+end
+puts "Found #{owned_jobs.length} jobs created by #{result.metadata.name}"
 
 # Delete
 puts "\nDeleting CronJob..."

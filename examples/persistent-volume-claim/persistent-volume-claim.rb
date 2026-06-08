@@ -25,7 +25,7 @@ result = core_client.create_namespaced_persistent_volume_claim("default", pvc)
 puts "Created: #{result.metadata.name}"
 puts "  accessModes: #{result.spec.access_modes.join(', ')}"
 puts "  capacity: #{result.spec.resources.requests['storage']}"
-puts "  status.phase: #{result.status.phase}"
+puts "  status.phase: #{result.status&.phase || 'unknown'}"
 
 # Get
 puts "\nReading PVC..."

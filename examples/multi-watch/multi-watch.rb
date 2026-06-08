@@ -1,5 +1,4 @@
 require "kruby"
-require "pp"
 
 config = Kubernetes::Configuration.default_config
 Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
@@ -9,34 +8,40 @@ watch = Kubernetes::Watch.new(client)
 # Watch multiple resources simultaneously using threads
 namespace = ENV["NAMESPACE"] || "default"
 
-puts "Watching Pods and Services in '#{namespace}' namespace..."
+puts "Watching Pods, Services and Events in '#{namespace}' namespace..."
 puts "(Press Ctrl+C to stop)\n\n"
 
 threads = []
 
-# Watch Pods
-threads << Thread.new do
-  watch.connect("/api/v1/namespaces/#{namespace}/pods") do |type, obj|
-    name = obj.dig("metadata", "name") || "unknown"
-    puts "[POD] #{type}: #{name}"
+def watch_resource(watch, label, path)
+  Thread.new do
+    watch.connect(path) do |event|
+      type = event["type"] || "UNKNOWN"
+      object = event["object"] || {}
+      yield type, object
+    end
+  rescue StandardError => e
+    warn "[ERROR] #{label} watch failed: #{e.class}: #{e.message}"
   end
+end
+
+# Watch Pods
+threads << watch_resource(watch, "Pod", "/api/v1/namespaces/#{namespace}/pods") do |type, object|
+  name = object.dig("metadata", "name") || "unknown"
+  puts "[POD] #{type}: #{name}"
 end
 
 # Watch Services
-threads << Thread.new do
-  watch.connect("/api/v1/namespaces/#{namespace}/services") do |type, obj|
-    name = obj.dig("metadata", "name") || "unknown"
-    puts "[SERVICE] #{type}: #{name}"
-  end
+threads << watch_resource(watch, "Service", "/api/v1/namespaces/#{namespace}/services") do |type, object|
+  name = object.dig("metadata", "name") || "unknown"
+  puts "[SERVICE] #{type}: #{name}"
 end
 
 # Watch Events
-threads << Thread.new do
-  watch.connect("/api/v1/namespaces/#{namespace}/events") do |type, obj|
-    reason = obj.dig("reason") || ""
-    message = obj.dig("message") || ""
-    puts "[EVENT] #{type}: #{reason} - #{message}"
-  end
+threads << watch_resource(watch, "Event", "/api/v1/namespaces/#{namespace}/events") do |type, object|
+  reason = object["reason"] || ""
+  message = object["message"] || ""
+  puts "[EVENT] #{type}: #{reason} - #{message}"
 end
 
 # Wait for all threads (blocks until interrupted)
