@@ -6,16 +6,37 @@ Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
 core_client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 apps_client = Kubernetes::AppsV1Api.new(Kubernetes::ApiClient.new(config))
 
+def delete_pvc_with_retry(client, name, namespace, timeout: 30)
+  deadline = Time.now + timeout
+
+  loop do
+    return pp client.delete_namespaced_persistent_volume_claim(name, namespace)
+  rescue Kubernetes::ApiError => e
+    case e.code.to_i
+    when 404
+      puts "#{name}: already deleted"
+      return
+    when 409
+      raise if Time.now >= deadline
+
+      puts "#{name}: still in use, retrying..."
+      sleep 1
+    else
+      raise
+    end
+  end
+end
+
 headless_service = Kubernetes::V1Service.new({
   metadata: {
     name: "nginx-headless",
     namespace: "default",
   },
   spec: {
-    cluster_ip: "None",
+    "clusterIP" => "None",
     selector: { "app" => "nginx-stateful" },
     ports: [
-      { name: "web", port: 80, target_port: 80 },
+      { name: "web", port: 80, "targetPort" => 80 },
     ],
   },
 })
@@ -27,17 +48,17 @@ stateful_set = Kubernetes::V1StatefulSet.new({
     namespace: "default",
   },
   spec: {
-    service_name: "nginx-headless",
+    "serviceName" => "nginx-headless",
     replicas: 2,
-    pod_management_policy: "OrderedReady",
-    update_strategy: {
+    "podManagementPolicy" => "OrderedReady",
+    "updateStrategy" => {
       type: "RollingUpdate",
-      rolling_update: {
+      "rollingUpdate" => {
         partition: 0,
       },
     },
     selector: {
-      match_labels: { "app" => "nginx-stateful" },
+      "matchLabels" => { "app" => "nginx-stateful" },
     },
     template: {
       metadata: {
@@ -48,19 +69,19 @@ stateful_set = Kubernetes::V1StatefulSet.new({
           {
             name: "nginx",
             image: "nginx:1.27",
-            ports: [{ container_port: 80, name: "web" }],
-            volume_mounts: [
-              { name: "data", mount_path: "/usr/share/nginx/html" },
+            ports: [{ "containerPort" => 80, name: "web" }],
+            "volumeMounts" => [
+              { name: "data", "mountPath" => "/usr/share/nginx/html" },
             ],
           },
         ],
       },
     },
-    volume_claim_templates: [
+    "volumeClaimTemplates" => [
       {
         metadata: { name: "data" },
         spec: {
-          access_modes: ["ReadWriteOnce"],
+          "accessModes" => ["ReadWriteOnce"],
           resources: {
             requests: { storage: "1Gi" },
           },
@@ -89,6 +110,12 @@ pp apps_client.list_namespaced_stateful_set("default")
 # Delete
 puts "\nDeleting StatefulSet..."
 pp apps_client.delete_namespaced_stateful_set("web-statefulset", "default")
+
+puts "\nDeleting PVCs created by StatefulSet..."
+2.times do |ordinal|
+  pvc_name = "data-web-statefulset-#{ordinal}"
+  delete_pvc_with_retry(core_client, pvc_name, "default")
+end
 
 puts "\nDeleting headless Service..."
 pp core_client.delete_namespaced_service("nginx-headless", "default")
