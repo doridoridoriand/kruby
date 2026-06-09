@@ -12,14 +12,22 @@
 #   include SpecSupport::E2E::ApiDiscoveryMatchers::Matchers
 #
 require "json"
+require_relative "target_selector"
 
 module SpecSupport
   module E2E
     class ApiDiscovery
+      TargetAvailability = Struct.new(:served, :reason, keyword_init: true) do
+        def served?
+          !!served
+        end
+      end
+
       attr_reader :api_client
 
       def initialize(api_client)
         @api_client = api_client
+        @resource_cache = {}
       end
 
       # Check if a resource is served by the cluster
@@ -47,32 +55,61 @@ module SpecSupport
 
       # Check if any resource of the given kind is served (regardless of scope)
       def resource_served?(group, version, kind)
-        namespaced_resource_served?(group, version, kind) || cluster_resource_served?(group, version, kind)
+        validate_params(group, version, kind)
+
+        resource_served_strict?(group, version, kind)
       rescue StandardError
         false
       end
 
-      # Predefined kind-incompatible resources that need discovery gating
-      # These resources have method names that don't follow the standard pattern:
-      # - "namespaced_<resource>" pattern (e.g., create_namespaced_pod)
-      # - Instead use: "create_<resource>" (e.g., create_volume_attachment)
-      KIND_INCOMPATIBLE_RESOURCES = {
+      # Resources whose availability varies by Kubernetes minor or feature gate.
+      # These are resolved dynamically because the generated kruby client may
+      # expose methods before an older target cluster serves the resource.
+      DISCOVERY_GATED_RESOURCES = {
         "storage.k8s.io/v1/volumeattachments" => ["storage.k8s.io", "v1", "VolumeAttachment"],
         "storage.k8s.io/v1/csinodes" => ["storage.k8s.io", "v1", "CSINode"],
         "storage.k8s.io/v1/volumeattributesclasses" => ["storage.k8s.io", "v1", "VolumeAttributesClass"],
         "networking.k8s.io/v1/ipaddresses" => ["networking.k8s.io", "v1", "IPAddress"],
         "networking.k8s.io/v1/servicecidrs" => ["networking.k8s.io", "v1", "ServiceCIDR"]
       }.freeze
+      KIND_INCOMPATIBLE_RESOURCES = DISCOVERY_GATED_RESOURCES
 
       # Check if a kind-incompatible resource is served
       def kind_incompatible_resource_served?(selector)
         raise ArgumentError, "selector required" if selector.nil? || selector.empty?
 
-        resource_info = KIND_INCOMPATIBLE_RESOURCES[selector]
-        return false unless resource_info
+        return false unless discovery_gated_resource?(selector)
+
+        target_availability(selector).served?
+      end
+
+      def discovery_gated_resource?(selector)
+        raise ArgumentError, "selector required" if selector.nil? || selector.empty?
+
+        DISCOVERY_GATED_RESOURCES.key?(resource_key_from_selector(selector))
+      end
+
+      def target_availability(selector)
+        raise ArgumentError, "selector required" if selector.nil? || selector.empty?
+
+        resource_key = resource_key_from_selector(selector)
+        resource_info = DISCOVERY_GATED_RESOURCES[resource_key]
+        return TargetAvailability.new(served: true) unless resource_info
 
         group, version, kind = resource_info
-        resource_served?(group, version, kind)
+        return TargetAvailability.new(served: true) if resource_served_strict?(group, version, kind)
+
+        TargetAvailability.new(
+          served: false,
+          reason: "Resource #{group}/#{version}/#{kind} not served by cluster"
+        )
+      rescue StandardError => e
+        raise unless not_found_error?(e)
+
+        TargetAvailability.new(
+          served: false,
+          reason: "Resource #{group}/#{version}/#{kind} not served by cluster"
+        )
       end
 
       # Discover resources for a given API group/version
@@ -80,6 +117,9 @@ module SpecSupport
       def discover_resources(group, version)
         raise ArgumentError, "group required" if group.nil? || group.empty?
         raise ArgumentError, "version required" if version.nil? || version.empty?
+
+        cache_key = [group, version]
+        return @resource_cache.fetch(cache_key) if @resource_cache.key?(cache_key)
 
         path = if group.empty? || group == "core"
           "/api/#{version}"
@@ -91,12 +131,31 @@ module SpecSupport
         return [] if body.nil? || body.empty?
 
         payload = body.is_a?(String) ? JSON.parse(body) : body
-        resource_value(payload, "resources") || []
+        @resource_cache[cache_key] = resource_value(payload, "resources") || []
       rescue StandardError => e
+        raise e if e.respond_to?(:code)
+
         raise "Failed to discover resources for #{group}/#{version}: #{e.message}"
       end
 
       private
+
+      def resource_served_strict?(group, version, kind)
+        resources = discover_resources(group, version)
+        resources.any? { |resource| resource_value(resource, "kind") == kind }
+      end
+
+      def not_found_error?(error)
+        error.respond_to?(:code) && error.code.to_i == 404
+      end
+
+      def resource_key_from_selector(selector)
+        text = selector.to_s
+        return text if text.count("/") == 2 && !text.include?(":")
+
+        parsed = TargetSelector.parse(selector)
+        "#{parsed.fetch(:api_group)}/#{parsed.fetch(:version)}/#{parsed.fetch(:resource)}"
+      end
 
       def resource_value(resource, key)
         return nil unless resource.respond_to?(:key?)

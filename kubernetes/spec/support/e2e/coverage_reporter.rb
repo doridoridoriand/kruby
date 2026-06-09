@@ -78,6 +78,7 @@ module SpecSupport
             "recorded" => @entries.length,
             "covered" => count_status("covered"),
             "unsupported" => count_status("unsupported"),
+            "unavailable" => count_status("unavailable"),
             "failed" => count_status("failed")
           }
         end

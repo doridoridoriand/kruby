@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "tmpdir"
 
 RSpec.describe SpecSupport::E2E::Executor do
   let(:executor) { described_class.new }
@@ -316,5 +317,46 @@ RSpec.describe SpecSupport::E2E::Executor do
 
     expect(executor.send(:test_ip_address_name)).to eq("192.0.2.254")
     expect(executor.send(:test_ip_address_name)).to eq("192.0.2.1")
+  end
+
+  it "records discovery-gated resources as unavailable without executing the API call" do
+    availability = SpecSupport::E2E::ApiDiscovery::TargetAvailability.new(
+      served: false,
+      reason: "Resource storage.k8s.io/v1/VolumeAttributesClass not served by cluster"
+    )
+    api_discovery = instance_double(SpecSupport::E2E::ApiDiscovery, target_availability: availability)
+    executor = described_class.new(api_discovery: api_discovery)
+    coverage_reporter = SpecSupport::E2E::CoverageReporter.new(
+      run_id: "run-unavailable-test",
+      mode: "full",
+      output_path: File.join(Dir.tmpdir, "kruby-unavailable-coverage.json")
+    )
+    target_id = "storage.k8s.io/v1/volumeattributesclasses:list"
+    coverage_reporter.start!(resolved_targets: [target_id])
+
+    expect(executor).not_to receive(:execute_target)
+
+    executor.send(
+      :execute_target_with_reporting,
+      target_id: target_id,
+      namespace: "test-ns",
+      cleanup: instance_double("Cleanup"),
+      context: SpecSupport::E2E::RunContext.from_env,
+      coverage_reporter: coverage_reporter
+    )
+
+    payload = coverage_reporter.payload
+    expect(payload.fetch("summary")).to include(
+      "covered" => 0,
+      "unsupported" => 0,
+      "unavailable" => 1,
+      "failed" => 0
+    )
+    expect(payload.fetch("targets").first).to include(
+      "targetId" => target_id,
+      "status" => "unavailable",
+      "reason" => "Resource storage.k8s.io/v1/VolumeAttributesClass not served by cluster",
+      "apiMethod" => "StorageV1Api#list_volume_attributes_class"
+    )
   end
 end

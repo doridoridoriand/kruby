@@ -3,6 +3,7 @@
 require "kubernetes"
 require "securerandom"
 
+require_relative "api_discovery"
 require_relative "cluster_manager"
 require_relative "coverage_reporter"
 require_relative "failure_reporter"
@@ -398,11 +399,13 @@ module SpecSupport
                      run_id: nil,
                      cluster_manager: nil,
                      failure_reporter: nil,
+                     api_discovery: nil,
                      coverage_output_path: ENV["E2E_COVERAGE_REPORT"])
         @mode_dispatcher = mode_dispatcher
         @run_id = run_id || default_run_id
         @cluster_manager = cluster_manager
         @failure_reporter = failure_reporter || FailureReporter.new(run_id: @run_id)
+        @api_discovery = api_discovery
         @coverage_output_path = coverage_output_path.to_s.empty? ? nil : coverage_output_path
         @repro_command_builder = ReproCommandBuilder.new
       end
@@ -469,8 +472,12 @@ module SpecSupport
           "coverage" => coverage_reporter.payload
         }
 
-        failed = result.fetch("coverage").fetch("summary").fetch("failed")
+        summary = result.fetch("coverage").fetch("summary")
+        failed = summary.fetch("failed")
         raise ExecutionError.new("real API execution had #{failed} failures", result) if failed.positive?
+
+        unsupported = summary.fetch("unsupported")
+        raise ExecutionError.new("real API execution had #{unsupported} unsupported targets", result) if unsupported.positive?
 
         result
       end
@@ -500,6 +507,18 @@ module SpecSupport
         started_at = monotonic_time
 
         begin
+          availability = target_availability(target_id)
+          unless availability.served?
+            coverage_reporter.record(
+              target_id: target_id,
+              status: "unavailable",
+              api_method: api_method,
+              reason: availability.reason,
+              duration_ms: elapsed_ms(started_at)
+            )
+            return
+          end
+
           execute_target(parsed, namespace: namespace, cleanup: cleanup)
           coverage_reporter.record(
             target_id: target_id,
@@ -538,6 +557,10 @@ module SpecSupport
             duration_ms: elapsed_ms(started_at)
           )
         end
+      end
+
+      def target_availability(target_id)
+        api_discovery.target_availability(target_id)
       end
 
       def execute_target(parsed_target, namespace:, cleanup:)
@@ -2144,6 +2167,10 @@ module SpecSupport
 
       def elapsed_ms(started_at)
         ((monotonic_time - started_at) * 1000.0).round(2)
+      end
+
+      def api_discovery
+        @api_discovery ||= ApiDiscovery.new(build_api_client)
       end
 
       def build_api_client
