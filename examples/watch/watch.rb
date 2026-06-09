@@ -12,14 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'kruby'
-require 'pp'
+require "kruby"
+require "pp"
 
-config = Kubernetes::Configuration.default_config()
+config = Kubernetes::Configuration.default_config
+Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
 client = Kubernetes::ApiClient.new(config)
 
 watch = Kubernetes::Watch.new(client)
+watch_timeout_seconds = [Integer(ENV.fetch("WATCH_TIMEOUT_SECONDS", "10")), 1].max
 
-watch.connect('/api/v1/namespaces') do |obj|
-    pp obj
+Signal.trap("INT") { exit!(0) }
+Signal.trap("TERM") { exit!(0) }
+
+puts "Watching namespaces for #{watch_timeout_seconds} seconds..."
+
+watch.connect("/api/v1/namespaces?timeoutSeconds=#{watch_timeout_seconds}") do |obj|
+  pp obj
 end
