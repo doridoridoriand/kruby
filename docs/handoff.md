@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-09 00:44:19 UTC
+生成時刻: 2026-06-09 03:10:46 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,27 +13,25 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `d31711af22ed1d8a3abe00375202d78063ea5dcf` (`Examples expand clean (#112)`)
+- 基点の `HEAD`: `d86acef38b97f4772a8ff11be78587a5ce22205d` (`Fix logs and watch examples`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
 - `examples/logs/logs.rb`: staged modification.
-- `examples/multi-watch/multi-watch.rb`: staged modification.
-- `examples/watch/watch.rb`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `feat/fix-logs-watch-examples`
-- Base HEAD: `d31711af22ed1d8a3abe00375202d78063ea5dcf`
+- Base HEAD: `d86acef38b97f4772a8ff11be78587a5ce22205d`
 - Recent commits:
 
 ```text
+d86acef Fix logs and watch examples
 d31711a Examples expand clean (#112)
 6a44955 feat: expand examples — cronjob, hpa, statefulset, network-policy, rbac, pvc, ingress, custom-object, dry-run, label-selector, multi-watch (#106)
 ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and events (#104)
 6dcce98 release: prepare 1.36.0.3 (#103)
-e443e6b Expand kind E2E coverage for CustomObjects (#102)
 ```
 
 ## 5. Commands Run
@@ -42,10 +40,8 @@ e443e6b Expand kind E2E coverage for CustomObjects (#102)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- examples/logs/logs.rb               | 100 +++++++++++++++++++++++++++++++-----
- examples/multi-watch/multi-watch.rb |  31 +++++++++--
- examples/watch/watch.rb             |  17 ++++--
- 3 files changed, 125 insertions(+), 23 deletions(-)
+ examples/logs/logs.rb | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 ```
 
 ## 6. Verification

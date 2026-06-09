@@ -5,8 +5,13 @@ Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
 logs_client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 namespace = ENV["NAMESPACE"] || "default"
-pod_name = ENV["POD_NAME"] || "kruby-logs-example"
-managed_pod = ENV["POD_NAME"].to_s.empty?
+pod_env = ENV["POD_NAME"].to_s
+managed_pod = pod_env.empty?
+pod_name = if managed_pod
+             "kruby-logs-example-#{Time.now.to_i}-#{Process.pid}-#{rand(10_000).to_s.rjust(4, "0")}"
+           else
+             pod_env
+           end
 
 def ignore_not_found
   yield
@@ -44,11 +49,6 @@ def wait_for_pod_deleted(client, name, namespace, timeout: 30)
 end
 
 if managed_pod
-  ignore_not_found do
-    logs_client.delete_namespaced_pod(pod_name, namespace, grace_period_seconds: 0)
-  end
-  wait_for_pod_deleted(logs_client, pod_name, namespace)
-
   pod = Kubernetes::V1Pod.new({
     metadata: {
       name: pod_name,
