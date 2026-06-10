@@ -133,7 +133,7 @@ module SpecSupport
         payload = body.is_a?(String) ? JSON.parse(body) : body
         @resource_cache[cache_key] = resource_value(payload, "resources") || []
       rescue StandardError => e
-        raise e if e.respond_to?(:code)
+        raise if e.respond_to?(:code)
 
         raise "Failed to discover resources for #{group}/#{version}: #{e.message}"
       end
