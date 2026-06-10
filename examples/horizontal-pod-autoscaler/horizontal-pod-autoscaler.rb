@@ -13,13 +13,13 @@ hpa = Kubernetes::V2HorizontalPodAutoscaler.new({
     namespace: namespace,
   },
   spec: {
-    scale_target_ref: {
-      api_version: "apps/v1",
+    "scaleTargetRef" => {
+      "apiVersion" => "apps/v1",
       kind: "Deployment",
       name: "nginx-deployment",
     },
-    min_replicas: 2,
-    max_replicas: 10,
+    "minReplicas" => 2,
+    "maxReplicas" => 10,
     metrics: [
       {
         type: "Resource",
@@ -27,7 +27,7 @@ hpa = Kubernetes::V2HorizontalPodAutoscaler.new({
           name: "cpu",
           target: {
             type: "Utilization",
-            average_utilization: 80,
+            "averageUtilization" => 80,
           },
         },
       },

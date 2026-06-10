@@ -12,7 +12,7 @@ ingress = Kubernetes::V1Ingress.new({
     namespace: "default",
   },
   spec: {
-    ingress_class_name: "nginx",
+    "ingressClassName" => "nginx",
     rules: [
       {
         host: "example.com",
@@ -20,7 +20,7 @@ ingress = Kubernetes::V1Ingress.new({
           paths: [
             {
               path: "/",
-              path_type: "Prefix",
+              "pathType" => "Prefix",
               backend: {
                 service: {
                   name: "my-service",
@@ -30,7 +30,7 @@ ingress = Kubernetes::V1Ingress.new({
             },
             {
               path: "/api",
-              path_type: "Prefix",
+              "pathType" => "Prefix",
               backend: {
                 service: {
                   name: "api-service",

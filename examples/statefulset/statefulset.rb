@@ -33,10 +33,10 @@ headless_service = Kubernetes::V1Service.new({
     namespace: "default",
   },
   spec: {
-    cluster_ip: "None",
+    "clusterIP" => "None",
     selector: { "app" => "nginx-stateful" },
     ports: [
-      { name: "web", port: 80, target_port: 80 },
+      { name: "web", port: 80, "targetPort" => 80 },
     ],
   },
 })
@@ -48,17 +48,17 @@ stateful_set = Kubernetes::V1StatefulSet.new({
     namespace: "default",
   },
   spec: {
-    service_name: "nginx-headless",
+    "serviceName" => "nginx-headless",
     replicas: 2,
-    pod_management_policy: "OrderedReady",
-    update_strategy: {
+    "podManagementPolicy" => "OrderedReady",
+    "updateStrategy" => {
       type: "RollingUpdate",
-      rolling_update: {
+      "rollingUpdate" => {
         partition: 0,
       },
     },
     selector: {
-      match_labels: { "app" => "nginx-stateful" },
+      "matchLabels" => { "app" => "nginx-stateful" },
     },
     template: {
       metadata: {
@@ -69,19 +69,19 @@ stateful_set = Kubernetes::V1StatefulSet.new({
           {
             name: "nginx",
             image: "nginx:1.27",
-            ports: [{ container_port: 80, name: "web" }],
-            volume_mounts: [
-              { name: "data", mount_path: "/usr/share/nginx/html" },
+            ports: [{ "containerPort" => 80, name: "web" }],
+            "volumeMounts" => [
+              { name: "data", "mountPath" => "/usr/share/nginx/html" },
             ],
           },
         ],
       },
     },
-    volume_claim_templates: [
+    "volumeClaimTemplates" => [
       {
         metadata: { name: "data" },
         spec: {
-          access_modes: ["ReadWriteOnce"],
+          "accessModes" => ["ReadWriteOnce"],
           resources: {
             requests: { storage: "1Gi" },
           },

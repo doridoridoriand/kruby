@@ -53,7 +53,7 @@ crd = Kubernetes::V1CustomResourceDefinition.new({
       plural: plural,
       singular: "crontask",
       kind: "CronTask",
-      short_names: ["ct"],
+      "shortNames" => ["ct"],
     },
     scope: "Namespaced",
     versions: [
@@ -62,7 +62,7 @@ crd = Kubernetes::V1CustomResourceDefinition.new({
         served: true,
         storage: true,
         schema: {
-          open_api_v3_schema: {
+          "openAPIV3Schema" => {
             type: "object",
             properties: {
               spec: {
@@ -76,7 +76,7 @@ crd = Kubernetes::V1CustomResourceDefinition.new({
               status: {
                 type: "object",
                 properties: {
-                  last_schedule: { type: "string" },
+                  "lastSchedule" => { type: "string" },
                 },
               },
             },

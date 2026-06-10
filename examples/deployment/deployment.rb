@@ -16,7 +16,7 @@ deployment = Kubernetes::V1Deployment.new({
   spec: {
     replicas: 2,
     selector: {
-      match_labels: { "app" => "nginx" },
+      "matchLabels" => { "app" => "nginx" },
     },
     template: {
       metadata: {
@@ -27,7 +27,7 @@ deployment = Kubernetes::V1Deployment.new({
           {
             name: "nginx",
             image: "nginx:1.27",
-            ports: [{ container_port: 80 }],
+            ports: [{ "containerPort" => 80 }],
           },
         ],
       },
@@ -53,8 +53,10 @@ sleep 3
 
 # Scale (update replicas to 3)
 puts "\nScaling to 3 replicas..."
-deployment.spec.replicas = 3
-pp apps_client.replace_namespaced_deployment("nginx-deployment", "default", deployment)
+patch = [
+  { op: "replace", path: "/spec/replicas", value: 3 },
+]
+pp apps_client.patch_namespaced_deployment("nginx-deployment", "default", patch)
 sleep 3
 
 # Delete

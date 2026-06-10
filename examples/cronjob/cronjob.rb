@@ -13,7 +13,7 @@ cron_job = Kubernetes::V1CronJob.new({
   },
   spec: {
     schedule: "*/1 * * * *",  # every minute
-    job_template: {
+    "jobTemplate" => {
       spec: {
         template: {
           spec: {
@@ -21,16 +21,16 @@ cron_job = Kubernetes::V1CronJob.new({
               {
                 name: "hello",
                 image: "busybox:1.36",
-                image_pull_policy: "IfNotPresent",
+                "imagePullPolicy" => "IfNotPresent",
                 command: ["sh", "-c", "echo Hello from Kubernetes; date"],
               },
             ],
-            restart_policy: "OnFailure",
+            "restartPolicy" => "OnFailure",
           },
         },
       },
     },
-    concurrency_policy: "Forbid",
+    "concurrencyPolicy" => "Forbid",
   },
 })
 

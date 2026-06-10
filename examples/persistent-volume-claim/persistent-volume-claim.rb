@@ -12,11 +12,11 @@ pvc = Kubernetes::V1PersistentVolumeClaim.new({
     namespace: "default",
   },
   spec: {
-    access_modes: ["ReadWriteOnce"],
+    "accessModes" => ["ReadWriteOnce"],
     resources: {
       requests: { storage: "1Gi" },
     },
-    # storage_class_name: "standard",  # uncomment to specify a StorageClass
+    # storageClassName: "standard",  # uncomment to specify a StorageClass
   },
 })
 

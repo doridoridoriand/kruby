@@ -13,7 +13,7 @@ cluster_ip_service = Kubernetes::V1Service.new({
   },
   spec: {
     selector: { "app" => "nginx" },
-    ports: [{ port: 80, target_port: 80, protocol: "TCP" }],
+    ports: [{ port: 80, "targetPort" => 80, protocol: "TCP" }],
     type: "ClusterIP",
   },
 })
@@ -31,7 +31,7 @@ node_port_service = Kubernetes::V1Service.new({
   },
   spec: {
     selector: { "app" => "nginx" },
-    ports: [{ port: 80, target_port: 80, protocol: "TCP" }],
+    ports: [{ port: 80, "targetPort" => 80, protocol: "TCP" }],
     type: "NodePort",
   },
 })
