@@ -24,19 +24,23 @@ puts "Creating ConfigMap..."
 result = client.create_namespaced_config_map("default", config_map)
 puts "Created: #{result.metadata.name}"
 pp result.data
+sleep 3
 
 # Get
 puts "\nReading ConfigMap..."
 pp client.read_namespaced_config_map("app-config", "default")
+sleep 3
 
 # Update
 puts "\nUpdating ConfigMap..."
 config_map.data["new-key"] = "new-value"
 pp client.replace_namespaced_config_map("app-config", "default", config_map)
+sleep 3
 
 # List
 puts "\nListing ConfigMaps..."
 pp client.list_namespaced_config_map("default")
+sleep 3
 
 # Delete
 puts "\nDeleting ConfigMap..."

@@ -22,16 +22,19 @@ secret = Kubernetes::V1Secret.new({
 puts "Creating Secret..."
 result = client.create_namespaced_secret("default", secret)
 puts "Created: #{result.metadata.name} (type: #{result.type})"
+sleep 3
 
 # Get (note: data is returned base64-encoded)
 puts "\nReading Secret..."
 read_secret = client.read_namespaced_secret("app-secret", "default")
 puts "Username: #{Base64.decode64(read_secret.data["username"])}"
 puts "Password: #{Base64.decode64(read_secret.data["password"])}"
+sleep 3
 
 # List
 puts "\nListing Secrets..."
 pp client.list_namespaced_secret("default")
+sleep 3
 
 # Delete
 puts "\nDeleting Secret..."

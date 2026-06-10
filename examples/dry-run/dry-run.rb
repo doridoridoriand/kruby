@@ -23,6 +23,7 @@ result = core_client.create_namespaced_config_map(
   dry_run: "All"
 )
 puts "Dry-run result: #{result.metadata.name} (not actually created)"
+sleep 3
 
 # Verify it does NOT exist
 puts "\nVerifying it was NOT created..."
@@ -34,6 +35,7 @@ rescue Kubernetes::ApiError => e
 
   puts "Confirmed: #{e.code} - ConfigMap does not exist (as expected)"
 end
+sleep 3
 
 # Now create for real (no dry_run option)
 puts "\nCreating ConfigMap for real..."

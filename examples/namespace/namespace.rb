@@ -16,5 +16,9 @@ namespace = Kubernetes::V1Namespace.new({
 })
 
 pp client.create_namespace(namespace)
+sleep 3
+
 pp client.list_namespace
+sleep 3
+
 pp client.delete_namespace(name)
