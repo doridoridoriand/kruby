@@ -235,7 +235,7 @@ emit_coverage_summary() {
     path = ARGV.fetch(0)
     data = JSON.parse(File.read(path))
     summary = data.fetch("summary", {})
-    puts "[run-e2e] coverage resolved=#{summary["resolved"] || 0} recorded=#{summary["recorded"] || 0} covered=#{summary["covered"] || 0} unsupported=#{summary["unsupported"] || 0} failed=#{summary["failed"] || 0}"
+    puts "[run-e2e] coverage resolved=#{summary["resolved"] || 0} recorded=#{summary["recorded"] || 0} covered=#{summary["covered"] || 0} unsupported=#{summary["unsupported"] || 0} unavailable=#{summary["unavailable"] || 0} failed=#{summary["failed"] || 0}"
   ' "${coverage_file}"
 }
 
