@@ -26,14 +26,17 @@ puts "Created: #{result.metadata.name}"
 puts "  accessModes: #{result.spec.access_modes.join(', ')}"
 puts "  capacity: #{result.spec.resources.requests['storage']}"
 puts "  status.phase: #{result.status&.phase || 'unknown'}"
+sleep 3
 
 # Get
 puts "\nReading PVC..."
 pp core_client.read_namespaced_persistent_volume_claim("app-pvc", "default")
+sleep 3
 
 # List
 puts "\nListing PVCs..."
 pp core_client.list_namespaced_persistent_volume_claim("default")
+sleep 3
 
 # Delete
 puts "\nDeleting PVC..."

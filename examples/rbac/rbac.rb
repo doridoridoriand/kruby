@@ -31,6 +31,7 @@ sa = Kubernetes::V1ServiceAccount.new({
 pp api_call("Creating ServiceAccount", ignore_codes: [409]) {
   core_client.create_namespaced_service_account(namespace, sa)
 }
+sleep 3
 
 # 2. Create Role (namespace-scoped permissions)
 puts "\nCreating Role..."
@@ -56,6 +57,7 @@ role = Kubernetes::V1Role.new({
 pp api_call("Creating Role", ignore_codes: [409]) {
   rbac_client.create_namespaced_role(namespace, role)
 }
+sleep 3
 
 # 3. Create RoleBinding (bind ServiceAccount to Role)
 puts "\nCreating RoleBinding..."
@@ -80,14 +82,17 @@ role_binding = Kubernetes::V1RoleBinding.new({
 pp api_call("Creating RoleBinding", ignore_codes: [409]) {
   rbac_client.create_namespaced_role_binding(namespace, role_binding)
 }
+sleep 3
 
 # List Roles
 puts "\nListing Roles..."
 pp api_call("Listing Roles") { rbac_client.list_namespaced_role(namespace) }
+sleep 3
 
 # List RoleBindings
 puts "\nListing RoleBindings..."
 pp api_call("Listing RoleBindings") { rbac_client.list_namespaced_role_binding(namespace) }
+sleep 3
 
 # Cleanup
 puts "\nDeleting RoleBinding..."

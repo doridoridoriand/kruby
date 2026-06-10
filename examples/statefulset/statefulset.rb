@@ -94,18 +94,22 @@ stateful_set = Kubernetes::V1StatefulSet.new({
 puts "Creating headless Service..."
 service = core_client.create_namespaced_service("default", headless_service)
 puts "Created: #{service.metadata.name}"
+sleep 3
 
 puts "Creating StatefulSet..."
 result = apps_client.create_namespaced_stateful_set("default", stateful_set)
 puts "Created: #{result.metadata.name} (replicas: #{result.spec.replicas})"
+sleep 3
 
 # Get
 puts "\nReading StatefulSet..."
 pp apps_client.read_namespaced_stateful_set("web-statefulset", "default")
+sleep 3
 
 # List
 puts "\nListing StatefulSets..."
 pp apps_client.list_namespaced_stateful_set("default")
+sleep 3
 
 # Delete
 puts "\nDeleting StatefulSet..."

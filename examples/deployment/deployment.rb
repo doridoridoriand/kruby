@@ -4,7 +4,8 @@ require "pp"
 config = Kubernetes::Configuration.default_config
 Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
 
-client = Kubernetes::AppsV1Api.new(Kubernetes::ApiClient.new(config))
+apps_client = Kubernetes::AppsV1Api.new(Kubernetes::ApiClient.new(config))
+core_client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 deployment = Kubernetes::V1Deployment.new({
   metadata: {
@@ -36,25 +37,28 @@ deployment = Kubernetes::V1Deployment.new({
 
 # Create
 puts "Creating deployment..."
-result = client.create_namespaced_deployment("default", deployment)
+result = apps_client.create_namespaced_deployment("default", deployment)
 puts "Created: #{result.metadata.name}"
+sleep 3
 
 # Get
 puts "\nGetting deployment..."
-current = client.read_namespaced_deployment("nginx-deployment", "default")
-pp current
+pp apps_client.read_namespaced_deployment("nginx-deployment", "default")
+sleep 3
 
 # List
 puts "\nListing deployments..."
-pp client.list_namespaced_deployment("default")
+pp apps_client.list_namespaced_deployment("default")
+sleep 3
 
 # Scale (update replicas to 3)
 puts "\nScaling to 3 replicas..."
 patch = [
   { op: "replace", path: "/spec/replicas", value: 3 },
 ]
-pp client.patch_namespaced_deployment("nginx-deployment", "default", patch)
+pp apps_client.patch_namespaced_deployment("nginx-deployment", "default", patch)
+sleep 3
 
 # Delete
 puts "\nDeleting deployment..."
-pp client.delete_namespaced_deployment("nginx-deployment", "default")
+pp apps_client.delete_namespaced_deployment("nginx-deployment", "default")

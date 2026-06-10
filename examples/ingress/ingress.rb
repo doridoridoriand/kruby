@@ -48,14 +48,17 @@ ingress = Kubernetes::V1Ingress.new({
 puts "Creating Ingress..."
 result = networking_client.create_namespaced_ingress("default", ingress)
 puts "Created: #{result.metadata.name}"
+sleep 3
 
 # Get
 puts "\nReading Ingress..."
 pp networking_client.read_namespaced_ingress("nginx-ingress", "default")
+sleep 3
 
 # List
 puts "\nListing Ingresses..."
 pp networking_client.list_namespaced_ingress("default")
+sleep 3
 
 # Delete
 puts "\nDeleting Ingress..."
