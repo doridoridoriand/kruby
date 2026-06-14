@@ -23,6 +23,45 @@ RSpec.describe "run-e2e-matrix" do
     end
   end
 
+  it "runs the default Kubernetes matrix through 1.36" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      version=""
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          --kubernetes-version)
+            version="$2"
+            shift 2
+            ;;
+          --kubernetes-version=*)
+            version="${1#*=}"
+            shift
+            ;;
+          *)
+            shift
+            ;;
+        esac
+      done
+
+      echo "stub run for ${version}"
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      stdout, stderr, status = Open3.capture3(
+        matrix_script, "--mode", "full",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(true)
+      expect(stderr).to include("started kubernetes_version=1.36")
+      %w[1.31 1.32 1.33 1.34 1.35 1.36].each do |version|
+        expect(stdout).to include("stub run for #{version}")
+      end
+    end
+  end
+
   it "rejects unsupported fallback values before spawning child runs" do
     stub_body = <<~BASH
       #!/usr/bin/env bash

@@ -2,36 +2,45 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-09 03:10:46 UTC
+生成時刻: 2026-06-14 08:53:00 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `feat/fix-logs-watch-examples` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `add-e2e-matrix-1-36` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `d86acef38b97f4772a8ff11be78587a5ce22205d` (`Fix logs and watch examples`)
+- 基点の `HEAD`: `05c8aef1a8f510ce5d7dba1333478778b8124648` (`docs: add sleep intervals between CRUD operations in examples (#118)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `examples/logs/logs.rb`: staged modification.
+- `.github/workflows/nightly-e2e.yml`: staged modification.
+- `CONTRIBUTING.md`: staged modification.
+- `README.md`: staged modification.
+- `docs/e2e-kind-testing.md`: staged modification.
+- `kubernetes/Rakefile`: staged modification.
+- `kubernetes/spec/e2e/kind_version_resolver_spec.rb`: staged modification.
+- `kubernetes/spec/e2e/run_e2e_matrix_spec.rb`: staged modification.
+- `kubernetes/spec/support/e2e/kind_version_resolver.rb`: staged modification.
+- `scripts/e2e/run-e2e`: staged modification.
+- `scripts/e2e/run-e2e-matrix`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `feat/fix-logs-watch-examples`
-- Base HEAD: `d86acef38b97f4772a8ff11be78587a5ce22205d`
+- Branch: `add-e2e-matrix-1-36`
+- Base HEAD: `05c8aef1a8f510ce5d7dba1333478778b8124648`
 - Recent commits:
 
 ```text
-d86acef Fix logs and watch examples
-d31711a Examples expand clean (#112)
-6a44955 feat: expand examples — cronjob, hpa, statefulset, network-policy, rbac, pvc, ingress, custom-object, dry-run, label-selector, multi-watch (#106)
-ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and events (#104)
-6dcce98 release: prepare 1.36.0.3 (#103)
+05c8aef docs: add sleep intervals between CRUD operations in examples (#118)
+d3c79c6 fix(e2e): gate unavailable APIs by discovery (#117)
+43d2db8 [codex] fix E2E handling for discovery-gated APIs (#116)
+cc298ef Fix logs and watch examples (#115)
+6b3d035 Fix logs and watch examples (#113)
 ```
 
 ## 5. Commands Run
@@ -40,8 +49,17 @@ ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- examples/logs/logs.rb | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ .github/workflows/nightly-e2e.yml                  |  4 +--
+ CONTRIBUTING.md                                    |  1 +
+ README.md                                          |  8 ++---
+ docs/e2e-kind-testing.md                           |  6 ++--
+ kubernetes/Rakefile                                |  2 +-
+ kubernetes/spec/e2e/kind_version_resolver_spec.rb  |  1 +
+ kubernetes/spec/e2e/run_e2e_matrix_spec.rb         | 39 ++++++++++++++++++++++
+ .../spec/support/e2e/kind_version_resolver.rb      |  7 ++--
+ scripts/e2e/run-e2e                                |  2 +-
+ scripts/e2e/run-e2e-matrix                         |  4 +--
+ 10 files changed, 59 insertions(+), 15 deletions(-)
 ```
 
 ## 6. Verification

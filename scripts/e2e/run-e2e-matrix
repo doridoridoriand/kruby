@@ -17,7 +17,7 @@ Options:
   --base-ref <git-ref>
   --fallback <minimal-smoke|full>
   --real-api <0|1>
-  --versions <1.31,1.32,1.33,1.34,1.35>
+  --versions <1.31,1.32,1.33,1.34,1.35,1.36>
   -h, --help
 USAGE
 }
@@ -27,7 +27,7 @@ targets="${E2E_TARGETS:-}"
 base_ref="${BASE_REF:-origin/HEAD}"
 fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
 real_api="${E2E_REAL_API:-1}"
-versions_csv="${E2E_KUBERNETES_VERSIONS:-1.31,1.32,1.33,1.34,1.35}"
+versions_csv="${E2E_KUBERNETES_VERSIONS:-1.31,1.32,1.33,1.34,1.35,1.36}"
 rspec_args=()
 
 while [[ $# -gt 0 ]]; do
