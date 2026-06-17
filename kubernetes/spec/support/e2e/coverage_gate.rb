@@ -374,6 +374,21 @@ module SpecSupport
         "StorageV1Api#replace_storage_class",
         "StorageV1Api#patch_storage_class",
         "StorageV1Api#delete_storage_class",
+        # AuthenticationV1Api — review endpoints
+        "AuthenticationV1Api#create_self_subject_review",
+        "AuthenticationV1Api#create_token_review",
+        # AuthorizationV1Api — review endpoints
+        "AuthorizationV1Api#create_namespaced_local_subject_access_review",
+        "AuthorizationV1Api#create_self_subject_access_review",
+        "AuthorizationV1Api#create_self_subject_rules_review",
+        "AuthorizationV1Api#create_subject_access_review",
+        # AutoscalingV1Api — HPA
+        "AutoscalingV1Api#create_namespaced_horizontal_pod_autoscaler",
+        "AutoscalingV1Api#read_namespaced_horizontal_pod_autoscaler",
+        "AutoscalingV1Api#list_namespaced_horizontal_pod_autoscaler",
+        "AutoscalingV1Api#replace_namespaced_horizontal_pod_autoscaler",
+        "AutoscalingV1Api#patch_namespaced_horizontal_pod_autoscaler",
+        "AutoscalingV1Api#delete_namespaced_horizontal_pod_autoscaler",
         # AutoscalingV2Api — HPA (method names include full HTTP path suffix)
         "AutoscalingV2Api#create_namespaced_horizontal_pod_autoscaler_post_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers",
         "AutoscalingV2Api#read_namespaced_horizontal_pod_autoscaler_get_apis_autoscaling_v2_namespaces_by_namespace_horizontalpodautoscalers_by_name",
@@ -388,6 +403,13 @@ module SpecSupport
         "PolicyV1Api#replace_namespaced_pod_disruption_budget",
         "PolicyV1Api#patch_namespaced_pod_disruption_budget",
         "PolicyV1Api#delete_namespaced_pod_disruption_budget",
+        # DiscoveryV1Api — endpoint slices
+        "DiscoveryV1Api#create_namespaced_endpoint_slice",
+        "DiscoveryV1Api#read_namespaced_endpoint_slice",
+        "DiscoveryV1Api#list_namespaced_endpoint_slice",
+        "DiscoveryV1Api#replace_namespaced_endpoint_slice",
+        "DiscoveryV1Api#patch_namespaced_endpoint_slice",
+        "DiscoveryV1Api#delete_namespaced_endpoint_slice",
         # CoordinationV1Api — leases
         "CoordinationV1Api#create_namespaced_lease",
         "CoordinationV1Api#read_namespaced_lease",

@@ -3,8 +3,16 @@
 require_relative "change_resolver"
 require_relative "run_context"
 require_relative "target_catalog"
+require_relative "targets/authentication_k8s_io_v1_selfsubjectreviews"
+require_relative "targets/authentication_k8s_io_v1_tokenreviews"
+require_relative "targets/authorization_k8s_io_v1_localsubjectaccessreviews"
+require_relative "targets/authorization_k8s_io_v1_selfsubjectaccessreviews"
+require_relative "targets/authorization_k8s_io_v1_selfsubjectrulesreviews"
+require_relative "targets/authorization_k8s_io_v1_subjectaccessreviews"
+require_relative "targets/autoscaling_v1_horizontalpodautoscalers"
 require_relative "targets/autoscaling_v2_horizontalpodautoscalers"
 require_relative "targets/coordination_k8s_io_v1_leases"
+require_relative "targets/discovery_k8s_io_v1_endpointslices"
 require_relative "targets/networking_v1_ingresses"
 require_relative "targets/networking_v1_networkpolicies"
 require_relative "targets/networking_v1_ingressclasses"
@@ -73,6 +81,9 @@ module SpecSupport
         "apps" => 20,
         "batch" => 30,
         "rbac.authorization.k8s.io" => 40,
+        "authentication.k8s.io" => 45,
+        "authorization.k8s.io" => 46,
+        "discovery.k8s.io" => 47,
         "networking.k8s.io" => 50,
         "storage.k8s.io" => 60,
         "autoscaling" => 70,
@@ -91,6 +102,13 @@ module SpecSupport
 
       def self.build_default_catalog
         catalog = TargetCatalog.new
+        Targets::AuthenticationK8sIoV1Selfsubjectreviews.register!(catalog)
+        Targets::AuthenticationK8sIoV1Tokenreviews.register!(catalog)
+        Targets::AuthorizationK8sIoV1Localsubjectaccessreviews.register!(catalog)
+        Targets::AuthorizationK8sIoV1Selfsubjectaccessreviews.register!(catalog)
+        Targets::AuthorizationK8sIoV1Selfsubjectrulesreviews.register!(catalog)
+        Targets::AuthorizationK8sIoV1Subjectaccessreviews.register!(catalog)
+        Targets::AutoscalingV1Horizontalpodautoscalers.register!(catalog)
         Targets::CoreV1ConfigMaps.register!(catalog)
         Targets::CoreV1Namespaces.register!(catalog)
         Targets::CoreV1Pods.register!(catalog)
@@ -118,6 +136,7 @@ module SpecSupport
         Targets::AutoscalingV2HorizontalPodAutoscalers.register!(catalog)
         Targets::PolicyV1PodDisruptionBudgets.register!(catalog)
         Targets::CoordinationK8sIoV1Leases.register!(catalog)
+        Targets::DiscoveryK8sIoV1Endpointslices.register!(catalog)
         Targets::SchedulingK8sIoV1PriorityClasses.register!(catalog)
         Targets::CoreV1LimitRanges.register!(catalog)
         Targets::CoreV1ResourceQuotas.register!(catalog)

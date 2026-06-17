@@ -197,6 +197,46 @@ RSpec.describe SpecSupport::E2E::Executor do
     end
   end
 
+  it "maps authentication, authorization, autoscaling/v1, and discovery selectors to API method names" do
+    authn_expected = {
+      "authentication.k8s.io/v1/selfsubjectreviews:create" => "AuthenticationV1Api#create_self_subject_review",
+      "authentication.k8s.io/v1/tokenreviews:create" => "AuthenticationV1Api#create_token_review",
+      "authorization.k8s.io/v1/localsubjectaccessreviews:create" => "AuthorizationV1Api#create_namespaced_local_subject_access_review",
+      "authorization.k8s.io/v1/selfsubjectaccessreviews:create" => "AuthorizationV1Api#create_self_subject_access_review",
+      "authorization.k8s.io/v1/selfsubjectrulesreviews:create" => "AuthorizationV1Api#create_self_subject_rules_review",
+      "authorization.k8s.io/v1/subjectaccessreviews:create" => "AuthorizationV1Api#create_subject_access_review"
+    }
+
+    authn_expected.each do |selector, api_method|
+      expect(executor.send(:api_method_name, SpecSupport::E2E::TargetSelector.parse(selector))).to eq(api_method)
+    end
+
+    %w[create get list update patch delete].each do |op|
+      hpa_v1 = SpecSupport::E2E::TargetSelector.parse("autoscaling/v1/horizontalpodautoscalers:#{op}")
+      endpoint_slice = SpecSupport::E2E::TargetSelector.parse("discovery.k8s.io/v1/endpointslices:#{op}")
+
+      hpa_expected = {
+        "create" => "AutoscalingV1Api#create_namespaced_horizontal_pod_autoscaler",
+        "get" => "AutoscalingV1Api#read_namespaced_horizontal_pod_autoscaler",
+        "list" => "AutoscalingV1Api#list_namespaced_horizontal_pod_autoscaler",
+        "update" => "AutoscalingV1Api#replace_namespaced_horizontal_pod_autoscaler",
+        "patch" => "AutoscalingV1Api#patch_namespaced_horizontal_pod_autoscaler",
+        "delete" => "AutoscalingV1Api#delete_namespaced_horizontal_pod_autoscaler"
+      }
+      endpoint_slice_expected = {
+        "create" => "DiscoveryV1Api#create_namespaced_endpoint_slice",
+        "get" => "DiscoveryV1Api#read_namespaced_endpoint_slice",
+        "list" => "DiscoveryV1Api#list_namespaced_endpoint_slice",
+        "update" => "DiscoveryV1Api#replace_namespaced_endpoint_slice",
+        "patch" => "DiscoveryV1Api#patch_namespaced_endpoint_slice",
+        "delete" => "DiscoveryV1Api#delete_namespaced_endpoint_slice"
+      }
+
+      expect(executor.send(:api_method_name, hpa_v1)).to eq(hpa_expected[op])
+      expect(executor.send(:api_method_name, endpoint_slice)).to eq(endpoint_slice_expected[op])
+    end
+  end
+
   it "creates the namespaced CustomObjects test CRD when it is missing" do
     crd_api = instance_double(Kubernetes::ApiextensionsV1Api)
     cleanup = instance_double("Cleanup")
