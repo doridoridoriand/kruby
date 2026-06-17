@@ -2,45 +2,40 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-14 08:53:00 UTC
+生成時刻: 2026-06-17 13:28:39 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `add-e2e-matrix-1-36` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `issue-119-core-api-unit-tests` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `05c8aef1a8f510ce5d7dba1333478778b8124648` (`docs: add sleep intervals between CRUD operations in examples (#118)`)
+- 基点の `HEAD`: `0212b3be2245761a8804bf27e8ae248ff5870693` (`test: add Kubernetes 1.36 to E2E matrix`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `.github/workflows/nightly-e2e.yml`: staged modification.
-- `CONTRIBUTING.md`: staged modification.
-- `README.md`: staged modification.
-- `docs/e2e-kind-testing.md`: staged modification.
-- `kubernetes/Rakefile`: staged modification.
-- `kubernetes/spec/e2e/kind_version_resolver_spec.rb`: staged modification.
-- `kubernetes/spec/e2e/run_e2e_matrix_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/kind_version_resolver.rb`: staged modification.
-- `scripts/e2e/run-e2e`: staged modification.
-- `scripts/e2e/run-e2e-matrix`: staged modification.
+- `kubernetes/spec/custom_objects_api_spec.rb`: staged addition.
+- `kubernetes/spec/discovery_api_spec.rb`: staged addition.
+- `kubernetes/spec/logs_api_spec.rb`: staged addition.
+- `kubernetes/spec/version_api_spec.rb`: staged addition.
+- `kubernetes/spec/well_known_api_spec.rb`: staged addition.
 
 ## 4. Branch / Commit
 
-- Branch: `add-e2e-matrix-1-36`
-- Base HEAD: `05c8aef1a8f510ce5d7dba1333478778b8124648`
+- Branch: `issue-119-core-api-unit-tests`
+- Base HEAD: `0212b3be2245761a8804bf27e8ae248ff5870693`
 - Recent commits:
 
 ```text
+0212b3b test: add Kubernetes 1.36 to E2E matrix
 05c8aef docs: add sleep intervals between CRUD operations in examples (#118)
 d3c79c6 fix(e2e): gate unavailable APIs by discovery (#117)
 43d2db8 [codex] fix E2E handling for discovery-gated APIs (#116)
 cc298ef Fix logs and watch examples (#115)
-6b3d035 Fix logs and watch examples (#113)
 ```
 
 ## 5. Commands Run
@@ -49,17 +44,12 @@ cc298ef Fix logs and watch examples (#115)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- .github/workflows/nightly-e2e.yml                  |  4 +--
- CONTRIBUTING.md                                    |  1 +
- README.md                                          |  8 ++---
- docs/e2e-kind-testing.md                           |  6 ++--
- kubernetes/Rakefile                                |  2 +-
- kubernetes/spec/e2e/kind_version_resolver_spec.rb  |  1 +
- kubernetes/spec/e2e/run_e2e_matrix_spec.rb         | 39 ++++++++++++++++++++++
- .../spec/support/e2e/kind_version_resolver.rb      |  7 ++--
- scripts/e2e/run-e2e                                |  2 +-
- scripts/e2e/run-e2e-matrix                         |  4 +--
- 10 files changed, 59 insertions(+), 15 deletions(-)
+ kubernetes/spec/custom_objects_api_spec.rb | 367 +++++++++++++++++++++++++++++
+ kubernetes/spec/discovery_api_spec.rb      |  82 +++++++
+ kubernetes/spec/logs_api_spec.rb           |  80 +++++++
+ kubernetes/spec/version_api_spec.rb        |  84 +++++++
+ kubernetes/spec/well_known_api_spec.rb     |  72 ++++++
+ 5 files changed, 685 insertions(+)
 ```
 
 ## 6. Verification
