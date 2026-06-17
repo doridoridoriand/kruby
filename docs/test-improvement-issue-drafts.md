@@ -70,10 +70,10 @@ Missing categories:
 ### Scope
 
 - Add deterministic E2E targets for all-namespaces list methods where a resource can be safely created in the test namespace.
-- Add `delete_collection` coverage using dedicated labels and the per-test namespace.
-- Add read coverage for safe `status` subresources first, then patch/replace where the API server allows it.
-- Add `scale` coverage for Deployment/ReplicaSet/StatefulSet/ReplicationController where supported.
-- Add event coverage for both `events.k8s.io` and core event method naming where applicable.
+- Use dedicated labels and the per-test namespace to add `delete_collection` coverage safely.
+- Start with read coverage for safe `status` subresources, then extend to patch/replace where the API server allows it.
+- Cover `scale` subresources for Deployment/ReplicaSet/StatefulSet/ReplicationController where supported.
+- Include event coverage for both `events.k8s.io` and core event method naming where applicable.
 - Gate `scheduling.k8s.io/v1alpha2` by API discovery, or add explicit policy exclusions with reasons if not supported by kind 1.35.
 
 ### Acceptance Criteria
@@ -275,6 +275,8 @@ scripts/e2e/generate-coverage-inventory --output /tmp/coverage_inventory.json
 ```
 
 ## Optional `gh` Commands
+
+Before using the commands below, run `gh auth login` and confirm the authenticated account has access to `doridoridoriand/kruby` plus permission to create issues there.
 
 When GitHub CLI authentication is available, create issues from the sections above with commands like:
 
