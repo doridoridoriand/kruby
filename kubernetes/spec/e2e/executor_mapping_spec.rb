@@ -401,4 +401,17 @@ RSpec.describe SpecSupport::E2E::Executor do
       )
     end
   end
+
+  it "preserves boolean false when reading nested hash values" do
+    review = {
+      kind: "SelfSubjectAccessReview",
+      status: {
+        allowed: false
+      }
+    }
+
+    expect(executor.send(:nested_value, review, :status, :allowed)).to be(false)
+    expect { executor.send(:assert_subject_access_review_response!, review, "SelfSubjectAccessReview") }
+      .not_to raise_error
+  end
 end

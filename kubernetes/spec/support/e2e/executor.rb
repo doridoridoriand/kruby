@@ -1978,7 +1978,15 @@ module SpecSupport
 
         path.each do |key|
           if current.is_a?(Hash)
-            current = current[key] || current[key.to_s] || current[key.to_sym]
+            if current.key?(key)
+              current = current[key]
+            elsif current.key?(key.to_s)
+              current = current[key.to_s]
+            elsif current.key?(key.to_sym)
+              current = current[key.to_sym]
+            else
+              return nil
+            end
           elsif current.respond_to?(key)
             current = current.public_send(key)
           else

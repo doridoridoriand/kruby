@@ -103,5 +103,35 @@ RSpec.describe SpecSupport::E2E::CoverageInventory do
       expect(excluded.fetch("classification")).to eq("excluded_by_policy")
       expect(excluded.fetch("exclusionRule")).to eq("^create_namespaced_binding$")
     end
+
+    it "uses the default reason for string-form rules even when the pattern contains 'reason'" do
+      File.write(
+        File.join(api_dir, "core_v1_api.rb"),
+        <<~RUBY
+          class CoreV1Api
+            def create_reason_binding; end
+          end
+        RUBY
+      )
+      File.write(
+        policy_path,
+        <<~YAML
+          explicitly_excluded_apis: []
+          exclude_method_patterns:
+            - "^create_reason_binding$"
+        YAML
+      )
+
+      inventory = described_class.new(
+        api_glob: File.join(api_dir, "*_api.rb"),
+        policy_path: policy_path,
+        repo_root: test_dir
+      )
+
+      payload = inventory.generate
+      excluded = payload.fetch("exclusions").find { |entry| entry.fetch("method") == "create_reason_binding" }
+
+      expect(excluded.fetch("reason")).to eq("Excluded by policy")
+    end
   end
 end

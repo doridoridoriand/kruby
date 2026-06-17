@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-17 14:56:12 UTC
+生成時刻: 2026-06-17 16:44:17 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,49 +13,28 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `42f575b8f2f0b99fafb0f6c197ed4ed33deeb133` (`Add comprehensive authentication and authorization tests (#125)`)
+- 基点の `HEAD`: `fa6cd178bc0acf5fb41a04bc56b33276490a8621` (`Add E2E coverage for excluded auth and discovery APIs`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/e2e/authentication_k8s_io_v1_selfsubjectreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/authentication_k8s_io_v1_tokenreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/authorization_k8s_io_v1_localsubjectaccessreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/authorization_k8s_io_v1_selfsubjectaccessreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/authorization_k8s_io_v1_selfsubjectrulesreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/authorization_k8s_io_v1_subjectaccessreviews_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/autoscaling_v1_horizontalpodautoscalers_full_spec.rb`: staged addition.
-- `kubernetes/spec/e2e/discovery_k8s_io_v1_endpointslices_full_spec.rb`: staged addition.
 - `kubernetes/spec/e2e/executor_mapping_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/coverage_gate.rb`: staged modification.
 - `kubernetes/spec/support/e2e/coverage_inventory.rb`: staged modification.
-- `kubernetes/spec/support/e2e/coverage_inventory_spec.rb`: staged addition.
-- `kubernetes/spec/support/e2e/coverage_policy.yml`: staged modification.
+- `kubernetes/spec/support/e2e/coverage_inventory_spec.rb`: staged modification.
 - `kubernetes/spec/support/e2e/executor.rb`: staged modification.
-- `kubernetes/spec/support/e2e/factories.rb`: staged modification.
-- `kubernetes/spec/support/e2e/mode_dispatcher.rb`: staged modification.
-- `kubernetes/spec/support/e2e/targets/authentication_k8s_io_v1_selfsubjectreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/authentication_k8s_io_v1_tokenreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/authorization_k8s_io_v1_localsubjectaccessreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/authorization_k8s_io_v1_selfsubjectaccessreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/authorization_k8s_io_v1_selfsubjectrulesreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/authorization_k8s_io_v1_subjectaccessreviews.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/autoscaling_v1_horizontalpodautoscalers.rb`: staged addition.
-- `kubernetes/spec/support/e2e/targets/discovery_k8s_io_v1_endpointslices.rb`: staged addition.
-- `specs/002-real-api-e2e-coverage/coverage_inventory.json`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `fix/121-e2e-coverage-exclusions`
-- Base HEAD: `42f575b8f2f0b99fafb0f6c197ed4ed33deeb133`
+- Base HEAD: `fa6cd178bc0acf5fb41a04bc56b33276490a8621`
 - Recent commits:
 
 ```text
+fa6cd17 Add E2E coverage for excluded auth and discovery APIs
 42f575b Add comprehensive authentication and authorization tests (#125)
 83601a8 Docs: add test improvement issue drafts (#119-#131)
 e1aeb09 Add core API unit tests and review fixes (#119)
 05c8aef docs: add sleep intervals between CRUD operations in examples (#118)
-d3c79c6 fix(e2e): gate unavailable APIs by discovery (#117)
 ```
 
 ## 5. Commands Run
@@ -64,32 +43,11 @@ d3c79c6 fix(e2e): gate unavailable APIs by discovery (#117)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- ...ation_k8s_io_v1_selfsubjectreviews_full_spec.rb |  15 +
- ...hentication_k8s_io_v1_tokenreviews_full_spec.rb |  15 +
- ...8s_io_v1_localsubjectaccessreviews_full_spec.rb |  15 +
- ...k8s_io_v1_selfsubjectaccessreviews_full_spec.rb |  15 +
- ..._k8s_io_v1_selfsubjectrulesreviews_full_spec.rb |  15 +
- ...ion_k8s_io_v1_subjectaccessreviews_full_spec.rb |  15 +
- ...caling_v1_horizontalpodautoscalers_full_spec.rb |  21 ++
- ...discovery_k8s_io_v1_endpointslices_full_spec.rb |  19 ++
- kubernetes/spec/e2e/executor_mapping_spec.rb       |  40 +++
- kubernetes/spec/support/e2e/coverage_gate.rb       |  22 ++
- kubernetes/spec/support/e2e/coverage_inventory.rb  |  41 ++-
- .../spec/support/e2e/coverage_inventory_spec.rb    | 107 ++++++++
- kubernetes/spec/support/e2e/coverage_policy.yml    |   4 -
- kubernetes/spec/support/e2e/executor.rb            | 126 +++++++++
- kubernetes/spec/support/e2e/factories.rb           | 111 ++++++++
- kubernetes/spec/support/e2e/mode_dispatcher.rb     |  19 ++
- .../authentication_k8s_io_v1_selfsubjectreviews.rb |  23 ++
- .../authentication_k8s_io_v1_tokenreviews.rb       |  23 ++
- ...rization_k8s_io_v1_localsubjectaccessreviews.rb |  23 ++
- ...orization_k8s_io_v1_selfsubjectaccessreviews.rb |  23 ++
- ...horization_k8s_io_v1_selfsubjectrulesreviews.rb |  23 ++
- ...authorization_k8s_io_v1_subjectaccessreviews.rb |  23 ++
- .../autoscaling_v1_horizontalpodautoscalers.rb     |  25 ++
- .../targets/discovery_k8s_io_v1_endpointslices.rb  |  25 ++
- .../coverage_inventory.json                        | 304 ++++++++++++---------
- 25 files changed, 946 insertions(+), 146 deletions(-)
+ kubernetes/spec/e2e/executor_mapping_spec.rb       | 13 ++++++++++
+ kubernetes/spec/support/e2e/coverage_inventory.rb  |  8 +++++-
+ .../spec/support/e2e/coverage_inventory_spec.rb    | 30 ++++++++++++++++++++++
+ kubernetes/spec/support/e2e/executor.rb            | 10 +++++++-
+ 4 files changed, 59 insertions(+), 2 deletions(-)
 ```
 
 ## 6. Verification

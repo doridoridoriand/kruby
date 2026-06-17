@@ -240,10 +240,16 @@ module SpecSupport
           pattern = rule.is_a?(Hash) ? rule["pattern"].to_s : rule.to_s
           next if pattern.empty?
 
+          reason = if rule.is_a?(Hash)
+            rule["reason"].to_s.empty? ? "Excluded by policy" : rule["reason"].to_s
+          else
+            "Excluded by policy"
+          end
+
           rules << {
             pattern: pattern,
             regex: Regexp.new(pattern),
-            reason: rule["reason"].to_s.empty? ? "Excluded by policy" : rule["reason"].to_s
+            reason: reason
           }
         end
       end
