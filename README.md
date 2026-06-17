@@ -92,9 +92,9 @@ For a full, repeatable upgrade workflow (including verification and troubleshoot
 
 ## E2E testing
 
-Kind-backed E2E runs currently support Kubernetes `1.31`, `1.32`, `1.33`, `1.34`, and `1.35`.
-The default E2E Kind environment is `1.35`, and the repository pins official `kindest/node` images for deterministic coverage.
-Kubernetes `1.36` client generation is covered by OpenAPI/gem checks; Kind-backed 1.36 E2E can be added once an official `kindest/node` 1.36 image is available.
+Kind-backed E2E runs currently support Kubernetes `1.31`, `1.32`, `1.33`, `1.34`, `1.35`, and `1.36`.
+The single-version default E2E Kind environment is `1.35`, the matrix default runs `1.31` through `1.36`, and the repository pins official `kindest/node` images for deterministic coverage.
+Use kind `v0.32.0` or newer for Kubernetes `1.36` E2E runs.
 
 Run a single Kubernetes version:
 
@@ -107,7 +107,7 @@ Run the supported Kubernetes matrix in parallel:
 
 ```bash
 scripts/e2e/run-e2e-matrix --mode full
-scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.35 --targets 'core/v1/pods:create'
+scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.36 --targets 'core/v1/pods:create'
 ```
 
 For troubleshooting and cleanup guidance, see:

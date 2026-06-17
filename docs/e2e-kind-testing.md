@@ -17,9 +17,11 @@ The Kind-backed E2E environment supports the Kubernetes versions declared in `RE
 - `1.33`
 - `1.34`
 - `1.35`
+- `1.36`
 
 Use `--kubernetes-version` (or `E2E_KUBERNETES_VERSION`) to select one version explicitly.
 Use `scripts/e2e/run-e2e-matrix` to fan out across multiple versions in parallel.
+Use kind `v0.32.0` or newer when running Kubernetes `1.36`.
 
 ## Quick Health Checks
 
@@ -29,7 +31,7 @@ kind version
 kubectl version --client
 (cd kubernetes && E2E_KUBERNETES_VERSION=1.35 bundle exec rspec spec/e2e --format progress)
 scripts/e2e/run-e2e --mode full --kubernetes-version 1.35 --real-api 0
-scripts/e2e/run-e2e-matrix --mode full --versions 1.31,1.35 --real-api 0
+scripts/e2e/run-e2e-matrix --mode full --versions 1.31,1.36 --real-api 0
 ```
 
 If any command above fails, fix it before debugging test logic.
@@ -140,7 +142,7 @@ When `E2E_REUSE_CLUSTER` is unset, the matrix runner forces `E2E_REUSE_CLUSTER=0
 
 ```bash
 scripts/e2e/run-e2e-matrix --mode full
-scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.32,1.33,1.34,1.35 --targets core/v1/pods:create
+scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.32,1.33,1.34,1.35,1.36 --targets core/v1/pods:create
 ```
 
 ## Failure Reporting Checklist

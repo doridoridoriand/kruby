@@ -86,6 +86,7 @@ Supported Kind Kubernetes versions:
 - `1.33`
 - `1.34`
 - `1.35`
+- `1.36`
 
 Selector format:
 - `apiGroup/version/resource:operation`

@@ -32,7 +32,7 @@ run_release_script = lambda do |script_name, *args|
 end
 
 namespace :e2e do
-  desc 'Run full kind-backed E2E suite (set E2E_KUBERNETES_VERSION=1.31..1.35 to choose the Kind version)'
+  desc 'Run full kind-backed E2E suite (set E2E_KUBERNETES_VERSION=1.31..1.36 to choose the Kind version)'
   task :full, [:fallback] do |_task, args|
     fallback = args[:fallback].to_s.strip
     fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?

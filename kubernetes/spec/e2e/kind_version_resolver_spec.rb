@@ -10,6 +10,7 @@ RSpec.describe SpecSupport::E2E::KindVersionResolver do
       expect(described_class.resolve_kubernetes_version("1.33.7+build.1")).to eq("1.33")
       expect(described_class.resolve_kubernetes_version("1.34.3")).to eq("1.34")
       expect(described_class.resolve_kubernetes_version("1.35.0")).to eq("1.35")
+      expect(described_class.resolve_kubernetes_version("v1.36.1")).to eq("1.36")
     end
 
     it "rejects unsupported Kubernetes minors" do
