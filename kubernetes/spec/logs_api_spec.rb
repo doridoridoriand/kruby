@@ -15,10 +15,9 @@ RSpec.describe Kubernetes::LogsApi do
   let(:api) { Kubernetes::LogsApi.new(api_client) }
 
   describe "#log_file_handler" do
-    it "returns log content on success" do
-      log_content = "2024-01-01 00:00:00 INFO Starting application"
+    it "returns nil with a successful response" do
       WebMock.stub_request(:get, "https://k8s.example.com/logs/var%2Flog%2Fmyfile.log")
-        .to_return(status: 200, body: log_content)
+        .to_return(status: 200, body: "2024-01-01 00:00:00 INFO Starting application")
 
       result, status, _ = api.log_file_handler_with_http_info("var/log/myfile.log")
       expect(status).to eq(200)
@@ -58,7 +57,7 @@ RSpec.describe Kubernetes::LogsApi do
   end
 
   describe "#log_file_list_handler" do
-    it "returns list of log files on success" do
+    it "returns nil with a successful response" do
       response = { directories: ["a/", "b/"], files: ["file1.log", "file2.log"] }
       WebMock.stub_request(:get, "https://k8s.example.com/logs/")
         .to_return(status: 200, body: response.to_json)

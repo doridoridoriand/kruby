@@ -49,7 +49,13 @@ RSpec.describe "run-e2e-matrix" do
     BASH
 
     build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      env = {
+        "E2E_KUBERNETES_VERSIONS" => nil,
+        "E2E_FALLBACK_STRATEGY" => nil,
+        "E2E_REAL_API" => nil
+      }
       stdout, stderr, status = Open3.capture3(
+        env,
         matrix_script, "--mode", "full",
         chdir: repo_root
       )

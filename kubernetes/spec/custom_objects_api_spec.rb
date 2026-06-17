@@ -203,7 +203,12 @@ RSpec.describe Kubernetes::CustomObjectsApi do
 
     it "passes list query parameters" do
       response = { apiVersion: "v1", kind: "List", items: [] }
-      WebMock.stub_request(:get, "https://k8s.example.com/apis/example.com/v1/examples?labelSelector=app=test&fieldSelector=status.phase=Running&limit=10")
+      WebMock.stub_request(:get, "https://k8s.example.com/apis/example.com/v1/examples")
+        .with(query: {
+          "fieldSelector" => "status.phase=Running",
+          "labelSelector" => "app=test",
+          "limit" => "10"
+        })
         .to_return(status: 200, body: response.to_json, headers: { "Content-Type" => "application/json" })
 
       api.list_cluster_custom_object("example.com", "v1", "examples",
