@@ -153,21 +153,10 @@ RSpec.describe "Authentication mechanisms" do
     end
 
     it "returns false when not in cluster environment" do
-      old_token = Kubernetes::InClusterConfig::SERVICE_TOKEN_FILENAME.dup
-      old_ca = Kubernetes::InClusterConfig::SERVICE_CA_CERT_FILENAME.dup
-
-      # Use instance variable to avoid constant redefinition warnings
-      Kubernetes::InClusterConfig.module_eval {
-        SERVICE_TOKEN_FILENAME = "/nonexistent/token"
-        SERVICE_CA_CERT_FILENAME = "/nonexistent/ca.crt"
-      }
+      stub_const("Kubernetes::InClusterConfig::SERVICE_TOKEN_FILENAME", "/nonexistent/token")
+      stub_const("Kubernetes::InClusterConfig::SERVICE_CA_CERT_FILENAME", "/nonexistent/ca.crt")
 
       expect(Kubernetes::InClusterConfig.in_cluster?).to be false
-
-      Kubernetes::InClusterConfig.module_eval {
-        SERVICE_TOKEN_FILENAME = old_token
-        SERVICE_CA_CERT_FILENAME = old_ca
-      }
     end
   end
 
