@@ -2,36 +2,36 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-17 14:09:13 UTC
+生成時刻: 2026-06-17 14:33:10 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `fix/pr132-reviews` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `merge/pr134-master-clean` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `056ecb66aa10a087aaecaf5d18792a3fb8582559` (`docs: add comprehensive code review findings as GitHub Issues (#119-#131)`)
+- 基点の `HEAD`: `83601a89a6177705972e1cf157174f4e4321c09b` (`Docs: add test improvement issue drafts (#119-#131)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `docs/test-improvement-issue-drafts.md`: staged modification.
+- `kubernetes/spec/auth_spec.rb`: staged addition.
 
 ## 4. Branch / Commit
 
-- Branch: `fix/pr132-reviews`
-- Base HEAD: `056ecb66aa10a087aaecaf5d18792a3fb8582559`
+- Branch: `merge/pr134-master-clean`
+- Base HEAD: `83601a89a6177705972e1cf157174f4e4321c09b`
 - Recent commits:
 
 ```text
-056ecb6 docs: add comprehensive code review findings as GitHub Issues (#119-#131)
-8eb9837 fix(e2e): address discovery review comments
-6535154 fix(e2e): gate unavailable APIs by discovery
-6b3d035 Fix logs and watch examples (#113)
-d31711a Examples expand clean (#112)
+83601a8 Docs: add test improvement issue drafts (#119-#131)
+e1aeb09 Add core API unit tests and review fixes (#119)
+05c8aef docs: add sleep intervals between CRUD operations in examples (#118)
+d3c79c6 fix(e2e): gate unavailable APIs by discovery (#117)
+43d2db8 [codex] fix E2E handling for discovery-gated APIs (#116)
 ```
 
 ## 5. Commands Run
@@ -40,8 +40,8 @@ d31711a Examples expand clean (#112)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- docs/test-improvement-issue-drafts.md | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ kubernetes/spec/auth_spec.rb | 309 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 309 insertions(+)
 ```
 
 ## 6. Verification
