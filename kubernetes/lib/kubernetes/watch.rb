@@ -54,6 +54,7 @@ module Kubernetes
           return unless event
 
           if watch_reset_event?(event)
+            current_resource_version = nil
             reconnect_requested = true
             next
           end
@@ -74,8 +75,8 @@ module Kubernetes
 
         response = request.run
         reconnect_reason = reconnect_reason(response, reconnect_requested)
-        break unless reconnect_reason
-        raise_terminal_watch_error(response) if reconnect_attempts >= MAX_RECONNECT_ATTEMPTS
+        return response unless reconnect_reason
+        raise_terminal_watch_error(response, reconnect_reason) if reconnect_attempts >= MAX_RECONNECT_ATTEMPTS
 
         reconnect_attempts += 1
         sleep reconnect_backoff_seconds(reconnect_attempts - 1) if reconnect_reason == :transport
@@ -93,6 +94,8 @@ module Kubernetes
       last = data[(ix + 1)..data.length]
       [last, complete.split(/\n/)]
     end
+
+    private
 
     def parse_event(part)
       JSON.parse(part)
@@ -128,8 +131,10 @@ module Kubernetes
       RECONNECT_BACKOFF_SECONDS * (2**reconnect_attempt)
     end
 
-    def raise_terminal_watch_error(response)
-      if response&.timed_out?
+    def raise_terminal_watch_error(response, reconnect_reason)
+      if reconnect_reason == :reset
+        raise ApiError.new(code: 410, message: 'Watch resource version expired')
+      elsif response&.timed_out?
         raise ApiError.new('Watch connection timed out')
       elsif response && response.code.to_i.zero?
         raise ApiError.new(code: 0, message: response.return_message)

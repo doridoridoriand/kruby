@@ -59,10 +59,11 @@ RSpec.describe Kubernetes::Watch do
       .and_return(request_two)
 
     seen_versions = []
-    watch.connect("/api/v1/pods") do |event|
+    response = watch.connect("/api/v1/pods") do |event|
       seen_versions << event.dig("object", "metadata", "resourceVersion")
     end
 
+    expect(response.code).to eq(200)
     expect(seen_versions).to eq(%w[10 11])
   end
 
@@ -84,16 +85,17 @@ RSpec.describe Kubernetes::Watch do
       .ordered
       .and_return(request_one)
     expect(client).to receive(:build_request)
-      .with("GET", "/api/v1/pods?watch=true&resourceVersion=25", auth_names: ["BearerToken"])
+      .with("GET", "/api/v1/pods?watch=true", auth_names: ["BearerToken"])
       .ordered
       .and_return(request_two)
     expect(watch).not_to receive(:sleep)
 
     seen_versions = []
-    watch.connect("/api/v1/pods") do |event|
+    response = watch.connect("/api/v1/pods") do |event|
       seen_versions << event.dig("object", "metadata", "resourceVersion")
     end
 
+    expect(response.code).to eq(200)
     expect(seen_versions).to eq(%w[25 26])
   end
 
@@ -148,5 +150,35 @@ RSpec.describe Kubernetes::Watch do
     expect do
       watch.connect("/api/v1/pods") { |_event| nil }
     end.to raise_error(Kubernetes::ApiError, /Watch connection timed out/)
+  end
+
+  it "raises ApiError after exhausting reconnect attempts on repeated 410 reset events" do
+    allow(client).to receive(:build_request).and_return(
+      FakeWatchRequest.new(
+        chunks: ["{\"type\":\"ERROR\",\"object\":{\"kind\":\"Status\",\"code\":410,\"message\":\"too old resource version\"}}\n"],
+        response: FakeResponse.new(success_value: true, timed_out_value: false, code: 200, return_message: nil)
+      ),
+      FakeWatchRequest.new(
+        chunks: ["{\"type\":\"ERROR\",\"object\":{\"kind\":\"Status\",\"code\":410,\"message\":\"too old resource version\"}}\n"],
+        response: FakeResponse.new(success_value: true, timed_out_value: false, code: 200, return_message: nil)
+      ),
+      FakeWatchRequest.new(
+        chunks: ["{\"type\":\"ERROR\",\"object\":{\"kind\":\"Status\",\"code\":410,\"message\":\"too old resource version\"}}\n"],
+        response: FakeResponse.new(success_value: true, timed_out_value: false, code: 200, return_message: nil)
+      ),
+      FakeWatchRequest.new(
+        chunks: ["{\"type\":\"ERROR\",\"object\":{\"kind\":\"Status\",\"code\":410,\"message\":\"too old resource version\"}}\n"],
+        response: FakeResponse.new(success_value: true, timed_out_value: false, code: 200, return_message: nil)
+      )
+    )
+
+    expect(watch).not_to receive(:sleep)
+
+    expect do
+      watch.connect("/api/v1/pods") { |_event| nil }
+    end.to raise_error(Kubernetes::ApiError) do |error|
+      expect(error.code).to eq(410)
+      expect(error.message).to include("Watch resource version expired")
+    end
   end
 end
