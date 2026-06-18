@@ -2,35 +2,32 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-17 16:44:17 UTC
+生成時刻: 2026-06-18 00:21:52 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `fix/121-e2e-coverage-exclusions` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `fix/124-api-client-error-handling-tests` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `fa6cd178bc0acf5fb41a04bc56b33276490a8621` (`Add E2E coverage for excluded auth and discovery APIs`)
+- 基点の `HEAD`: `5e4777bb5ec328f2601b86e358e610c54023b093` (`[codex] Add E2E coverage for excluded auth and discovery APIs (#135)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/e2e/executor_mapping_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/coverage_inventory.rb`: staged modification.
-- `kubernetes/spec/support/e2e/coverage_inventory_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/executor.rb`: staged modification.
+- `kubernetes/spec/api_client_error_handling_spec.rb`: staged addition.
 
 ## 4. Branch / Commit
 
-- Branch: `fix/121-e2e-coverage-exclusions`
-- Base HEAD: `fa6cd178bc0acf5fb41a04bc56b33276490a8621`
+- Branch: `fix/124-api-client-error-handling-tests`
+- Base HEAD: `5e4777bb5ec328f2601b86e358e610c54023b093`
 - Recent commits:
 
 ```text
-fa6cd17 Add E2E coverage for excluded auth and discovery APIs
+5e4777b [codex] Add E2E coverage for excluded auth and discovery APIs (#135)
 42f575b Add comprehensive authentication and authorization tests (#125)
 83601a8 Docs: add test improvement issue drafts (#119-#131)
 e1aeb09 Add core API unit tests and review fixes (#119)
@@ -43,11 +40,8 @@ e1aeb09 Add core API unit tests and review fixes (#119)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/e2e/executor_mapping_spec.rb       | 13 ++++++++++
- kubernetes/spec/support/e2e/coverage_inventory.rb  |  8 +++++-
- .../spec/support/e2e/coverage_inventory_spec.rb    | 30 ++++++++++++++++++++++
- kubernetes/spec/support/e2e/executor.rb            | 10 +++++++-
- 4 files changed, 59 insertions(+), 2 deletions(-)
+ kubernetes/spec/api_client_error_handling_spec.rb | 164 ++++++++++++++++++++++
+ 1 file changed, 164 insertions(+)
 ```
 
 ## 6. Verification
