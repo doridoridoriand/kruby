@@ -47,35 +47,43 @@ module Kubernetes
     # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
-      request = build_request(http_method, path, opts)
-      response = request.run
+      retries_performed = 0
 
-      if @config.debugging
-        @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
-      end
+      loop do
+        request = build_request(http_method, path, opts)
+        response = request.run
 
-      unless response.success?
+        if @config.debugging
+          @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
+        end
+
+        unless response.success?
+          if retry_request?(response, retries_performed)
+            interval_seconds = retry_interval_seconds(response, retries_performed)
+            log_retry_attempt(response, retries_performed + 1, interval_seconds)
+            sleep interval_seconds
+            retries_performed += 1
+            next
+          end
+
           if response.timed_out?
             fail ApiError.new(:code => 0,
                               :message => 'Connection timed out')
-        elsif response.code == 0
-          # Errors from libcurl will be made visible here
-          fail ApiError.new(:code => 0,
-                            :message => response.return_message)
-        else
-          fail ApiError.new(:code => response.code,
-                            :response_headers => response.headers,
-                            :response_body => response.body),
-               response.status_message
+          elsif response.code == 0
+            # Errors from libcurl will be made visible here
+            fail ApiError.new(:code => 0,
+                              :message => response.return_message)
+          else
+            fail ApiError.new(:code => response.code,
+                              :response_headers => response.headers,
+                              :response_body => response.body),
+                 response.status_message
+          end
         end
-      end
 
-      if opts[:return_type]
-        data = deserialize(response, opts[:return_type])
-      else
-        data = nil
+        data = opts[:return_type] ? deserialize(response, opts[:return_type]) : nil
+        return data, response.code, response.headers
       end
-      return data, response.code, response.headers
     end
 
     # Builds the HTTP request
@@ -403,6 +411,86 @@ module Kubernetes
         param
       else
         fail "unknown collection format: #{collection_format.inspect}"
+      end
+    end
+
+    def retry_request?(response, retries_performed)
+      return false if response.timed_out?
+      return false if response.code.to_i == 0
+      return false if max_retry_attempts <= 0
+      return false if retries_performed >= max_retry_attempts
+
+      retry_statuses.include?(response.code.to_i)
+    end
+
+    def retry_interval_seconds(response, retries_performed)
+      exponential_interval = retry_base_interval_seconds * (2**retries_performed)
+      server_interval = server_retry_after_seconds(response)
+
+      server_interval ? [exponential_interval, server_interval].max : exponential_interval
+    end
+
+    def log_retry_attempt(response, retry_number, interval_seconds)
+      @config.logger.info(
+        "Retrying API request after HTTP #{response.code} (retry #{retry_number}/#{max_retry_attempts}) in #{interval_seconds} seconds"
+      )
+      return unless @config.debugging
+
+      @config.logger.debug("Retry response body: #{response.body}")
+    end
+
+    def max_retry_attempts
+      value = fetch_retry_configuration(:max_retries, 0)
+      [value.to_i, 0].max
+    end
+
+    def retry_base_interval_seconds
+      [fetch_retry_configuration(:base_interval_seconds, 1.0).to_f, 0.0].max
+    end
+
+    def retry_statuses
+      Array(fetch_retry_configuration(:retry_statuses, [429, 500, 501, 502, 503])).map(&:to_i)
+    end
+
+    def server_retry_after_seconds(response)
+      header_value = response.headers['Retry-After'] if response.respond_to?(:headers) && response.headers.is_a?(Hash)
+      header_seconds = parse_retry_after_header(header_value)
+      return header_seconds if header_seconds
+
+      parse_retry_after_from_body(response.body)
+    end
+
+    def parse_retry_after_header(header_value)
+      return nil if header_value.nil?
+
+      integer_value = Integer(header_value, exception: false)
+      return integer_value.to_f if integer_value
+
+      retry_at = Time.httpdate(header_value)
+      [retry_at - Time.now, 0.0].max
+    rescue ArgumentError
+      nil
+    end
+
+    def parse_retry_after_from_body(body)
+      return nil if body.nil? || body.empty?
+
+      parsed = JSON.parse(body)
+      retry_after = parsed.dig('details', 'retryAfterSeconds') || parsed.dig(:details, :retryAfterSeconds)
+      return nil if retry_after.nil?
+
+      retry_after.to_f
+    rescue JSON::ParserError, TypeError
+      nil
+    end
+
+    def fetch_retry_configuration(key, default)
+      return default unless @config.retry_configuration.is_a?(Hash)
+
+      if @config.retry_configuration.key?(key)
+        @config.retry_configuration[key]
+      else
+        @config.retry_configuration.fetch(key.to_s, default)
       end
     end
   end
