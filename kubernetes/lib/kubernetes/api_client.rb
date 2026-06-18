@@ -59,7 +59,7 @@ module Kubernetes
 
         unless response.success?
           if retry_request?(response, retries_performed)
-            interval_seconds = retry_interval_seconds(retries_performed)
+            interval_seconds = retry_interval_seconds(response, retries_performed)
             log_retry_attempt(response, retries_performed + 1, interval_seconds)
             sleep interval_seconds
             retries_performed += 1
@@ -423,14 +423,19 @@ module Kubernetes
       retry_statuses.include?(response.code.to_i)
     end
 
-    def retry_interval_seconds(retries_performed)
-      retry_base_interval_seconds * (2**retries_performed)
+    def retry_interval_seconds(response, retries_performed)
+      exponential_interval = retry_base_interval_seconds * (2**retries_performed)
+      server_interval = server_retry_after_seconds(response)
+
+      server_interval ? [exponential_interval, server_interval].max : exponential_interval
     end
 
     def log_retry_attempt(response, retry_number, interval_seconds)
       @config.logger.info(
         "Retrying API request after HTTP #{response.code} (retry #{retry_number}/#{max_retry_attempts}) in #{interval_seconds} seconds"
       )
+      return unless @config.debugging
+
       @config.logger.debug("Retry response body: #{response.body}")
     end
 
@@ -440,11 +445,43 @@ module Kubernetes
     end
 
     def retry_base_interval_seconds
-      fetch_retry_configuration(:base_interval_seconds, 1.0).to_f
+      [fetch_retry_configuration(:base_interval_seconds, 1.0).to_f, 0.0].max
     end
 
     def retry_statuses
       Array(fetch_retry_configuration(:retry_statuses, [429, 500, 501, 502, 503])).map(&:to_i)
+    end
+
+    def server_retry_after_seconds(response)
+      header_value = response.headers['Retry-After'] if response.respond_to?(:headers) && response.headers.is_a?(Hash)
+      header_seconds = parse_retry_after_header(header_value)
+      return header_seconds if header_seconds
+
+      parse_retry_after_from_body(response.body)
+    end
+
+    def parse_retry_after_header(header_value)
+      return nil if header_value.nil?
+
+      integer_value = Integer(header_value, exception: false)
+      return integer_value.to_f if integer_value
+
+      retry_at = Time.httpdate(header_value)
+      [retry_at - Time.now, 0.0].max
+    rescue ArgumentError
+      nil
+    end
+
+    def parse_retry_after_from_body(body)
+      return nil if body.nil? || body.empty?
+
+      parsed = JSON.parse(body)
+      retry_after = parsed.dig('details', 'retryAfterSeconds') || parsed.dig(:details, :retryAfterSeconds)
+      return nil if retry_after.nil?
+
+      retry_after.to_f
+    rescue JSON::ParserError, TypeError
+      nil
     end
 
     def fetch_retry_configuration(key, default)

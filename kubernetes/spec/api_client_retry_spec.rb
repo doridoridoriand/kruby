@@ -20,14 +20,14 @@ RSpec.describe Kubernetes::ApiClient do
     instance_double(Typhoeus::Request, run: response)
   end
 
-  def error_response(code, status_message: "Temporary Failure", body: '{"message":"retry me"}')
+  def error_response(code, status_message: "Temporary Failure", body: '{"message":"retry me"}', headers: { "Content-Type" => "application/json" })
     instance_double(
       Typhoeus::Response,
       success?: false,
       timed_out?: false,
       code: code,
       status_message: status_message,
-      headers: { "Content-Type" => "application/json" },
+      headers: headers,
       body: body
     )
   end
@@ -102,6 +102,7 @@ RSpec.describe Kubernetes::ApiClient do
     end
 
     it "logs retry attempts at info and debug levels" do
+      config.debugging = true
       allow(api_client).to receive(:build_request).and_return(
         request_for(error_response(503, body: '{"message":"please retry"}')),
         request_for(success_response)
@@ -113,7 +114,63 @@ RSpec.describe Kubernetes::ApiClient do
       expect(logger).to have_received(:info)
         .with(include("HTTP 503", "retry 1/4", "1.0 seconds"))
       expect(logger).to have_received(:debug)
-        .with(include('{"message":"please retry"}'))
+        .with(include("Retry response body:", '{"message":"please retry"}'))
+    end
+
+    it "does not emit retry response body logs when debugging is disabled" do
+      allow(api_client).to receive(:build_request).and_return(
+        request_for(error_response(503, body: '{"message":"please retry"}')),
+        request_for(success_response)
+      )
+      allow(api_client).to receive(:sleep)
+
+      api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
+
+      expect(logger).to have_received(:info)
+      expect(logger).not_to have_received(:debug)
+    end
+
+    it "honors Retry-After response headers when they exceed the exponential backoff" do
+      allow(api_client).to receive(:build_request).and_return(
+        request_for(error_response(429, headers: { "Content-Type" => "application/json", "Retry-After" => "5" })),
+        request_for(success_response)
+      )
+
+      expect(api_client).to receive(:sleep).with(5.0).ordered
+
+      data, response_status, = api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
+
+      expect(data).to eq(message: "ok")
+      expect(response_status).to eq(200)
+    end
+
+    it "honors status details.retryAfterSeconds when present in the response body" do
+      allow(api_client).to receive(:build_request).and_return(
+        request_for(error_response(503, body: '{"details":{"retryAfterSeconds":6}}')),
+        request_for(success_response)
+      )
+
+      expect(api_client).to receive(:sleep).with(6.0).ordered
+
+      data, response_status, = api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
+
+      expect(data).to eq(message: "ok")
+      expect(response_status).to eq(200)
+    end
+
+    it "clamps negative retry intervals to zero seconds" do
+      config.retry_configuration[:base_interval_seconds] = -1
+      allow(api_client).to receive(:build_request).and_return(
+        request_for(error_response(503)),
+        request_for(success_response)
+      )
+
+      expect(api_client).to receive(:sleep).with(0.0).ordered
+
+      data, response_status, = api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
+
+      expect(data).to eq(message: "ok")
+      expect(response_status).to eq(200)
     end
 
     it "does not retry non-retryable HTTP statuses" do
