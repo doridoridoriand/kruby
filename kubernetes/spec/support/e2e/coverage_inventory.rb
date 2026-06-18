@@ -25,9 +25,15 @@ module SpecSupport
         policy = load_policy
         include_prefixes = include_prefixes_from(policy)
         exclude_rules = exclude_rules_from(policy)
+        api_exclusions = api_exclusions_from(policy)
 
         api_entries = Dir[@api_glob].sort.map do |api_file|
-          analyze_api_file(api_file, include_prefixes: include_prefixes, exclude_rules: exclude_rules)
+          analyze_api_file(
+            api_file,
+            include_prefixes: include_prefixes,
+            exclude_rules: exclude_rules,
+            api_exclusions: api_exclusions
+          )
         end
 
         method_entries = api_entries.flat_map { |entry| entry.fetch("methods") }
@@ -38,9 +44,14 @@ module SpecSupport
             "path" => relative_path(@policy_path),
             "loaded" => File.exist?(@policy_path),
             "includePrefixes" => include_prefixes,
-            "excludeRuleCount" => exclude_rules.length
+            "excludeRuleCount" => exclude_rules.length,
+            "explicitApiExclusionCount" => api_exclusions.length
           },
-          "totals" => summarize_totals(api_entries: api_entries, method_entries: method_entries),
+          "totals" => summarize_totals(
+            api_entries: api_entries,
+            method_entries: method_entries,
+            api_exclusions: api_exclusions
+          ),
           "operations" => summarize_operations(method_entries),
           "apis" => api_entries.map { |entry| summarize_api_entry(entry) },
           "candidates" => method_entries.select { |entry| entry.fetch("classification") == "candidate" },
@@ -58,7 +69,7 @@ module SpecSupport
 
       private
 
-      def analyze_api_file(api_file, include_prefixes:, exclude_rules:)
+      def analyze_api_file(api_file, include_prefixes:, exclude_rules:, api_exclusions: nil)
         api_name = File.basename(api_file, ".rb")
         methods = []
 
@@ -148,13 +159,14 @@ module SpecSupport
         entry
       end
 
-      def summarize_totals(api_entries:, method_entries:)
+      def summarize_totals(api_entries:, method_entries:, api_exclusions:)
         {
           "apiFiles" => api_entries.length,
           "methodsTotal" => method_entries.length,
           "methodsWithoutHttpInfo" => method_entries.count { |entry| entry.fetch("classification") != "http_info_variant" },
           "methodsWithHttpInfo" => method_entries.count { |entry| entry.fetch("classification") == "http_info_variant" },
           "candidateMethods" => method_entries.count { |entry| entry.fetch("classification") == "candidate" },
+          "candidateMethodsExcludedByExplicitApiPolicy" => count_explicit_api_excluded_candidates(method_entries, api_exclusions),
           "excludedByPolicy" => method_entries.count { |entry| entry.fetch("classification") == "excluded_by_policy" },
           "nonTargetOperations" => method_entries.count { |entry| entry.fetch("classification") == "non_target_operation" }
         }
@@ -225,14 +237,37 @@ module SpecSupport
 
       def exclude_rules_from(policy)
         Array(policy["exclude_method_patterns"]).each_with_object([]) do |rule, rules|
-          pattern = rule.is_a?(Hash) ? rule["pattern"].to_s : ""
+          pattern = rule.is_a?(Hash) ? rule["pattern"].to_s : rule.to_s
           next if pattern.empty?
+
+          reason = if rule.is_a?(Hash)
+            rule["reason"].to_s.empty? ? "Excluded by policy" : rule["reason"].to_s
+          else
+            "Excluded by policy"
+          end
 
           rules << {
             pattern: pattern,
             regex: Regexp.new(pattern),
-            reason: rule["reason"].to_s.empty? ? "Excluded by policy" : rule["reason"].to_s
+            reason: reason
           }
+        end
+      end
+
+      def api_exclusions_from(policy)
+        Array(policy["explicitly_excluded_apis"]).map do |rule|
+          rule.is_a?(Hash) ? rule["api"].to_s : rule.to_s
+        end.map(&:strip).reject(&:empty?)
+      end
+
+      def canonical_api_class(api_name)
+        api_name.split("_").map(&:capitalize).join("")
+      end
+
+      def count_explicit_api_excluded_candidates(method_entries, api_exclusions)
+        method_entries.count do |entry|
+          entry.fetch("classification") == "candidate" &&
+            api_exclusions.any? { |excluded_api| canonical_api_class(entry.fetch("api")).start_with?(excluded_api) }
         end
       end
 

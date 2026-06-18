@@ -168,6 +168,19 @@ module SpecSupport
           patch_method: :patch_storage_class,
           delete_method: :delete_storage_class
         },
+        ["autoscaling", "v1", "horizontalpodautoscalers"] => {
+          api_class: "AutoscalingV1Api",
+          factory: :horizontal_pod_autoscaler_v1,
+          name_prefix: "hpa-v1",
+          namespace_scoped: true,
+          kubectl_resource: "horizontalpodautoscaler",
+          create_method: :create_namespaced_horizontal_pod_autoscaler,
+          read_method: :read_namespaced_horizontal_pod_autoscaler,
+          list_method: :list_namespaced_horizontal_pod_autoscaler,
+          replace_method: :replace_namespaced_horizontal_pod_autoscaler,
+          patch_method: :patch_namespaced_horizontal_pod_autoscaler,
+          delete_method: :delete_namespaced_horizontal_pod_autoscaler
+        },
         ["autoscaling", "v2", "horizontalpodautoscalers"] => {
           api_class: "AutoscalingV2Api",
           factory: :horizontal_pod_autoscaler,
@@ -193,6 +206,19 @@ module SpecSupport
           replace_method: :replace_namespaced_pod_disruption_budget,
           patch_method: :patch_namespaced_pod_disruption_budget,
           delete_method: :delete_namespaced_pod_disruption_budget
+        },
+        ["discovery.k8s.io", "v1", "endpointslices"] => {
+          api_class: "DiscoveryV1Api",
+          factory: :endpoint_slice,
+          name_prefix: "endpointslice",
+          namespace_scoped: true,
+          kubectl_resource: "endpointslices.discovery.k8s.io",
+          create_method: :create_namespaced_endpoint_slice,
+          read_method: :read_namespaced_endpoint_slice,
+          list_method: :list_namespaced_endpoint_slice,
+          replace_method: :replace_namespaced_endpoint_slice,
+          patch_method: :patch_namespaced_endpoint_slice,
+          delete_method: :delete_namespaced_endpoint_slice
         },
         ["coordination.k8s.io", "v1", "leases"] => {
           api_class: "CoordinationV1Api",
@@ -587,6 +613,18 @@ module SpecSupport
         end
 
         case key
+        when ["authentication.k8s.io", "v1", "selfsubjectreviews"]
+          execute_self_subject_review_operation(operation)
+        when ["authentication.k8s.io", "v1", "tokenreviews"]
+          execute_token_review_operation(operation)
+        when ["authorization.k8s.io", "v1", "localsubjectaccessreviews"]
+          execute_local_subject_access_review_operation(operation, namespace: namespace)
+        when ["authorization.k8s.io", "v1", "selfsubjectaccessreviews"]
+          execute_self_subject_access_review_operation(operation, namespace: namespace)
+        when ["authorization.k8s.io", "v1", "selfsubjectrulesreviews"]
+          execute_self_subject_rules_review_operation(operation, namespace: namespace)
+        when ["authorization.k8s.io", "v1", "subjectaccessreviews"]
+          execute_subject_access_review_operation(operation, namespace: namespace)
         when %w[core v1 pods]
           execute_pod_operation(operation, namespace: namespace, cleanup: cleanup)
         when %w[core v1 services]
@@ -620,6 +658,60 @@ module SpecSupport
         else
           raise UnsupportedTargetError, "no executor registered for #{parsed_target.fetch(:id)}"
         end
+      end
+
+      def execute_self_subject_review_operation(operation)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authentication.k8s.io/v1/selfsubjectreviews" unless operation == "create"
+
+        api = Kubernetes::AuthenticationV1Api.new(build_api_client)
+        review = api.create_self_subject_review(Factories.self_subject_review)
+        user_info = nested_value(review, :status, :user_info)
+        raise "expected SelfSubjectReview response to include status.user_info" if user_info.nil?
+      end
+
+      def execute_token_review_operation(operation)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authentication.k8s.io/v1/tokenreviews" unless operation == "create"
+
+        api = Kubernetes::AuthenticationV1Api.new(build_api_client)
+        review = api.create_token_review(Factories.token_review(token: "kruby-e2e.invalid-token"))
+        authenticated = nested_value(review, :status, :authenticated)
+        raise "expected TokenReview response to include status.authenticated" if authenticated.nil?
+      end
+
+      def execute_local_subject_access_review_operation(operation, namespace:)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authorization.k8s.io/v1/localsubjectaccessreviews" unless operation == "create"
+
+        api = Kubernetes::AuthorizationV1Api.new(build_api_client)
+        review = api.create_namespaced_local_subject_access_review(
+          namespace,
+          Factories.local_subject_access_review(namespace: namespace)
+        )
+        assert_subject_access_review_response!(review, "LocalSubjectAccessReview")
+      end
+
+      def execute_self_subject_access_review_operation(operation, namespace:)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authorization.k8s.io/v1/selfsubjectaccessreviews" unless operation == "create"
+
+        api = Kubernetes::AuthorizationV1Api.new(build_api_client)
+        review = api.create_self_subject_access_review(Factories.self_subject_access_review(namespace: namespace))
+        assert_subject_access_review_response!(review, "SelfSubjectAccessReview")
+      end
+
+      def execute_self_subject_rules_review_operation(operation, namespace:)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authorization.k8s.io/v1/selfsubjectrulesreviews" unless operation == "create"
+
+        api = Kubernetes::AuthorizationV1Api.new(build_api_client)
+        review = api.create_self_subject_rules_review(Factories.self_subject_rules_review(namespace: namespace))
+        resource_rules = nested_value(review, :status, :resource_rules)
+        raise "expected SelfSubjectRulesReview response to include status.resource_rules" if resource_rules.nil?
+      end
+
+      def execute_subject_access_review_operation(operation, namespace:)
+        raise UnsupportedTargetError, "operation '#{operation}' is not implemented for authorization.k8s.io/v1/subjectaccessreviews" unless operation == "create"
+
+        api = Kubernetes::AuthorizationV1Api.new(build_api_client)
+        review = api.create_subject_access_review(Factories.subject_access_review(namespace: namespace))
+        assert_subject_access_review_response!(review, "SubjectAccessReview")
       end
 
       def execute_pod_operation(operation, namespace:, cleanup:)
@@ -1881,6 +1973,42 @@ module SpecSupport
         "kruby-e2e-#{prefix}-#{SecureRandom.hex(4)}"
       end
 
+      def nested_value(resource, *path)
+        current = resource
+
+        path.each do |key|
+          if current.is_a?(Hash)
+            if current.key?(key)
+              current = current[key]
+            elsif current.key?(key.to_s)
+              current = current[key.to_s]
+            elsif current.key?(key.to_sym)
+              current = current[key.to_sym]
+            else
+              return nil
+            end
+          elsif current.respond_to?(key)
+            current = current.public_send(key)
+          else
+            return nil
+          end
+        end
+
+        current
+      end
+
+      def assert_subject_access_review_response!(review, kind)
+        actual_kind = nested_value(review, :kind)
+        raise "expected #{kind} response, got #{actual_kind.inspect}" unless actual_kind == kind
+
+        allowed = nested_value(review, :status, :allowed)
+        denied = nested_value(review, :status, :denied)
+        return if allowed == true || allowed == false
+        return if denied == true || denied == false
+
+        raise "expected #{kind} response to include status.allowed or status.denied"
+      end
+
       def assert_resource_name!(resource, expected_name)
         actual_name = resource_name_from(resource)
         raise "expected resource name #{expected_name}, got #{actual_name.inspect}" unless actual_name == expected_name
@@ -2143,6 +2271,12 @@ module SpecSupport
         when ["custom", "customobjects-cluster", "patch"] then "CustomObjectsApi#patch_cluster_custom_object"
         when ["custom", "customobjects-cluster", "delete"] then "CustomObjectsApi#delete_cluster_custom_object"
         when ["custom", "customobjects-cluster", "watch"] then "CustomObjectsApi#list_cluster_custom_object (watch)"
+        when ["authentication.k8s.io", "selfsubjectreviews", "create"] then "AuthenticationV1Api#create_self_subject_review"
+        when ["authentication.k8s.io", "tokenreviews", "create"] then "AuthenticationV1Api#create_token_review"
+        when ["authorization.k8s.io", "localsubjectaccessreviews", "create"] then "AuthorizationV1Api#create_namespaced_local_subject_access_review"
+        when ["authorization.k8s.io", "selfsubjectaccessreviews", "create"] then "AuthorizationV1Api#create_self_subject_access_review"
+        when ["authorization.k8s.io", "selfsubjectrulesreviews", "create"] then "AuthorizationV1Api#create_self_subject_rules_review"
+        when ["authorization.k8s.io", "subjectaccessreviews", "create"] then "AuthorizationV1Api#create_subject_access_review"
         else
           nil
         end

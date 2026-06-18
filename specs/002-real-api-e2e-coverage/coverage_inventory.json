@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T00:04:14Z",
+  "generatedAt": "2026-06-17T14:55:20Z",
   "policy": {
     "path": "kubernetes/spec/support/e2e/coverage_policy.yml",
     "loaded": true,
@@ -12,28 +12,30 @@
       "delete",
       "watch"
     ],
-    "excludeRuleCount": 49
+    "excludeRuleCount": 71,
+    "explicitApiExclusionCount": 23
   },
   "totals": {
     "apiFiles": 65,
     "methodsTotal": 1937,
     "methodsWithoutHttpInfo": 1001,
     "methodsWithHttpInfo": 936,
-    "candidateMethods": 515,
-    "excludedByPolicy": 301,
+    "candidateMethods": 500,
+    "candidateMethodsExcludedByExplicitApiPolicy": 267,
+    "excludedByPolicy": 316,
     "nonTargetOperations": 185
   },
   "operations": {
     "create": {
       "total": 198,
-      "candidate": 92,
-      "excludedByPolicy": 7,
+      "candidate": 87,
+      "excludedByPolicy": 12,
       "httpInfoVariant": 99
     },
     "delete": {
       "total": 354,
-      "candidate": 83,
-      "excludedByPolicy": 94,
+      "candidate": 82,
+      "excludedByPolicy": 95,
       "httpInfoVariant": 177
     },
     "list": {
@@ -44,20 +46,20 @@
     },
     "patch": {
       "total": 274,
-      "candidate": 85,
-      "excludedByPolicy": 52,
+      "candidate": 83,
+      "excludedByPolicy": 54,
       "httpInfoVariant": 137
     },
     "read": {
       "total": 266,
-      "candidate": 85,
-      "excludedByPolicy": 48,
+      "candidate": 82,
+      "excludedByPolicy": 51,
       "httpInfoVariant": 133
     },
     "replace": {
       "total": 276,
-      "candidate": 86,
-      "excludedByPolicy": 52,
+      "candidate": 82,
+      "excludedByPolicy": 56,
       "httpInfoVariant": 138
     }
   },
@@ -386,8 +388,8 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "counts": {
         "methodsTotal": 413,
-        "candidateMethods": 97,
-        "excludedByPolicy": 60,
+        "candidateMethods": 82,
+        "excludedByPolicy": 75,
         "nonTargetOperations": 50,
         "httpInfoVariants": 206
       }
@@ -2206,14 +2208,6 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 3560,
-      "method": "create_namespaced_binding",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 3639,
       "method": "create_namespaced_config_map",
       "operation": "create",
@@ -2248,22 +2242,6 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 4034,
       "method": "create_namespaced_pod",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 4114,
-      "method": "create_namespaced_pod_binding",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 4199,
-      "method": "create_namespaced_pod_eviction",
       "operation": "create",
       "classification": "candidate"
     },
@@ -2312,22 +2290,6 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 4678,
       "method": "create_namespaced_service_account",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 4758,
-      "method": "create_namespaced_service_account_token",
-      "operation": "create",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 4841,
-      "method": "create_node",
       "operation": "create",
       "classification": "candidate"
     },
@@ -2440,14 +2402,6 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 7529,
       "method": "delete_namespaced_service_account",
-      "operation": "delete",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 7615,
-      "method": "delete_node",
       "operation": "delete",
       "classification": "candidate"
     },
@@ -2622,22 +2576,6 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 11250,
-      "method": "patch_namespaced_pod_ephemeralcontainers",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 11340,
-      "method": "patch_namespaced_pod_resize",
-      "operation": "patch",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 11520,
       "method": "patch_namespaced_pod_template",
       "operation": "patch",
@@ -2750,30 +2688,6 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 13433,
-      "method": "read_namespaced_pod_ephemeralcontainers",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 13512,
-      "method": "read_namespaced_pod_log",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 13600,
-      "method": "read_namespaced_pod_resize",
-      "operation": "read",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 13740,
       "method": "read_namespaced_pod_template",
       "operation": "read",
@@ -2846,14 +2760,6 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 14778,
-      "method": "replace_namespace_finalize",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 14937,
       "method": "replace_namespaced_config_map",
       "operation": "replace",
@@ -2888,22 +2794,6 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 15447,
       "method": "replace_namespaced_pod",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 15532,
-      "method": "replace_namespaced_pod_ephemeralcontainers",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 15617,
-      "method": "replace_namespaced_pod_resize",
       "operation": "replace",
       "classification": "candidate"
     },
@@ -2952,14 +2842,6 @@
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 16467,
       "method": "replace_namespaced_service_account",
-      "operation": "replace",
-      "classification": "candidate"
-    },
-    {
-      "api": "core_v1_api",
-      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
-      "line": 16636,
-      "method": "replace_node",
       "operation": "replace",
       "classification": "candidate"
     },
@@ -9853,6 +9735,16 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 3560,
+      "method": "create_namespaced_binding",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^create_namespaced_binding$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 3574,
       "method": "create_namespaced_binding_with_http_info",
       "operation": "create",
@@ -9926,11 +9818,31 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 4114,
+      "method": "create_namespaced_pod_binding",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^create_namespaced_pod_binding$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 4129,
       "method": "create_namespaced_pod_binding_with_http_info",
       "operation": "create",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 4199,
+      "method": "create_namespaced_pod_eviction",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^create_namespaced_pod_eviction$"
     },
     {
       "api": "core_v1_api",
@@ -9998,11 +9910,31 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 4758,
+      "method": "create_namespaced_service_account_token",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^create_namespaced_service_account_token$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 4773,
       "method": "create_namespaced_service_account_token_with_http_info",
       "operation": "create",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 4841,
+      "method": "create_node",
+      "operation": "create",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^create_node$"
     },
     {
       "api": "core_v1_api",
@@ -10404,6 +10336,16 @@
       "operation": "delete",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 7615,
+      "method": "delete_node",
+      "operation": "delete",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^delete_node$"
     },
     {
       "api": "core_v1_api",
@@ -10947,11 +10889,31 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 11250,
+      "method": "patch_namespaced_pod_ephemeralcontainers",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^patch_namespaced_pod_ephemeralcontainers$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 11266,
       "method": "patch_namespaced_pod_ephemeralcontainers_with_http_info",
       "operation": "patch",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 11340,
+      "method": "patch_namespaced_pod_resize",
+      "operation": "patch",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^patch_namespaced_pod_resize$"
     },
     {
       "api": "core_v1_api",
@@ -11300,6 +11262,16 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 13433,
+      "method": "read_namespaced_pod_ephemeralcontainers",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^read_namespaced_pod_ephemeralcontainers$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 13444,
       "method": "read_namespaced_pod_ephemeralcontainers_with_http_info",
       "operation": "read",
@@ -11309,11 +11281,31 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 13512,
+      "method": "read_namespaced_pod_log",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^read_namespaced_pod_log$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 13532,
       "method": "read_namespaced_pod_log_with_http_info",
       "operation": "read",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 13600,
+      "method": "read_namespaced_pod_resize",
+      "operation": "read",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^read_namespaced_pod_resize$"
     },
     {
       "api": "core_v1_api",
@@ -11541,6 +11533,16 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 14778,
+      "method": "replace_namespace_finalize",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^replace_namespace_finalize$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 14792,
       "method": "replace_namespace_finalize_with_http_info",
       "operation": "replace",
@@ -11652,11 +11654,31 @@
     {
       "api": "core_v1_api",
       "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 15532,
+      "method": "replace_namespaced_pod_ephemeralcontainers",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^replace_namespaced_pod_ephemeralcontainers$"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
       "line": 15547,
       "method": "replace_namespaced_pod_ephemeralcontainers_with_http_info",
       "operation": "replace",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 15617,
+      "method": "replace_namespaced_pod_resize",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^replace_namespaced_pod_resize$"
     },
     {
       "api": "core_v1_api",
@@ -11815,6 +11837,16 @@
       "operation": "replace",
       "classification": "http_info_variant",
       "reason": "Generated _with_http_info wrapper"
+    },
+    {
+      "api": "core_v1_api",
+      "file": "kubernetes/lib/kubernetes/api/core_v1_api.rb",
+      "line": 16636,
+      "method": "replace_node",
+      "operation": "replace",
+      "classification": "excluded_by_policy",
+      "reason": "Excluded by policy",
+      "exclusionRule": "^replace_node$"
     },
     {
       "api": "core_v1_api",
