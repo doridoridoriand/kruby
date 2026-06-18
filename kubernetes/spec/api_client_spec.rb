@@ -411,10 +411,12 @@ RSpec.describe Kubernetes::ApiClient do
 
     it "raises error for non-JSON content type" do
       response = instance_double(Typhoeus::Response,
+                                 code: 200,
                                  body: '<html>error</html>',
                                  headers: { "Content-Type" => "text/html" })
 
-      expect { api_client.deserialize(response, "Hash<String, String>") }.to raise_error(/Content-Type is not supported/)
+      expect { api_client.deserialize(response, "Hash<String, String>") }
+        .to raise_error(Kubernetes::ApiError, /Content-Type is not supported/)
     end
 
     it "handles Date return type" do

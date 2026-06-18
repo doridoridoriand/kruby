@@ -107,7 +107,7 @@ RSpec.describe Kubernetes::ApiClient do
 
       expect do
         api_client.call_api(:get, "/api/v1/pods", return_type: "Hash<String, String>")
-      end.to raise_error(/Content-Type is not supported/)
+      end.to raise_error(Kubernetes::ApiError, /Content-Type is not supported/)
     end
 
     it "raises ApiError on read timeout" do
@@ -122,7 +122,10 @@ RSpec.describe Kubernetes::ApiClient do
 
       expect do
         api_client.call_api(:get, "/api/v1/pods")
-      end.to raise_error(Kubernetes::ApiError, /Connection timed out/)
+      end.to raise_error(Kubernetes::ApiError) do |error|
+        expect(error.code).to eq(0)
+        expect(error.message).to match(/Connection timed out/)
+      end
     end
 
     it "raises ApiError on DNS resolution failures" do

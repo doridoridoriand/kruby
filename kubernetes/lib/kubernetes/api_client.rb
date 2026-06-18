@@ -55,8 +55,9 @@ module Kubernetes
       end
 
       unless response.success?
-        if response.timed_out?
-          fail ApiError.new('Connection timed out')
+          if response.timed_out?
+            fail ApiError.new(:code => 0,
+                              :message => 'Connection timed out')
         elsif response.code == 0
           # Errors from libcurl will be made visible here
           fail ApiError.new(:code => 0,
@@ -225,7 +226,12 @@ module Kubernetes
       # ensuring a default content type
       content_type = response.headers['Content-Type'] || 'application/json'
 
-      fail "Content-Type is not supported: #{content_type}" unless json_mime?(content_type)
+      unless json_mime?(content_type)
+        fail ApiError.new(:code => response.code,
+                          :response_headers => response.headers,
+                          :response_body => body,
+                          :message => "Content-Type is not supported: #{content_type}")
+      end
 
       begin
         data = JSON.parse("[#{body}]", :symbolize_names => true)[0]
