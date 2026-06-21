@@ -137,11 +137,14 @@ scripts/e2e/check-gem-package
 
 ## Multi-version Matrix Runs
 
-By default, `run-e2e-matrix` starts one `run-e2e` process per requested Kubernetes version in parallel.
+By default, `run-e2e-matrix` allows up to two concurrent `run-e2e` processes across the requested Kubernetes versions.
 When `E2E_REUSE_CLUSTER` is unset, the matrix runner forces `E2E_REUSE_CLUSTER=0` for each child to avoid leaving multiple full-mode clusters behind.
+Set `E2E_MAX_PARALLEL` (or pass `--max-parallel`) to cap concurrent Kind clusters when Docker CPU, memory, or disk pressure causes flaky startup.
+Set `E2E_MAX_PARALLEL=0` to remove the cap and fan out across every requested version at once.
 
 ```bash
 scripts/e2e/run-e2e-matrix --mode full
+E2E_MAX_PARALLEL=1 scripts/e2e/run-e2e-matrix --mode full
 scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.32,1.33,1.34,1.35,1.36 --targets core/v1/pods:create
 ```
 
