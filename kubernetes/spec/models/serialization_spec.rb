@@ -471,6 +471,78 @@ RSpec.describe "Kubernetes model serialization" do
       expected_types: {
         metadata: Kubernetes::V1ObjectMeta
       }
+    },
+    {
+      klass: Kubernetes::V1ProjectedVolumeSource,
+      payload: {
+        defaultMode: "420",
+        sources: [
+          {
+            configMap: {
+              name: "app-config",
+              items: [{ key: "config.yaml", path: "configs/app.yaml" }]
+            }
+          },
+          {
+            secret: {
+              name: "app-secret",
+              optional: "true",
+              items: [{ key: "token", path: "creds/token" }]
+            }
+          },
+          {
+            serviceAccountToken: {
+              path: "token",
+              expirationSeconds: "3600"
+            }
+          }
+        ]
+      },
+      expected_types: {
+        sources: Array
+      },
+      expected_values: {
+        default_mode: 420
+      }
+    },
+    {
+      klass: Kubernetes::V1Probe,
+      payload: {
+        httpGet: {
+          path: "/healthz",
+          port: "8080",
+          scheme: "HTTP"
+        },
+        initialDelaySeconds: "5",
+        timeoutSeconds: "3",
+        failureThreshold: "2",
+        terminationGracePeriodSeconds: "1"
+      },
+      expected_types: {
+        http_get: Kubernetes::V1HTTPGetAction
+      },
+      expected_values: {
+        initial_delay_seconds: 5,
+        timeout_seconds: 3,
+        failure_threshold: 2,
+        termination_grace_period_seconds: 1
+      }
+    },
+    {
+      klass: Kubernetes::V1alpha1ClusterTrustBundle,
+      payload: {
+        apiVersion: "certificates.k8s.io/v1alpha1",
+        kind: "ClusterTrustBundle",
+        metadata: { name: "example.com:signer:v1" },
+        spec: {
+          signerName: "example.com/signer",
+          trustBundle: "-----BEGIN CERTIFICATE-----\nMIIB\n-----END CERTIFICATE-----\n"
+        }
+      },
+      expected_types: {
+        metadata: Kubernetes::V1ObjectMeta,
+        spec: Kubernetes::V1alpha1ClusterTrustBundleSpec
+      }
     }
   ].freeze
 
@@ -510,6 +582,39 @@ RSpec.describe "Kubernetes model serialization" do
     expect do
       Kubernetes::V1Pod.new(not_a_real_attribute: "value")
     end.to raise_error(ArgumentError, /not_a_real_attribute/)
+  end
+
+  it "round-trips special characters and non-ASCII strings" do
+    model = Kubernetes::V1ConfigMap.build_from_hash(
+      {
+        apiVersion: "v1",
+        kind: "ConfigMap",
+        metadata: { name: "unicode-demo" },
+        data: {
+          "message" => "こんにちは\nkruby",
+          "json" => "{\"enabled\":true}",
+          "emoji_like_text" => "plain-ascii:-)"
+        }
+      }
+    )
+
+    expect(model.data["message"]).to eq("こんにちは\nkruby")
+    serialized = model.to_hash
+    serialized_data = serialized["data"] || serialized[:data]
+    expect(serialized_data["message"]).to eq("こんにちは\nkruby")
+  end
+
+  it "keeps required-field validation for models with mandatory nested specs" do
+    bundle = Kubernetes::V1alpha1ClusterTrustBundle.build_from_hash(
+      {
+        apiVersion: "certificates.k8s.io/v1alpha1",
+        kind: "ClusterTrustBundle",
+        metadata: { name: "missing-spec" }
+      }
+    )
+
+    expect(bundle).not_to be_valid
+    expect(bundle.list_invalid_properties).to include(/spec cannot be nil/)
   end
 
   it "compares model equality and hash code by attributes" do

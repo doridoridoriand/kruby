@@ -2,38 +2,36 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-18 00:59:22 UTC
+生成時刻: 2026-06-21 08:26:20 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `fix/124-api-client-error-handling-tests` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `fix/120-model-serialization` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `2065dc8ccaec694251c9aa94bbf1cc7f10408e67` (`Add ApiClient error handling specs`)
+- 基点の `HEAD`: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d` (`test: strengthen model serialization coverage (#120)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/lib/kubernetes/api_client.rb`: staged modification.
-- `kubernetes/spec/api_client_error_handling_spec.rb`: staged modification.
-- `kubernetes/spec/api_client_spec.rb`: staged modification.
+- `kubernetes/spec/models/smoke_spec.rb`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `fix/124-api-client-error-handling-tests`
-- Base HEAD: `2065dc8ccaec694251c9aa94bbf1cc7f10408e67`
+- Branch: `fix/120-model-serialization`
+- Base HEAD: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d`
 - Recent commits:
 
 ```text
-2065dc8 Add ApiClient error handling specs
+d2831f3 test: strengthen model serialization coverage (#120)
+e188adc [codex] Add configurable ApiClient retries (#137)
+aba93ba [codex] Improve Watch edge case handling (#138)
+5a1eda2 [codex] Add ApiClient error handling specs (#136)
 5e4777b [codex] Add E2E coverage for excluded auth and discovery APIs (#135)
-42f575b Add comprehensive authentication and authorization tests (#125)
-83601a8 Docs: add test improvement issue drafts (#119-#131)
-e1aeb09 Add core API unit tests and review fixes (#119)
 ```
 
 ## 5. Commands Run
@@ -42,10 +40,8 @@ e1aeb09 Add core API unit tests and review fixes (#119)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/lib/kubernetes/api_client.rb           | 12 +++++++++---
- kubernetes/spec/api_client_error_handling_spec.rb |  7 +++++--
- kubernetes/spec/api_client_spec.rb                |  4 +++-
- 3 files changed, 17 insertions(+), 6 deletions(-)
+ kubernetes/spec/models/smoke_spec.rb | 75 ++++++++++++++++++++++++++++--------
+ 1 file changed, 59 insertions(+), 16 deletions(-)
 ```
 
 ## 6. Verification
