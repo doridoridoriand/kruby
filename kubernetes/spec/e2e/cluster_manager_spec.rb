@@ -122,6 +122,31 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
       expect(manager).to have_received(:run_command).exactly(3).times
       expect(manager).to have_received(:sleep).with(described_class::CREATE_RETRY_INTERVAL_SECONDS).once
     end
+
+    it "retries kind cluster creation when startup times out" do
+      manager = described_class.new(mode: "full", kubernetes_version: "1.33", reuse_cluster: false)
+      timeout_result = described_class::CommandResult.new(
+        command: "kind create cluster",
+        status: 1,
+        stdout: "",
+        stderr: "ERROR: failed to create cluster: timed out waiting for the condition\n"
+      )
+      timeout_error = described_class::CommandError.new("command failed", timeout_result)
+      call_count = 0
+
+      allow(manager).to receive(:run_command) do
+        call_count += 1
+        raise timeout_error if call_count == 1
+
+        success_result
+      end
+      allow(manager).to receive(:sleep)
+
+      manager.create
+
+      expect(manager).to have_received(:run_command).exactly(3).times
+      expect(manager).to have_received(:sleep).with(described_class::CREATE_RETRY_INTERVAL_SECONDS).once
+    end
   end
 
   describe "#delete" do

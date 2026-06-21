@@ -2,36 +2,37 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-21 08:26:20 UTC
+生成時刻: 2026-06-21 12:29:48 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `fix/120-model-serialization` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `fix/129-e2e-stability` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d` (`test: strengthen model serialization coverage (#120)`)
+- 基点の `HEAD`: `dbc02016fad5335da346471bfb718ec90b115018` (`Reap missing matrix child status files`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/models/smoke_spec.rb`: staged modification.
+- `kubernetes/spec/e2e/run_e2e_matrix_spec.rb`: staged modification.
+- `scripts/e2e/run-e2e-matrix`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `fix/120-model-serialization`
-- Base HEAD: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d`
+- Branch: `fix/129-e2e-stability`
+- Base HEAD: `dbc02016fad5335da346471bfb718ec90b115018`
 - Recent commits:
 
 ```text
-d2831f3 test: strengthen model serialization coverage (#120)
-e188adc [codex] Add configurable ApiClient retries (#137)
-aba93ba [codex] Improve Watch edge case handling (#138)
-5a1eda2 [codex] Add ApiClient error handling specs (#136)
-5e4777b [codex] Add E2E coverage for excluded auth and discovery APIs (#135)
+dbc0201 Reap missing matrix child status files
+9f303b5 Merge origin/master into fix/129-e2e-stability
+1ae4211 Handle matrix child wrapper exits
+798a1e6 [codex] Strengthen model serialization coverage (#139)
+f946379 Address matrix runner review feedback
 ```
 
 ## 5. Commands Run
@@ -40,8 +41,9 @@ aba93ba [codex] Improve Watch edge case handling (#138)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/models/smoke_spec.rb | 75 ++++++++++++++++++++++++++++--------
- 1 file changed, 59 insertions(+), 16 deletions(-)
+ kubernetes/spec/e2e/run_e2e_matrix_spec.rb | 50 ++++++++++++++++++++++++++++--
+ scripts/e2e/run-e2e-matrix                 |  9 +++++-
+ 2 files changed, 56 insertions(+), 3 deletions(-)
 ```
 
 ## 6. Verification

@@ -12,6 +12,12 @@ module SpecSupport
       DEFAULT_KUBECONFIG_DIR = File.expand_path("../../../tmp/e2e/kubeconfig", __dir__)
       CREATE_RETRY_ATTEMPTS = 3
       CREATE_RETRY_INTERVAL_SECONDS = 1
+      RETRYABLE_CREATE_ERROR_PATTERNS = [
+        /failed to bind host port/i,
+        /address already in use/i,
+        /timed out waiting for the condition/i,
+        /context deadline exceeded/i
+      ].freeze
 
       class CommandError < StandardError
         attr_reader :result
@@ -188,7 +194,7 @@ module SpecSupport
 
       def retryable_create_error?(error)
         stderr = error.result&.stderr.to_s
-        stderr.include?("failed to bind host port") || stderr.include?("address already in use")
+        RETRYABLE_CREATE_ERROR_PATTERNS.any? { |pattern| pattern.match?(stderr) }
       end
     end
   end
