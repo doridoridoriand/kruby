@@ -325,10 +325,56 @@ RSpec.describe "run-e2e-matrix" do
           status = wait_thr.value
         end
 
+        stderr_output = stderr.read
         expect(status.success?).to be(false)
-        expect(status.exitstatus).to eq(143)
+        expect(status.exitstatus).to eq(143), "stderr=#{stderr_output.inspect}"
         expect(stdout.read).to eq("")
-        expect(stderr.read).to include("completed kubernetes_version=1.31 exit=143")
+        expect(stderr_output).to include("completed kubernetes_version=1.31 exit=143")
+      end
+    end
+  end
+
+  it "does not hang when a child wrapper is SIGKILLed before writing a status file" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      while [[ $# -gt 0 ]]; do
+        shift
+      done
+
+      sleep 2
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      Open3.popen3(matrix_script, "--mode", "full", "--versions", "1.31", "--max-parallel", "1", chdir: repo_root) do |stdin, stdout, stderr, wait_thr|
+        stdin.close
+
+        child_pid = nil
+        Timeout.timeout(5) do
+          loop do
+            line = stderr.gets
+            next if line.nil?
+
+            if (match = line.match(/started kubernetes_version=1\.31 pid=(\d+)/))
+              child_pid = match[1].to_i
+              break
+            end
+          end
+        end
+
+        Process.kill("KILL", child_pid)
+
+        status = nil
+        Timeout.timeout(5) do
+          status = wait_thr.value
+        end
+
+        stderr_output = stderr.read
+        expect(status.success?).to be(false)
+        expect(status.exitstatus).to eq(137), "stderr=#{stderr_output.inspect}"
+        expect(stdout.read).to eq("")
+        expect(stderr_output).to include("completed kubernetes_version=1.31 exit=137")
       end
     end
   end

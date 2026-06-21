@@ -241,13 +241,19 @@ reap_child_at_index() {
 }
 
 reap_next_completed_child() {
-  local i
+  local i pid_state
 
   [[ ${#pids[@]} -gt 0 ]] || return 0
 
   while true; do
     for i in "${!pids[@]}"; do
       if [[ -f "${pid_status_files[$i]}" ]] || ! kill -0 "${pids[$i]}" 2>/dev/null; then
+        reap_child_at_index "${i}"
+        return 0
+      fi
+
+      pid_state="$(ps -o stat= -p "${pids[$i]}" 2>/dev/null | tr -d '[:space:]' || true)"
+      if [[ "${pid_state}" == Z* ]]; then
         reap_child_at_index "${i}"
         return 0
       fi
@@ -283,6 +289,7 @@ for version in "${versions[@]}"; do
     child_command+=("${rspec_args[@]}")
   fi
 
+  : > "${log_file}"
   rm -f "${status_file}"
   (
     set +e
