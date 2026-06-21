@@ -8,13 +8,23 @@
 # To regenerate, run the generator script or update this file's
 # MODEL_FILES constant.
 
+require "base64"
 require "spec_helper"
 
 RSpec.describe "model serialization smoke (auto-generated)" do
-  MODEL_FILES = Dir[File.expand_path("../../../lib/kubernetes/models/*.rb", __dir__)]
-                    .map { |f| File.basename(f, ".rb") }
-                    .sort
-                    .freeze
+  MODEL_PATHS = Dir[File.expand_path("../../../lib/kubernetes/models/*.rb", __dir__)]
+                  .sort
+                  .each_with_object({}) do |path, paths|
+                    paths[File.basename(path, ".rb")] = path
+                  end
+                  .freeze
+  MODEL_FILES = MODEL_PATHS.keys.freeze
+  MODEL_CLASSES = MODEL_PATHS.transform_values do |path|
+    class_name = File.foreach(path).lazy.map { |line| line[/^\s*class\s+([A-Za-z0-9_]+)/, 1] }.find(&:itself)
+    raise "Could not resolve class name for #{path}" unless class_name
+
+    Kubernetes.const_get(class_name)
+  end.freeze
   MAX_SAMPLE_DEPTH = 2
   NESTED_ATTRIBUTE_SAMPLE_LIMIT = 3
 
@@ -26,28 +36,36 @@ RSpec.describe "model serialization smoke (auto-generated)" do
   subject(:model_files) { MODEL_FILES - EXCLUDED_MODELS.to_a }
 
   def model_class_for(filename)
-    klass_name = filename.split("_").map(&:capitalize).join
-    Object.const_get("Kubernetes::#{klass_name}")
+    MODEL_CLASSES.fetch(filename)
   end
 
   def sample_payload_for(klass, depth: 0, seen: Set.new)
+    class_name = klass.name.split("::").last
     attributes = klass.attribute_map.to_a
     attributes = attributes.first(NESTED_ATTRIBUTE_SAMPLE_LIMIT) if depth >= 1
 
     attributes.each_with_object({}) do |(ruby_key, json_key), payload|
       sample_value = sample_value_for(
         klass.openapi_types.fetch(ruby_key).to_s,
+        attribute_name: json_key.to_s,
         depth: depth,
-        seen: seen | [klass.name]
+        seen: seen | [class_name]
       )
-      payload[json_key] = sample_value unless sample_value.nil?
+      next if sample_value.nil?
+      next unless attribute_accepts_sample?(klass, json_key, sample_value)
+
+      payload[json_key] = sample_value
     end
   end
 
-  def sample_value_for(type_name, depth:, seen:)
+  def sample_value_for(type_name, attribute_name:, depth:, seen:)
     case type_name
     when "String"
-      "smoke-value"
+      if attribute_name.match?(/(caBundle|certificate|request|publicKey|proof|bundle)\z/i)
+        Base64.strict_encode64("smoke-value")
+      else
+        "smoke-value"
+      end
     when "Integer"
       "7"
     when "Float"
@@ -61,11 +79,26 @@ RSpec.describe "model serialization smoke (auto-generated)" do
     when "Object"
       { "kind" => "smoke-object", "value" => "generated" }
     when /\AArray<(.+)>\z/
-      inner_sample = sample_value_for(Regexp.last_match(1), depth: depth + 1, seen: seen)
+      inner_sample = sample_value_for(
+        Regexp.last_match(1),
+        attribute_name: attribute_name,
+        depth: depth + 1,
+        seen: seen
+      )
       inner_sample.nil? ? [] : [inner_sample]
     when /\AHash<(.+?), (.+)>\z/
-      key_sample = sample_value_for(Regexp.last_match(1), depth: depth + 1, seen: seen)
-      value_sample = sample_value_for(Regexp.last_match(2), depth: depth + 1, seen: seen)
+      key_sample = sample_value_for(
+        Regexp.last_match(1),
+        attribute_name: attribute_name,
+        depth: depth + 1,
+        seen: seen
+      )
+      value_sample = sample_value_for(
+        Regexp.last_match(2),
+        attribute_name: attribute_name,
+        depth: depth + 1,
+        seen: seen
+      )
       return {} if key_sample.nil? || value_sample.nil?
 
       { key_sample.to_s => value_sample }
@@ -73,11 +106,21 @@ RSpec.describe "model serialization smoke (auto-generated)" do
       return nil if depth >= MAX_SAMPLE_DEPTH
       return nil if seen.include?(type_name)
 
-      nested_klass = Kubernetes.const_get(type_name)
+      begin
+        nested_klass = Kubernetes.const_get(type_name)
+      rescue NameError
+        return nil
+      end
+
       sample_payload_for(nested_klass, depth: depth + 1, seen: seen | [type_name])
     end
-  rescue NameError
-    nil
+  end
+
+  def attribute_accepts_sample?(klass, json_key, sample_value)
+    klass.build_from_hash(json_key => sample_value)
+    true
+  rescue ArgumentError
+    false
   end
 
   def expect_value_to_match_type!(value, type_name, context:)

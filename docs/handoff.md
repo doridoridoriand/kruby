@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-21 08:09:27 UTC
+生成時刻: 2026-06-21 08:26:20 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,26 +13,25 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `e188adc232525b4a37b137b6a15d5595d48dc970` (`[codex] Add configurable ApiClient retries (#137)`)
+- 基点の `HEAD`: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d` (`test: strengthen model serialization coverage (#120)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/models/serialization_spec.rb`: staged modification.
 - `kubernetes/spec/models/smoke_spec.rb`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `fix/120-model-serialization`
-- Base HEAD: `e188adc232525b4a37b137b6a15d5595d48dc970`
+- Base HEAD: `d2831f3d0f1a78ba15c11e60a3f9c16f5177ca2d`
 - Recent commits:
 
 ```text
+d2831f3 test: strengthen model serialization coverage (#120)
 e188adc [codex] Add configurable ApiClient retries (#137)
 aba93ba [codex] Improve Watch edge case handling (#138)
 5a1eda2 [codex] Add ApiClient error handling specs (#136)
 5e4777b [codex] Add E2E coverage for excluded auth and discovery APIs (#135)
-42f575b Add comprehensive authentication and authorization tests (#125)
 ```
 
 ## 5. Commands Run
@@ -41,9 +40,8 @@ aba93ba [codex] Improve Watch edge case handling (#138)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/models/serialization_spec.rb | 105 +++++++++++++++++
- kubernetes/spec/models/smoke_spec.rb         | 169 +++++++++++++++++++++------
- 2 files changed, 238 insertions(+), 36 deletions(-)
+ kubernetes/spec/models/smoke_spec.rb | 75 ++++++++++++++++++++++++++++--------
+ 1 file changed, 59 insertions(+), 16 deletions(-)
 ```
 
 ## 6. Verification
