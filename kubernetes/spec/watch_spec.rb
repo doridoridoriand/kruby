@@ -313,5 +313,28 @@ RSpec.describe Kubernetes::Watch do
       expect(result[0]["object"]["metadata"]["name"]).to eq("pod-1")
       expect(result[49]["object"]["metadata"]["name"]).to eq("pod-50")
     end
+
+    it "keeps concurrent watch connections isolated on the same Watch instance" do
+      WebMock.stub_request(:get, "http://k8s.example.com:8080/api/v1/pods?watch=true&resourceVersion=rv-1")
+             .with(headers: { "Content-Type" => "application/json", "Expect" => "" })
+             .to_return(status: 200, body: "{\"type\":\"ADDED\",\"object\":{\"metadata\":{\"name\":\"pod-1\"}}}\n", headers: {})
+      WebMock.stub_request(:get, "http://k8s.example.com:8080/api/v1/services?watch=true&resourceVersion=rv-2")
+             .with(headers: { "Content-Type" => "application/json", "Expect" => "" })
+             .to_return(status: 200, body: "{\"type\":\"ADDED\",\"object\":{\"metadata\":{\"name\":\"svc-1\"}}}\n", headers: {})
+
+      results = Queue.new
+      threads = [
+        Thread.new { watch.connect("/api/v1/pods", "rv-1") { |obj| results << [:pods, obj] } },
+        Thread.new { watch.connect("/api/v1/services", "rv-2") { |obj| results << [:services, obj] } }
+      ]
+      threads.each(&:join)
+
+      first = results.pop
+      second = results.pop
+      expect([first, second]).to contain_exactly(
+        [:pods, { "type" => "ADDED", "object" => { "metadata" => { "name" => "pod-1" } } }],
+        [:services, { "type" => "ADDED", "object" => { "metadata" => { "name" => "svc-1" } } }]
+      )
+    end
   end
 end

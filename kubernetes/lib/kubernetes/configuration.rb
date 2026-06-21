@@ -11,9 +11,12 @@ OpenAPI Generator version: 5.1.0
 =end
 
 require 'logger'
+require 'thread'
 
 module Kubernetes
   class Configuration
+    @default_mutex = Mutex.new
+
     # Defines url scheme
     attr_accessor :scheme
 
@@ -172,7 +175,17 @@ module Kubernetes
 
     # The default Configuration object.
     def self.default
-      @@default ||= Configuration.new
+      return @@default if defined?(@@default) && @@default
+
+      @default_mutex.synchronize do
+        @@default ||= Configuration.new
+      end
+    end
+
+    def self.reset_default
+      @default_mutex.synchronize do
+        @@default = nil
+      end
     end
 
     # Backward-compatible alias used by examples and older integrations.

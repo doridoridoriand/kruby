@@ -15,10 +15,13 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'time'
+require 'thread'
 require 'typhoeus'
 
 module Kubernetes
   class ApiClient
+    @default_mutex = Mutex.new
+
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
 
@@ -39,7 +42,17 @@ module Kubernetes
     end
 
     def self.default
-      @@default ||= ApiClient.new
+      return @@default if defined?(@@default) && @@default
+
+      @default_mutex.synchronize do
+        @@default ||= ApiClient.new
+      end
+    end
+
+    def self.reset_default
+      @default_mutex.synchronize do
+        @@default = nil
+      end
     end
 
     # Call an API with given options.

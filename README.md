@@ -60,6 +60,11 @@ pp client.list_namespaced_pod('default')
 
 For backward compatibility, `require 'kubernetes'` is also supported.
 
+## Thread Safety
+
+`Kubernetes::Configuration.default` and `Kubernetes::ApiClient.default` are shared singletons.
+In multi-threaded callers, prefer per-thread instances via `Kubernetes::Configuration.new` and `Kubernetes.new_client_from_config` instead of mutating the shared defaults.
+
 ## Contribute
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on how to contribute.
