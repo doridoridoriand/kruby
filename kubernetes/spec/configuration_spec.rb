@@ -154,6 +154,13 @@ RSpec.describe Kubernetes::Configuration do
   end
 
   describe ".default" do
+    around do |example|
+      described_class.reset_default
+      example.run
+    ensure
+      described_class.reset_default
+    end
+
     it "returns a Configuration object" do
       expect(Kubernetes::Configuration.default).to be_a(Kubernetes::Configuration)
     end
@@ -162,6 +169,24 @@ RSpec.describe Kubernetes::Configuration do
       first = Kubernetes::Configuration.default
       second = Kubernetes::Configuration.default
       expect(first).to be(second)
+    end
+
+    it "memoizes safely across concurrent callers" do
+      allow(described_class).to receive(:new).and_wrap_original do |original, *args, &block|
+        sleep 0.01
+        original.call(*args, &block)
+      end
+
+      results = Array.new(8)
+      threads = results.each_index.map do |index|
+        Thread.new do
+          results[index] = described_class.default
+        end
+      end
+      threads.each(&:value)
+
+      expect(results.uniq.length).to eq(1)
+      expect(described_class).to have_received(:new).once
     end
   end
 

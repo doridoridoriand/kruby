@@ -15,6 +15,7 @@
 require 'kubernetes/config/incluster_config'
 require 'kubernetes/config/kube_config'
 require 'rubygems/version'
+require 'thread'
 
 # The Kubernetes module encapsulates the Kubernetes client for Ruby
 module Kubernetes
@@ -73,18 +74,22 @@ module Kubernetes
   end
 
   @temp_files = {}
+  @temp_files_mutex = Mutex.new
 
   def create_temp_file_with_base64content(content)
-    @temp_files[content] ||= Tempfile.open('kube') do |temp|
-      temp.write(Base64.strict_decode64(content))
-      temp
+    @temp_files_mutex.synchronize do
+      @temp_files[content] ||= Tempfile.open('kube') do |temp|
+        temp.write(Base64.strict_decode64(content))
+        temp
+      end
+      @temp_files.fetch(content).path
     end
-
-    @temp_files[content].path
   end
 
   def clear_temp_files
-    @temp_files = {}
+    @temp_files_mutex.synchronize do
+      @temp_files = {}
+    end
   end
 
   SUPPORTED_KUBERNETES_VERSION_RANGE = (
