@@ -107,6 +107,7 @@ Run the supported Kubernetes matrix in parallel:
 
 ```bash
 scripts/e2e/run-e2e-matrix --mode full
+E2E_MAX_PARALLEL=2 scripts/e2e/run-e2e-matrix --mode full
 scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.36 --targets 'core/v1/pods:create'
 ```
 

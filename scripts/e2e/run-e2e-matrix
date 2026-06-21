@@ -17,6 +17,7 @@ Options:
   --base-ref <git-ref>
   --fallback <minimal-smoke|full>
   --real-api <0|1>
+  --max-parallel <0|1..N>
   --versions <1.31,1.32,1.33,1.34,1.35,1.36>
   -h, --help
 USAGE
@@ -27,6 +28,7 @@ targets="${E2E_TARGETS:-}"
 base_ref="${BASE_REF:-origin/HEAD}"
 fallback="${E2E_FALLBACK_STRATEGY:-minimal-smoke}"
 real_api="${E2E_REAL_API:-1}"
+max_parallel="${E2E_MAX_PARALLEL:-2}"
 versions_csv="${E2E_KUBERNETES_VERSIONS:-1.31,1.32,1.33,1.34,1.35,1.36}"
 rspec_args=()
 
@@ -81,6 +83,15 @@ while [[ $# -gt 0 ]]; do
       real_api="${1#*=}"
       shift
       ;;
+    --max-parallel)
+      [[ $# -ge 2 ]] || { echo "ERROR: --max-parallel requires a value" >&2; exit 1; }
+      max_parallel="$2"
+      shift 2
+      ;;
+    --max-parallel=*)
+      max_parallel="${1#*=}"
+      shift
+      ;;
     --versions)
       [[ $# -ge 2 ]] || { echo "ERROR: --versions requires a value" >&2; exit 1; }
       versions_csv="$2"
@@ -126,6 +137,11 @@ case "${real_api}" in
     ;;
 esac
 
+if ! [[ "${max_parallel}" =~ ^[0-9]+$ ]]; then
+  echo "ERROR: unsupported --max-parallel value '${max_parallel}' (expected 0 or a positive integer)" >&2
+  exit 1
+fi
+
 if [[ "${mode}" == "targeted" && -z "${targets}" ]]; then
   echo "ERROR: --targets (or E2E_TARGETS) is required in targeted mode" >&2
   exit 1
@@ -147,6 +163,10 @@ fi
 LOG_DIR="${REPO_ROOT}/kubernetes/tmp/e2e/matrix"
 mkdir -p "${LOG_DIR}"
 
+all_pids=()
+all_versions=()
+all_logs=()
+all_exit_codes=()
 pids=()
 pid_versions=()
 pid_logs=()
@@ -187,7 +207,53 @@ cleanup_children() {
 trap 'cleanup_children INT; exit 130' INT
 trap 'cleanup_children TERM; exit 143' TERM
 
+record_exit_code() {
+  local completed_pid="$1"
+  local completed_exit_code="$2"
+  local i
+
+  for i in "${!all_pids[@]}"; do
+    if [[ "${all_pids[$i]}" == "${completed_pid}" ]]; then
+      all_exit_codes[$i]="${completed_exit_code}"
+      return
+    fi
+  done
+}
+
+reap_next_child() {
+  local pid version log_file exit_code
+
+  [[ ${#pids[@]} -gt 0 ]] || return 0
+
+  pid="${pids[0]}"
+  version="${pid_versions[0]}"
+  log_file="${pid_logs[0]}"
+
+  if wait "${pid}"; then
+    exit_code=0
+  else
+    exit_code=$?
+    failed_runs+=("kubernetes_version=${version} exit=${exit_code} log=${log_file}")
+    if [[ "${final_exit_code}" -eq 0 ]]; then
+      final_exit_code="${exit_code}"
+    fi
+  fi
+
+  record_exit_code "${pid}" "${exit_code}"
+  echo "[run-e2e-matrix] completed kubernetes_version=${version} exit=${exit_code} log=${log_file}" >&2
+
+  pids=("${pids[@]:1}")
+  pid_versions=("${pid_versions[@]:1}")
+  pid_logs=("${pid_logs[@]:1}")
+}
+
+final_exit_code=0
+failed_runs=()
 for version in "${versions[@]}"; do
+  while [[ "${max_parallel}" != "0" && ${#pids[@]} -ge ${max_parallel} ]]; do
+    reap_next_child
+  done
+
   version_slug="$(printf '%s' "${version}" | sed 's/^v//' | tr '.+' '--' | tr -cd '[:alnum:]-')"
   log_file="${LOG_DIR}/run-e2e-${mode}-k8s-${version_slug:-unknown}-$$.log"
   child_command=("${REPO_ROOT}/scripts/e2e/run-e2e" "--mode" "${mode}" "--fallback" "${fallback}" "--kubernetes-version" "${version}" "--real-api" "${real_api}")
@@ -218,28 +284,19 @@ for version in "${versions[@]}"; do
   pids+=("${pid}")
   pid_versions+=("${version}")
   pid_logs+=("${log_file}")
+  all_pids+=("${pid}")
+  all_versions+=("${version}")
+  all_logs+=("${log_file}")
+  all_exit_codes+=("")
   echo "[run-e2e-matrix] started kubernetes_version=${version} pid=${pid} log=${log_file}" >&2
 done
 
-final_exit_code=0
-failed_runs=()
+while [[ ${#pids[@]} -gt 0 ]]; do
+  reap_next_child
+done
 
-for i in "${!pids[@]}"; do
-  pid="${pids[$i]}"
-  version="${pid_versions[$i]}"
-  log_file="${pid_logs[$i]}"
-
-  if wait "${pid}"; then
-    exit_code=0
-  else
-    exit_code=$?
-    failed_runs+=("kubernetes_version=${version} exit=${exit_code} log=${log_file}")
-    if [[ "${final_exit_code}" -eq 0 ]]; then
-      final_exit_code="${exit_code}"
-    fi
-  fi
-
-  echo "[run-e2e-matrix] completed kubernetes_version=${version} exit=${exit_code} log=${log_file}" >&2
+for i in "${!all_pids[@]}"; do
+  log_file="${all_logs[$i]}"
   cat "${log_file}"
 done
 

@@ -110,6 +110,27 @@ RSpec.describe "run-e2e-matrix" do
     end
   end
 
+  it "rejects unsupported max-parallel values before spawning child runs" do
+    stub_body = <<~BASH
+      #!/usr/bin/env bash
+      echo "child should not run" >&2
+      exit 99
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      stdout, stderr, status = Open3.capture3(
+        matrix_script, "--max-parallel", "bogus",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(false)
+      expect(status.exitstatus).to eq(1)
+      expect(stdout).to eq("")
+      expect(stderr).to include("ERROR: unsupported --max-parallel value 'bogus'")
+      expect(stderr).not_to include("child should not run")
+    end
+  end
+
   it "reports every failed Kubernetes version after waiting for all child runs" do
     stub_body = <<~'BASH'
       #!/usr/bin/env bash
@@ -154,6 +175,53 @@ RSpec.describe "run-e2e-matrix" do
       expect(stderr).to include("[run-e2e-matrix] failed runs:")
       expect(stderr).to include("kubernetes_version=1.31 exit=3")
       expect(stderr).to include("kubernetes_version=1.33 exit=5")
+    end
+  end
+
+  it "limits concurrent child runs when max parallel is set" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      version=""
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          --kubernetes-version)
+            version="$2"
+            shift 2
+            ;;
+          --kubernetes-version=*)
+            version="${1#*=}"
+            shift
+            ;;
+          *)
+            shift
+            ;;
+        esac
+      done
+
+      echo "start:${version}" >> "__REPO_ROOT__/sequence.log"
+      sleep 0.05
+      echo "finish:${version}" >> "__REPO_ROOT__/sequence.log"
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      _stdout, _stderr, status = Open3.capture3(
+        matrix_script, "--mode", "full", "--versions", "1.31,1.32,1.33", "--max-parallel", "1",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(true)
+      expect(File.readlines(File.join(repo_root, "sequence.log"), chomp: true)).to eq(
+        [
+          "start:1.31",
+          "finish:1.31",
+          "start:1.32",
+          "finish:1.32",
+          "start:1.33",
+          "finish:1.33"
+        ]
+      )
     end
   end
 

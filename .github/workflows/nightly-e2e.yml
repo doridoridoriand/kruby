@@ -52,6 +52,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          export E2E_MAX_PARALLEL=2
           scripts/e2e/run-e2e-matrix --mode full
 
       - name: Upload E2E artifacts on failure
