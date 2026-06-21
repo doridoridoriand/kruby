@@ -287,6 +287,52 @@ RSpec.describe "run-e2e-matrix" do
     end
   end
 
+  it "does not hang when a child wrapper exits on TERM before writing its normal status file" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      while [[ $# -gt 0 ]]; do
+        shift
+      done
+
+      while true; do
+        sleep 1
+      done
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      Open3.popen3(matrix_script, "--mode", "full", "--versions", "1.31", "--max-parallel", "1", chdir: repo_root) do |stdin, stdout, stderr, wait_thr|
+        stdin.close
+
+        child_pid = nil
+        Timeout.timeout(5) do
+          loop do
+            line = stderr.gets
+            next if line.nil?
+
+            if (match = line.match(/started kubernetes_version=1\.31 pid=(\d+)/))
+              child_pid = match[1].to_i
+              break
+            end
+          end
+        end
+
+        Process.kill("TERM", child_pid)
+
+        status = nil
+        Timeout.timeout(5) do
+          status = wait_thr.value
+        end
+
+        expect(status.success?).to be(false)
+        expect(status.exitstatus).to eq(143)
+        expect(stdout.read).to eq("")
+        expect(stderr.read).to include("completed kubernetes_version=1.31 exit=143")
+      end
+    end
+  end
+
   it "terminates active child runs when the matrix runner receives TERM" do
     stub_body = <<~'BASH'
       #!/usr/bin/env bash

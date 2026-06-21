@@ -286,12 +286,22 @@ for version in "${versions[@]}"; do
   rm -f "${status_file}"
   (
     set +e
+    status_written=0
 
     if [[ -z "${E2E_REUSE_CLUSTER+x}" ]]; then
       export E2E_REUSE_CLUSTER=0
     fi
 
     child_pid=""
+
+    write_status_file() {
+      local status="${1:-$?}"
+
+      if [[ "${status_written}" -eq 0 ]]; then
+        printf '%s\n' "${status}" > "${status_file}"
+        status_written=1
+      fi
+    }
 
     terminate_child() {
       if [[ -n "${child_pid}" ]] && kill -0 "${child_pid}" 2>/dev/null; then
@@ -302,13 +312,13 @@ for version in "${versions[@]}"; do
       exit 143
     }
 
+    trap 'write_status_file "$?"' EXIT
     trap 'terminate_child' INT TERM
 
     "${child_command[@]}" &
     child_pid=$!
     wait "${child_pid}"
     exit_code=$?
-    printf '%s\n' "${exit_code}" > "${status_file}"
     exit "${exit_code}"
   ) >"${log_file}" 2>&1 &
 
