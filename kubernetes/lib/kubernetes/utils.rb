@@ -82,8 +82,8 @@ module Kubernetes
         temp.write(Base64.strict_decode64(content))
         temp
       end
+      @temp_files.fetch(content).path
     end
-    @temp_files.fetch(content).path
   end
 
   def clear_temp_files

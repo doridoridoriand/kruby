@@ -129,7 +129,7 @@ describe Kubernetes do
           results[index] = Kubernetes.create_temp_file_with_base64content(content)
         end
       end
-      threads.each(&:join)
+      threads.each(&:value)
 
       expect(results.uniq).to eq(['tempfile-path'])
       expect(Tempfile).to have_received(:open).once

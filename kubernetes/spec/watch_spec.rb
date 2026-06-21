@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "kubernetes/watch"
+require "timeout"
 require "webmock/rspec"
 
 RSpec.describe Kubernetes::Watch do
@@ -327,11 +328,12 @@ RSpec.describe Kubernetes::Watch do
         Thread.new { watch.connect("/api/v1/pods", "rv-1") { |obj| results << [:pods, obj] } },
         Thread.new { watch.connect("/api/v1/services", "rv-2") { |obj| results << [:services, obj] } }
       ]
-      threads.each(&:join)
+      Timeout.timeout(5) do
+        threads.each(&:value)
+      end
 
-      first = results.pop
-      second = results.pop
-      expect([first, second]).to contain_exactly(
+      observed = 2.times.map { results.pop(true) }
+      expect(observed).to contain_exactly(
         [:pods, { "type" => "ADDED", "object" => { "metadata" => { "name" => "pod-1" } } }],
         [:services, { "type" => "ADDED", "object" => { "metadata" => { "name" => "svc-1" } } }]
       )

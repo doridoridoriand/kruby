@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-21 08:10:43 UTC
+生成時刻: 2026-06-21 08:26:20 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,14 +13,11 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `e188adc232525b4a37b137b6a15d5595d48dc970` (`[codex] Add configurable ApiClient retries (#137)`)
+- 基点の `HEAD`: `8c8aaef60b4edb4d5390c4904eb4535e9ca53d50` (`fix: synchronize shared client defaults (#126)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `README.md`: staged modification.
-- `kubernetes/lib/kubernetes/api_client.rb`: staged modification.
-- `kubernetes/lib/kubernetes/configuration.rb`: staged modification.
 - `kubernetes/lib/kubernetes/utils.rb`: staged modification.
 - `kubernetes/spec/api_client_spec.rb`: staged modification.
 - `kubernetes/spec/configuration_spec.rb`: staged modification.
@@ -30,15 +27,15 @@
 ## 4. Branch / Commit
 
 - Branch: `fix/126-thread-safety`
-- Base HEAD: `e188adc232525b4a37b137b6a15d5595d48dc970`
+- Base HEAD: `8c8aaef60b4edb4d5390c4904eb4535e9ca53d50`
 - Recent commits:
 
 ```text
+8c8aaef fix: synchronize shared client defaults (#126)
 e188adc [codex] Add configurable ApiClient retries (#137)
 aba93ba [codex] Improve Watch edge case handling (#138)
 5a1eda2 [codex] Add ApiClient error handling specs (#136)
 5e4777b [codex] Add E2E coverage for excluded auth and discovery APIs (#135)
-42f575b Add comprehensive authentication and authorization tests (#125)
 ```
 
 ## 5. Commands Run
@@ -47,15 +44,12 @@ aba93ba [codex] Improve Watch edge case handling (#138)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- README.md                                  |  5 +++++
- kubernetes/lib/kubernetes/api_client.rb    | 15 ++++++++++++++-
- kubernetes/lib/kubernetes/configuration.rb | 15 ++++++++++++++-
- kubernetes/lib/kubernetes/utils.rb         | 17 +++++++++++------
- kubernetes/spec/api_client_spec.rb         | 29 +++++++++++++++++++++++++++++
- kubernetes/spec/configuration_spec.rb      | 25 +++++++++++++++++++++++++
- kubernetes/spec/utils_spec.rb              | 23 +++++++++++++++++++++++
- kubernetes/spec/watch_spec.rb              | 23 +++++++++++++++++++++++
- 8 files changed, 144 insertions(+), 8 deletions(-)
+ kubernetes/lib/kubernetes/utils.rb    |  2 +-
+ kubernetes/spec/api_client_spec.rb    |  2 +-
+ kubernetes/spec/configuration_spec.rb |  2 +-
+ kubernetes/spec/utils_spec.rb         |  2 +-
+ kubernetes/spec/watch_spec.rb         | 10 ++++++----
+ 5 files changed, 10 insertions(+), 8 deletions(-)
 ```
 
 ## 6. Verification

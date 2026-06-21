@@ -29,7 +29,7 @@ RSpec.describe Kubernetes::ApiClient do
           results[index] = described_class.default
         end
       end
-      threads.each(&:join)
+      threads.each(&:value)
 
       expect(results.uniq.length).to eq(1)
       expect(described_class).to have_received(:new).once
