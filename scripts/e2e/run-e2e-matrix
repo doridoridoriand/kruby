@@ -137,7 +137,7 @@ case "${real_api}" in
     ;;
 esac
 
-if ! [[ "${max_parallel}" =~ ^[0-9]+$ ]]; then
+if ! [[ "${max_parallel}" == "0" || "${max_parallel}" =~ ^[1-9][0-9]*$ ]]; then
   echo "ERROR: unsupported --max-parallel value '${max_parallel}' (expected 0 or a positive integer)" >&2
   exit 1
 fi
@@ -164,12 +164,11 @@ LOG_DIR="${REPO_ROOT}/kubernetes/tmp/e2e/matrix"
 mkdir -p "${LOG_DIR}"
 
 all_pids=()
-all_versions=()
 all_logs=()
-all_exit_codes=()
 pids=()
 pid_versions=()
 pid_logs=()
+pid_status_files=()
 
 cleanup_children() {
   local signal="$1"
@@ -207,27 +206,23 @@ cleanup_children() {
 trap 'cleanup_children INT; exit 130' INT
 trap 'cleanup_children TERM; exit 143' TERM
 
-record_exit_code() {
-  local completed_pid="$1"
-  local completed_exit_code="$2"
-  local i
+remove_child_at_index() {
+  local index="$1"
 
-  for i in "${!all_pids[@]}"; do
-    if [[ "${all_pids[$i]}" == "${completed_pid}" ]]; then
-      all_exit_codes[$i]="${completed_exit_code}"
-      return
-    fi
-  done
+  pids=("${pids[@]:0:${index}}" "${pids[@]:$((index + 1))}")
+  pid_versions=("${pid_versions[@]:0:${index}}" "${pid_versions[@]:$((index + 1))}")
+  pid_logs=("${pid_logs[@]:0:${index}}" "${pid_logs[@]:$((index + 1))}")
+  pid_status_files=("${pid_status_files[@]:0:${index}}" "${pid_status_files[@]:$((index + 1))}")
 }
 
-reap_next_child() {
-  local pid version log_file exit_code
+reap_child_at_index() {
+  local index="$1"
+  local pid version log_file status_file exit_code
 
-  [[ ${#pids[@]} -gt 0 ]] || return 0
-
-  pid="${pids[0]}"
-  version="${pid_versions[0]}"
-  log_file="${pid_logs[0]}"
+  pid="${pids[$index]}"
+  version="${pid_versions[$index]}"
+  log_file="${pid_logs[$index]}"
+  status_file="${pid_status_files[$index]}"
 
   if wait "${pid}"; then
     exit_code=0
@@ -239,23 +234,39 @@ reap_next_child() {
     fi
   fi
 
-  record_exit_code "${pid}" "${exit_code}"
   echo "[run-e2e-matrix] completed kubernetes_version=${version} exit=${exit_code} log=${log_file}" >&2
 
-  pids=("${pids[@]:1}")
-  pid_versions=("${pid_versions[@]:1}")
-  pid_logs=("${pid_logs[@]:1}")
+  rm -f "${status_file}"
+  remove_child_at_index "${index}"
+}
+
+reap_next_completed_child() {
+  local i
+
+  [[ ${#pids[@]} -gt 0 ]] || return 0
+
+  while true; do
+    for i in "${!pids[@]}"; do
+      if [[ -f "${pid_status_files[$i]}" ]]; then
+        reap_child_at_index "${i}"
+        return 0
+      fi
+    done
+
+    sleep 0.1
+  done
 }
 
 final_exit_code=0
 failed_runs=()
 for version in "${versions[@]}"; do
   while [[ "${max_parallel}" != "0" && ${#pids[@]} -ge ${max_parallel} ]]; do
-    reap_next_child
+    reap_next_completed_child
   done
 
   version_slug="$(printf '%s' "${version}" | sed 's/^v//' | tr '.+' '--' | tr -cd '[:alnum:]-')"
   log_file="${LOG_DIR}/run-e2e-${mode}-k8s-${version_slug:-unknown}-$$.log"
+  status_file="${LOG_DIR}/run-e2e-${mode}-k8s-${version_slug:-unknown}-$$.status"
   child_command=("${REPO_ROOT}/scripts/e2e/run-e2e" "--mode" "${mode}" "--fallback" "${fallback}" "--kubernetes-version" "${version}" "--real-api" "${real_api}")
 
   case "${mode}" in
@@ -272,27 +283,47 @@ for version in "${versions[@]}"; do
     child_command+=("${rspec_args[@]}")
   fi
 
+  rm -f "${status_file}"
   (
+    set +e
+
     if [[ -z "${E2E_REUSE_CLUSTER+x}" ]]; then
       export E2E_REUSE_CLUSTER=0
     fi
 
-    exec "${child_command[@]}"
+    child_pid=""
+
+    terminate_child() {
+      if [[ -n "${child_pid}" ]] && kill -0 "${child_pid}" 2>/dev/null; then
+        kill "${child_pid}" 2>/dev/null || true
+        wait "${child_pid}" 2>/dev/null || true
+      fi
+
+      exit 143
+    }
+
+    trap 'terminate_child' INT TERM
+
+    "${child_command[@]}" &
+    child_pid=$!
+    wait "${child_pid}"
+    exit_code=$?
+    printf '%s\n' "${exit_code}" > "${status_file}"
+    exit "${exit_code}"
   ) >"${log_file}" 2>&1 &
 
   pid=$!
   pids+=("${pid}")
   pid_versions+=("${version}")
   pid_logs+=("${log_file}")
+  pid_status_files+=("${status_file}")
   all_pids+=("${pid}")
-  all_versions+=("${version}")
   all_logs+=("${log_file}")
-  all_exit_codes+=("")
   echo "[run-e2e-matrix] started kubernetes_version=${version} pid=${pid} log=${log_file}" >&2
 done
 
 while [[ ${#pids[@]} -gt 0 ]]; do
-  reap_next_child
+  reap_next_completed_child
 done
 
 for i in "${!all_pids[@]}"; do
