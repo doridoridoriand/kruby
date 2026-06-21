@@ -328,8 +328,17 @@ RSpec.describe Kubernetes::Watch do
         Thread.new { watch.connect("/api/v1/pods", "rv-1") { |obj| results << [:pods, obj] } },
         Thread.new { watch.connect("/api/v1/services", "rv-2") { |obj| results << [:services, obj] } }
       ]
-      Timeout.timeout(5) do
-        threads.each(&:value)
+      begin
+        Timeout.timeout(5) do
+          threads.each(&:value)
+        end
+      ensure
+        threads.each do |thread|
+          next unless thread.alive?
+
+          thread.kill
+          thread.join
+        end
       end
 
       observed = 2.times.map { results.pop(true) }
