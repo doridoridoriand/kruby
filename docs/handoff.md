@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-21 12:14:58 UTC
+生成時刻: 2026-06-21 12:15:31 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,25 +13,26 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `381e187a9de7685111da3783e01791d41ae90d7c` (`Address thread-safety review feedback`)
+- 基点の `HEAD`: `347d8de55f7b8f1fc3548da6c1490d03e62e906f` (`Clean up watch threads on timeout`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/watch_spec.rb`: staged modification.
+- `kubernetes/spec/models/serialization_spec.rb`: staged modification.
+- `kubernetes/spec/models/smoke_spec.rb`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `fix/126-thread-safety`
-- Base HEAD: `381e187a9de7685111da3783e01791d41ae90d7c`
+- Base HEAD: `347d8de55f7b8f1fc3548da6c1490d03e62e906f`
 - Recent commits:
 
 ```text
+347d8de Clean up watch threads on timeout
 381e187 Address thread-safety review feedback
 8c8aaef fix: synchronize shared client defaults (#126)
 e188adc [codex] Add configurable ApiClient retries (#137)
 aba93ba [codex] Improve Watch edge case handling (#138)
-5a1eda2 [codex] Add ApiClient error handling specs (#136)
 ```
 
 ## 5. Commands Run
@@ -40,8 +41,9 @@ aba93ba [codex] Improve Watch edge case handling (#138)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/watch_spec.rb | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ kubernetes/spec/models/serialization_spec.rb | 105 +++++++++++++
+ kubernetes/spec/models/smoke_spec.rb         | 220 ++++++++++++++++++++++-----
+ 2 files changed, 285 insertions(+), 40 deletions(-)
 ```
 
 ## 6. Verification
