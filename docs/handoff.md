@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-22 04:40:26 UTC
+生成時刻: 2026-06-22 07:44:01 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,26 +13,25 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `a1d605332473924e7597d3ce800b842ea29b98eb` (`release: prepare 1.36.0.4 (#142)`)
+- 基点の `HEAD`: `c6aa7b4a54dfa11b05f813e9dba9a4695dfa12cd` (`Fix release publish gem build directory`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/release/publish_script_spec.rb`: staged modification.
-- `scripts/release/publish`: staged modification.
+- `docs/release-process.md`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `fix/release-publish-build-path`
-- Base HEAD: `a1d605332473924e7597d3ce800b842ea29b98eb`
+- Base HEAD: `c6aa7b4a54dfa11b05f813e9dba9a4695dfa12cd`
 - Recent commits:
 
 ```text
+c6aa7b4 Fix release publish gem build directory
 a1d6053 release: prepare 1.36.0.4 (#142)
 cb73b7a [codex] Harden shared defaults for multi-threaded callers (#141)
 1308abc [codex] Stabilize Kind-backed E2E matrix execution (#140)
 798a1e6 [codex] Strengthen model serialization coverage (#139)
-e188adc [codex] Add configurable ApiClient retries (#137)
 ```
 
 ## 5. Commands Run
@@ -41,9 +40,8 @@ e188adc [codex] Add configurable ApiClient retries (#137)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/release/publish_script_spec.rb | 147 ++++++++++++++++++++++++-
- scripts/release/publish                        |  12 +-
- 2 files changed, 154 insertions(+), 5 deletions(-)
+ docs/release-process.md | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 ```
 
 ## 6. Verification
