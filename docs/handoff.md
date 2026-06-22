@@ -2,39 +2,37 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-22 02:36:19 UTC
+生成時刻: 2026-06-22 04:40:26 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `release/1.36.0.4-prep` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `fix/release-publish-build-path` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `cb73b7af08a13429583e9aa2d77c5b8c3b3055bf` (`[codex] Harden shared defaults for multi-threaded callers (#141)`)
+- 基点の `HEAD`: `a1d605332473924e7597d3ce800b842ea29b98eb` (`release: prepare 1.36.0.4 (#142)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `CHANGELOG.md`: staged modification.
-- `README.md`: staged modification.
-- `kubernetes/Gemfile.lock`: staged modification.
-- `kubernetes/lib/kubernetes/version.rb`: staged modification.
+- `kubernetes/spec/release/publish_script_spec.rb`: staged modification.
+- `scripts/release/publish`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `release/1.36.0.4-prep`
-- Base HEAD: `cb73b7af08a13429583e9aa2d77c5b8c3b3055bf`
+- Branch: `fix/release-publish-build-path`
+- Base HEAD: `a1d605332473924e7597d3ce800b842ea29b98eb`
 - Recent commits:
 
 ```text
+a1d6053 release: prepare 1.36.0.4 (#142)
 cb73b7a [codex] Harden shared defaults for multi-threaded callers (#141)
 1308abc [codex] Stabilize Kind-backed E2E matrix execution (#140)
 798a1e6 [codex] Strengthen model serialization coverage (#139)
 e188adc [codex] Add configurable ApiClient retries (#137)
-aba93ba [codex] Improve Watch edge case handling (#138)
 ```
 
 ## 5. Commands Run
@@ -43,11 +41,9 @@ aba93ba [codex] Improve Watch edge case handling (#138)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- CHANGELOG.md                         | 16 ++++++++++++++++
- README.md                            | 14 +++++++-------
- kubernetes/Gemfile.lock              |  2 +-
- kubernetes/lib/kubernetes/version.rb |  2 +-
- 4 files changed, 25 insertions(+), 9 deletions(-)
+ kubernetes/spec/release/publish_script_spec.rb | 147 ++++++++++++++++++++++++-
+ scripts/release/publish                        |  12 +-
+ 2 files changed, 154 insertions(+), 5 deletions(-)
 ```
 
 ## 6. Verification
