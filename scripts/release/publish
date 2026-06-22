@@ -12,8 +12,11 @@ require "kubernetes/version"
 require "kubernetes/release/changelog"
 require "kubernetes/release/publish_guard"
 
-def run_command(*command, env: {})
-  return if system(env, *command)
+def run_command(*command, env: {}, chdir: nil)
+  system_options = {}
+  system_options[:chdir] = chdir if chdir
+
+  return if system(env, *command, **system_options)
 
   raise Kubernetes::Release::Changelog::Error, "command failed: #{Shellwords.join(command)}"
 end
@@ -77,10 +80,13 @@ def rubygems_version_visible?(host, version, attempts: 6, delay_seconds: 5)
 end
 
 def build_gem(gemspec_path, gem_path)
+  gemspec_dir = File.dirname(gemspec_path)
+  gemspec_file = File.basename(gemspec_path)
+
   FileUtils.mkdir_p(File.dirname(gem_path))
   FileUtils.rm_f(gem_path)
 
-  run_command("gem", "build", gemspec_path, "--output", gem_path)
+  run_command("gem", "build", gemspec_file, "--output", gem_path, chdir: gemspec_dir)
   raise Kubernetes::Release::Changelog::Error, "gem build did not create #{gem_path}" unless File.file?(gem_path)
 
   gem_path
