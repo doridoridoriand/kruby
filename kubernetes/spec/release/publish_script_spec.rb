@@ -19,13 +19,18 @@ RSpec.describe "release publish script" do
   it "builds the gem from the package directory during a dry run" do
     Dir.mktmpdir("kruby-release-publish") do |tmp_root|
       repo_root = File.join(tmp_root, "repo")
+      package_root = File.join(repo_root, "kubernetes")
       remote_root = File.join(tmp_root, "origin.git")
       fake_bin = File.join(tmp_root, "bin")
+      gem_build_log_path = File.join(tmp_root, "gem-build.log")
       gem_path = File.join(repo_root, "kubernetes/tmp/release/kruby-1.0.0.gem")
 
       build_fixture_repo(repo_root: repo_root, remote_root: remote_root, fake_bin: fake_bin)
 
-      env = Bundler.unbundled_env.merge("PATH" => "#{fake_bin}:#{ENV.fetch('PATH')}")
+      env = Bundler.unbundled_env.merge(
+        "FAKE_GEM_LOG_PATH" => gem_build_log_path,
+        "PATH" => "#{fake_bin}:#{ENV.fetch('PATH')}"
+      )
       stdout, stderr, status = Open3.capture3(
         env,
         File.join(repo_root, "scripts/release/publish"),
@@ -37,6 +42,7 @@ RSpec.describe "release publish script" do
       expect(status.success?).to be(true), stderr
       expect(stdout).to include("RubyGems availability OK for kruby 1.0.0")
       expect(File.file?(gem_path)).to be(true)
+      expect(File.read(gem_build_log_path).lines(chomp: true)).to include(File.realpath(package_root))
       expect(stdout).to include("Gem artifact OK: #{File.realpath(gem_path)}")
       expect(stdout).to include("Dry run complete; did not push kruby 1.0.0")
     end
@@ -143,6 +149,10 @@ RSpec.describe "release publish script" do
         exit 0
       end
 
+      if ARGV[0] == "build" && ENV["FAKE_GEM_LOG_PATH"]
+        File.open(ENV.fetch("FAKE_GEM_LOG_PATH"), "a") { |file| file.puts(File.realpath(Dir.pwd)) }
+      end
+
       exec(#{gem_path.strip.inspect}, *ARGV)
     RUBY
     FileUtils.chmod(0o755, path)
@@ -153,7 +163,13 @@ RSpec.describe "release publish script" do
   end
 
   def run_command(*command)
-    system(*command, out: File::NULL, err: File::NULL) ||
-      raise("#{command.first} #{command.drop(1).join(' ')} failed")
+    stdout, stderr, status = Open3.capture3(*command)
+    return if status.success?
+
+    raise <<~ERROR
+      #{command.join(' ')} failed (exit #{status.exitstatus})
+      stdout: #{stdout}
+      stderr: #{stderr}
+    ERROR
   end
 end
