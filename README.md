@@ -119,6 +119,22 @@ scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.36 --targets 'core/
 For troubleshooting and cleanup guidance, see:
 
 - [docs/e2e-kind-testing.md](docs/e2e-kind-testing.md)
+- [docs/test-suite.md](docs/test-suite.md)
+
+## Test workflow
+
+From `kubernetes/`, the most useful day-to-day commands are:
+
+```bash
+bundle exec rake spec:unit
+bundle exec rake spec:integration
+bundle exec rake spec:smoke
+bundle exec rake "spec:changed[origin/master]"
+bundle exec rake spec:e2e
+bundle exec rake "e2e:changed[origin/master]"
+```
+
+Use `spec:smoke` for a fast sanity pass, `spec:changed` for focused local iteration, and `spec` before merging wider library changes.
 
 ## License
 
