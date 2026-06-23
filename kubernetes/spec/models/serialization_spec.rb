@@ -604,6 +604,129 @@ RSpec.describe "Kubernetes model serialization" do
     expect(serialized_data["message"]).to eq("こんにちは\nkruby")
   end
 
+  it "deserializes deeply nested payloads with object fields and timezone-aware timestamps" do
+    managed_fields_payload = {
+      "f:metadata" => {
+        "f:annotations" => {
+          "." => {},
+          "f:message" => {}
+        }
+      }
+    }
+
+    pod = Kubernetes::V1Pod.build_from_hash(
+      {
+        apiVersion: "v1",
+        kind: "Pod",
+        metadata: {
+          name: "deep-pod",
+          annotations: {
+            "message" => "こんにちは\nkruby"
+          },
+          managedFields: [
+            {
+              apiVersion: "v1",
+              fieldsType: "FieldsV1",
+              fieldsV1: managed_fields_payload,
+              manager: "kubectl",
+              operation: "Apply",
+              time: "2026-05-27T09:30:00+09:00"
+            }
+          ]
+        },
+        spec: {
+          affinity: {
+            nodeAffinity: {
+              requiredDuringSchedulingIgnoredDuringExecution: {
+                nodeSelectorTerms: [
+                  {
+                    matchExpressions: [
+                      {
+                        key: "kubernetes.io/os",
+                        operator: "In",
+                        values: %w[linux darwin]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          containers: [
+            {
+              name: "app",
+              image: "registry.k8s.io/pause:3.9",
+              env: [
+                { name: "UNICODE_MESSAGE", value: "こんにちは世界" },
+                {
+                  name: "POD_NAME",
+                  valueFrom: {
+                    fieldRef: {
+                      fieldPath: "metadata.name"
+                    }
+                  }
+                }
+              ],
+              volumeMounts: [
+                {
+                  name: "config",
+                  mountPath: "etc/config"
+                }
+              ]
+            }
+          ],
+          terminationGracePeriodSeconds: "30",
+          volumes: [
+            {
+              name: "config",
+              configMap: {
+                name: "unicode-config",
+                items: [
+                  {
+                    key: "message",
+                    path: "message.txt"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    )
+
+    managed_field = pod.metadata.managed_fields.first
+    expect(managed_field.fields_v1).to eq(managed_fields_payload)
+    expect(managed_field.time.utc.iso8601).to eq("2026-05-27T00:30:00Z")
+
+    match_expression = pod.spec.affinity
+                          .node_affinity
+                          .required_during_scheduling_ignored_during_execution
+                          .node_selector_terms
+                          .first
+                          .match_expressions
+                          .first
+    expect(match_expression.key).to eq("kubernetes.io/os")
+    expect(match_expression.operator).to eq("In")
+    expect(match_expression.values).to eq(%w[linux darwin])
+
+    env_from_field = pod.spec.containers.first.env.last
+    expect(env_from_field.value_from.field_ref.field_path).to eq("metadata.name")
+    expect(pod.spec.volumes.first.config_map.items.first.path).to eq("message.txt")
+    expect(pod.spec.termination_grace_period_seconds).to eq(30)
+
+    serialized = pod.to_hash
+    serialized_metadata = serialized["metadata"] || serialized[:metadata]
+    serialized_annotations = serialized_metadata["annotations"] || serialized_metadata[:annotations]
+    serialized_managed_fields = serialized_metadata["managedFields"] || serialized_metadata[:managedFields]
+    serialized_spec = serialized["spec"] || serialized[:spec]
+    serialized_containers = serialized_spec["containers"] || serialized_spec[:containers]
+    serialized_env = serialized_containers.first["env"] || serialized_containers.first[:env]
+
+    expect(serialized_annotations["message"]).to eq("こんにちは\nkruby")
+    expect(serialized_managed_fields.first["fieldsV1"] || serialized_managed_fields.first[:fieldsV1]).to eq(managed_fields_payload)
+    expect(serialized_env.first["value"] || serialized_env.first[:value]).to eq("こんにちは世界")
+  end
+
   it "keeps required-field validation for models with mandatory nested specs" do
     bundle = Kubernetes::V1alpha1ClusterTrustBundle.build_from_hash(
       {
