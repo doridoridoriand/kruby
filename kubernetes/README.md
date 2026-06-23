@@ -89,6 +89,62 @@ end
 
 For backward compatibility, `require 'kubernetes'` is also supported.
 
+## Usage Guides
+
+### Common API entry points
+
+- Core resources: [CoreV1Api](docs/CoreV1Api.md), [V1Pod](docs/V1Pod.md), [V1ConfigMap](docs/V1ConfigMap.md), [V1Service](docs/V1Service.md)
+- Workloads: [AppsV1Api](docs/AppsV1Api.md), [BatchV1Api](docs/BatchV1Api.md), [V1Deployment](docs/V1Deployment.md), [V1StatefulSet](docs/V1StatefulSet.md)
+- Networking and policy: [NetworkingV1Api](docs/NetworkingV1Api.md), [V1Ingress](docs/V1Ingress.md), [V1NetworkPolicy](docs/V1NetworkPolicy.md)
+- Custom resources: [CustomObjectsApi](docs/CustomObjectsApi.md)
+- Discovery and cluster metadata: [DiscoveryApi](docs/DiscoveryApi.md), [VersionApi](docs/VersionApi.md)
+- Logs and streaming: [LogsApi](docs/LogsApi.md), `Kubernetes::Watch`
+
+### Curated examples
+
+- Full example index: <https://github.com/doridoridoriand/kruby/tree/master/examples/README.md>
+- Minimal client: <https://github.com/doridoridoriand/kruby/blob/master/examples/simple/simple.rb>
+- Safe dry-run write: <https://github.com/doridoridoriand/kruby/blob/master/examples/dry-run/dry-run.rb>
+- Efficient filtered reads: <https://github.com/doridoridoriand/kruby/blob/master/examples/label-selector/label-selector.rb>
+- Concurrent watches: <https://github.com/doridoridoriand/kruby/blob/master/examples/multi-watch/multi-watch.rb>
+- Logs with lifecycle cleanup: <https://github.com/doridoridoriand/kruby/blob/master/examples/logs/logs.rb>
+
+### Error handling
+
+```ruby
+client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
+
+begin
+  pod = client.read_namespaced_pod("example", "default")
+  puts pod.metadata.name
+rescue Kubernetes::ApiError => e
+  case e.code.to_i
+  when 404
+    warn "Pod was not found"
+  when 409
+    warn "Resource version conflict"
+  else
+    warn "Kubernetes API call failed: #{e.message}"
+    raise
+  end
+end
+```
+
+### Concurrent usage
+
+When you need multiple long-lived streams, create one `Kubernetes::ApiClient`, wrap it in `Kubernetes::Watch`, and fan out watches in threads.
+See the `multi-watch` example for a concrete pattern:
+
+- <https://github.com/doridoridoriand/kruby/blob/master/examples/multi-watch/multi-watch.rb>
+
+### Performance tips
+
+- Reuse a single `Kubernetes::ApiClient` and API object across many calls instead of rebuilding them per request.
+- Prefer `label_selector` and `field_selector` when listing large collections.
+- Use `Kubernetes::Watch` for change streams instead of frequent polling loops.
+- Start from namespaced list/read methods when you already know the namespace to reduce server-side work.
+- Use dry-run for manifest validation paths that should not persist resources.
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *http://localhost*

@@ -60,6 +60,20 @@ pp client.list_namespaced_pod('default')
 
 For backward compatibility, `require 'kubernetes'` is also supported.
 
+## Guides and Examples
+
+- The gem-facing README with curated API entry points lives in [`kubernetes/README.md`](kubernetes/README.md).
+- A categorized example index lives in [`examples/README.md`](examples/README.md).
+- Generated endpoint and model reference lives under [`kubernetes/docs/`](kubernetes/docs/).
+
+Useful starting points:
+
+- [`examples/simple/simple.rb`](examples/simple/simple.rb) for a minimal read-only client
+- [`examples/dry-run/dry-run.rb`](examples/dry-run/dry-run.rb) for safe write validation
+- [`examples/label-selector/label-selector.rb`](examples/label-selector/label-selector.rb) for efficient filtered list calls
+- [`examples/logs/logs.rb`](examples/logs/logs.rb) for log retrieval and cleanup
+- [`examples/multi-watch/multi-watch.rb`](examples/multi-watch/multi-watch.rb) for concurrent watch streams
+
 ## Thread Safety
 
 `Kubernetes::Configuration.default` and `Kubernetes::ApiClient.default` are shared singletons.
