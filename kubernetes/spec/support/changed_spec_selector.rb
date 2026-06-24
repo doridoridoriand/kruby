@@ -21,6 +21,9 @@ module SpecSupport
     DIRECT_SPEC_MAP = {
       "kubernetes/lib/kubernetes/api_client.rb" => %w[spec/api_client_spec.rb],
       "kubernetes/lib/kubernetes/api_error.rb" => %w[spec/api_error_spec.rb],
+      "kubernetes/lib/kubernetes/config/error.rb" => %w[spec/config/config_error_spec.rb],
+      "kubernetes/lib/kubernetes/config/incluster_config.rb" => %w[spec/config/incluster_config_spec.rb],
+      "kubernetes/lib/kubernetes/config/kube_config.rb" => %w[spec/config/kube_config_spec.rb],
       "kubernetes/lib/kubernetes/configuration.rb" => %w[
         spec/configuration_spec.rb
         spec/config/kube_config_spec.rb

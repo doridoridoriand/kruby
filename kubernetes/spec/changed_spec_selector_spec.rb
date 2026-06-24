@@ -27,6 +27,21 @@ RSpec.describe SpecSupport::ChangedSpecSelector do
     expect(selection.selected_specs).to eq(["spec/api_client_spec.rb"])
   end
 
+  it "maps config implementation changes to the dedicated config specs" do
+    selection = selector.resolve(
+      changed_files: [
+        "kubernetes/lib/kubernetes/config/incluster_config.rb",
+        "kubernetes/lib/kubernetes/config/error.rb"
+      ]
+    )
+
+    expect(selection.fallback_used).to be(false)
+    expect(selection.selected_specs).to include(
+      "spec/config/config_error_spec.rb",
+      "spec/config/incluster_config_spec.rb"
+    )
+  end
+
   it "maps e2e target changes to the e2e selector and coverage specs" do
     selection = selector.resolve(changed_files: ["kubernetes/spec/support/e2e/targets/core_v1_pods.rb"])
 

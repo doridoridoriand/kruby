@@ -2,7 +2,7 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-23 15:56:07 UTC
+生成時刻: 2026-06-24 14:50:31 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
@@ -13,30 +13,28 @@
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `5b911e63dd849ad86578ecba15655edae1987f80` (`[codex] Fix release publish path and document retry flow (#143)`)
+- 基点の `HEAD`: `4293d78b6c6018fae9398cde5f523d3291d3c53d` (`Add focused test suite tasks and changed spec selection`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `README.md`: staged modification.
-- `docs/test-suite.md`: staged addition.
 - `kubernetes/Rakefile`: staged modification.
-- `kubernetes/spec/changed_spec_selector_spec.rb`: staged addition.
-- `kubernetes/spec/spec_helper.rb`: staged modification.
-- `kubernetes/spec/support/changed_spec_selector.rb`: staged addition.
+- `kubernetes/spec/changed_spec_selector_spec.rb`: staged modification.
+- `kubernetes/spec/models/serialization_spec.rb`: staged modification.
+- `kubernetes/spec/support/changed_spec_selector.rb`: staged modification.
 
 ## 4. Branch / Commit
 
 - Branch: `test/130-test-suite-ergonomics`
-- Base HEAD: `5b911e63dd849ad86578ecba15655edae1987f80`
+- Base HEAD: `4293d78b6c6018fae9398cde5f523d3291d3c53d`
 - Recent commits:
 
 ```text
+4293d78 Add focused test suite tasks and changed spec selection
 5b911e6 [codex] Fix release publish path and document retry flow (#143)
 a1d6053 release: prepare 1.36.0.4 (#142)
 cb73b7a [codex] Harden shared defaults for multi-threaded callers (#141)
 1308abc [codex] Stabilize Kind-backed E2E matrix execution (#140)
-798a1e6 [codex] Strengthen model serialization coverage (#139)
 ```
 
 ## 5. Commands Run
@@ -45,13 +43,11 @@ cb73b7a [codex] Harden shared defaults for multi-threaded callers (#141)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- README.md                                        |  16 ++
- docs/test-suite.md                               |  55 ++++++
- kubernetes/Rakefile                              |  83 +++++++++
- kubernetes/spec/changed_spec_selector_spec.rb    |  50 ++++++
- kubernetes/spec/spec_helper.rb                   |   2 +
- kubernetes/spec/support/changed_spec_selector.rb | 215 +++++++++++++++++++++++
- 6 files changed, 421 insertions(+)
+ kubernetes/Rakefile                              |  13 ++-
+ kubernetes/spec/changed_spec_selector_spec.rb    |  15 +++
+ kubernetes/spec/models/serialization_spec.rb     | 123 +++++++++++++++++++++++
+ kubernetes/spec/support/changed_spec_selector.rb |   3 +
+ 4 files changed, 152 insertions(+), 2 deletions(-)
 ```
 
 ## 6. Verification

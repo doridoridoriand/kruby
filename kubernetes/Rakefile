@@ -1,5 +1,4 @@
 require "bundler/gem_tasks"
-require "rspec/core"
 require "shellwords"
 
 require_relative "spec/support/changed_spec_selector"
@@ -34,12 +33,22 @@ run_release_script = lambda do |script_name, *args|
   raise "command failed: #{command_display}" unless success
 end
 
+spec_glob_pattern = lambda do |entry|
+  entry.match?(/[*?\[\]{}]/)
+end
+
 run_specs = lambda do |specs|
+  require "rspec/core"
+
   selected_specs = Array(specs).flat_map do |entry|
     if File.directory?(entry)
       Dir.glob(File.join(entry, "**/*_spec.rb"))
-    else
+    elsif spec_glob_pattern.call(entry)
       Dir.glob(entry)
+    elsif File.exist?(entry)
+      [entry]
+    else
+      raise ArgumentError, "spec entry not found: #{entry}"
     end
   end.uniq.sort
 
