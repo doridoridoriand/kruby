@@ -112,6 +112,8 @@ For backward compatibility, `require 'kubernetes'` is also supported.
 ### Error handling
 
 ```ruby
+config = Kubernetes::Configuration.default_config
+Kubernetes.load_kube_config(ENV["KUBECONFIG"], client_configuration: config)
 client = Kubernetes::CoreV1Api.new(Kubernetes::ApiClient.new(config))
 
 begin

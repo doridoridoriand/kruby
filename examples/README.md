@@ -14,7 +14,7 @@ They complement the generated API and model reference under `kubernetes/docs/`.
 | Example | Focus | Notes |
 | --- | --- | --- |
 | [`simple`](simple/simple.rb) | List pods in a namespace | Smallest possible read-only client |
-| [`dry-run`](dry-run/dry-run.rb) | Validate writes without persisting | Uses server-side `dry_run: "All"` |
+| [`dry-run`](dry-run/dry-run.rb) | Validate dry-run behavior before a real create/delete cycle | Demonstrates server-side `dry_run: "All"` plus cleanup |
 | [`label-selector`](label-selector/label-selector.rb) | Narrow list calls efficiently | Shows `label_selector` and `field_selector` |
 
 ## Core Resources

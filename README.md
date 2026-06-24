@@ -64,7 +64,7 @@ For backward compatibility, `require 'kubernetes'` is also supported.
 
 - The gem-facing README with curated API entry points lives in [`kubernetes/README.md`](kubernetes/README.md).
 - A categorized example index lives in [`examples/README.md`](examples/README.md).
-- Generated endpoint and model reference lives under [`kubernetes/docs/`](kubernetes/docs/).
+- Generated endpoint and model references live under [`kubernetes/docs/`](kubernetes/docs/).
 
 Useful starting points:
 
