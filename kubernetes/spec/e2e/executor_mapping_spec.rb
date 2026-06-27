@@ -237,6 +237,51 @@ RSpec.describe SpecSupport::E2E::Executor do
     end
   end
 
+  it "accepts TokenReview responses that report unauthenticated via status.authenticated" do
+    api = instance_double(Kubernetes::AuthenticationV1Api)
+    review = double("token_review_response")
+    status = double("token_review_status", authenticated: false)
+
+    allow(executor).to receive(:build_api_client).and_return(double("api_client"))
+    allow(Kubernetes::AuthenticationV1Api).to receive(:new).and_return(api)
+    allow(api).to receive(:create_token_review).and_return(review)
+    allow(review).to receive(:status).and_return(status)
+
+    expect do
+      executor.send(:execute_token_review_operation, "create")
+    end.not_to raise_error
+  end
+
+  it "accepts TokenReview responses that only expose status.error" do
+    api = instance_double(Kubernetes::AuthenticationV1Api)
+    review = double("token_review_response")
+    status = double("token_review_status", authenticated: nil, error: "token could not be checked")
+
+    allow(executor).to receive(:build_api_client).and_return(double("api_client"))
+    allow(Kubernetes::AuthenticationV1Api).to receive(:new).and_return(api)
+    allow(api).to receive(:create_token_review).and_return(review)
+    allow(review).to receive(:status).and_return(status)
+
+    expect do
+      executor.send(:execute_token_review_operation, "create")
+    end.not_to raise_error
+  end
+
+  it "still fails when TokenReview status exposes neither authenticated nor error" do
+    api = instance_double(Kubernetes::AuthenticationV1Api)
+    review = double("token_review_response")
+    status = double("token_review_status", authenticated: nil, error: nil, to_hash: {})
+
+    allow(executor).to receive(:build_api_client).and_return(double("api_client"))
+    allow(Kubernetes::AuthenticationV1Api).to receive(:new).and_return(api)
+    allow(api).to receive(:create_token_review).and_return(review)
+    allow(review).to receive(:status).and_return(status)
+
+    expect do
+      executor.send(:execute_token_review_operation, "create")
+    end.to raise_error(RuntimeError, /status\.authenticated or status\.error/)
+  end
+
   it "creates the namespaced CustomObjects test CRD when it is missing" do
     crd_api = instance_double(Kubernetes::ApiextensionsV1Api)
     cleanup = instance_double("Cleanup")
