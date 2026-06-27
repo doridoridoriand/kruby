@@ -41,6 +41,8 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsSL -o /tmp/kubectl https://dl.k8s.io/release/v1.36.2/bin/linux/amd64/kubectl
+          curl -fsSL -o /tmp/kubectl.sha256 https://dl.k8s.io/release/v1.36.2/bin/linux/amd64/kubectl.sha256
+          echo "$(cat /tmp/kubectl.sha256)  /tmp/kubectl" | sha256sum --check --strict
           chmod +x /tmp/kubectl
           sudo mv /tmp/kubectl /usr/local/bin/kubectl
           kubectl version --client
