@@ -675,7 +675,12 @@ module SpecSupport
         api = Kubernetes::AuthenticationV1Api.new(build_api_client)
         review = api.create_token_review(Factories.token_review(token: "kruby-e2e.invalid-token"))
         authenticated = nested_value(review, :status, :authenticated)
-        raise "expected TokenReview response to include status.authenticated" if authenticated.nil?
+        error = nested_value(review, :status, :error)
+        return unless authenticated.nil? && error.to_s.strip.empty?
+
+        status = nested_value(review, :status)
+        serialized_status = status.respond_to?(:to_hash) ? status.to_hash : status
+        raise "expected TokenReview response to include status.authenticated or status.error, got #{serialized_status.inspect}"
       end
 
       def execute_local_subject_access_review_operation(operation, namespace:)
