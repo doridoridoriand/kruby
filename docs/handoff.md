@@ -2,37 +2,37 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-27 12:04:46 UTC
+生成時刻: 2026-06-27 13:17:19 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `fix/nightly-e2e-failure` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `fix/107-update-k8s-patch-versions` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `c341ce41f4664f7ac1542bc0916503383237b16c` (`Add focused test suite tasks and changed spec selection (#146)`)
+- 基点の `HEAD`: `920117ed00ed38d214fd4d4bbe50eb5c2d4985c4` (`test(e2e): update pinned Kubernetes patch versions`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `kubernetes/spec/e2e/executor_mapping_spec.rb`: staged modification.
-- `kubernetes/spec/support/e2e/executor.rb`: staged modification.
+- `.github/workflows/nightly-e2e.yml`: staged modification.
+- `kubernetes/spec/e2e/cluster_manager_spec.rb`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `fix/nightly-e2e-failure`
-- Base HEAD: `c341ce41f4664f7ac1542bc0916503383237b16c`
+- Branch: `fix/107-update-k8s-patch-versions`
+- Base HEAD: `920117ed00ed38d214fd4d4bbe50eb5c2d4985c4`
 - Recent commits:
 
 ```text
+920117e test(e2e): update pinned Kubernetes patch versions
+fd9e60b Handle TokenReview error-only responses in E2E (#147)
 c341ce4 Add focused test suite tasks and changed spec selection (#146)
 87ba7c6 Add curated usage guides and example index (#145)
 632fde1 Strengthen model serialization coverage (#144)
-5b911e6 [codex] Fix release publish path and document retry flow (#143)
-a1d6053 release: prepare 1.36.0.4 (#142)
 ```
 
 ## 5. Commands Run
@@ -41,9 +41,9 @@ a1d6053 release: prepare 1.36.0.4 (#142)
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- kubernetes/spec/e2e/executor_mapping_spec.rb | 45 ++++++++++++++++++++++++++++
- kubernetes/spec/support/e2e/executor.rb      |  7 ++++-
- 2 files changed, 51 insertions(+), 1 deletion(-)
+ .github/workflows/nightly-e2e.yml           | 2 ++
+ kubernetes/spec/e2e/cluster_manager_spec.rb | 4 +++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 ```
 
 ## 6. Verification

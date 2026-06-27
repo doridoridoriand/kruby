@@ -23,9 +23,11 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
   describe "#create" do
     it "creates a version-scoped cluster with a pinned node image and isolated kubeconfig" do
       Dir.mktmpdir("kruby-e2e-kubeconfig") do |tmpdir|
+        custom_kind_bin = "/tmp/custom-kind"
         manager = described_class.new(
           mode: "full",
           kubernetes_version: "1.33",
+          kind_bin: custom_kind_bin,
           kubeconfig_path: File.join(tmpdir, "kubeconfig"),
           reuse_cluster: false
         )
@@ -40,7 +42,7 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
         )
         expect(manager).to have_received(:run_command).with(
           [
-            "kind", "create", "cluster", "--name", "kruby-e2e-full-v1-33",
+            custom_kind_bin, "create", "cluster", "--name", "kruby-e2e-full-v1-33",
             "--image", manager.kind_node_image,
             "--kubeconfig", File.join(tmpdir, "kubeconfig")
           ]
