@@ -40,7 +40,7 @@ RSpec.describe SpecSupport::E2E::ClusterManager do
         )
         expect(manager).to have_received(:run_command).with(
           [
-            "kind", "create", "cluster", "--name", "kruby-e2e-full-v1-33",
+            manager.instance_variable_get(:@kind_bin), "create", "cluster", "--name", "kruby-e2e-full-v1-33",
             "--image", manager.kind_node_image,
             "--kubeconfig", File.join(tmpdir, "kubeconfig")
           ]

@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsSL -o /tmp/kubectl https://dl.k8s.io/release/v1.36.1/bin/linux/amd64/kubectl
+          curl -fsSL -o /tmp/kubectl https://dl.k8s.io/release/v1.36.2/bin/linux/amd64/kubectl
           chmod +x /tmp/kubectl
           sudo mv /tmp/kubectl /usr/local/bin/kubectl
           kubectl version --client

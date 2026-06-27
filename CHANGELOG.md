@@ -8,7 +8,10 @@ Historical releases published before this file was introduced are summarized as 
 
 ## [Unreleased]
 
-- Nothing yet.
+### Changed
+
+- Updated the Kind-backed E2E node image pins to the latest published patch releases for Kubernetes 1.33, 1.34, and 1.35.
+- Updated the nightly E2E workflow to install `kubectl` v1.36.2.
 
 ## [1.36.0.4] - 2026-06-22
 
