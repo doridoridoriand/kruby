@@ -111,6 +111,29 @@ describe Kubernetes do
         expect(path).to eq(expected_path)
       end
     end
+
+    it 'memoizes temp files safely across concurrent callers' do
+      content = TEST_DATA_BASE64
+      io = double('io')
+
+      allow(io).to receive(:write).with(TEST_DATA)
+      allow(io).to receive(:path).and_return('tempfile-path')
+      allow(Tempfile).to receive(:open).and_wrap_original do |_original, *_args, &block|
+        sleep 0.01
+        block.call(io)
+      end
+
+      results = Array.new(8)
+      threads = results.each_index.map do |index|
+        Thread.new do
+          results[index] = Kubernetes.create_temp_file_with_base64content(content)
+        end
+      end
+      threads.each(&:value)
+
+      expect(results.uniq).to eq(['tempfile-path'])
+      expect(Tempfile).to have_received(:open).once
+    end
   end
 
   describe '.kubernetes_version_compatible?' do

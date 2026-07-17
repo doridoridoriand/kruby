@@ -11,9 +11,12 @@ OpenAPI Generator version: 5.1.0
 =end
 
 require 'logger'
+require 'thread'
 
 module Kubernetes
   class Configuration
+    @default_mutex = Mutex.new
+
     # Defines url scheme
     attr_accessor :scheme
 
@@ -88,6 +91,11 @@ module Kubernetes
     # Default to 0 (never times out).
     attr_accessor :timeout
 
+    # Optional retry configuration for retriable HTTP responses.
+    # Example:
+    #   { max_retries: 4, base_interval_seconds: 1.0, retry_statuses: [429, 500, 501, 502, 503] }
+    attr_accessor :retry_configuration
+
     # Set this to false to skip client side validation in the operation.
     # Default to true.
     # @return [true, false]
@@ -150,6 +158,7 @@ module Kubernetes
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
+      @retry_configuration = nil
       @client_side_validation = true
       @verify_ssl = true
       @verify_ssl_host = true
@@ -166,7 +175,17 @@ module Kubernetes
 
     # The default Configuration object.
     def self.default
-      @@default ||= Configuration.new
+      return @@default if defined?(@@default) && @@default
+
+      @default_mutex.synchronize do
+        @@default ||= Configuration.new
+      end
+    end
+
+    def self.reset_default
+      @default_mutex.synchronize do
+        @@default = nil
+      end
     end
 
     # Backward-compatible alias used by examples and older integrations.

@@ -509,6 +509,108 @@ module SpecSupport
         }
       end
 
+      def horizontal_pod_autoscaler_v1(name:, labels: {})
+        {
+          "apiVersion" => "autoscaling/v1",
+          "kind" => "HorizontalPodAutoscaler",
+          "metadata" => { "name" => name, "labels" => labels },
+          "spec" => {
+            "minReplicas" => 1,
+            "maxReplicas" => 3,
+            "scaleTargetRef" => {
+              "apiVersion" => "apps/v1",
+              "kind" => "Deployment",
+              "name" => "#{name}-target"
+            },
+            "targetCPUUtilizationPercentage" => 50
+          }
+        }
+      end
+
+      def endpoint_slice(name:, labels: {})
+        {
+          "apiVersion" => "discovery.k8s.io/v1",
+          "kind" => "EndpointSlice",
+          "metadata" => {
+            "name" => name,
+            "labels" => labels.merge("kubernetes.io/service-name" => "#{name}-service")
+          },
+          "addressType" => "IPv4",
+          "endpoints" => [
+            {
+              "addresses" => ["10.0.0.10"],
+              "conditions" => { "ready" => true }
+            }
+          ],
+          "ports" => [
+            {
+              "name" => "http",
+              "protocol" => "TCP",
+              "port" => 80
+            }
+          ]
+        }
+      end
+
+      def self_subject_review
+        {
+          "apiVersion" => "authentication.k8s.io/v1",
+          "kind" => "SelfSubjectReview"
+        }
+      end
+
+      def token_review(token:)
+        {
+          "apiVersion" => "authentication.k8s.io/v1",
+          "kind" => "TokenReview",
+          "spec" => {
+            "token" => token
+          }
+        }
+      end
+
+      def self_subject_access_review(namespace:)
+        {
+          "apiVersion" => "authorization.k8s.io/v1",
+          "kind" => "SelfSubjectAccessReview",
+          "spec" => {
+            "resourceAttributes" => review_resource_attributes(namespace: namespace)
+          }
+        }
+      end
+
+      def self_subject_rules_review(namespace:)
+        {
+          "apiVersion" => "authorization.k8s.io/v1",
+          "kind" => "SelfSubjectRulesReview",
+          "spec" => {
+            "namespace" => namespace
+          }
+        }
+      end
+
+      def subject_access_review(namespace:, user: "system:anonymous")
+        {
+          "apiVersion" => "authorization.k8s.io/v1",
+          "kind" => "SubjectAccessReview",
+          "spec" => {
+            "user" => user,
+            "resourceAttributes" => review_resource_attributes(namespace: namespace)
+          }
+        }
+      end
+
+      def local_subject_access_review(namespace:, user: "system:anonymous")
+        {
+          "apiVersion" => "authorization.k8s.io/v1",
+          "kind" => "LocalSubjectAccessReview",
+          "spec" => {
+            "user" => user,
+            "resourceAttributes" => review_resource_attributes(namespace: namespace)
+          }
+        }
+      end
+
       def pod_disruption_budget(name:, labels: {})
         {
           "apiVersion" => "policy/v1",
@@ -719,6 +821,15 @@ module SpecSupport
           "spec" => {
             "cidrs" => ["192.168.255.0/24"]
           }
+        }
+      end
+
+      def review_resource_attributes(namespace:)
+        {
+          "namespace" => namespace,
+          "verb" => "get",
+          "group" => "",
+          "resource" => "pods"
         }
       end
     end

@@ -471,6 +471,78 @@ RSpec.describe "Kubernetes model serialization" do
       expected_types: {
         metadata: Kubernetes::V1ObjectMeta
       }
+    },
+    {
+      klass: Kubernetes::V1ProjectedVolumeSource,
+      payload: {
+        defaultMode: "420",
+        sources: [
+          {
+            configMap: {
+              name: "app-config",
+              items: [{ key: "config.yaml", path: "configs/app.yaml" }]
+            }
+          },
+          {
+            secret: {
+              name: "app-secret",
+              optional: "true",
+              items: [{ key: "token", path: "creds/token" }]
+            }
+          },
+          {
+            serviceAccountToken: {
+              path: "token",
+              expirationSeconds: "3600"
+            }
+          }
+        ]
+      },
+      expected_types: {
+        sources: Array
+      },
+      expected_values: {
+        default_mode: 420
+      }
+    },
+    {
+      klass: Kubernetes::V1Probe,
+      payload: {
+        httpGet: {
+          path: "/healthz",
+          port: "8080",
+          scheme: "HTTP"
+        },
+        initialDelaySeconds: "5",
+        timeoutSeconds: "3",
+        failureThreshold: "2",
+        terminationGracePeriodSeconds: "1"
+      },
+      expected_types: {
+        http_get: Kubernetes::V1HTTPGetAction
+      },
+      expected_values: {
+        initial_delay_seconds: 5,
+        timeout_seconds: 3,
+        failure_threshold: 2,
+        termination_grace_period_seconds: 1
+      }
+    },
+    {
+      klass: Kubernetes::V1alpha1ClusterTrustBundle,
+      payload: {
+        apiVersion: "certificates.k8s.io/v1alpha1",
+        kind: "ClusterTrustBundle",
+        metadata: { name: "example.com:signer:v1" },
+        spec: {
+          signerName: "example.com/signer",
+          trustBundle: "-----BEGIN CERTIFICATE-----\nMIIB\n-----END CERTIFICATE-----\n"
+        }
+      },
+      expected_types: {
+        metadata: Kubernetes::V1ObjectMeta,
+        spec: Kubernetes::V1alpha1ClusterTrustBundleSpec
+      }
     }
   ].freeze
 
@@ -510,6 +582,162 @@ RSpec.describe "Kubernetes model serialization" do
     expect do
       Kubernetes::V1Pod.new(not_a_real_attribute: "value")
     end.to raise_error(ArgumentError, /not_a_real_attribute/)
+  end
+
+  it "round-trips special characters and non-ASCII strings" do
+    model = Kubernetes::V1ConfigMap.build_from_hash(
+      {
+        apiVersion: "v1",
+        kind: "ConfigMap",
+        metadata: { name: "unicode-demo" },
+        data: {
+          "message" => "こんにちは\nkruby",
+          "json" => "{\"enabled\":true}",
+          "emoji_like_text" => "plain-ascii:-)"
+        }
+      }
+    )
+
+    expect(model.data["message"]).to eq("こんにちは\nkruby")
+    serialized = model.to_hash
+    serialized_data = serialized["data"] || serialized[:data]
+    expect(serialized_data["message"]).to eq("こんにちは\nkruby")
+  end
+
+  it "deserializes deeply nested payloads with object fields and timezone-aware timestamps" do
+    managed_fields_payload = {
+      "f:metadata" => {
+        "f:annotations" => {
+          "." => {},
+          "f:message" => {}
+        }
+      }
+    }
+
+    pod = Kubernetes::V1Pod.build_from_hash(
+      {
+        apiVersion: "v1",
+        kind: "Pod",
+        metadata: {
+          name: "deep-pod",
+          annotations: {
+            "message" => "こんにちは\nkruby"
+          },
+          managedFields: [
+            {
+              apiVersion: "v1",
+              fieldsType: "FieldsV1",
+              fieldsV1: managed_fields_payload,
+              manager: "kubectl",
+              operation: "Apply",
+              time: "2026-05-27T09:30:00+09:00"
+            }
+          ]
+        },
+        spec: {
+          affinity: {
+            nodeAffinity: {
+              requiredDuringSchedulingIgnoredDuringExecution: {
+                nodeSelectorTerms: [
+                  {
+                    matchExpressions: [
+                      {
+                        key: "kubernetes.io/os",
+                        operator: "In",
+                        values: %w[linux darwin]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          containers: [
+            {
+              name: "app",
+              image: "registry.k8s.io/pause:3.9",
+              env: [
+                { name: "UNICODE_MESSAGE", value: "こんにちは世界" },
+                {
+                  name: "POD_NAME",
+                  valueFrom: {
+                    fieldRef: {
+                      fieldPath: "metadata.name"
+                    }
+                  }
+                }
+              ],
+              volumeMounts: [
+                {
+                  name: "config",
+                  mountPath: "etc/config"
+                }
+              ]
+            }
+          ],
+          terminationGracePeriodSeconds: "30",
+          volumes: [
+            {
+              name: "config",
+              configMap: {
+                name: "unicode-config",
+                items: [
+                  {
+                    key: "message",
+                    path: "message.txt"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    )
+
+    managed_field = pod.metadata.managed_fields.first
+    expect(managed_field.fields_v1).to eq(managed_fields_payload)
+    expect(managed_field.time.utc.iso8601).to eq("2026-05-27T00:30:00Z")
+
+    match_expression = pod.spec.affinity
+                          .node_affinity
+                          .required_during_scheduling_ignored_during_execution
+                          .node_selector_terms
+                          .first
+                          .match_expressions
+                          .first
+    expect(match_expression.key).to eq("kubernetes.io/os")
+    expect(match_expression.operator).to eq("In")
+    expect(match_expression.values).to eq(%w[linux darwin])
+
+    env_from_field = pod.spec.containers.first.env.last
+    expect(env_from_field.value_from.field_ref.field_path).to eq("metadata.name")
+    expect(pod.spec.volumes.first.config_map.items.first.path).to eq("message.txt")
+    expect(pod.spec.termination_grace_period_seconds).to eq(30)
+
+    serialized = pod.to_hash
+    serialized_metadata = serialized["metadata"] || serialized[:metadata]
+    serialized_annotations = serialized_metadata["annotations"] || serialized_metadata[:annotations]
+    serialized_managed_fields = serialized_metadata["managedFields"] || serialized_metadata[:managedFields]
+    serialized_spec = serialized["spec"] || serialized[:spec]
+    serialized_containers = serialized_spec["containers"] || serialized_spec[:containers]
+    serialized_env = serialized_containers.first["env"] || serialized_containers.first[:env]
+
+    expect(serialized_annotations["message"]).to eq("こんにちは\nkruby")
+    expect(serialized_managed_fields.first["fieldsV1"] || serialized_managed_fields.first[:fieldsV1]).to eq(managed_fields_payload)
+    expect(serialized_env.first["value"] || serialized_env.first[:value]).to eq("こんにちは世界")
+  end
+
+  it "keeps required-field validation for models with mandatory nested specs" do
+    bundle = Kubernetes::V1alpha1ClusterTrustBundle.build_from_hash(
+      {
+        apiVersion: "certificates.k8s.io/v1alpha1",
+        kind: "ClusterTrustBundle",
+        metadata: { name: "missing-spec" }
+      }
+    )
+
+    expect(bundle).not_to be_valid
+    expect(bundle.list_invalid_properties).to include(/spec cannot be nil/)
   end
 
   it "compares model equality and hash code by attributes" do

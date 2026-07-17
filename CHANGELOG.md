@@ -10,6 +10,34 @@ Historical releases published before this file was introduced are summarized as 
 
 - Nothing yet.
 
+## [1.36.1.1] - 2026-06-27
+
+### Changed
+
+- Updated the Kind-backed E2E node image pins to the latest published patch releases for Kubernetes 1.33, 1.34, and 1.35.
+- Updated the nightly E2E workflow to install `kubectl` v1.36.2.
+
+### Fixed
+
+- Verified the nightly E2E workflow's `kubectl` download against the published sha256 before installation.
+- Hardened the cluster manager E2E spec so custom `kind_bin` overrides are exercised explicitly.
+
+## [1.36.0.4] - 2026-06-22
+
+### Added
+
+- Added configurable retry settings to `Kubernetes::ApiClient` for transient request failures.
+- Added example scripts for Deployments, Services, ConfigMaps, Secrets, Events, CronJobs, HorizontalPodAutoscalers, StatefulSets, NetworkPolicies, RBAC, PersistentVolumeClaims, Ingresses, custom objects, dry-run requests, label selectors, and multi-watch flows.
+
+### Changed
+
+- Refined the example suite with cleaner CRUD pacing and more reliable logs/watch walkthroughs.
+
+### Fixed
+
+- Hardened `Kubernetes::Watch` so malformed events are skipped with a warning and callback-raised `JSON::ParserError` exceptions remain visible to callers.
+- Made `Kubernetes::Configuration.default`, `Kubernetes::ApiClient.default`, and kubeconfig-backed temporary file caching safer for multi-threaded callers.
+
 ## [1.36.0.3] - 2026-06-07
 
 ### Added

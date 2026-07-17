@@ -1,6 +1,8 @@
 require "bundler/gem_tasks"
 require "shellwords"
 
+require_relative "spec/support/changed_spec_selector"
+
 begin
   require 'rspec/core/rake_task'
 
@@ -31,8 +33,98 @@ run_release_script = lambda do |script_name, *args|
   raise "command failed: #{command_display}" unless success
 end
 
+spec_glob_pattern = lambda do |entry|
+  entry.match?(/[*?\[\]{}]/)
+end
+
+run_specs = lambda do |specs|
+  require "rspec/core"
+
+  selected_specs = Array(specs).flat_map do |entry|
+    if File.directory?(entry)
+      Dir.glob(File.join(entry, "**/*_spec.rb"))
+    elsif spec_glob_pattern.call(entry)
+      Dir.glob(entry)
+    elsif File.exist?(entry)
+      [entry]
+    else
+      raise ArgumentError, "spec entry not found: #{entry}"
+    end
+  end.uniq.sort
+
+  abort("no specs selected") if selected_specs.empty?
+
+  status = RSpec::Core::Runner.run(selected_specs)
+  raise "RSpec failed with exit code #{status}" unless status.zero?
+end
+
+unit_specs = %w[
+  spec/api_error_spec.rb
+  spec/config/config_error_spec.rb
+  spec/config/incluster_config_spec.rb
+  spec/config/kube_config_spec.rb
+  spec/configuration_spec.rb
+  spec/loader_spec.rb
+  spec/models/serialization_spec.rb
+  spec/models/smoke_spec.rb
+  spec/release/changelog_spec.rb
+  spec/release/publish_guard_spec.rb
+  spec/support/e2e/coverage_gate_spec.rb
+  spec/support/e2e/coverage_inventory_spec.rb
+  spec/utils_spec.rb
+  spec/version_spec.rb
+].freeze
+
+integration_specs = %w[
+  spec/api_client_spec.rb
+  spec/auth_spec.rb
+  spec/custom_objects_api_spec.rb
+  spec/discovery_api_spec.rb
+  spec/logs_api_spec.rb
+  spec/release/publish_script_spec.rb
+  spec/version_api_spec.rb
+  spec/watch_spec.rb
+  spec/well_known_api_spec.rb
+].freeze
+
+smoke_specs = SpecSupport::ChangedSpecSelector::DEFAULT_SMOKE_SPECS.freeze
+
+desc "Run fast library-focused specs"
+task "spec:unit" do
+  run_specs.call(unit_specs)
+end
+
+desc "Run offline client and generated API integration specs"
+task "spec:integration" do
+  run_specs.call(integration_specs)
+end
+
+desc "Run the compact smoke suite for everyday development"
+task "spec:smoke" do
+  run_specs.call(smoke_specs)
+end
+
+desc "Run E2E-related specs without requiring a live cluster"
+task "spec:e2e" do
+  run_specs.call(["spec/e2e"])
+end
+
+desc 'Run only specs impacted by the current diff: rake "spec:changed[origin/master]"'
+task "spec:changed", [:base_ref] do |_task, args|
+  base_ref = args[:base_ref].to_s.strip
+  base_ref = ENV["BASE_REF"].to_s.strip if base_ref.empty?
+  base_ref = SpecSupport::ChangedSpecSelector::DEFAULT_BASE_REF if base_ref.empty?
+
+  selection = SpecSupport::ChangedSpecSelector.new.resolve(base_ref: base_ref)
+  puts "Selected specs (base=#{selection.base_ref}, fallback=#{selection.fallback_used}):"
+  selection.selected_specs.each { |spec| puts "  - #{spec}" }
+  puts "Reason: #{selection.reason}" if selection.reason
+
+  run_specs.call(selection.selected_specs)
+end
+
 namespace :e2e do
-  desc 'Run full kind-backed E2E suite (set E2E_KUBERNETES_VERSION=1.31..1.35 to choose the Kind version)'
+  desc 'Run full kind-backed E2E suite (set E2E_KUBERNETES_VERSION=1.31..1.36 to choose the Kind version)'
   task :full, [:fallback] do |_task, args|
     fallback = args[:fallback].to_s.strip
     fallback = ENV['E2E_FALLBACK_STRATEGY'].to_s.strip if fallback.empty?

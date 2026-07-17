@@ -7,6 +7,35 @@ RSpec.describe Kubernetes::ApiClient do
   let(:config) { Kubernetes::Configuration.new }
   let(:api_client) { Kubernetes::ApiClient.new(config) }
 
+  describe ".default" do
+    around do |example|
+      described_class.reset_default
+      Kubernetes::Configuration.reset_default
+      example.run
+    ensure
+      described_class.reset_default
+      Kubernetes::Configuration.reset_default
+    end
+
+    it "memoizes safely across concurrent callers" do
+      allow(described_class).to receive(:new).and_wrap_original do |original, *args, &block|
+        sleep 0.01
+        original.call(*args, &block)
+      end
+
+      results = Array.new(8)
+      threads = results.each_index.map do |index|
+        Thread.new do
+          results[index] = described_class.default
+        end
+      end
+      threads.each(&:value)
+
+      expect(results.uniq.length).to eq(1)
+      expect(described_class).to have_received(:new).once
+    end
+  end
+
   describe "#call_api" do
     it "returns [data, status, headers] on success" do
       request = instance_double(Typhoeus::Request, run: nil)
@@ -411,10 +440,12 @@ RSpec.describe Kubernetes::ApiClient do
 
     it "raises error for non-JSON content type" do
       response = instance_double(Typhoeus::Response,
+                                 code: 200,
                                  body: '<html>error</html>',
                                  headers: { "Content-Type" => "text/html" })
 
-      expect { api_client.deserialize(response, "Hash<String, String>") }.to raise_error(/Content-Type is not supported/)
+      expect { api_client.deserialize(response, "Hash<String, String>") }
+        .to raise_error(Kubernetes::ApiError, /Content-Type is not supported/)
     end
 
     it "handles Date return type" do

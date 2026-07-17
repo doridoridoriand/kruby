@@ -2,36 +2,39 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-06-09 03:10:46 UTC
+生成時刻: 2026-06-27 13:27:18 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `feat/fix-logs-watch-examples` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `release/1.36.1.1` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `d86acef38b97f4772a8ff11be78587a5ce22205d` (`Fix logs and watch examples`)
+- 基点の `HEAD`: `814e8273199460a86d392ef62c023f6eb91d360b` (`[codex] Update pinned Kubernetes patch versions (#148)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `examples/logs/logs.rb`: staged modification.
+- `CHANGELOG.md`: staged modification.
+- `README.md`: staged modification.
+- `kubernetes/Gemfile.lock`: staged modification.
+- `kubernetes/lib/kubernetes/version.rb`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `feat/fix-logs-watch-examples`
-- Base HEAD: `d86acef38b97f4772a8ff11be78587a5ce22205d`
+- Branch: `release/1.36.1.1`
+- Base HEAD: `814e8273199460a86d392ef62c023f6eb91d360b`
 - Recent commits:
 
 ```text
-d86acef Fix logs and watch examples
-d31711a Examples expand clean (#112)
-6a44955 feat: expand examples — cronjob, hpa, statefulset, network-policy, rbac, pvc, ingress, custom-object, dry-run, label-selector, multi-watch (#106)
-ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and events (#104)
-6dcce98 release: prepare 1.36.0.3 (#103)
+814e827 [codex] Update pinned Kubernetes patch versions (#148)
+fd9e60b Handle TokenReview error-only responses in E2E (#147)
+c341ce4 Add focused test suite tasks and changed spec selection (#146)
+87ba7c6 Add curated usage guides and example index (#145)
+632fde1 Strengthen model serialization coverage (#144)
 ```
 
 ## 5. Commands Run
@@ -40,8 +43,11 @@ ca8e781 feat: add examples for deployment, service, configmap, secret, logs, and
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- examples/logs/logs.rb | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ CHANGELOG.md                         |  9 +++++++++
+ README.md                            | 14 +++++++-------
+ kubernetes/Gemfile.lock              |  2 +-
+ kubernetes/lib/kubernetes/version.rb |  2 +-
+ 4 files changed, 18 insertions(+), 9 deletions(-)
 ```
 
 ## 6. Verification

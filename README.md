@@ -12,7 +12,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 ## Release Tracking
 
 - User-visible changes are tracked in [CHANGELOG.md](CHANGELOG.md).
-- Release tags use the format `v<version>` (for example `v1.36.0.1`).
+- Release tags use the format `v<version>` (for example `v1.36.1.1`).
 - Pushed release tags automatically publish a GitHub Release using the matching changelog section.
 
 ## Generation Policy
@@ -24,12 +24,12 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 | Kubernetes version | Kubernetes API (OpenAPI) | Client gem version |
 | --- | --- | --- |
-| 1.31 | release-1.36 | 1.36.0.1 |
-| 1.32 | release-1.36 | 1.36.0.1 |
-| 1.33 | release-1.36 | 1.36.0.1 |
-| 1.34 | release-1.36 | 1.36.0.1 |
-| 1.35 | release-1.36 | 1.36.0.1 |
-| 1.36 | release-1.36 | 1.36.0.1 |
+| 1.31 | release-1.36 | 1.36.1.1 |
+| 1.32 | release-1.36 | 1.36.1.1 |
+| 1.33 | release-1.36 | 1.36.1.1 |
+| 1.34 | release-1.36 | 1.36.1.1 |
+| 1.35 | release-1.36 | 1.36.1.1 |
+| 1.36 | release-1.36 | 1.36.1.1 |
 
 ## Requirements
 
@@ -59,6 +59,25 @@ pp client.list_namespaced_pod('default')
 ```
 
 For backward compatibility, `require 'kubernetes'` is also supported.
+
+## Guides and Examples
+
+- The gem-facing README with curated API entry points lives in [`kubernetes/README.md`](kubernetes/README.md).
+- A categorized example index lives in [`examples/README.md`](examples/README.md).
+- Generated endpoint and model references live under [`kubernetes/docs/`](kubernetes/docs/).
+
+Useful starting points:
+
+- [`examples/simple/simple.rb`](examples/simple/simple.rb) for a minimal read-only client
+- [`examples/dry-run/dry-run.rb`](examples/dry-run/dry-run.rb) for safe write validation
+- [`examples/label-selector/label-selector.rb`](examples/label-selector/label-selector.rb) for efficient filtered list calls
+- [`examples/logs/logs.rb`](examples/logs/logs.rb) for log retrieval and cleanup
+- [`examples/multi-watch/multi-watch.rb`](examples/multi-watch/multi-watch.rb) for concurrent watch streams
+
+## Thread Safety
+
+`Kubernetes::Configuration.default` and `Kubernetes::ApiClient.default` are shared singletons.
+In multi-threaded callers, prefer per-thread instances via `Kubernetes::Configuration.new` and `Kubernetes.new_client_from_config` instead of mutating the shared defaults.
 
 ## Contribute
 
@@ -92,9 +111,9 @@ For a full, repeatable upgrade workflow (including verification and troubleshoot
 
 ## E2E testing
 
-Kind-backed E2E runs currently support Kubernetes `1.31`, `1.32`, `1.33`, `1.34`, and `1.35`.
-The default E2E Kind environment is `1.35`, and the repository pins official `kindest/node` images for deterministic coverage.
-Kubernetes `1.36` client generation is covered by OpenAPI/gem checks; Kind-backed 1.36 E2E can be added once an official `kindest/node` 1.36 image is available.
+Kind-backed E2E runs currently support Kubernetes `1.31`, `1.32`, `1.33`, `1.34`, `1.35`, and `1.36`.
+The single-version default E2E Kind environment is `1.35`, the matrix default runs `1.31` through `1.36`, and the repository pins official `kindest/node` images for deterministic coverage.
+Use kind `v0.32.0` or newer for Kubernetes `1.36` E2E runs.
 
 Run a single Kubernetes version:
 
@@ -103,16 +122,33 @@ scripts/e2e/run-e2e --mode full --kubernetes-version 1.35
 scripts/e2e/run-e2e --mode targeted --kubernetes-version 1.31 --targets 'core/v1/pods:create'
 ```
 
-Run the supported Kubernetes matrix in parallel:
+Run the supported Kubernetes matrix:
 
 ```bash
 scripts/e2e/run-e2e-matrix --mode full
-scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.35 --targets 'core/v1/pods:create'
+E2E_MAX_PARALLEL=1 scripts/e2e/run-e2e-matrix --mode full
+scripts/e2e/run-e2e-matrix --mode targeted --versions 1.31,1.36 --targets 'core/v1/pods:create'
 ```
 
 For troubleshooting and cleanup guidance, see:
 
 - [docs/e2e-kind-testing.md](docs/e2e-kind-testing.md)
+- [docs/test-suite.md](docs/test-suite.md)
+
+## Test workflow
+
+From `kubernetes/`, the most useful day-to-day commands are:
+
+```bash
+bundle exec rake spec:unit
+bundle exec rake spec:integration
+bundle exec rake spec:smoke
+bundle exec rake "spec:changed[origin/master]"
+bundle exec rake spec:e2e
+bundle exec rake "e2e:changed[origin/master]"
+```
+
+Use `spec:smoke` for a fast sanity pass, `spec:changed` for focused local iteration, and `spec` before merging wider library changes.
 
 ## License
 

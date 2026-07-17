@@ -23,6 +23,51 @@ RSpec.describe "run-e2e-matrix" do
     end
   end
 
+  it "runs the default Kubernetes matrix through 1.36" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      version=""
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          --kubernetes-version)
+            version="$2"
+            shift 2
+            ;;
+          --kubernetes-version=*)
+            version="${1#*=}"
+            shift
+            ;;
+          *)
+            shift
+            ;;
+        esac
+      done
+
+      echo "stub run for ${version}"
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      env = {
+        "E2E_KUBERNETES_VERSIONS" => nil,
+        "E2E_FALLBACK_STRATEGY" => nil,
+        "E2E_REAL_API" => nil
+      }
+      stdout, stderr, status = Open3.capture3(
+        env,
+        matrix_script, "--mode", "full",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(true)
+      expect(stderr).to include("started kubernetes_version=1.36")
+      %w[1.31 1.32 1.33 1.34 1.35 1.36].each do |version|
+        expect(stdout).to include("stub run for #{version}")
+      end
+    end
+  end
+
   it "rejects unsupported fallback values before spawning child runs" do
     stub_body = <<~BASH
       #!/usr/bin/env bash
@@ -61,6 +106,48 @@ RSpec.describe "run-e2e-matrix" do
       expect(status.exitstatus).to eq(1)
       expect(stdout).to eq("")
       expect(stderr).to include("ERROR: unsupported --real-api value '2' (expected 0|1)")
+      expect(stderr).not_to include("child should not run")
+    end
+  end
+
+  it "rejects unsupported max-parallel values before spawning child runs" do
+    stub_body = <<~BASH
+      #!/usr/bin/env bash
+      echo "child should not run" >&2
+      exit 99
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      stdout, stderr, status = Open3.capture3(
+        matrix_script, "--max-parallel", "bogus",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(false)
+      expect(status.exitstatus).to eq(1)
+      expect(stdout).to eq("")
+      expect(stderr).to include("ERROR: unsupported --max-parallel value 'bogus'")
+      expect(stderr).not_to include("child should not run")
+    end
+  end
+
+  it "rejects max-parallel values with leading zeroes before spawning child runs" do
+    stub_body = <<~BASH
+      #!/usr/bin/env bash
+      echo "child should not run" >&2
+      exit 99
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      stdout, stderr, status = Open3.capture3(
+        matrix_script, "--max-parallel", "00",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(false)
+      expect(status.exitstatus).to eq(1)
+      expect(stdout).to eq("")
+      expect(stderr).to include("ERROR: unsupported --max-parallel value '00'")
       expect(stderr).not_to include("child should not run")
     end
   end
@@ -109,6 +196,186 @@ RSpec.describe "run-e2e-matrix" do
       expect(stderr).to include("[run-e2e-matrix] failed runs:")
       expect(stderr).to include("kubernetes_version=1.31 exit=3")
       expect(stderr).to include("kubernetes_version=1.33 exit=5")
+    end
+  end
+
+  it "limits concurrent child runs when max parallel is set" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      version=""
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          --kubernetes-version)
+            version="$2"
+            shift 2
+            ;;
+          --kubernetes-version=*)
+            version="${1#*=}"
+            shift
+            ;;
+          *)
+            shift
+            ;;
+        esac
+      done
+
+      echo "start:${version}" >> "__REPO_ROOT__/sequence.log"
+      sleep 0.05
+      echo "finish:${version}" >> "__REPO_ROOT__/sequence.log"
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      _stdout, _stderr, status = Open3.capture3(
+        matrix_script, "--mode", "full", "--versions", "1.31,1.32,1.33", "--max-parallel", "1",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(true)
+      expect(File.readlines(File.join(repo_root, "sequence.log"), chomp: true)).to eq(
+        [
+          "start:1.31",
+          "finish:1.31",
+          "start:1.32",
+          "finish:1.32",
+          "start:1.33",
+          "finish:1.33"
+        ]
+      )
+    end
+  end
+
+  it "starts the next version as soon as any capped child finishes" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      version=""
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          --kubernetes-version)
+            version="$2"
+            shift 2
+            ;;
+          --kubernetes-version=*)
+            version="${1#*=}"
+            shift
+            ;;
+          *)
+            shift
+            ;;
+        esac
+      done
+
+      case "${version}" in
+        1.31) sleep 0.25 ;;
+        1.32) sleep 0.05 ;;
+        1.33) sleep 0.01 ;;
+      esac
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      _stdout, stderr, status = Open3.capture3(
+        matrix_script, "--mode", "full", "--versions", "1.31,1.32,1.33", "--max-parallel", "2",
+        chdir: repo_root
+      )
+
+      expect(status.success?).to be(true)
+      expect(stderr.index("completed kubernetes_version=1.32")).to be < stderr.index("started kubernetes_version=1.33")
+      expect(stderr.index("started kubernetes_version=1.33")).to be < stderr.index("completed kubernetes_version=1.31")
+    end
+  end
+
+  it "does not hang when a child wrapper exits on TERM before writing its normal status file" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      while [[ $# -gt 0 ]]; do
+        shift
+      done
+
+      while true; do
+        sleep 1
+      done
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      Open3.popen3(matrix_script, "--mode", "full", "--versions", "1.31", "--max-parallel", "1", chdir: repo_root) do |stdin, stdout, stderr, wait_thr|
+        stdin.close
+
+        child_pid = nil
+        Timeout.timeout(5) do
+          loop do
+            line = stderr.gets
+            next if line.nil?
+
+            if (match = line.match(/started kubernetes_version=1\.31 pid=(\d+)/))
+              child_pid = match[1].to_i
+              break
+            end
+          end
+        end
+
+        Process.kill("TERM", child_pid)
+
+        status = nil
+        Timeout.timeout(5) do
+          status = wait_thr.value
+        end
+
+        stderr_output = stderr.read
+        expect(status.success?).to be(false)
+        expect(status.exitstatus).to eq(143), "stderr=#{stderr_output.inspect}"
+        expect(stdout.read).to eq("")
+        expect(stderr_output).to include("completed kubernetes_version=1.31 exit=143")
+      end
+    end
+  end
+
+  it "does not hang when a child wrapper is SIGKILLed before writing a status file" do
+    stub_body = <<~'BASH'
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      while [[ $# -gt 0 ]]; do
+        shift
+      done
+
+      sleep 2
+    BASH
+
+    build_fake_repo(stub_body: stub_body) do |matrix_script, _child_script, repo_root|
+      Open3.popen3(matrix_script, "--mode", "full", "--versions", "1.31", "--max-parallel", "1", chdir: repo_root) do |stdin, stdout, stderr, wait_thr|
+        stdin.close
+
+        child_pid = nil
+        Timeout.timeout(5) do
+          loop do
+            line = stderr.gets
+            next if line.nil?
+
+            if (match = line.match(/started kubernetes_version=1\.31 pid=(\d+)/))
+              child_pid = match[1].to_i
+              break
+            end
+          end
+        end
+
+        Process.kill("KILL", child_pid)
+
+        status = nil
+        Timeout.timeout(5) do
+          status = wait_thr.value
+        end
+
+        stderr_output = stderr.read
+        expect(status.success?).to be(false)
+        expect(status.exitstatus).to eq(137), "stderr=#{stderr_output.inspect}"
+        expect(stdout.read).to eq("")
+        expect(stderr_output).to include("completed kubernetes_version=1.31 exit=137")
+      end
     end
   end
 

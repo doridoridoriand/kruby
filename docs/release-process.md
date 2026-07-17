@@ -52,6 +52,17 @@ The workflow does not publish to RubyGems. Gem publication remains a separate ma
 
 ## Publishing to RubyGems
 
+Before publishing, verify that `ruby` and `gem` resolve to the project toolchain rather than the macOS system Ruby:
+
+```bash
+which ruby
+ruby -v
+which gem
+gem --version
+```
+
+`kruby` release tasks are expected to run on Ruby 3.3+. If you use `rbenv`, either run the commands through `rbenv exec` or ensure `~/.rbenv/shims` appears before `/usr/bin` in `PATH`.
+
 After the GitHub Release workflow succeeds, publish the same tagged release to RubyGems:
 
 ```bash
@@ -68,3 +79,17 @@ GEM_HOST_OTP_CODE=123456 scripts/release/publish
 ```
 
 The publish script validates the changelog, verifies that `HEAD`, the local tag, and the remote tag all point at the same release commit, checks that the version is not already published on RubyGems, builds the gem under `kubernetes/tmp/release/`, verifies the packaged files, and then runs `gem push`. If MFA is required, pass the OTP with `GEM_HOST_OTP_CODE` or `--otp`.
+
+If the checks have already passed and only the final push needs to be retried, rerun the publish step against the existing artifact instead of rebuilding it:
+
+```bash
+env PATH="$HOME/.rbenv/shims:$PATH" \
+  scripts/release/publish --gem kubernetes/tmp/release/kruby-1.35.0.5.gem
+```
+
+If the artifact is already built and you only want to retry the RubyGems upload itself, you can also push it directly:
+
+```bash
+env PATH="$HOME/.rbenv/shims:$PATH" \
+  gem push kubernetes/tmp/release/kruby-1.35.0.5.gem --host https://rubygems.org
+```
