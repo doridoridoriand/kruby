@@ -10,6 +10,13 @@ Historical releases published before this file was introduced are summarized as 
 
 - Nothing yet.
 
+## [1.36.2.1] - 2026-07-22
+
+### Changed
+
+- Verified Kubernetes v1.36.2 compatibility; upstream OpenAPI API paths and definitions are unchanged from v1.36.1.
+- Updated release metadata for client version `1.36.2.1`.
+
 ## [1.36.1.1] - 2026-06-27
 
 ### Changed
