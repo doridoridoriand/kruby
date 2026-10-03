@@ -10,6 +10,15 @@ Historical releases published before this file was introduced are summarized as 
 
 - Nothing yet.
 
+## [1.36.5.1] - 2026-10-03
+
+### Changed
+
+- Verified Kubernetes v1.36.5 compatibility; upstream OpenAPI API paths and definitions are unchanged from v1.36.1 (v1.36.0 through v1.36.5 publish byte-identical OpenAPI specs).
+- Updated the nightly E2E workflow to install `kubectl` v1.36.5.
+- Updated release metadata for client version `1.36.5.1`.
+- The Kind-backed E2E node image pin stays at v1.36.4 until `kindest/node:v1.36.5` is published by a kind release.
+
 ## [1.36.4.1] - 2026-09-20
 
 ### Changed
