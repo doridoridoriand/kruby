@@ -2,39 +2,40 @@
 
 このレポートは、別セッションへ作業を引き継ぐための自動生成スナップショットです。
 テンプレート元: https://gist.githubusercontent.com/doridoridoriand/68dc9b4145dd905155a48ffbfdc29c4f/raw/d2b9e7a073f4cf5fa6b60e860341cf8693c39aaa/handoff.md
-生成時刻: 2026-10-17 08:54:06 UTC
+生成時刻: 2026-10-17 09:26:33 UTC
 生成フック: `.githooks/pre-commit`
 
 ## 1. Goal
 
-- `feature/ruby-4-support` 上の staged changes を引き継ぐための handoff スナップショットです。
+- `release/1.36.5.2` 上の staged changes を引き継ぐための handoff スナップショットです。
 - issue / ticket / spec などの意図は自動取得できないため、必要ならこのファイルに追記してください。
 
 ## 2. Current Status
 
 - `docs/handoff.md` は commit 前に生成され、同じ commit に含める前提です。
-- 基点の `HEAD`: `598d027251cbf3db054cf0841b8a5e97efa111d1` (`release: prepare 1.36.5.1 for Kubernetes v1.36.5 (#153)`)
+- 基点の `HEAD`: `35e8c2865ad4a36d2eccc72beaa9065a7c4d9e79` (`feat: support Ruby 4.0 (#154)`)
 - このスナップショットは `docs/handoff.md` 自身を差分集計から除外しているため、handoff 更新の自己参照を避けています。
 
 ## 3. Files Changed
 
-- `.github/workflows/ci.yml`: staged modification.
+- `CHANGELOG.md`: staged modification.
 - `README.md`: staged modification.
 - `kubernetes/Gemfile.lock`: staged modification.
-- `kubernetes/kubernetes.gemspec`: staged modification.
+- `kubernetes/README.md`: staged modification.
+- `kubernetes/lib/kubernetes/version.rb`: staged modification.
 
 ## 4. Branch / Commit
 
-- Branch: `feature/ruby-4-support`
-- Base HEAD: `598d027251cbf3db054cf0841b8a5e97efa111d1`
+- Branch: `release/1.36.5.2`
+- Base HEAD: `35e8c2865ad4a36d2eccc72beaa9065a7c4d9e79`
 - Recent commits:
 
 ```text
+35e8c28 feat: support Ruby 4.0 (#154)
 598d027 release: prepare 1.36.5.1 for Kubernetes v1.36.5 (#153)
 8c7eadf Release kruby 1.36.4.1 (#152)
 78c53f3 test(e2e): update pinned Kubernetes patch versions (#151)
 5ed2f6e Release kruby 1.36.2.1 (#150)
-66a2622 release: prepare 1.36.1.1 (#149)
 ```
 
 ## 5. Commands Run
@@ -43,11 +44,12 @@
 - `git diff --cached --stat --no-renames -- . ':(exclude)docs/handoff.md'`: staged diff size summary.
 
 ```text
- .github/workflows/ci.yml      | 1 +
- README.md                     | 2 +-
- kubernetes/Gemfile.lock       | 2 ++
- kubernetes/kubernetes.gemspec | 3 +++
- 4 files changed, 7 insertions(+), 1 deletion(-)
+ CHANGELOG.md                         | 11 +++++++++++
+ README.md                            | 14 +++++++-------
+ kubernetes/Gemfile.lock              |  2 +-
+ kubernetes/README.md                 | 10 +++++-----
+ kubernetes/lib/kubernetes/version.rb |  2 +-
+ 5 files changed, 25 insertions(+), 14 deletions(-)
 ```
 
 ## 6. Verification

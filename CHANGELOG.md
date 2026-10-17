@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Release tags use the format `v<version>` (for example `v1.36.0.1`), and the matching `## [<version>]` section in this file is published as the GitHub Release body.
 Historical releases published before this file was introduced are summarized as a baseline entry instead of being reconstructed commit-by-commit.
 
+## [1.36.5.2] - 2026-10-17
+
+### Added
+
+- Added Ruby 4.0 support: `logger` is now declared as a runtime dependency, because Ruby 4.0 promoted `logger` from a default gem to a bundled gem, which made `require 'logger'` fail under Bundler on Ruby 4.0.
+- Added Ruby 4.0 to the CI test matrix.
+
+### Changed
+
+- Updated release metadata for client version `1.36.5.2`.
+
 ## [Unreleased]
 
 - Nothing yet.
