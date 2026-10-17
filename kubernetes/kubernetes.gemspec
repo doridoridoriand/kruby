@@ -37,6 +37,9 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'base64', '~> 0.2'
+  # logger was a default gem through Ruby 3.4; Ruby 4.0 promoted it to a
+  # bundled gem, so it must be declared to stay requirable under Bundler.
+  s.add_runtime_dependency 'logger', '~> 1.6'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 

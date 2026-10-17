@@ -33,7 +33,7 @@ Ruby client for the [kubernetes](http://kubernetes.io/) API.
 
 ## Requirements
 
-- Ruby 3.3.0+
+- Ruby 3.3.0+ (tested on Ruby 3.3, 3.4, and 4.0)
 
 ## Installation
 
